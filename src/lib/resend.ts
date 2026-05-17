@@ -69,6 +69,31 @@ export async function sendOrderConfirmationEmail(
   });
 }
 
+export async function sendEmailVerificationEmail(to: string, name: string, verifyUrl: string) {
+  return resend.emails.send({
+    from: FROM,
+    to,
+    subject: "Verify your Élan account",
+    html: `
+      <div style="font-family: Georgia, serif; background:#0a0a0a; color:#fff; padding:40px; max-width:600px; margin:0 auto;">
+        <h1 style="color:#C9A84C; font-size:32px; margin-bottom:8px;">ÉLAN</h1>
+        <p style="color:#9a9a9a; font-size:12px; letter-spacing:4px; margin-bottom:32px;">FINE JEWELLERY</p>
+        <h2 style="font-size:22px; margin-bottom:16px;">Verify your email</h2>
+        <p style="color:#ccc; line-height:1.8;">
+          Hello ${name}, please verify your email address to activate your account.
+        </p>
+        <a href="${verifyUrl}"
+           style="display:inline-block; margin-top:32px; background:#C9A84C; color:#000; padding:14px 32px; text-decoration:none; font-size:13px; letter-spacing:2px;">
+          VERIFY EMAIL
+        </a>
+        <p style="color:#5a5a5a; font-size:12px; margin-top:32px;">
+          This link expires in 24 hours. If you did not create an account, ignore this email.
+        </p>
+      </div>
+    `,
+  });
+}
+
 export async function sendNewsletterConfirmEmail(to: string) {
   return resend.emails.send({
     from: FROM,

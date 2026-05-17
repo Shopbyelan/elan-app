@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { randomBytes } from "crypto";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
-import { sendWelcomeEmail } from "@/lib/resend";
+import { sendEmailVerificationEmail } from "@/lib/resend";
 import { z } from "zod";
 
 const schema = z.object({
@@ -21,15 +22,27 @@ export async function POST(req: NextRequest) {
     }
 
     const hashed = await bcrypt.hash(password, 12);
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: { name, email, password: hashed, role: "CUSTOMER" },
     });
 
-    // Send welcome email (non-blocking)
-    sendWelcomeEmail(email, name).catch(console.error);
+    // Delete any existing verification tokens for this email
+    await prisma.verificationToken.deleteMany({
+      where: { identifier: `verify:${email}` },
+    });
+
+    const token = randomBytes(32).toString("hex");
+    const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+    await prisma.verificationToken.create({
+      data: { identifier: `verify:${email}`, token, expires },
+    });
+
+    const verifyUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
+    sendEmailVerificationEmail(email, name, verifyUrl).catch(console.error);
 
     return NextResponse.json(
-      { message: "Account created", userId: user.id },
+      { message: "Account created. Please check your email to verify your account." },
       { status: 201 }
     );
   } catch (err) {

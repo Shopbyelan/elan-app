@@ -2,18 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 export default function RegisterPage() {
-  const router = useRouter();
   const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "" });
   const [showPw, setShowPw] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [registeredEmail, setRegisteredEmail] = useState("");
 
   function update(f: string, v: string) {
     setForm((prev) => ({ ...prev, [f]: v }));
@@ -41,20 +40,42 @@ export default function RegisterPage() {
         toast.error(data.message || "Registration failed");
         return;
       }
-      // Auto sign in
-      const signInRes = await signIn("credentials", {
-        email: form.email,
-        password: form.password,
-        redirect: false,
-      });
-      if (signInRes?.ok) {
-        toast.success("Welcome to Élan");
-        router.push("/home");
-        router.refresh();
-      }
+      setRegisteredEmail(form.email);
     } finally {
       setLoading(false);
     }
+  }
+
+  if (registeredEmail) {
+    return (
+      <div className="min-h-screen flex">
+        <div className="hidden lg:flex lg:w-1/2 gradient-silver relative overflow-hidden items-end p-16">
+          <div className="absolute inset-0 opacity-20"
+            style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(184,212,232,0.1) 30px, rgba(184,212,232,0.1) 31px)` }}
+          />
+          <div className="relative z-10">
+            <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
+            <p className="font-sans text-[10px] tracking-[0.4em] text-[#C9A84C] uppercase mt-2 mb-6">Fine Jewellery</p>
+          </div>
+        </div>
+        <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#0A0A0A]">
+          <div className="w-full max-w-sm text-center">
+            <CheckCircle className="h-14 w-14 text-[#C9A84C] mx-auto mb-6" strokeWidth={1} />
+            <h1 className="font-serif text-3xl text-white mb-3">Check your inbox</h1>
+            <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-2">
+              We sent a verification link to
+            </p>
+            <p className="font-sans text-sm text-white mb-8">{registeredEmail}</p>
+            <p className="font-sans text-xs text-[#5A5A5A] leading-relaxed mb-8">
+              Click the link in the email to activate your account. The link expires in 24 hours.
+            </p>
+            <Link href="/login" className="font-sans text-sm text-[#C9A84C] hover:text-[#D4AF6C] transition-colors">
+              ← Back to Sign In
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -62,9 +83,7 @@ export default function RegisterPage() {
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 gradient-silver relative overflow-hidden items-end p-16">
         <div className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(184,212,232,0.1) 30px, rgba(184,212,232,0.1) 31px)`,
-          }}
+          style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(184,212,232,0.1) 30px, rgba(184,212,232,0.1) 31px)` }}
         />
         <div className="relative z-10">
           <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
