@@ -1,26 +1,172 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Élan Brand Colors */
+  --elan-black: #0A0A0A;
+  --elan-dark: #111111;
+  --elan-card: #141414;
+  --elan-surface: #1A1A1A;
+  --elan-border: #2A2A2A;
+  --elan-gold: #C9A84C;
+  --elan-gold-light: #D4AF6C;
+  --elan-gold-dim: #9A7B38;
+  --elan-blue: #85A0B5;
+  --elan-white: #FFFFFF;
+  --elan-text: #E8E8E8;
+  --elan-muted: #9A9A9A;
+  --elan-dim: #5A5A5A;
+
+  /* Background & Foreground */
+  --background: var(--elan-black);
+  --foreground: var(--elan-text);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gold: var(--elan-gold);
+  --color-gold-light: var(--elan-gold-light);
+  --color-elan-dark: var(--elan-dark);
+  --color-elan-card: var(--elan-card);
+  --color-elan-surface: var(--elan-surface);
+  --color-elan-border: var(--elan-border);
+  --color-elan-muted: var(--elan-muted);
+  --color-elan-dim: var(--elan-dim);
+  --color-elan-blue: var(--elan-blue);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ─────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--elan-black);
+  color: var(--elan-text);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  min-height: 100vh;
 }
+
+/* ── Scrollbar ────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--elan-dark); }
+::-webkit-scrollbar-thumb { background: var(--elan-gold-dim); border-radius: 2px; }
+
+/* ── Selection ────────────────────── */
+::selection { background: var(--elan-gold); color: #000; }
+
+/* ── Typography Utilities ─────────── */
+.font-serif { font-family: 'Georgia', 'Times New Roman', serif; }
+.font-sans  { font-family: 'Helvetica Neue', 'Arial', sans-serif; }
+
+.tracking-luxury { letter-spacing: 0.25em; }
+.tracking-wide-xl { letter-spacing: 0.15em; }
+
+/* ── Gold Gradient Text ───────────── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #C9A84C, #D4AF6C, #A07830);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Collection Card Gradients ───── */
+.gradient-gold    { background: radial-gradient(ellipse at top, #5C1A1A 0%, #2A0505 60%, #0A0000 100%); }
+.gradient-silver  {
+  background:
+    radial-gradient(ellipse 70% 25% at 50% 0%, rgba(133, 160, 181, 0.14) 0%, transparent 100%),
+    radial-gradient(ellipse at top, #0A1628 0%, #1A2840 50%, #080D18 100%);
+}
+.gradient-diamond { background: radial-gradient(ellipse at top, #0A1A28 0%, #051018 60%, #020810 100%); }
+.gradient-platinum{ background: radial-gradient(ellipse at top, #1A0A2A 0%, #2A1040 50%, #0A0510 100%); }
+.gradient-moiss   { background: radial-gradient(ellipse at top, #0A1F0A 0%, #1A3020 50%, #050F05 100%); }
+
+/* ── Glass / Blur Cards ───────────── */
+.glass {
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+/* ── Gold Border Glow ─────────────── */
+.border-gold-glow {
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.05);
+}
+
+/* ── Button Base ──────────────────── */
+.btn-gold {
+  background: #C9A84C;
+  color: #000;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+.btn-gold:hover { background: #D4AF6C; }
+
+.btn-outline-gold {
+  background: transparent;
+  color: #C9A84C;
+  border: 1px solid #C9A84C;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+.btn-outline-gold:hover { background: #C9A84C; color: #000; }
+
+/* ── Marquee / Ticker ─────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+  display: flex;
+  width: max-content;
+}
+.animate-marquee:hover { animation-play-state: paused; }
+
+/* ── Fade In ──────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 0.7s ease forwards; }
+
+/* ── Shimmer Skeleton ─────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ── Input ────────────────────────── */
+input, textarea, select {
+  background: #141414;
+  border: 1px solid #2A2A2A;
+  color: #E8E8E8;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #C9A84C;
+}
+
+/* ── Prose overrides ──────────────── */
+.prose-elan p { color: #9a9a9a; line-height: 1.9; }
+.prose-elan h2 { color: #fff; font-size: 1.5rem; margin-bottom: 1rem; }
