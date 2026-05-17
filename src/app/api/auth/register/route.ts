@@ -39,7 +39,8 @@ export async function POST(req: NextRequest) {
     });
 
     const verifyUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
-    sendEmailVerificationEmail(email, name, verifyUrl).catch(console.error);
+    const emailResult = await sendEmailVerificationEmail(email, name, verifyUrl);
+    console.log("[register] Resend result:", JSON.stringify(emailResult));
 
     return NextResponse.json(
       { message: "Account created. Please check your email to verify your account." },
