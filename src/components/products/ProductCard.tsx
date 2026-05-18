@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Heart, ShoppingBag, Bell } from "lucide-react";
 import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
+import { useCurrencyStore } from "@/store/currency.store";
 import { Badge } from "@/components/ui/badge";
-import { formatPrice } from "@/lib/utils";
 import type { Product } from "@/types";
 import { toast } from "sonner";
 
@@ -18,6 +18,7 @@ interface ProductCardProps {
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const { addItem, openCart } = useCartStore();
   const { toggleItem, isWishlisted } = useWishlistStore();
+  const { format } = useCurrencyStore();
 
   const primaryImg =
     product.images.find((i) => i.isPrimary)?.url ||
@@ -48,7 +49,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       style={{ animationDelay: `${index * 80}ms` }}
     >
       {/* Image container */}
-      <div className="relative aspect-[3/4] bg-[#111111] overflow-hidden">
+      <div className="relative aspect-3/4 bg-[#111111] overflow-hidden">
         <Image
           src={primaryImg}
           alt={product.name}
@@ -62,11 +63,11 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
         {/* Out-of-stock dim overlay */}
         {product.stock === 0 && (
-          <div className="absolute inset-0 bg-[#0A0A0A]/50 z-[1]" />
+          <div className="absolute inset-0 bg-[#0A0A0A]/50 z-1" />
         )}
 
         {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-[2]">
+        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-2">
           {product.stock === 0 ? (
             <Badge variant="dark">Sold Out</Badge>
           ) : (
@@ -80,7 +81,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         </div>
 
         {/* Actions */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2 translate-x-10 group-hover:translate-x-0 transition-transform duration-300 z-[2]">
+        <div className="absolute top-3 right-3 flex flex-col gap-2 translate-x-10 group-hover:translate-x-0 transition-transform duration-300 z-2">
           <button
             onClick={handleWishlist}
             className={`h-8 w-8 flex items-center justify-center bg-[#0A0A0A]/90 border transition-colors duration-200 ${
@@ -94,7 +95,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         </div>
 
         {/* Bottom action bar — Add to cart or Waitlist */}
-        <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-[2]">
+        <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-2">
           {product.stock === 0 ? (
             <div className="w-full flex items-center justify-center gap-2 bg-[#1C2D3E] text-[#85A0B5] h-10 font-sans text-[10px] tracking-[0.2em] uppercase font-medium">
               <Bell className="h-3.5 w-3.5" />
@@ -127,11 +128,11 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         )}
         <div className="flex items-center gap-3 mt-2.5">
           <span className="font-sans text-sm text-[#85A0B5]">
-            From {formatPrice(product.price)}
+            From {format(product.price)}
           </span>
           {product.comparePrice && product.comparePrice > product.price && (
             <span className="font-sans text-xs text-[#5A5A5A] line-through">
-              {formatPrice(product.comparePrice)}
+              {format(product.comparePrice)}
             </span>
           )}
         </div>

@@ -5,11 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { X, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/cart.store";
+import { useCurrencyStore } from "@/store/currency.store";
 import { Button } from "@/components/ui/button";
-import { formatPrice } from "@/lib/utils";
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, totalPrice } = useCartStore();
+  const { format } = useCurrencyStore();
 
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
@@ -103,7 +104,7 @@ export function CartDrawer() {
                       </div>
 
                       <p className="font-sans text-sm text-[#85A0B5] mt-2">
-                        {formatPrice(product.price)}
+                        {format(product.price)}
                       </p>
 
                       {/* Quantity */}
@@ -124,7 +125,7 @@ export function CartDrawer() {
                           <Plus className="h-3 w-3" />
                         </button>
                         <span className="ml-auto font-sans text-xs text-[#5A5A5A]">
-                          {formatPrice(product.price * quantity)}
+                          {format(product.price * quantity)}
                         </span>
                       </div>
                     </div>
@@ -143,7 +144,7 @@ export function CartDrawer() {
                 Subtotal
               </span>
               <span className="font-serif text-lg text-white">
-                {formatPrice(totalPrice())}
+                {format(totalPrice())}
               </span>
             </div>
             <p className="font-sans text-[10px] text-[#5A5A5A]">

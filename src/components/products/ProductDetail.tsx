@@ -6,11 +6,12 @@ import Link from "next/link";
 import { Heart, ShoppingBag, Star, Shield, RotateCcw, Truck } from "lucide-react";
 import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
+import { useCurrencyStore } from "@/store/currency.store";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { WaitlistButton } from "@/components/products/WaitlistButton";
 import { ProductCard } from "@/components/products/ProductCard";
-import { formatPrice, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { toast } from "sonner";
 import type { Product, Review } from "@/types";
 
@@ -29,6 +30,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
   const { addItem, openCart } = useCartStore();
   const { toggleItem, isWishlisted } = useWishlistStore();
 
+  const { format } = useCurrencyStore();
   const wishlisted = isWishlisted(product.id);
   const images = product.images.length > 0 ? product.images : [{ url: "/placeholder.jpg", alt: product.name }];
   const avgRating = product.reviews.length > 0
@@ -58,7 +60,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
         {/* Gallery */}
         <div className="space-y-3">
           {/* Main image */}
-          <div className="relative aspect-[4/5] bg-[#111] overflow-hidden">
+          <div className="relative aspect-4/5 bg-[#111] overflow-hidden">
             <Image
               src={images[activeImg]?.url || "/placeholder.jpg"}
               alt={images[activeImg]?.alt || product.name}
@@ -81,7 +83,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
                 <button
                   key={i}
                   onClick={() => setActiveImg(i)}
-                  className={`relative flex-shrink-0 w-16 h-16 overflow-hidden border-2 transition-all ${
+                  className={`relative shrink-0 w-16 h-16 overflow-hidden border-2 transition-all ${
                     activeImg === i ? "border-[#85A0B5]" : "border-transparent"
                   }`}
                 >
@@ -136,11 +138,11 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
           {/* Price */}
           <div className="flex items-baseline gap-4 mb-8">
             <span className="font-sans text-2xl text-[#85A0B5]">
-              {formatPrice(product.price)}
+              {format(product.price)}
             </span>
             {product.comparePrice && product.comparePrice > product.price && (
               <span className="font-sans text-base text-[#5A5A5A] line-through">
-                {formatPrice(product.comparePrice)}
+                {format(product.comparePrice)}
               </span>
             )}
           </div>
@@ -211,7 +213,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="text-center">
                 <Icon className="h-4 w-4 text-[#85A0B5] mx-auto mb-2" />
-                <p className="font-sans text-[9px] tracking-[0.1em] text-[#5A5A5A] leading-relaxed">
+                <p className="font-sans text-[9px] tracking-widest text-[#5A5A5A] leading-relaxed">
                   {label}
                 </p>
               </div>

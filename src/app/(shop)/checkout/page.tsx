@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useCartStore } from "@/store/cart.store";
+import { useCurrencyStore, NGN_PER_USD } from "@/store/currency.store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { formatPrice } from "@/lib/utils";
 import { COUNTRIES, getInternationalDeliveryFee, getDeliveryLabel } from "@/data/countries";
 import { toast } from "sonner";
 
@@ -31,6 +31,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { data: session } = useSession();
   const { items, totalPrice, clearCart } = useCartStore();
+  const { currency, format } = useCurrencyStore();
 
   const [form, setForm] = useState<CheckoutForm>({
     firstName: "",
@@ -112,12 +113,17 @@ export default function CheckoutPage() {
       if (!orderRes.ok) throw new Error("Failed to create order");
       const { order, reference } = await orderRes.json();
 
+      const paystackAmount =
+        currency === "USD"
+          ? Math.round((total / NGN_PER_USD) * 100)
+          : Math.round(total * 100);
+
       const PaystackPop = (await import("@paystack/inline-js")).default;
       const handler = PaystackPop.setup({
         key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,
         email: form.email,
-        amount: Math.round(total * 100),
-        currency: "NGN",
+        amount: paystackAmount,
+        currency,
         ref: reference,
         metadata: {
           orderId: order.id,
@@ -304,7 +310,7 @@ export default function CheckoutPage() {
                     <p className="font-sans text-[10px] text-[#5A5A5A]">Qty: {quantity}</p>
                   </div>
                   <p className="font-sans text-xs text-white flex-shrink-0">
-                    {formatPrice(product.price * quantity)}
+                    {format(product.price * quantity)}
                   </p>
                 </div>
               ))}
@@ -313,12 +319,12 @@ export default function CheckoutPage() {
             <div className="border-t border-[#1A1A1A] pt-4 space-y-3 mb-6">
               <div className="flex justify-between font-sans text-sm">
                 <span className="text-[#9A9A9A]">Subtotal</span>
-                <span className="text-white">{formatPrice(subtotal)}</span>
+                <span className="text-white">{format(subtotal)}</span>
               </div>
               <div className="flex justify-between font-sans text-sm">
                 <span className="text-[#9A9A9A] capitalize">{deliveryLabel}</span>
                 <span className="text-white">
-                  {form.country ? formatPrice(delivery) : "Select country"}
+                  {form.country ? format(delivery) : "Select country"}
                 </span>
               </div>
               {form.country !== "NG" && (
@@ -328,12 +334,18 @@ export default function CheckoutPage() {
               )}
               <div className="border-t border-[#1A1A1A] pt-3 flex justify-between">
                 <span className="font-sans text-xs tracking-[0.15em] text-[#9A9A9A] uppercase">Total</span>
-                <span className="font-serif text-xl text-[#85A0B5]">{formatPrice(total)}</span>
+                <span className="font-serif text-xl text-[#85A0B5]">{format(total)}</span>
               </div>
             </div>
 
+            {currency === "USD" && (
+              <p className="font-sans text-[10px] text-[#5A5A5A] text-center mb-3">
+                Approx. {format(total)} · Rate: $1 = ₦{NGN_PER_USD.toLocaleString()}
+              </p>
+            )}
+
             <Button variant="gold" size="lg" className="w-full" loading={loading} onClick={handlePaystack}>
-              Pay with Paystack
+              Pay {format(total)} with Paystack
             </Button>
 
             <div className="mt-4 space-y-1.5">

@@ -6,8 +6,43 @@ import { useSession, signOut } from "next-auth/react";
 import { ShoppingBag, Heart, User, Search, Menu, X, ChevronDown } from "lucide-react";
 import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
+import { useCurrencyStore } from "@/store/currency.store";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { MobileNav } from "@/components/layout/MobileNav";
+
+function CurrencyToggle() {
+  const { currency, setCurrency } = useCurrencyStore();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <div className="w-[60px] h-[26px]" />;
+
+  return (
+    <div className="hidden md:flex items-center border border-[#2A2A2A] overflow-hidden">
+      <button
+        onClick={() => setCurrency("NGN")}
+        className={`px-2.5 py-1 font-sans text-[9px] tracking-[0.15em] transition-colors ${
+          currency === "NGN"
+            ? "bg-[#1A2A3A] text-[#85A0B5]"
+            : "text-[#3A3A3A] hover:text-[#5A5A5A]"
+        }`}
+      >
+        ₦
+      </button>
+      <div className="w-px h-3.5 bg-[#2A2A2A]" />
+      <button
+        onClick={() => setCurrency("USD")}
+        className={`px-2.5 py-1 font-sans text-[9px] tracking-[0.15em] transition-colors ${
+          currency === "USD"
+            ? "bg-[#1A2A3A] text-[#85A0B5]"
+            : "text-[#3A3A3A] hover:text-[#5A5A5A]"
+        }`}
+      >
+        $
+      </button>
+    </div>
+  );
+}
 
 export function Header() {
   const { data: session } = useSession();
@@ -98,6 +133,8 @@ export function Header() {
 
             {/* Right — Actions */}
             <div className="flex items-center gap-1 md:gap-2">
+              <CurrencyToggle />
+
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
                 className="p-2.5 text-[#9A9A9A] hover:text-white transition-colors"
