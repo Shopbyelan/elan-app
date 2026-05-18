@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
 import Link from "next/link";
@@ -87,7 +87,7 @@ export function CartDrawer() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <p className="font-sans text-[9px] tracking-[0.2em] text-[#C9A84C] uppercase">
+                          <p className="font-sans text-[9px] tracking-[0.2em] text-[#85A0B5] uppercase">
                             {product.category?.name}
                           </p>
                           <h3 className="font-serif text-sm text-white mt-0.5 truncate">
@@ -102,7 +102,7 @@ export function CartDrawer() {
                         </button>
                       </div>
 
-                      <p className="font-sans text-sm text-[#C9A84C] mt-2">
+                      <p className="font-sans text-sm text-[#85A0B5] mt-2">
                         {formatPrice(product.price)}
                       </p>
 
@@ -110,7 +110,7 @@ export function CartDrawer() {
                       <div className="flex items-center gap-3 mt-3">
                         <button
                           onClick={() => updateQuantity(product.id, quantity - 1)}
-                          className="h-7 w-7 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#C9A84C] hover:text-white transition-colors"
+                          className="h-7 w-7 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-white transition-colors"
                         >
                           <Minus className="h-3 w-3" />
                         </button>
@@ -119,7 +119,7 @@ export function CartDrawer() {
                         </span>
                         <button
                           onClick={() => updateQuantity(product.id, quantity + 1)}
-                          className="h-7 w-7 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#C9A84C] hover:text-white transition-colors"
+                          className="h-7 w-7 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-white transition-colors"
                         >
                           <Plus className="h-3 w-3" />
                         </button>

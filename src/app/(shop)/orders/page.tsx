@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+﻿import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { formatPrice, formatDate } from "@/lib/utils";
 import Link from "next/link";
@@ -37,7 +37,7 @@ export default async function OrdersPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-16">
       <div className="mb-10">
-        <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-2">
+        <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-2">
           My Orders
         </p>
         <h1 className="font-serif text-3xl md:text-4xl text-white">
@@ -62,7 +62,7 @@ export default async function OrdersPage() {
             <div key={order.id} className="bg-[#111] border border-[#1A1A1A] p-6">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                 <div>
-                  <p className="font-sans text-[10px] tracking-[0.2em] text-[#C9A84C] uppercase mb-1">
+                  <p className="font-sans text-[10px] tracking-[0.2em] text-[#85A0B5] uppercase mb-1">
                     {order.orderNumber}
                   </p>
                   <p className="font-sans text-xs text-[#5A5A5A]">
@@ -73,7 +73,7 @@ export default async function OrdersPage() {
                   <span className={`font-sans text-xs font-medium ${STATUS_COLORS[order.status] || "text-[#9A9A9A]"}`}>
                     {order.status}
                   </span>
-                  <span className="font-serif text-lg text-[#C9A84C]">
+                  <span className="font-serif text-lg text-[#85A0B5]">
                     {formatPrice(order.total)}
                   </span>
                 </div>

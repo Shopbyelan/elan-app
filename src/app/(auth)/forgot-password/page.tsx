@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -36,12 +36,12 @@ export default function ForgotPasswordPage() {
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(201,168,76,0.1) 30px, rgba(201,168,76,0.1) 31px)`,
+            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(133, 160, 181,0.1) 30px, rgba(133, 160, 181,0.1) 31px)`,
           }}
         />
         <div className="relative z-10">
           <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
-          <p className="font-sans text-[10px] tracking-[0.4em] text-[#C9A84C] uppercase mt-2 mb-6">Fine Jewellery</p>
+          <p className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase mt-2 mb-6">Fine Jewellery</p>
           <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
             We&apos;ll send you a secure link to reset your password.
           </p>
@@ -57,14 +57,14 @@ export default function ForgotPasswordPage() {
 
           {sent ? (
             <div className="text-center">
-              <CheckCircle className="h-12 w-12 text-[#C9A84C] mx-auto mb-6" />
+              <CheckCircle className="h-12 w-12 text-[#85A0B5] mx-auto mb-6" />
               <h1 className="font-serif text-3xl text-white mb-3">Check your inbox</h1>
               <p className="font-sans text-sm text-[#9A9A9A] mb-8 leading-relaxed">
                 If an account exists for <span className="text-white">{email}</span>, you&apos;ll receive a reset link shortly.
               </p>
               <Link
                 href="/login"
-                className="font-sans text-sm text-[#C9A84C] hover:text-[#D4AF6C] transition-colors"
+                className="font-sans text-sm text-[#85A0B5] hover:text-[#9DB5C8] transition-colors"
               >
                 ← Back to Sign In
               </Link>
@@ -92,7 +92,7 @@ export default function ForgotPasswordPage() {
 
               <p className="mt-6 text-center font-sans text-sm text-[#5A5A5A]">
                 Remember your password?{" "}
-                <Link href="/login" className="text-[#C9A84C] hover:text-[#D4AF6C] transition-colors">
+                <Link href="/login" className="text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">
                   Sign in
                 </Link>
               </p>

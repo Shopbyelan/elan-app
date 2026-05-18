@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { WaitlistButton } from "@/components/products/WaitlistButton";
 import { ProductCard } from "@/components/products/ProductCard";
 import { formatPrice, formatDate } from "@/lib/utils";
 import { toast } from "sonner";
@@ -44,9 +45,9 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-16">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 font-sans text-[10px] tracking-[0.15em] text-[#5A5A5A] uppercase mb-8">
-        <Link href="/shop" className="hover:text-[#C9A84C] transition-colors">Collections</Link>
+        <Link href="/shop" className="hover:text-[#85A0B5] transition-colors">Collections</Link>
         <span>/</span>
-        <Link href={`/shop?category=${product.category?.slug}`} className="hover:text-[#C9A84C] transition-colors">
+        <Link href={`/shop?category=${product.category?.slug}`} className="hover:text-[#85A0B5] transition-colors">
           {product.category?.name}
         </Link>
         <span>/</span>
@@ -81,7 +82,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
                   key={i}
                   onClick={() => setActiveImg(i)}
                   className={`relative flex-shrink-0 w-16 h-16 overflow-hidden border-2 transition-all ${
-                    activeImg === i ? "border-[#C9A84C]" : "border-transparent"
+                    activeImg === i ? "border-[#85A0B5]" : "border-transparent"
                   }`}
                 >
                   <Image
@@ -102,7 +103,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
           <div className="flex items-center justify-between mb-4">
             <Link
               href={`/shop?category=${product.category?.slug}`}
-              className="font-sans text-[10px] tracking-[0.3em] text-[#C9A84C] uppercase hover:text-[#D4AF6C] transition-colors"
+              className="font-sans text-[10px] tracking-[0.3em] text-[#85A0B5] uppercase hover:text-[#9DB5C8] transition-colors"
             >
               {product.category?.name}
             </Link>
@@ -110,7 +111,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
               <div className="flex items-center gap-1.5">
                 <div className="flex">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className={`h-3 w-3 ${i < Math.round(avgRating) ? "fill-[#C9A84C] text-[#C9A84C]" : "text-[#2A2A2A]"}`} />
+                    <Star key={i} className={`h-3 w-3 ${i < Math.round(avgRating) ? "fill-[#85A0B5] text-[#85A0B5]" : "text-[#2A2A2A]"}`} />
                   ))}
                 </div>
                 <span className="font-sans text-[10px] text-[#5A5A5A]">
@@ -134,7 +135,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
 
           {/* Price */}
           <div className="flex items-baseline gap-4 mb-8">
-            <span className="font-sans text-2xl text-[#C9A84C]">
+            <span className="font-sans text-2xl text-[#85A0B5]">
               {formatPrice(product.price)}
             </span>
             {product.comparePrice && product.comparePrice > product.price && (
@@ -155,14 +156,14 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setQty(Math.max(1, qty - 1))}
-                className="h-10 w-10 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#C9A84C] hover:text-white transition-all text-lg"
+                className="h-10 w-10 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-white transition-all text-lg"
               >
                 −
               </button>
               <span className="font-sans text-base text-white w-8 text-center">{qty}</span>
               <button
                 onClick={() => setQty(qty + 1)}
-                className="h-10 w-10 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#C9A84C] hover:text-white transition-all text-lg"
+                className="h-10 w-10 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-white transition-all text-lg"
               >
                 +
               </button>
@@ -171,29 +172,34 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
 
           {/* Actions */}
           <div className="flex gap-3 mb-8">
-            <Button
-              variant="gold"
-              size="lg"
-              className="flex-1"
-              onClick={handleAddToCart}
-              disabled={product.stock === 0}
-            >
-              <ShoppingBag className="h-4 w-4" />
-              {product.stock === 0 ? "Out of Stock" : "Add to Selection"}
-            </Button>
-            <button
-              onClick={() => {
-                toggleItem(product);
-                toast(wishlisted ? "Removed from wishlist" : "Added to wishlist");
-              }}
-              className={`h-13 w-13 min-w-[52px] flex items-center justify-center border transition-all ${
-                wishlisted
-                  ? "border-[#C9A84C] text-[#C9A84C]"
-                  : "border-[#2A2A2A] text-[#9A9A9A] hover:border-[#C9A84C] hover:text-[#C9A84C]"
-              }`}
-            >
-              <Heart className={`h-4 w-4 ${wishlisted ? "fill-[#C9A84C]" : ""}`} />
-            </button>
+            {product.stock === 0 ? (
+              <WaitlistButton productId={product.id} productName={product.name} />
+            ) : (
+              <>
+                <Button
+                  variant="gold"
+                  size="lg"
+                  className="flex-1"
+                  onClick={handleAddToCart}
+                >
+                  <ShoppingBag className="h-4 w-4" />
+                  Add to Selection
+                </Button>
+                <button
+                  onClick={() => {
+                    toggleItem(product);
+                    toast(wishlisted ? "Removed from wishlist" : "Added to wishlist");
+                  }}
+                  className={`h-13 w-13 min-w-13 flex items-center justify-center border transition-all ${
+                    wishlisted
+                      ? "border-[#85A0B5] text-[#85A0B5]"
+                      : "border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-[#85A0B5]"
+                  }`}
+                >
+                  <Heart className={`h-4 w-4 ${wishlisted ? "fill-[#85A0B5]" : ""}`} />
+                </button>
+              </>
+            )}
           </div>
 
           {/* Trust badges */}
@@ -204,7 +210,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
               { icon: RotateCcw, label: "14-Day Returns" },
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="text-center">
-                <Icon className="h-4 w-4 text-[#C9A84C] mx-auto mb-2" />
+                <Icon className="h-4 w-4 text-[#85A0B5] mx-auto mb-2" />
                 <p className="font-sans text-[9px] tracking-[0.1em] text-[#5A5A5A] leading-relaxed">
                   {label}
                 </p>
@@ -221,7 +227,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
                   onClick={() => setActiveTab(tab)}
                   className={`mr-6 pb-3 font-sans text-[10px] tracking-[0.2em] uppercase border-b-2 transition-colors ${
                     activeTab === tab
-                      ? "border-[#C9A84C] text-[#C9A84C]"
+                      ? "border-[#85A0B5] text-[#85A0B5]"
                       : "border-transparent text-[#5A5A5A] hover:text-[#9A9A9A]"
                   }`}
                 >
@@ -272,7 +278,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
         <section className="mt-20 pt-16 border-t border-[#141414]">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-2">Client Experiences</p>
+              <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-2">Client Experiences</p>
               <h2 className="font-serif text-2xl text-white">
                 {avgRating.toFixed(1)} / 5.0
                 <span className="font-sans text-sm text-[#5A5A5A] ml-3">
@@ -285,7 +291,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
             {product.reviews.map((review) => (
               <div key={review.id} className="p-6 bg-[#111] border border-[#1A1A1A]">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="h-8 w-8 rounded-full bg-[#1A1A1A] flex items-center justify-center text-[#C9A84C] font-serif text-sm">
+                  <div className="h-8 w-8 rounded-full bg-[#1A1A1A] flex items-center justify-center text-[#85A0B5] font-serif text-sm">
                     {review.user?.name?.[0] || "C"}
                   </div>
                   <div>
@@ -296,7 +302,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
                   </div>
                   <div className="ml-auto flex">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className={`h-3 w-3 ${i < review.rating ? "fill-[#C9A84C] text-[#C9A84C]" : "text-[#2A2A2A]"}`} />
+                      <Star key={i} className={`h-3 w-3 ${i < review.rating ? "fill-[#85A0B5] text-[#85A0B5]" : "text-[#2A2A2A]"}`} />
                     ))}
                   </div>
                 </div>
@@ -313,7 +319,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
       {related.length > 0 && (
         <section className="mt-20 pt-16 border-t border-[#141414]">
           <div className="mb-10">
-            <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-2">You May Also Love</p>
+            <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-2">You May Also Love</p>
             <h2 className="font-serif text-2xl text-white">From the Same Collection</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#141414]">

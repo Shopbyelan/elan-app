@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Suspense, useState } from "react";
 import Link from "next/link";
@@ -22,7 +22,7 @@ function ResetPasswordForm() {
     return (
       <div className="w-full max-w-sm text-center">
         <p className="font-sans text-sm text-[#9A9A9A] mb-6">This reset link is invalid or has expired.</p>
-        <Link href="/forgot-password" className="font-sans text-sm text-[#C9A84C] hover:underline">
+        <Link href="/forgot-password" className="font-sans text-sm text-[#85A0B5] hover:underline">
           Request a new link
         </Link>
       </div>
@@ -104,11 +104,11 @@ export default function ResetPasswordPage() {
     <div className="min-h-screen flex">
       <div className="hidden lg:flex lg:w-1/2 gradient-gold relative overflow-hidden items-end p-16">
         <div className="absolute inset-0 opacity-20"
-          style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(201,168,76,0.1) 30px, rgba(201,168,76,0.1) 31px)` }}
+          style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(133, 160, 181,0.1) 30px, rgba(133, 160, 181,0.1) 31px)` }}
         />
         <div className="relative z-10">
           <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
-          <p className="font-sans text-[10px] tracking-[0.4em] text-[#C9A84C] uppercase mt-2 mb-6">Fine Jewellery</p>
+          <p className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase mt-2 mb-6">Fine Jewellery</p>
           <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
             Choose a strong password to protect your Élan account.
           </p>

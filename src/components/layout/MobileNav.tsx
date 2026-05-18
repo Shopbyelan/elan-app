@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
 import Link from "next/link";
@@ -53,7 +53,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
         </div>
 
         <nav className="py-6">
-          <p className="px-6 mb-4 font-sans text-[9px] tracking-[0.3em] text-[#C9A84C] uppercase">
+          <p className="px-6 mb-4 font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase">
             Collections
           </p>
           {navLinks.map((link) => (
@@ -69,7 +69,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
         </nav>
 
         <div className="border-t border-[#1A1A1A] py-6">
-          <p className="px-6 mb-4 font-sans text-[9px] tracking-[0.3em] text-[#C9A84C] uppercase">
+          <p className="px-6 mb-4 font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase">
             Account
           </p>
           {session ? (

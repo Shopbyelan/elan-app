@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { HeroSection } from "@/components/home/HeroSection";
 import { CollectionsSection } from "@/components/home/CollectionsSection";
 import { MaterialsSection } from "@/components/home/MaterialsSection";
@@ -42,18 +42,18 @@ export default async function HomePage() {
       <HeroSection />
 
       {/* Ticker bar */}
-      <div className="bg-[#111111] border-t border-b border-[#1A1A1A] overflow-hidden py-3">
+      <div className="bg-[#0D1E2E] border-t border-b border-[#3A5A78]/30 overflow-hidden py-3">
         <div className="animate-marquee">
           {[...Array(3)].map((_, i) => (
-            <span key={i} className="flex gap-10 font-sans text-[10px] tracking-[0.25em] text-[#5A5A5A] uppercase whitespace-nowrap pr-10">
+            <span key={i} className="flex gap-10 font-sans text-[10px] tracking-[0.25em] text-[#8A9BAB] uppercase whitespace-nowrap pr-10">
               <span>Complimentary Gift Wrapping</span>
-              <span className="text-[#C9A84C]">·</span>
+              <span className="text-[#4A6B8A]">✦</span>
               <span>Lifetime Polishing</span>
-              <span className="text-[#C9A84C]">·</span>
+              <span className="text-[#4A6B8A]">✦</span>
               <span>Certificate of Authenticity</span>
-              <span className="text-[#C9A84C]">·</span>
+              <span className="text-[#4A6B8A]">✦</span>
               <span>Secure Nationwide Delivery</span>
-              <span className="text-[#C9A84C]">·</span>
+              <span className="text-[#4A6B8A]">✦</span>
             </span>
           ))}
         </div>
@@ -66,7 +66,7 @@ export default async function HomePage() {
         <section className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-12">
             <div>
-              <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-3">
+              <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-3">
                 {label}
               </p>
               <h2 className="font-serif text-3xl md:text-4xl text-white">
@@ -75,7 +75,7 @@ export default async function HomePage() {
             </div>
             <a
               href="/shop"
-              className="hidden md:flex items-center gap-2 font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase hover:text-[#C9A84C] transition-colors"
+              className="hidden md:flex items-center gap-2 font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase hover:text-[#85A0B5] transition-colors"
             >
               View all →
             </a>

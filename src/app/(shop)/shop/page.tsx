@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductCardSkeleton } from "@/components/ui/skeleton";
@@ -71,11 +71,11 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     <>
       {/* Hero Banner */}
       <div className="bg-[#0D0D0D] border-b border-[#141414] py-16 md:py-20 px-4 text-center">
-        <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-4">
+        <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-4">
           Shop by Collection
         </p>
         <h1 className="font-serif text-4xl md:text-6xl text-white mb-4">
-          Select Your <em className="text-[#C9A84C] not-italic">Standard</em>
+          Select Your <em className="text-[#85A0B5] not-italic">Standard</em>
         </h1>
         <p className="font-sans text-sm text-[#9A9A9A] max-w-lg mx-auto leading-relaxed">
           Every tier is exceptional. The difference is in the metal, the stone, and the statement you wish to make.
@@ -92,8 +92,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 href={tab.slug ? `/shop?category=${tab.slug}` : "/shop"}
                 className={`flex-shrink-0 px-4 py-2 font-sans text-[10px] tracking-[0.2em] uppercase border transition-all duration-200 whitespace-nowrap ${
                   activeCategory === tab.slug
-                    ? "bg-[#C9A84C] text-black border-[#C9A84C]"
-                    : "border-[#2A2A2A] text-[#5A5A5A] hover:border-[#C9A84C] hover:text-[#C9A84C]"
+                    ? "bg-[#85A0B5] text-black border-[#85A0B5]"
+                    : "border-[#2A2A2A] text-[#5A5A5A] hover:border-[#85A0B5] hover:text-[#85A0B5]"
                 }`}
               >
                 {tab.label}
@@ -102,11 +102,11 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
             <div className="ml-auto flex-shrink-0 flex gap-2">
               <a href={`/shop${activeCategory ? `?category=${activeCategory}&` : "?"}sort=price-asc`}
-                className={`px-3 py-2 font-sans text-[10px] tracking-wider uppercase border border-[#2A2A2A] text-[#5A5A5A] hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all ${params.sort === "price-asc" ? "border-[#C9A84C] text-[#C9A84C]" : ""}`}>
+                className={`px-3 py-2 font-sans text-[10px] tracking-wider uppercase border border-[#2A2A2A] text-[#5A5A5A] hover:border-[#85A0B5] hover:text-[#85A0B5] transition-all ${params.sort === "price-asc" ? "border-[#85A0B5] text-[#85A0B5]" : ""}`}>
                 Price ↑
               </a>
               <a href={`/shop${activeCategory ? `?category=${activeCategory}&` : "?"}sort=price-desc`}
-                className={`px-3 py-2 font-sans text-[10px] tracking-wider uppercase border border-[#2A2A2A] text-[#5A5A5A] hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all ${params.sort === "price-desc" ? "border-[#C9A84C] text-[#C9A84C]" : ""}`}>
+                className={`px-3 py-2 font-sans text-[10px] tracking-wider uppercase border border-[#2A2A2A] text-[#5A5A5A] hover:border-[#85A0B5] hover:text-[#85A0B5] transition-all ${params.sort === "price-desc" ? "border-[#85A0B5] text-[#85A0B5]" : ""}`}>
                 Price ↓
               </a>
             </div>
@@ -121,7 +121,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             {products.length} {products.length === 1 ? "piece" : "pieces"}
           </p>
           {activeCategory && (
-            <a href="/shop" className="font-sans text-[10px] tracking-[0.15em] text-[#C9A84C] uppercase hover:text-[#D4AF6C] transition-colors">
+            <a href="/shop" className="font-sans text-[10px] tracking-[0.15em] text-[#85A0B5] uppercase hover:text-[#9DB5C8] transition-colors">
               Clear filter ×
             </a>
           )}

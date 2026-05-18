@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
   /* Élan Brand Colors */
@@ -7,10 +7,15 @@
   --elan-card: #141414;
   --elan-surface: #1A1A1A;
   --elan-border: #2A2A2A;
-  --elan-gold: #C9A84C;
-  --elan-gold-light: #D4AF6C;
-  --elan-gold-dim: #9A7B38;
+  --elan-gold: #85A0B5;
+  --elan-gold-light: #9DB5C8;
+  --elan-gold-dim: #4A6B8A;
   --elan-blue: #85A0B5;
+  --elan-blue-deep: #4A6B8A;
+  --elan-blue-rich: #3A5A78;
+  --elan-silver: #C4CDD6;
+  --elan-silver-light: #E2E8EE;
+  --elan-silver-dim: #8A9BAB;
   --elan-white: #FFFFFF;
   --elan-text: #E8E8E8;
   --elan-muted: #9A9A9A;
@@ -33,6 +38,10 @@
   --color-elan-muted: var(--elan-muted);
   --color-elan-dim: var(--elan-dim);
   --color-elan-blue: var(--elan-blue);
+  --color-elan-blue-deep: var(--elan-blue-deep);
+  --color-elan-silver: var(--elan-silver);
+  --color-elan-silver-light: var(--elan-silver-light);
+  --color-elan-silver-dim: var(--elan-silver-dim);
 }
 
 /* ── Base ─────────────────────────── */
@@ -54,10 +63,10 @@ body {
 /* ── Scrollbar ────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--elan-dark); }
-::-webkit-scrollbar-thumb { background: var(--elan-gold-dim); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--elan-blue-deep); border-radius: 2px; }
 
 /* ── Selection ────────────────────── */
-::selection { background: var(--elan-gold); color: #000; }
+::selection { background: var(--elan-blue); color: #fff; }
 
 /* ── Typography Utilities ─────────── */
 .font-serif { font-family: 'Georgia', 'Times New Roman', serif; }
@@ -66,9 +75,9 @@ body {
 .tracking-luxury { letter-spacing: 0.25em; }
 .tracking-wide-xl { letter-spacing: 0.15em; }
 
-/* ── Gold Gradient Text ───────────── */
+/* ── Blue-Silver Gradient Text ───────────── */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #C9A84C, #D4AF6C, #A07830);
+  background: linear-gradient(135deg, #4A6B8A, #85A0B5, #C4CDD6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -90,18 +99,18 @@ body {
   background: rgba(20, 20, 20, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(201, 168, 76, 0.15);
+  border: 1px solid rgba(133, 160, 181, 0.15);
 }
 
 /* ── Gold Border Glow ─────────────── */
 .border-gold-glow {
-  border: 1px solid rgba(201, 168, 76, 0.4);
-  box-shadow: 0 0 20px rgba(201, 168, 76, 0.05);
+  border: 1px solid rgba(133, 160, 181, 0.4);
+  box-shadow: 0 0 20px rgba(133, 160, 181, 0.05);
 }
 
 /* ── Button Base ──────────────────── */
 .btn-gold {
-  background: #C9A84C;
+  background: #85A0B5;
   color: #000;
   font-size: 12px;
   letter-spacing: 0.2em;
@@ -110,12 +119,12 @@ body {
   transition: all 0.3s ease;
   text-transform: uppercase;
 }
-.btn-gold:hover { background: #D4AF6C; }
+.btn-gold:hover { background: #9DB5C8; }
 
 .btn-outline-gold {
   background: transparent;
-  color: #C9A84C;
-  border: 1px solid #C9A84C;
+  color: #85A0B5;
+  border: 1px solid #85A0B5;
   font-size: 12px;
   letter-spacing: 0.2em;
   font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -123,7 +132,7 @@ body {
   transition: all 0.3s ease;
   text-transform: uppercase;
 }
-.btn-outline-gold:hover { background: #C9A84C; color: #000; }
+.btn-outline-gold:hover { background: #85A0B5; color: #000; }
 
 /* ── Marquee / Ticker ─────────────── */
 @keyframes marquee {
@@ -155,6 +164,12 @@ body {
   animation: shimmer 1.5s infinite;
 }
 
+/* ── Loading bar shimmer ──────────── */
+@keyframes shimmer-bar {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
 /* ── Input ────────────────────────── */
 input, textarea, select {
   background: #141414;
@@ -164,7 +179,7 @@ input, textarea, select {
   transition: border-color 0.2s;
 }
 input:focus, textarea:focus, select:focus {
-  border-color: #C9A84C;
+  border-color: #85A0B5;
 }
 
 /* ── Prose overrides ──────────────── */

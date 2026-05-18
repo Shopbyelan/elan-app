@@ -7,11 +7,16 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toggleProductActive } from "@/actions/product.actions";
 import { DeleteProductButton } from "@/components/admin/DeleteProductButton";
+import { NotifyWaitlistButton } from "@/components/admin/NotifyWaitlistButton";
 
 async function getProducts() {
   try {
     return await prisma.product.findMany({
-      include: { images: true, category: true, _count: { select: { orderItems: true } } },
+      include: {
+        images: true,
+        category: true,
+        _count: { select: { orderItems: true, waitlistEntries: true } },
+      },
       orderBy: { createdAt: "desc" },
     });
   } catch {
@@ -40,7 +45,7 @@ export default async function AdminProductsPage() {
         <table className="w-full">
           <thead>
             <tr className="border-b border-[#1A1A1A]">
-              {["Product", "Category", "Price", "Stock", "Orders", "Status", "Actions"].map((h) => (
+              {["Product", "Category", "Price", "Stock", "Waitlist", "Orders", "Status", "Actions"].map((h) => (
                 <th key={h} className="px-5 py-4 text-left font-sans text-[9px] tracking-[0.2em] text-[#5A5A5A] uppercase">
                   {h}
                 </th>
@@ -50,6 +55,7 @@ export default async function AdminProductsPage() {
           <tbody className="divide-y divide-[#141414]">
             {products.map((product) => {
               const img = product.images.find((i) => i.isPrimary)?.url || product.images[0]?.url;
+              const waitlistCount = product._count.waitlistEntries;
               return (
                 <tr key={product.id} className="hover:bg-[#141414] transition-colors">
                   <td className="px-5 py-4">
@@ -66,7 +72,7 @@ export default async function AdminProductsPage() {
                   <td className="px-5 py-4 font-sans text-xs text-[#9A9A9A]">
                     {product.category?.name || "—"}
                   </td>
-                  <td className="px-5 py-4 font-sans text-xs text-[#C9A84C]">
+                  <td className="px-5 py-4 font-sans text-xs text-[#85A0B5]">
                     {formatPrice(product.price)}
                   </td>
                   <td className="px-5 py-4">
@@ -78,6 +84,15 @@ export default async function AdminProductsPage() {
                       {product.stock}
                     </span>
                   </td>
+                  <td className="px-5 py-4">
+                    <NotifyWaitlistButton
+                      productId={product.id}
+                      count={waitlistCount}
+                    />
+                    {waitlistCount === 0 && (
+                      <span className="font-sans text-xs text-[#3A3A3A]">—</span>
+                    )}
+                  </td>
                   <td className="px-5 py-4 font-sans text-xs text-[#9A9A9A]">
                     {product._count.orderItems}
                   </td>
@@ -88,7 +103,7 @@ export default async function AdminProductsPage() {
                   </td>
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <Link href={`/admin/products/${product.id}/edit`} className="text-[#5A5A5A] hover:text-[#C9A84C] transition-colors">
+                      <Link href={`/admin/products/${product.id}/edit`} className="text-[#5A5A5A] hover:text-[#85A0B5] transition-colors">
                         <Edit className="h-4 w-4" />
                       </Link>
                       <form action={toggleProductActive}>
@@ -110,9 +125,9 @@ export default async function AdminProductsPage() {
             })}
             {products.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-5 py-12 text-center font-sans text-sm text-[#5A5A5A]">
+                <td colSpan={8} className="px-5 py-12 text-center font-sans text-sm text-[#5A5A5A]">
                   No products yet.{" "}
-                  <Link href="/admin/products/new" className="text-[#C9A84C] hover:underline">
+                  <Link href="/admin/products/new" className="text-[#85A0B5] hover:underline">
                     Add your first product →
                   </Link>
                 </td>

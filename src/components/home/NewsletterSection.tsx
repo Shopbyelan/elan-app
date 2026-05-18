@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -36,11 +36,11 @@ export function NewsletterSection() {
       <div className="max-w-2xl mx-auto text-center">
         {/* Decorative line */}
         <div className="flex items-center justify-center gap-4 mb-10">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#C9A84C]/30" />
-          <span className="font-sans text-[10px] tracking-[0.4em] text-[#C9A84C] uppercase">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#85A0B5]/30" />
+          <span className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase">
             Élan Inner Circle
           </span>
-          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#C9A84C]/30" />
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#85A0B5]/30" />
         </div>
 
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">

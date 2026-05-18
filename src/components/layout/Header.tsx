@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -26,18 +26,18 @@ export function Header() {
   return (
     <>
       {/* Announcement bar */}
-      <div className="bg-[#C9A84C] text-black text-center py-2 overflow-hidden">
+      <div className="bg-[#3A5A78] text-center py-2.5 overflow-hidden">
         <div className="animate-marquee">
           {[...Array(3)].map((_, i) => (
-            <span key={i} className="flex gap-12 font-sans text-[10px] tracking-[0.25em] uppercase font-medium whitespace-nowrap pr-12">
+            <span key={i} className="flex gap-12 font-sans text-[10px] tracking-[0.25em] uppercase font-medium whitespace-nowrap pr-12 text-[#C4CDD6]">
               <span>Free delivery on orders above ₦100,000</span>
-              <span>·</span>
+              <span className="text-[#85A0B5]">✦</span>
               <span>Certificate of Authenticity with every piece</span>
-              <span>·</span>
+              <span className="text-[#85A0B5]">✦</span>
               <span>Lifetime polishing service</span>
-              <span>·</span>
+              <span className="text-[#85A0B5]">✦</span>
               <span>Complimentary gift wrapping</span>
-              <span>·</span>
+              <span className="text-[#85A0B5]">✦</span>
             </span>
           ))}
         </div>
@@ -65,19 +65,19 @@ export function Header() {
               <nav className="hidden md:flex items-center gap-8">
                 <Link
                   href="/shop"
-                  className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#9A9A9A] hover:text-[#C9A84C] transition-colors"
+                  className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
                 >
                   Collections
                 </Link>
                 <Link
                   href="/shop?category=18k-gold"
-                  className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#9A9A9A] hover:text-[#C9A84C] transition-colors"
+                  className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
                 >
                   Fine Gold
                 </Link>
                 <Link
                   href="/materials"
-                  className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#9A9A9A] hover:text-[#C9A84C] transition-colors"
+                  className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
                 >
                   Our Materials
                 </Link>
@@ -90,7 +90,7 @@ export function Header() {
                 <span className="font-serif text-xl md:text-2xl text-white tracking-[0.3em]">
                   ÉLAN
                 </span>
-                <span className="font-sans text-[7px] tracking-[0.4em] text-[#C9A84C] uppercase mt-0.5 hidden md:block">
+                <span className="font-sans text-[7px] tracking-[0.4em] text-[#85A0B5] uppercase mt-0.5 hidden md:block">
                   Fine Jewellery
                 </span>
               </div>
@@ -111,7 +111,7 @@ export function Header() {
               >
                 <Heart className="h-4 w-4" />
                 {wishlistItems.length > 0 && (
-                  <span className="absolute top-1 right-1 h-3.5 w-3.5 flex items-center justify-center bg-[#C9A84C] text-black text-[8px] font-bold rounded-full">
+                  <span className="absolute top-1 right-1 h-3.5 w-3.5 flex items-center justify-center bg-[#85A0B5] text-black text-[8px] font-bold rounded-full">
                     {wishlistItems.length}
                   </span>
                 )}
@@ -124,14 +124,14 @@ export function Header() {
                     <ChevronDown className="h-3 w-3 hidden md:block" />
                   </button>
                   <div className="absolute right-0 top-full mt-2 w-48 bg-[#111] border border-[#2A2A2A] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <Link href="/account" className="block px-4 py-2.5 font-sans text-[11px] tracking-[0.15em] uppercase text-[#9A9A9A] hover:text-[#C9A84C] hover:bg-[#1A1A1A] transition-colors">
+                    <Link href="/account" className="block px-4 py-2.5 font-sans text-[11px] tracking-[0.15em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] hover:bg-[#1A1A1A] transition-colors">
                       My Account
                     </Link>
-                    <Link href="/orders" className="block px-4 py-2.5 font-sans text-[11px] tracking-[0.15em] uppercase text-[#9A9A9A] hover:text-[#C9A84C] hover:bg-[#1A1A1A] transition-colors">
+                    <Link href="/orders" className="block px-4 py-2.5 font-sans text-[11px] tracking-[0.15em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] hover:bg-[#1A1A1A] transition-colors">
                       My Orders
                     </Link>
                     {session.user?.role === "ADMIN" && (
-                      <Link href="/admin" className="block px-4 py-2.5 font-sans text-[11px] tracking-[0.15em] uppercase text-[#C9A84C] hover:bg-[#1A1A1A] transition-colors">
+                      <Link href="/admin" className="block px-4 py-2.5 font-sans text-[11px] tracking-[0.15em] uppercase text-[#85A0B5] hover:bg-[#1A1A1A] transition-colors">
                         Admin Panel
                       </Link>
                     )}
@@ -159,7 +159,7 @@ export function Header() {
               >
                 <ShoppingBag className="h-4 w-4" />
                 {totalItems() > 0 && (
-                  <span className="absolute top-1 right-1 h-3.5 w-3.5 flex items-center justify-center bg-[#C9A84C] text-black text-[8px] font-bold rounded-full">
+                  <span className="absolute top-1 right-1 h-3.5 w-3.5 flex items-center justify-center bg-[#85A0B5] text-black text-[8px] font-bold rounded-full">
                     {totalItems()}
                   </span>
                 )}
@@ -184,7 +184,7 @@ export function Header() {
                   autoFocus
                   type="text"
                   placeholder="Search for pieces..."
-                  className="w-full h-11 pl-11 pr-4 bg-[#141414] border border-[#2A2A2A] font-sans text-sm text-white placeholder:text-[#5A5A5A] focus:outline-none focus:border-[#C9A84C] transition-colors"
+                  className="w-full h-11 pl-11 pr-4 bg-[#141414] border border-[#2A2A2A] font-sans text-sm text-white placeholder:text-[#5A5A5A] focus:outline-none focus:border-[#85A0B5] transition-colors"
                 />
                 <button
                   onClick={() => setSearchOpen(false)}

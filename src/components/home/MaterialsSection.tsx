@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -45,12 +45,12 @@ export function MaterialsSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-4">
+          <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-4">
             Knowledge is Luxury
           </p>
           <h2 className="font-serif text-3xl md:text-5xl text-white">
             Understanding Your{" "}
-            <em className="text-[#C9A84C] not-italic">Élan</em>
+            <em className="text-[#85A0B5] not-italic">Élan</em>
           </h2>
           <p className="font-sans text-sm text-[#9A9A9A] max-w-xl mx-auto mt-4 leading-relaxed">
             True luxury is not just owning something rare — it is understanding what you carry and why it matters.
@@ -68,7 +68,7 @@ export function MaterialsSection() {
               transition={{ delay: i * 0.1, duration: 0.6 }}
               className="bg-[#0A0A0A] p-8 md:p-10 group hover:bg-[#111] transition-colors duration-300"
             >
-              <p className="font-serif text-5xl md:text-6xl text-[#C9A84C] mb-4 leading-none">
+              <p className="font-serif text-5xl md:text-6xl text-[#85A0B5] mb-4 leading-none">
                 {mat.code}
               </p>
               <p className="font-sans text-[9px] tracking-[0.25em] text-[#5A5A5A] uppercase mb-4">
@@ -79,7 +79,7 @@ export function MaterialsSection() {
               </p>
               <Link
                 href={mat.href}
-                className="inline-flex items-center gap-2 mt-6 font-sans text-[10px] tracking-[0.2em] text-[#C9A84C] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="inline-flex items-center gap-2 mt-6 font-sans text-[10px] tracking-[0.2em] text-[#85A0B5] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
                 Learn more →
               </Link>
@@ -90,7 +90,7 @@ export function MaterialsSection() {
         <div className="text-center mt-12">
           <Link
             href="/materials"
-            className="inline-flex items-center gap-3 font-sans text-xs tracking-[0.25em] text-[#9A9A9A] uppercase hover:text-[#C9A84C] transition-colors"
+            className="inline-flex items-center gap-3 font-sans text-xs tracking-[0.25em] text-[#9A9A9A] uppercase hover:text-[#85A0B5] transition-colors"
           >
             <div className="h-px w-12 bg-[#2A2A2A]" />
             Explore All Materials

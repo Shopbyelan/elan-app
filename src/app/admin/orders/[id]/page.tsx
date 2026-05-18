@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import { formatPrice, formatDate } from "@/lib/utils";
 import { updateOrderStatus } from "@/actions/order.actions";
 import { notFound } from "next/navigation";
@@ -47,7 +47,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
       {/* Header */}
       <div className="flex items-start justify-between mb-8">
         <div>
-          <Link href="/admin/orders" className="inline-flex items-center gap-1.5 font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase hover:text-[#C9A84C] transition-colors mb-3">
+          <Link href="/admin/orders" className="inline-flex items-center gap-1.5 font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase hover:text-[#85A0B5] transition-colors mb-3">
             <ArrowLeft className="h-3 w-3" /> All Orders
           </Link>
           <h1 className="font-serif text-3xl text-white">{order.orderNumber}</h1>
@@ -65,7 +65,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
           {/* Items */}
           <div className="bg-[#111] border border-[#1A1A1A] overflow-hidden">
             <div className="px-5 py-4 border-b border-[#1A1A1A] flex items-center gap-2">
-              <Package className="h-4 w-4 text-[#C9A84C]" />
+              <Package className="h-4 w-4 text-[#85A0B5]" />
               <h2 className="font-serif text-lg text-white">Items Ordered</h2>
             </div>
             <div className="divide-y divide-[#141414]">
@@ -80,7 +80,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
                     <p className="font-sans text-sm text-white">{item.productName}</p>
                     <p className="font-sans text-[10px] text-[#5A5A5A] mt-0.5">Qty: {item.quantity}</p>
                   </div>
-                  <p className="font-sans text-sm text-[#C9A84C] flex-shrink-0">
+                  <p className="font-sans text-sm text-[#85A0B5] flex-shrink-0">
                     {formatPrice(item.price * item.quantity)}
                   </p>
                 </div>
@@ -99,7 +99,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
                   <span>−{formatPrice(order.discount)}</span>
                 </div>
               )}
-              <div className="flex justify-between font-serif text-base text-[#C9A84C] pt-2 border-t border-[#1A1A1A]">
+              <div className="flex justify-between font-serif text-base text-[#85A0B5] pt-2 border-t border-[#1A1A1A]">
                 <span>Total</span><span>{formatPrice(order.total)}</span>
               </div>
             </div>
@@ -108,7 +108,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
           {/* Shipping address */}
           <div className="bg-[#111] border border-[#1A1A1A]">
             <div className="px-5 py-4 border-b border-[#1A1A1A] flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-[#C9A84C]" />
+              <MapPin className="h-4 w-4 text-[#85A0B5]" />
               <h2 className="font-serif text-lg text-white">Shipping Address</h2>
             </div>
             <div className="px-5 py-4 font-sans text-sm space-y-1">
@@ -118,7 +118,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
                   <p className="text-[#9A9A9A]">{order.address.address}</p>
                   <p className="text-[#9A9A9A]">{order.address.city}, {order.address.state}</p>
                   <p className="text-[#9A9A9A]">{order.address.country}</p>
-                  <p className="text-[#C9A84C] mt-2">{order.address.phone}</p>
+                  <p className="text-[#85A0B5] mt-2">{order.address.phone}</p>
                 </>
               ) : (
                 <p className="text-[#5A5A5A]">No address on record</p>
@@ -133,20 +133,20 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
           {/* Customer */}
           <div className="bg-[#111] border border-[#1A1A1A]">
             <div className="px-5 py-4 border-b border-[#1A1A1A] flex items-center gap-2">
-              <User className="h-4 w-4 text-[#C9A84C]" />
+              <User className="h-4 w-4 text-[#85A0B5]" />
               <h2 className="font-serif text-lg text-white">Customer</h2>
             </div>
             <div className="px-5 py-4 space-y-2 font-sans text-sm">
               <p className="text-white">{customerName}</p>
               <p className="text-[#9A9A9A] break-all">{customerEmail}</p>
-              <p className="text-[#C9A84C]">{customerPhone}</p>
+              <p className="text-[#85A0B5]">{customerPhone}</p>
             </div>
           </div>
 
           {/* Payment */}
           <div className="bg-[#111] border border-[#1A1A1A]">
             <div className="px-5 py-4 border-b border-[#1A1A1A] flex items-center gap-2">
-              <CreditCard className="h-4 w-4 text-[#C9A84C]" />
+              <CreditCard className="h-4 w-4 text-[#85A0B5]" />
               <h2 className="font-serif text-lg text-white">Payment</h2>
             </div>
             <div className="px-5 py-4 space-y-2 font-sans text-sm">
@@ -176,7 +176,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
 
               <div>
                 <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Status</label>
-                <select name="status" defaultValue={order.status} className="w-full h-10 px-3 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] appearance-none transition-colors">
+                <select name="status" defaultValue={order.status} className="w-full h-10 px-3 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] appearance-none transition-colors">
                   {STATUSES.map((s) => (
                     <option key={s} value={s}>{s}</option>
                   ))}
@@ -189,7 +189,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
                   name="trackingNumber"
                   defaultValue={order.trackingNumber || ""}
                   placeholder="e.g. GIG-123456"
-                  className="w-full h-10 px-3 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                  className="w-full h-10 px-3 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
                 />
               </div>
 
@@ -200,7 +200,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
                   defaultValue={order.notes || ""}
                   rows={3}
                   placeholder="Internal notes..."
-                  className="w-full px-3 py-2 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors resize-none"
+                  className="w-full px-3 py-2 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors resize-none"
                 />
               </div>
 

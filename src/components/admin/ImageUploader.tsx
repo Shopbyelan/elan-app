@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef } from "react";
 import { X, Upload, Loader2 } from "lucide-react";
@@ -80,7 +80,7 @@ export function ImageUploader({ maxImages = 3, existingCount = 0 }: Props) {
             <input type="hidden" name="imagePublicIds" value={img.publicId} />
             <input type="hidden" name="imagePrimary" value={img.isPrimary ? "true" : "false"} />
 
-            <div className={`relative w-24 h-24 bg-[#141414] border-2 transition-colors ${img.isPrimary ? "border-[#C9A84C]" : "border-transparent"}`}>
+            <div className={`relative w-24 h-24 bg-[#141414] border-2 transition-colors ${img.isPrimary ? "border-[#85A0B5]" : "border-transparent"}`}>
               <Image src={img.preview} alt="" fill className="object-cover" />
 
               {/* Overlay actions */}
@@ -89,7 +89,7 @@ export function ImageUploader({ maxImages = 3, existingCount = 0 }: Props) {
                   <button
                     type="button"
                     onClick={() => setPrimary(i)}
-                    className="bg-[#C9A84C] text-black font-sans text-[8px] tracking-wider uppercase px-1.5 py-0.5"
+                    className="bg-[#85A0B5] text-black font-sans text-[8px] tracking-wider uppercase px-1.5 py-0.5"
                   >
                     Primary
                   </button>
@@ -104,7 +104,7 @@ export function ImageUploader({ maxImages = 3, existingCount = 0 }: Props) {
               </div>
 
               {img.isPrimary && (
-                <span className="absolute bottom-0 left-0 right-0 bg-[#C9A84C]/90 text-black font-sans text-[8px] tracking-wider uppercase text-center py-0.5">
+                <span className="absolute bottom-0 left-0 right-0 bg-[#85A0B5]/90 text-black font-sans text-[8px] tracking-wider uppercase text-center py-0.5">
                   Primary
                 </span>
               )}
@@ -117,7 +117,7 @@ export function ImageUploader({ maxImages = 3, existingCount = 0 }: Props) {
           <button
             type="button"
             onClick={() => inputRef.current?.click()}
-            className="w-24 h-24 border border-dashed border-[#2A2A2A] hover:border-[#C9A84C] flex flex-col items-center justify-center gap-1.5 text-[#3A3A3A] hover:text-[#C9A84C] transition-colors"
+            className="w-24 h-24 border border-dashed border-[#2A2A2A] hover:border-[#85A0B5] flex flex-col items-center justify-center gap-1.5 text-[#3A3A3A] hover:text-[#85A0B5] transition-colors"
           >
             <Upload className="h-4 w-4" />
             <span className="font-sans text-[9px] tracking-[0.15em] uppercase">Add Photo</span>

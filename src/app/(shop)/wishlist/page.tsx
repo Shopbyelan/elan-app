@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Heart } from "lucide-react";
 import Link from "next/link";
@@ -12,7 +12,7 @@ export default function WishlistPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
       <div className="mb-12">
-        <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-2">
+        <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-2">
           Saved Pieces
         </p>
         <h1 className="font-serif text-3xl md:text-4xl text-white">

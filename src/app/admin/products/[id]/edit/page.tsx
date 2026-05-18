@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import { updateProduct, deleteProductImage } from "@/actions/product.actions";
 import { Button } from "@/components/ui/button";
 import { ImageUploader } from "@/components/admin/ImageUploader";
@@ -50,11 +50,11 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
         {product.images.length > 0 && (
           <div className="flex flex-wrap gap-3">
             {product.images.map((img) => (
-              <div key={img.id} className={`relative group w-24 h-24 border-2 ${img.isPrimary ? "border-[#C9A84C]" : "border-transparent"}`}>
+              <div key={img.id} className={`relative group w-24 h-24 border-2 ${img.isPrimary ? "border-[#85A0B5]" : "border-transparent"}`}>
                 <Image src={img.url} alt={img.alt || product.name} fill className="object-cover" />
 
                 {img.isPrimary && (
-                  <span className="absolute bottom-0 left-0 right-0 bg-[#C9A84C]/90 text-black font-sans text-[8px] tracking-wider uppercase text-center py-0.5">
+                  <span className="absolute bottom-0 left-0 right-0 bg-[#85A0B5]/90 text-black font-sans text-[8px] tracking-wider uppercase text-center py-0.5">
                     Primary
                   </span>
                 )}
@@ -80,7 +80,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
           <form action={updateProduct}>
             <input type="hidden" name="id" value={product.id} />
             <ImageUploader maxImages={3} existingCount={product.images.length} />
-            <button type="submit" className="mt-3 font-sans text-[10px] tracking-[0.2em] text-[#C9A84C] uppercase hover:underline">
+            <button type="submit" className="mt-3 font-sans text-[10px] tracking-[0.2em] text-[#85A0B5] uppercase hover:underline">
               Save new photos →
             </button>
           </form>
@@ -100,13 +100,13 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
 
           <div>
             <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Product Name *</label>
-            <input name="name" required defaultValue={product.name} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors" />
+            <input name="name" required defaultValue={product.name} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Category *</label>
-              <select name="categoryId" required defaultValue={product.categoryId} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors appearance-none">
+              <select name="categoryId" required defaultValue={product.categoryId} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors appearance-none">
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
@@ -114,48 +114,48 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
             </div>
             <div>
               <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">SKU</label>
-              <input name="sku" defaultValue={product.sku || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors" />
+              <input name="sku" defaultValue={product.sku || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
             </div>
           </div>
 
           <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Price (₦) *</label>
-              <input name="price" type="number" step="0.01" required defaultValue={product.price} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors" />
+              <input name="price" type="number" step="0.01" required defaultValue={product.price} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
             </div>
             <div>
               <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Compare Price</label>
-              <input name="comparePrice" type="number" step="0.01" defaultValue={product.comparePrice || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors" />
+              <input name="comparePrice" type="number" step="0.01" defaultValue={product.comparePrice || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
             </div>
             <div>
               <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Stock *</label>
-              <input name="stock" type="number" required defaultValue={product.stock} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors" />
+              <input name="stock" type="number" required defaultValue={product.stock} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
             </div>
           </div>
 
           <div>
             <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Short Description</label>
-            <input name="shortDesc" defaultValue={product.shortDesc || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors" />
+            <input name="shortDesc" defaultValue={product.shortDesc || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
           </div>
 
           <div>
             <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Description *</label>
-            <textarea name="description" required rows={5} defaultValue={product.description} className="w-full px-4 py-3 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors resize-none" />
+            <textarea name="description" required rows={5} defaultValue={product.description} className="w-full px-4 py-3 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors resize-none" />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Material</label>
-              <input name="material" defaultValue={product.material || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors" />
+              <input name="material" defaultValue={product.material || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
             </div>
             <div>
               <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Badge</label>
-              <input name="badge" defaultValue={product.badge || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors" />
+              <input name="badge" defaultValue={product.badge || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <input type="checkbox" id="isFeatured" name="isFeatured" defaultChecked={product.isFeatured} className="h-4 w-4 accent-[#C9A84C]" />
+            <input type="checkbox" id="isFeatured" name="isFeatured" defaultChecked={product.isFeatured} className="h-4 w-4 accent-[#85A0B5]" />
             <label htmlFor="isFeatured" className="font-sans text-xs text-[#9A9A9A]">Feature on homepage</label>
           </div>
         </div>

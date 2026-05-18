@@ -1,4 +1,4 @@
-import * as React from "react";
+﻿import * as React from "react";
 import { cn } from "@/lib/utils";
 
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -6,8 +6,8 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 const variantClasses = {
-  gold: "bg-[#C9A84C] text-black",
-  outline: "border border-[#C9A84C] text-[#C9A84C]",
+  gold: "bg-[#85A0B5] text-black",
+  outline: "border border-[#85A0B5] text-[#85A0B5]",
   dark: "bg-[#1A1A1A] text-[#9A9A9A] border border-[#2A2A2A]",
   green: "bg-emerald-900/40 text-emerald-400 border border-emerald-800",
   red: "bg-red-900/40 text-red-400 border border-red-800",

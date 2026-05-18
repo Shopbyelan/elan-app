@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 
 async function getCustomers() {
@@ -39,7 +39,7 @@ export default async function AdminCustomersPage() {
               <tr key={customer.id} className="hover:bg-[#141414] transition-colors">
                 <td className="px-5 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 flex items-center justify-center bg-[#1A1A1A] text-[#C9A84C] font-serif text-sm">
+                    <div className="h-8 w-8 flex items-center justify-center bg-[#1A1A1A] text-[#85A0B5] font-serif text-sm">
                       {customer.name?.[0] || customer.email[0].toUpperCase()}
                     </div>
                     <p className="font-sans text-xs text-white">{customer.name || "—"}</p>
@@ -48,7 +48,7 @@ export default async function AdminCustomersPage() {
                 <td className="px-5 py-4 font-sans text-xs text-[#9A9A9A]">
                   {customer.email}
                 </td>
-                <td className="px-5 py-4 font-sans text-xs text-[#C9A84C]">
+                <td className="px-5 py-4 font-sans text-xs text-[#85A0B5]">
                   {customer._count.orders}
                 </td>
                 <td className="px-5 py-4 font-sans text-xs text-[#9A9A9A]">

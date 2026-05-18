@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { ChevronDown } from "lucide-react";
@@ -26,7 +26,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             className={cn(
               "w-full h-11 px-4 py-3 font-sans text-sm text-[#E8E8E8] appearance-none",
               "bg-[#141414] border border-[#2A2A2A]",
-              "focus:outline-none focus:border-[#C9A84C] transition-colors duration-200",
+              "focus:outline-none focus:border-[#85A0B5] transition-colors duration-200",
               "disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer",
               error && "border-red-500",
               className

@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart, ShoppingBag, Bell } from "lucide-react";
 import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
 import { Badge } from "@/components/ui/badge";
@@ -60,48 +60,64 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         {/* Overlay on hover */}
         <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
+        {/* Out-of-stock dim overlay */}
+        {product.stock === 0 && (
+          <div className="absolute inset-0 bg-[#0A0A0A]/50 z-[1]" />
+        )}
+
         {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-          {product.badge && (
-            <Badge variant="gold">{product.badge}</Badge>
-          )}
-          {product.comparePrice && product.comparePrice > product.price && (
-            <Badge variant="dark">Sale</Badge>
+        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-[2]">
+          {product.stock === 0 ? (
+            <Badge variant="dark">Sold Out</Badge>
+          ) : (
+            <>
+              {product.badge && <Badge variant="gold">{product.badge}</Badge>}
+              {product.comparePrice && product.comparePrice > product.price && (
+                <Badge variant="dark">Sale</Badge>
+              )}
+            </>
           )}
         </div>
 
         {/* Actions */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2 translate-x-10 group-hover:translate-x-0 transition-transform duration-300">
+        <div className="absolute top-3 right-3 flex flex-col gap-2 translate-x-10 group-hover:translate-x-0 transition-transform duration-300 z-[2]">
           <button
             onClick={handleWishlist}
             className={`h-8 w-8 flex items-center justify-center bg-[#0A0A0A]/90 border transition-colors duration-200 ${
               wishlisted
-                ? "border-[#C9A84C] text-[#C9A84C]"
-                : "border-[#2A2A2A] text-[#9A9A9A] hover:border-[#C9A84C] hover:text-[#C9A84C]"
+                ? "border-[#85A0B5] text-[#85A0B5]"
+                : "border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-[#85A0B5]"
             }`}
           >
-            <Heart className={`h-3.5 w-3.5 ${wishlisted ? "fill-[#C9A84C]" : ""}`} />
+            <Heart className={`h-3.5 w-3.5 ${wishlisted ? "fill-[#85A0B5]" : ""}`} />
           </button>
         </div>
 
-        {/* Add to cart — bottom on hover */}
-        <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-          <button
-            onClick={handleAddToCart}
-            className="w-full flex items-center justify-center gap-2 bg-[#C9A84C] text-black h-10 font-sans text-[10px] tracking-[0.2em] uppercase font-medium hover:bg-[#D4AF6C] transition-colors"
-          >
-            <ShoppingBag className="h-3.5 w-3.5" />
-            Add to Selection
-          </button>
+        {/* Bottom action bar — Add to cart or Waitlist */}
+        <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-[2]">
+          {product.stock === 0 ? (
+            <div className="w-full flex items-center justify-center gap-2 bg-[#1C2D3E] text-[#85A0B5] h-10 font-sans text-[10px] tracking-[0.2em] uppercase font-medium">
+              <Bell className="h-3.5 w-3.5" />
+              Join Waiting List
+            </div>
+          ) : (
+            <button
+              onClick={handleAddToCart}
+              className="w-full flex items-center justify-center gap-2 bg-[#85A0B5] text-black h-10 font-sans text-[10px] tracking-[0.2em] uppercase font-medium hover:bg-[#9DB5C8] transition-colors"
+            >
+              <ShoppingBag className="h-3.5 w-3.5" />
+              Add to Selection
+            </button>
+          )}
         </div>
       </div>
 
       {/* Info */}
       <div className="pt-4 pb-2 px-1">
-        <p className="font-sans text-[9px] tracking-[0.25em] text-[#C9A84C] uppercase mb-1">
+        <p className="font-sans text-[9px] tracking-[0.25em] text-[#85A0B5] uppercase mb-1">
           {product.category?.name || product.material}
         </p>
-        <h3 className="font-serif text-base text-white group-hover:text-[#C9A84C] transition-colors duration-300 leading-snug">
+        <h3 className="font-serif text-base text-white group-hover:text-[#85A0B5] transition-colors duration-300 leading-snug">
           {product.name}
         </h3>
         {product.shortDesc && (
@@ -110,7 +126,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           </p>
         )}
         <div className="flex items-center gap-3 mt-2.5">
-          <span className="font-sans text-sm text-[#C9A84C]">
+          <span className="font-sans text-sm text-[#85A0B5]">
             From {formatPrice(product.price)}
           </span>
           {product.comparePrice && product.comparePrice > product.price && (

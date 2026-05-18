@@ -1,4 +1,4 @@
-import * as React from "react";
+﻿import * as React from "react";
 import { cn } from "@/lib/utils";
 
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "prefix"> {
@@ -28,7 +28,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "w-full h-11 px-4 py-3 font-sans text-sm text-[#E8E8E8]",
               "bg-[#141414] border border-[#2A2A2A]",
               "placeholder:text-[#5A5A5A]",
-              "focus:outline-none focus:border-[#C9A84C] transition-colors duration-200",
+              "focus:outline-none focus:border-[#85A0B5] transition-colors duration-200",
               "disabled:opacity-50 disabled:cursor-not-allowed",
               error && "border-red-500",
               prefix && "pl-10",
@@ -70,7 +70,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             "w-full px-4 py-3 font-sans text-sm text-[#E8E8E8]",
             "bg-[#141414] border border-[#2A2A2A]",
             "placeholder:text-[#5A5A5A] resize-none",
-            "focus:outline-none focus:border-[#C9A84C] transition-colors duration-200",
+            "focus:outline-none focus:border-[#85A0B5] transition-colors duration-200",
             error && "border-red-500",
             className
           )}

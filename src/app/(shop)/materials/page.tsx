@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -79,11 +79,11 @@ export default function MaterialsPage() {
     <>
       {/* Header */}
       <div className="bg-[#0D0D0D] border-b border-[#141414] py-16 md:py-24 px-4 text-center">
-        <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-4">
+        <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-4">
           Knowledge is Luxury
         </p>
         <h1 className="font-serif text-4xl md:text-6xl text-white mb-4">
-          Understanding Your <em className="text-[#C9A84C] not-italic">Élan</em>
+          Understanding Your <em className="text-[#85A0B5] not-italic">Élan</em>
         </h1>
         <p className="font-sans text-sm text-[#9A9A9A] max-w-xl mx-auto leading-relaxed">
           True luxury is not just owning something rare — it is understanding what you carry and why it matters.
@@ -94,7 +94,7 @@ export default function MaterialsPage() {
       <div className="sticky top-16 md:top-20 z-30 bg-[#0A0A0A]/95 backdrop-blur border-b border-[#141414]">
         <div className="max-w-4xl mx-auto px-4 flex gap-6 overflow-x-auto py-4">
           {materials.map((m) => (
-            <a key={m.id} href={`#${m.id}`} className="flex-shrink-0 font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase hover:text-[#C9A84C] transition-colors">
+            <a key={m.id} href={`#${m.id}`} className="flex-shrink-0 font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase hover:text-[#85A0B5] transition-colors">
               {m.name}
             </a>
           ))}
@@ -117,7 +117,7 @@ export default function MaterialsPage() {
               <div className={`${idx % 2 === 1 ? "md:order-2" : ""}`}>
                 <div className={`aspect-square relative overflow-hidden ${mat.gradient}`}>
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-                    <span className="font-serif text-7xl md:text-8xl text-[#C9A84C]">{mat.code}</span>
+                    <span className="font-serif text-7xl md:text-8xl text-[#85A0B5]">{mat.code}</span>
                     <p className="font-sans text-[9px] tracking-[0.3em] text-[#9A9A9A] uppercase mt-4">
                       {mat.name}
                     </p>
@@ -127,7 +127,7 @@ export default function MaterialsPage() {
 
               {/* Content */}
               <div className={`${idx % 2 === 1 ? "md:order-1" : ""}`}>
-                <p className="font-sans text-[9px] tracking-[0.3em] text-[#C9A84C] uppercase mb-3">
+                <p className="font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase mb-3">
                   {["18K GOLD", "STERLING SILVER", "CULTIVATED DIAMOND", "PLATINUM", "CRYSTAL MOISSANITE"][idx]}
                 </p>
                 <h2 className="font-serif text-3xl md:text-4xl text-white mb-2">{mat.name}</h2>

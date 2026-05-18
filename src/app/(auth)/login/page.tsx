@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
@@ -102,7 +102,7 @@ function LoginForm() {
           }
         />
         <div className="flex justify-end">
-          <Link href="/forgot-password" className="font-sans text-[11px] text-[#C9A84C] hover:text-[#D4AF6C] transition-colors">
+          <Link href="/forgot-password" className="font-sans text-[11px] text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">
             Forgot password?
           </Link>
         </div>
@@ -118,7 +118,7 @@ function LoginForm() {
             <button
               onClick={handleResend}
               disabled={resendLoading}
-              className="text-[#C9A84C] hover:underline disabled:opacity-50"
+              className="text-[#85A0B5] hover:underline disabled:opacity-50"
             >
               {resendLoading ? "Sending..." : "Resend verification email"}
             </button>
@@ -150,7 +150,7 @@ function LoginForm() {
 
       <p className="mt-8 text-center font-sans text-sm text-[#5A5A5A]">
         New to Élan?{" "}
-        <Link href="/register" className="text-[#C9A84C] hover:text-[#D4AF6C] transition-colors">
+        <Link href="/register" className="text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">
           Create an account
         </Link>
       </p>
@@ -163,11 +163,11 @@ export default function LoginPage() {
     <div className="min-h-screen flex">
       <div className="hidden lg:flex lg:w-1/2 gradient-gold relative overflow-hidden items-end p-16">
         <div className="absolute inset-0 opacity-20"
-          style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(201,168,76,0.1) 30px, rgba(201,168,76,0.1) 31px)` }}
+          style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(133, 160, 181,0.1) 30px, rgba(133, 160, 181,0.1) 31px)` }}
         />
         <div className="relative z-10">
           <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
-          <p className="font-sans text-[10px] tracking-[0.4em] text-[#C9A84C] uppercase mt-2 mb-6">Fine Jewellery</p>
+          <p className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase mt-2 mb-6">Fine Jewellery</p>
           <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
             Where rarity becomes ritual. Sign in to access your personal Élan experience.
           </p>

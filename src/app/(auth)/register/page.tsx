@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -55,12 +55,12 @@ export default function RegisterPage() {
           />
           <div className="relative z-10">
             <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
-            <p className="font-sans text-[10px] tracking-[0.4em] text-[#C9A84C] uppercase mt-2 mb-6">Fine Jewellery</p>
+            <p className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase mt-2 mb-6">Fine Jewellery</p>
           </div>
         </div>
         <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#0A0A0A]">
           <div className="w-full max-w-sm text-center">
-            <CheckCircle className="h-14 w-14 text-[#C9A84C] mx-auto mb-6" strokeWidth={1} />
+            <CheckCircle className="h-14 w-14 text-[#85A0B5] mx-auto mb-6" strokeWidth={1} />
             <h1 className="font-serif text-3xl text-white mb-3">Check your inbox</h1>
             <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-2">
               We sent a verification link to
@@ -69,7 +69,7 @@ export default function RegisterPage() {
             <p className="font-sans text-xs text-[#5A5A5A] leading-relaxed mb-8">
               Click the link in the email to activate your account. The link expires in 24 hours.
             </p>
-            <Link href="/login" className="font-sans text-sm text-[#C9A84C] hover:text-[#D4AF6C] transition-colors">
+            <Link href="/login" className="font-sans text-sm text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">
               ← Back to Sign In
             </Link>
           </div>
@@ -87,7 +87,7 @@ export default function RegisterPage() {
         />
         <div className="relative z-10">
           <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
-          <p className="font-sans text-[10px] tracking-[0.4em] text-[#C9A84C] uppercase mt-2 mb-6">Fine Jewellery</p>
+          <p className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase mt-2 mb-6">Fine Jewellery</p>
           <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
             Join the Élan circle. Access exclusive pieces, track your orders, and receive priority service.
           </p>
@@ -133,9 +133,9 @@ export default function RegisterPage() {
 
             <p className="font-sans text-[11px] text-[#5A5A5A] leading-relaxed">
               By creating an account, you agree to our{" "}
-              <Link href="/terms" className="text-[#C9A84C] hover:underline">Terms of Service</Link>
+              <Link href="/terms" className="text-[#85A0B5] hover:underline">Terms of Service</Link>
               {" "}and{" "}
-              <Link href="/privacy" className="text-[#C9A84C] hover:underline">Privacy Policy</Link>.
+              <Link href="/privacy" className="text-[#85A0B5] hover:underline">Privacy Policy</Link>.
             </p>
 
             <Button type="submit" variant="gold" size="lg" className="w-full" loading={loading}>
@@ -164,7 +164,7 @@ export default function RegisterPage() {
 
           <p className="mt-8 text-center font-sans text-sm text-[#5A5A5A]">
             Already have an account?{" "}
-            <Link href="/login" className="text-[#C9A84C] hover:text-[#D4AF6C] transition-colors">Sign in</Link>
+            <Link href="/login" className="text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">Sign in</Link>
           </p>
         </div>
       </div>

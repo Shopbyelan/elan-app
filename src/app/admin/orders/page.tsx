@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import { formatPrice, formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { updateOrderStatus } from "@/actions/order.actions";
@@ -55,7 +55,7 @@ export default async function AdminOrdersPage() {
             {orders.map((order) => (
               <tr key={order.id} className="hover:bg-[#141414] transition-colors">
                 <td className="px-5 py-4">
-                  <Link href={`/admin/orders/${order.id}`} className="font-sans text-xs text-[#C9A84C] hover:underline whitespace-nowrap">
+                  <Link href={`/admin/orders/${order.id}`} className="font-sans text-xs text-[#85A0B5] hover:underline whitespace-nowrap">
                     {order.orderNumber}
                   </Link>
                 </td>
@@ -66,7 +66,7 @@ export default async function AdminOrdersPage() {
                 <td className="px-5 py-4 font-sans text-xs text-[#9A9A9A]">
                   {order.items.length} piece{order.items.length !== 1 ? "s" : ""}
                 </td>
-                <td className="px-5 py-4 font-sans text-xs text-[#C9A84C] whitespace-nowrap">
+                <td className="px-5 py-4 font-sans text-xs text-[#85A0B5] whitespace-nowrap">
                   {formatPrice(order.total)}
                 </td>
                 <td className="px-5 py-4">
@@ -89,12 +89,12 @@ export default async function AdminOrdersPage() {
                 <td className="px-5 py-4">
                   <form action={updateOrderStatus} className="flex items-center gap-2">
                     <input type="hidden" name="id" value={order.id} />
-                    <select name="status" defaultValue={order.status} className="bg-[#141414] border border-[#2A2A2A] text-[#9A9A9A] font-sans text-[10px] px-2 py-1 focus:outline-none focus:border-[#C9A84C] appearance-none">
+                    <select name="status" defaultValue={order.status} className="bg-[#141414] border border-[#2A2A2A] text-[#9A9A9A] font-sans text-[10px] px-2 py-1 focus:outline-none focus:border-[#85A0B5] appearance-none">
                       {STATUSES.map((s) => (
                         <option key={s} value={s}>{s}</option>
                       ))}
                     </select>
-                    <button type="submit" className="font-sans text-[10px] tracking-wider text-[#C9A84C] hover:text-[#D4AF6C] uppercase">
+                    <button type="submit" className="font-sans text-[10px] tracking-wider text-[#85A0B5] hover:text-[#9DB5C8] uppercase">
                       Update
                     </button>
                   </form>

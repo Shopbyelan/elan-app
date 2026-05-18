@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
@@ -19,11 +19,11 @@ const sizeClasses = {
 };
 
 const variantClasses = {
-  gold: "bg-[#C9A84C] text-black hover:bg-[#D4AF6C] font-medium tracking-[0.2em] uppercase",
-  outline: "border border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-black tracking-[0.2em] uppercase",
+  gold: "bg-[#85A0B5] text-black hover:bg-[#9DB5C8] font-medium tracking-[0.2em] uppercase",
+  outline: "border border-[#85A0B5] text-[#85A0B5] hover:bg-[#85A0B5] hover:text-black tracking-[0.2em] uppercase",
   ghost: "text-[#9A9A9A] hover:text-white hover:bg-white/5 tracking-[0.15em] uppercase",
-  dark: "bg-[#1A1A1A] text-white border border-[#2A2A2A] hover:border-[#C9A84C] tracking-[0.15em] uppercase",
-  link: "text-[#C9A84C] hover:text-[#D4AF6C] underline-offset-4 hover:underline p-0 h-auto",
+  dark: "bg-[#1A1A1A] text-white border border-[#2A2A2A] hover:border-[#85A0B5] tracking-[0.15em] uppercase",
+  link: "text-[#85A0B5] hover:text-[#9DB5C8] underline-offset-4 hover:underline p-0 h-auto",
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -32,7 +32,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       "inline-flex items-center justify-center gap-2 whitespace-nowrap",
       "font-sans transition-all duration-300 cursor-pointer",
       "disabled:opacity-50 disabled:cursor-not-allowed",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#85A0B5]",
       sizeClasses[size],
       variantClasses[variant],
       className

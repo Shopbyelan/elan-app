@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -30,7 +30,7 @@ export default function CartPage() {
       {/* Header */}
       <div className="flex items-end justify-between mb-10">
         <div>
-          <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-2">
+          <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-2">
             Your Selection
           </p>
           <h1 className="font-serif text-3xl md:text-4xl text-white">
@@ -56,15 +56,15 @@ export default function CartPage() {
                   <Image src={img} alt={product.name} fill className="object-cover hover:scale-105 transition-transform duration-500" />
                 </Link>
                 <div className="flex-1 min-w-0">
-                  <p className="font-sans text-[9px] tracking-[0.25em] text-[#C9A84C] uppercase mb-1">
+                  <p className="font-sans text-[9px] tracking-[0.25em] text-[#85A0B5] uppercase mb-1">
                     {product.category?.name}
                   </p>
                   <Link href={`/product/${product.slug}`}>
-                    <h3 className="font-serif text-base text-white hover:text-[#C9A84C] transition-colors">
+                    <h3 className="font-serif text-base text-white hover:text-[#85A0B5] transition-colors">
                       {product.name}
                     </h3>
                   </Link>
-                  <p className="font-sans text-sm text-[#C9A84C] mt-1.5">
+                  <p className="font-sans text-sm text-[#85A0B5] mt-1.5">
                     {formatPrice(product.price)}
                   </p>
                   <div className="flex items-center justify-between mt-4">
@@ -108,7 +108,7 @@ export default function CartPage() {
           <div className="border-t border-[#1A1A1A] pt-4 mb-6">
             <div className="flex justify-between">
               <span className="font-sans text-xs tracking-[0.15em] text-[#9A9A9A] uppercase">Estimated Total</span>
-              <span className="font-serif text-xl text-[#C9A84C]">{formatPrice(totalPrice())}</span>
+              <span className="font-serif text-xl text-[#85A0B5]">{formatPrice(totalPrice())}</span>
             </div>
           </div>
           <Button variant="gold" size="lg" className="w-full mb-3" asChild>
@@ -122,7 +122,7 @@ export default function CartPage() {
           <div className="mt-6 pt-5 border-t border-[#1A1A1A] space-y-2">
             {["Certificate of Authenticity included", "Secure payment via Paystack", "Complimentary gift wrapping"].map((t) => (
               <p key={t} className="font-sans text-[10px] text-[#3A3A3A] flex items-center gap-2">
-                <span className="text-[#C9A84C]">✓</span> {t}
+                <span className="text-[#85A0B5]">✓</span> {t}
               </p>
             ))}
           </div>

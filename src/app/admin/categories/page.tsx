@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,7 +46,7 @@ export default async function AdminCategoriesPage() {
               <input
                 name="name"
                 required
-                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
                 placeholder="18k Gold"
               />
             </div>
@@ -57,7 +57,7 @@ export default async function AdminCategoriesPage() {
               <textarea
                 name="description"
                 rows={3}
-                className="w-full px-4 py-3 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors resize-none"
+                className="w-full px-4 py-3 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors resize-none"
                 placeholder="Fine 18k gold jewellery pieces..."
               />
             </div>
@@ -89,7 +89,7 @@ export default async function AdminCategoriesPage() {
                   <div className="flex items-center gap-3">
                     <Link
                       href={`/shop?category=${cat.slug}`}
-                      className="font-sans text-[10px] tracking-wider uppercase text-[#5A5A5A] hover:text-[#C9A84C] transition-colors"
+                      className="font-sans text-[10px] tracking-wider uppercase text-[#5A5A5A] hover:text-[#85A0B5] transition-colors"
                     >
                       View
                     </Link>

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { createCoupon } from "@/actions/coupon.actions";
 
@@ -26,7 +26,7 @@ export default function NewCouponPage() {
             <input
               name="code"
               required
-              className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors uppercase placeholder:normal-case"
+              className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors uppercase placeholder:normal-case"
               placeholder="WELCOME10"
             />
             <p className="mt-1.5 font-sans text-[10px] text-[#5A5A5A]">Will be auto-uppercased. Share this with customers.</p>
@@ -38,7 +38,7 @@ export default function NewCouponPage() {
             </label>
             <input
               name="description"
-              className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+              className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
               placeholder="New customer welcome discount"
             />
           </div>
@@ -51,7 +51,7 @@ export default function NewCouponPage() {
               <select
                 name="discountType"
                 required
-                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors appearance-none"
+                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors appearance-none"
               >
                 <option value="PERCENTAGE">Percentage (%)</option>
                 <option value="FIXED">Fixed Amount (₦)</option>
@@ -67,7 +67,7 @@ export default function NewCouponPage() {
                 step="0.01"
                 min="0"
                 required
-                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
                 placeholder="10"
               />
             </div>
@@ -83,7 +83,7 @@ export default function NewCouponPage() {
                 type="number"
                 step="0.01"
                 min="0"
-                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
                 placeholder="50000"
               />
             </div>
@@ -95,7 +95,7 @@ export default function NewCouponPage() {
                 name="maxUses"
                 type="number"
                 min="1"
-                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
                 placeholder="100"
               />
             </div>
@@ -108,7 +108,7 @@ export default function NewCouponPage() {
             <input
               name="expiresAt"
               type="date"
-              className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+              className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
             />
           </div>
         </div>

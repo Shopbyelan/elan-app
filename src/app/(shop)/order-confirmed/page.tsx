@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import type { Metadata } from "next";
@@ -14,9 +14,9 @@ export default async function OrderConfirmedPage({
 
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center px-4 text-center">
-      <CheckCircle className="h-16 w-16 text-[#C9A84C] mb-6" strokeWidth={1} />
+      <CheckCircle className="h-16 w-16 text-[#85A0B5] mb-6" strokeWidth={1} />
 
-      <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-3">
+      <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-3">
         Order Confirmed
       </p>
       <h1 className="font-serif text-3xl md:text-4xl text-white mb-4">

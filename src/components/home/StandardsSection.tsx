@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -10,11 +10,11 @@ export function StandardsSection() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-4">
+          <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-4">
             Shop By Collection
           </p>
           <h2 className="font-serif text-3xl md:text-5xl text-white mb-4">
-            Select Your <em className="text-[#C9A84C] not-italic">Standard</em>
+            Select Your <em className="text-[#85A0B5] not-italic">Standard</em>
           </h2>
           <p className="font-sans text-sm text-[#9A9A9A] max-w-lg mx-auto leading-relaxed">
             Every tier is exceptional. The difference is in the metal, the stone,
@@ -37,10 +37,10 @@ export function StandardsSection() {
               href={tab.href}
               className={`px-4 py-2 font-sans text-[10px] tracking-[0.2em] uppercase border transition-all duration-200 ${
                 tab.active
-                  ? "bg-[#C9A84C] text-black border-[#C9A84C]"
+                  ? "bg-[#85A0B5] text-black border-[#85A0B5]"
                   : tab.label === "Sterling Silver"
                   ? "border-[#2A2A2A] text-[#5A5A5A] hover:border-[#85A0B5] hover:text-[#85A0B5]"
-                  : "border-[#2A2A2A] text-[#5A5A5A] hover:border-[#C9A84C] hover:text-[#C9A84C]"
+                  : "border-[#2A2A2A] text-[#5A5A5A] hover:border-[#85A0B5] hover:text-[#85A0B5]"
               }`}
             >
               {tab.label}

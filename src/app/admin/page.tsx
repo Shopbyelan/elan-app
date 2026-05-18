@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/utils";
 import { ShoppingCart, Package, Users, TrendingUp, AlertCircle } from "lucide-react";
 import Link from "next/link";
@@ -77,7 +77,7 @@ export default async function AdminDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Total Revenue", value: formatPrice(stats.revenue), icon: TrendingUp, color: "text-[#C9A84C]" },
+          { label: "Total Revenue", value: formatPrice(stats.revenue), icon: TrendingUp, color: "text-[#85A0B5]" },
           { label: "Total Orders", value: stats.totalOrders.toString(), icon: ShoppingCart, color: "text-blue-400" },
           { label: "Active Products", value: stats.totalProducts.toString(), icon: Package, color: "text-purple-400" },
           { label: "Customers", value: stats.totalCustomers.toString(), icon: Users, color: "text-emerald-400" },
@@ -97,7 +97,7 @@ export default async function AdminDashboard() {
         <div className="lg:col-span-2 bg-[#111] border border-[#1A1A1A]">
           <div className="flex items-center justify-between px-6 py-4 border-b border-[#1A1A1A]">
             <h2 className="font-serif text-lg text-white">Recent Orders</h2>
-            <Link href="/admin/orders" className="font-sans text-[10px] tracking-[0.15em] text-[#C9A84C] uppercase hover:text-[#D4AF6C]">
+            <Link href="/admin/orders" className="font-sans text-[10px] tracking-[0.15em] text-[#85A0B5] uppercase hover:text-[#9DB5C8]">
               View all →
             </Link>
           </div>
@@ -116,7 +116,7 @@ export default async function AdminDashboard() {
                 {recentOrders.map((order) => (
                   <tr key={order.id} className="hover:bg-[#141414] transition-colors">
                     <td className="px-6 py-4">
-                      <Link href={`/admin/orders/${order.id}`} className="font-sans text-xs text-[#C9A84C] hover:underline">
+                      <Link href={`/admin/orders/${order.id}`} className="font-sans text-xs text-[#85A0B5] hover:underline">
                         {order.orderNumber}
                       </Link>
                     </td>
@@ -155,7 +155,7 @@ export default async function AdminDashboard() {
                 <h3 className="font-sans text-xs tracking-[0.15em] text-amber-400 uppercase">Pending Orders</h3>
               </div>
               <p className="font-serif text-2xl text-white mb-3">{stats.pendingOrders}</p>
-              <Link href="/admin/orders?status=PENDING" className="font-sans text-[10px] tracking-[0.15em] text-[#C9A84C] uppercase hover:text-[#D4AF6C]">
+              <Link href="/admin/orders?status=PENDING" className="font-sans text-[10px] tracking-[0.15em] text-[#85A0B5] uppercase hover:text-[#9DB5C8]">
                 Review orders →
               </Link>
             </div>
@@ -177,7 +177,7 @@ export default async function AdminDashboard() {
                   </div>
                 ))}
               </div>
-              <Link href="/admin/products" className="mt-4 block font-sans text-[10px] tracking-[0.15em] text-[#C9A84C] uppercase hover:text-[#D4AF6C]">
+              <Link href="/admin/products" className="mt-4 block font-sans text-[10px] tracking-[0.15em] text-[#85A0B5] uppercase hover:text-[#9DB5C8]">
                 Manage inventory →
               </Link>
             </div>
@@ -195,7 +195,7 @@ export default async function AdminDashboard() {
                 <Link
                   key={href}
                   href={href}
-                  className="block px-3 py-2.5 font-sans text-xs text-[#9A9A9A] hover:text-[#C9A84C] hover:bg-[#141414] transition-all"
+                  className="block px-3 py-2.5 font-sans text-xs text-[#9A9A9A] hover:text-[#85A0B5] hover:bg-[#141414] transition-all"
                 >
                   + {label}
                 </Link>

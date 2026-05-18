@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers/Providers";
+import { NavigationProgress } from "@/components/layout/NavigationProgress";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
@@ -48,6 +49,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className="min-h-full flex flex-col bg-[#0A0A0A] text-[#E8E8E8] antialiased">
         <Providers>
+          <NavigationProgress />
           {children}
           <Toaster
             position="bottom-right"

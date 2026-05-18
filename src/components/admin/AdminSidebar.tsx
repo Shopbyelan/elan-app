@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -26,7 +26,7 @@ export function AdminSidebar() {
         <Link href="/">
           <span className="font-serif text-xl tracking-[0.3em] text-white">ÉLAN</span>
         </Link>
-        <p className="font-sans text-[9px] tracking-[0.3em] text-[#C9A84C] uppercase mt-0.5">
+        <p className="font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase mt-0.5">
           Admin Panel
         </p>
       </div>
@@ -41,7 +41,7 @@ export function AdminSidebar() {
               href={href}
               className={`flex items-center gap-3 px-3 py-2.5 mb-1 transition-all duration-200 group ${
                 active
-                  ? "bg-[#C9A84C]/10 text-[#C9A84C] border-l-2 border-[#C9A84C]"
+                  ? "bg-[#85A0B5]/10 text-[#85A0B5] border-l-2 border-[#85A0B5]"
                   : "text-[#5A5A5A] hover:text-[#9A9A9A] hover:bg-[#141414]"
               }`}
             >

@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import { formatDate, formatPrice } from "@/lib/utils";
 import Link from "next/link";
 import { Plus } from "lucide-react";
@@ -46,7 +46,7 @@ export default async function AdminCouponsPage() {
             {coupons.map((coupon) => (
               <tr key={coupon.id} className="hover:bg-[#141414] transition-colors">
                 <td className="px-5 py-4">
-                  <span className="font-sans text-xs text-[#C9A84C] font-mono tracking-wider bg-[#C9A84C]/10 px-2 py-0.5">
+                  <span className="font-sans text-xs text-[#85A0B5] font-mono tracking-wider bg-[#85A0B5]/10 px-2 py-0.5">
                     {coupon.code}
                   </span>
                 </td>
@@ -84,7 +84,7 @@ export default async function AdminCouponsPage() {
               <tr>
                 <td colSpan={7} className="px-5 py-12 text-center font-sans text-sm text-[#5A5A5A]">
                   No coupons yet.{" "}
-                  <Link href="/admin/coupons/new" className="text-[#C9A84C] hover:underline">Create one →</Link>
+                  <Link href="/admin/coupons/new" className="text-[#85A0B5] hover:underline">Create one →</Link>
                 </td>
               </tr>
             )}

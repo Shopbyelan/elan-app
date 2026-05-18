@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -56,12 +56,12 @@ export function CollectionsSection() {
     <section className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
       {/* Header */}
       <div className="text-center mb-16">
-        <p className="font-sans text-[9px] tracking-[0.4em] text-[#C9A84C] uppercase mb-4">
+        <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-4">
           Curated Collections
         </p>
         <h2 className="font-serif text-3xl md:text-5xl text-white">
           The{" "}
-          <em className="text-[#C9A84C] not-italic">Élan</em>
+          <em className="text-[#85A0B5] not-italic">Élan</em>
           {" "}Edit
         </h2>
       </div>
@@ -109,12 +109,12 @@ export function CollectionsSection() {
                   <h3 className="font-serif text-lg text-white leading-tight mb-1">
                     {col.name.split(" ")[0]}{" "}
                     <br />
-                    <em className="text-[#C9A84C] not-italic">{col.italicName}</em>
+                    <em className="text-[#85A0B5] not-italic">{col.italicName}</em>
                   </h3>
                   <p className="font-sans text-[10px] text-[#9A9A9A] leading-relaxed hidden group-hover:block transition-all">
                     {col.description}
                   </p>
-                  <button className="mt-4 font-sans text-[10px] tracking-[0.2em] text-[#C9A84C] uppercase flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button className="mt-4 font-sans text-[10px] tracking-[0.2em] text-[#85A0B5] uppercase flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Explore →
                   </button>
                 </div>
