@@ -4,6 +4,8 @@ import { CollectionsSection } from "@/components/home/CollectionsSection";
 import { MaterialsSection } from "@/components/home/MaterialsSection";
 import { StandardsSection } from "@/components/home/StandardsSection";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
+import { FAQSection } from "@/components/home/FAQSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
 
@@ -81,7 +83,7 @@ export default async function HomePage() {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-[#141414]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-[#141414]">
             {products.map((product, i) => (
               <div key={product.id} className="bg-[#0A0A0A]">
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
@@ -92,8 +94,10 @@ export default async function HomePage() {
         </section>
       )}
 
+      <TestimonialsSection />
       <StandardsSection />
       <MaterialsSection />
+      <FAQSection />
       <NewsletterSection />
     </>
   );

@@ -140,7 +140,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         ) : (
           <Suspense
             fallback={
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-[#141414]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-[#141414]">
                 {Array.from({ length: 8 }).map((_, i) => (
                   <div key={i} className="bg-[#0A0A0A]">
                     <ProductCardSkeleton />
@@ -149,7 +149,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               </div>
             }
           >
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-[#141414]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-[#141414]">
               {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               {(products as any[]).map((product, i) => (
                 <div key={product.id} className="bg-[#0A0A0A]">

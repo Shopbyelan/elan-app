@@ -13,11 +13,15 @@ export function ProductCardSkeleton() {
   return (
     <div className="space-y-0">
       <Skeleton className="aspect-[3/4] w-full" />
-      <div className="p-4 space-y-2 bg-[#111]">
-        <Skeleton className="h-3 w-16" />
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-4 w-1/2" />
-        <Skeleton className="h-4 w-24" />
+      <div className="bg-[#141414] px-4 pt-4 pb-4 space-y-2.5">
+        <Skeleton className="h-2.5 w-24" />
+        <Skeleton className="h-6 w-3/4" />
+        <Skeleton className="h-3.5 w-full" />
+        <Skeleton className="h-3.5 w-2/3" />
+        <div className="flex items-center justify-between pt-3 mt-1 border-t border-[#1A1A1A]">
+          <Skeleton className="h-4 w-20" />
+          <Skeleton className="h-8 w-24" />
+        </div>
       </div>
     </div>
   );

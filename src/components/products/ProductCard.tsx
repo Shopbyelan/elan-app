@@ -1,18 +1,81 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, ShoppingBag, Bell } from "lucide-react";
+import { Heart, Bell } from "lucide-react";
 import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
 import { useCurrencyStore } from "@/store/currency.store";
-import { Badge } from "@/components/ui/badge";
 import type { Product } from "@/types";
 import { toast } from "sonner";
 
 interface ProductCardProps {
   product: Product;
   index?: number;
+}
+
+function getCategoryGradient(slug: string | undefined, name: string | undefined): string {
+  const s = (slug || name || "").toLowerCase();
+  if (s.includes("gold")) return "gradient-gold";
+  if (s.includes("silver")) return "gradient-silver";
+  if (s.includes("diamond")) return "gradient-diamond";
+  if (s.includes("platinum")) return "gradient-platinum";
+  if (s.includes("moissanite")) return "gradient-moiss";
+  return "bg-[#111111]";
+}
+
+function PlaceholderIcon({ slug }: { slug: string | undefined }) {
+  const s = (slug || "").toLowerCase();
+
+  if (s.includes("moissanite")) {
+    return (
+      <svg viewBox="0 0 80 80" fill="none" className="w-20 h-20 text-white/10">
+        <path d="M40 4L44 36L76 40L44 44L40 76L36 44L4 40L36 36L40 4Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  if (s.includes("diamond")) {
+    return (
+      <svg viewBox="0 0 80 80" fill="none" className="w-20 h-20 text-white/10">
+        <path d="M40 8L60 28H20L40 8Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M20 28L10 44L40 72L70 44L60 28H20Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M20 28L40 48L60 28" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M10 44H70" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  if (s.includes("gold")) {
+    return (
+      <svg viewBox="0 0 80 80" fill="none" className="w-20 h-20 text-white/10">
+        <circle cx="40" cy="40" r="24" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="40" cy="40" r="14" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M40 16V24M40 56V64M16 40H24M56 40H64" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (s.includes("platinum")) {
+    return (
+      <svg viewBox="0 0 80 80" fill="none" className="w-20 h-20 text-white/10">
+        <path d="M40 8L42 38L72 40L42 42L40 72L38 42L8 40L38 38L40 8Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        <circle cx="40" cy="40" r="6" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  if (s.includes("silver")) {
+    return (
+      <svg viewBox="0 0 80 80" fill="none" className="w-20 h-20 text-white/10">
+        <circle cx="40" cy="40" r="26" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M26 40C26 32.3 32.3 26 40 26C47.7 26 54 32.3 54 40" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M26 40C26 47.7 32.3 54 40 54C47.7 54 54 47.7 54 40" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 80 80" fill="none" className="w-20 h-20 text-white/10">
+      <rect x="16" y="16" width="48" height="48" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M16 16L64 64M64 16L16 64" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
 }
 
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
@@ -23,9 +86,12 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const primaryImg =
     product.images.find((i) => i.isPrimary)?.url ||
     product.images[0]?.url ||
-    "/placeholder.jpg";
+    null;
 
   const wishlisted = isWishlisted(product.id);
+  const categorySlug = product.category?.slug;
+  const categoryName = product.category?.name || product.material || "";
+  const gradientClass = getCategoryGradient(categorySlug, categoryName);
 
   function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
@@ -48,92 +114,112 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       className="group block"
       style={{ animationDelay: `${index * 80}ms` }}
     >
-      {/* Image container */}
-      <div className="relative aspect-3/4 bg-[#111111] overflow-hidden">
-        <Image
-          src={primaryImg}
-          alt={product.name}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-        />
-
-        {/* Overlay on hover */}
-        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-        {/* Out-of-stock dim overlay */}
-        {product.stock === 0 && (
-          <div className="absolute inset-0 bg-[#0A0A0A]/50 z-1" />
+      {/* ── Image ── */}
+      <div className={`relative aspect-[3/4] overflow-hidden ${gradientClass}`}>
+        {primaryImg ? (
+          <Image
+            src={primaryImg}
+            alt={product.name}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <PlaceholderIcon slug={categorySlug} />
+          </div>
         )}
 
-        {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-2">
-          {product.stock === 0 ? (
-            <Badge variant="dark">Sold Out</Badge>
-          ) : (
-            <>
-              {product.badge && <Badge variant="gold">{product.badge}</Badge>}
-              {product.comparePrice && product.comparePrice > product.price && (
-                <Badge variant="dark">Sale</Badge>
-              )}
-            </>
-          )}
+        {/* Subtle hover overlay */}
+        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        {/* Out-of-stock dim */}
+        {product.stock === 0 && (
+          <div className="absolute inset-0 bg-[#0A0A0A]/50 z-[1]" />
+        )}
+
+        {/* Category badge — top left */}
+        <div className="absolute top-3 left-3 z-[2]">
+          <span className="inline-block border border-[#85A0B5]/50 bg-black/50 backdrop-blur-sm px-3 py-1.5 font-sans text-[8px] tracking-[0.3em] text-[#C4CDD6] uppercase leading-none">
+            {categoryName}
+          </span>
         </div>
 
-        {/* Actions */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2 translate-x-10 group-hover:translate-x-0 transition-transform duration-300 z-2">
+        {/* Sale badge — top right */}
+        {product.comparePrice && product.comparePrice > product.price && (
+          <div className="absolute top-3 right-3 z-[2]">
+            <span className="inline-block border border-[#85A0B5]/30 bg-black/50 backdrop-blur-sm px-2 py-1 font-sans text-[7px] tracking-[0.2em] text-[#85A0B5] uppercase leading-none">
+              Sale
+            </span>
+          </div>
+        )}
+
+        {/* Wishlist — bottom left, always visible */}
+        <div className="absolute bottom-3 left-3 z-[2]">
           <button
             onClick={handleWishlist}
-            className={`h-8 w-8 flex items-center justify-center bg-[#0A0A0A]/90 border transition-colors duration-200 ${
+            className={`h-9 w-9 flex items-center justify-center border bg-black/60 backdrop-blur-sm transition-all duration-200 ${
               wishlisted
                 ? "border-[#85A0B5] text-[#85A0B5]"
-                : "border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-[#85A0B5]"
+                : "border-[#3A3A3A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-[#85A0B5]"
             }`}
+            aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
           >
             <Heart className={`h-3.5 w-3.5 ${wishlisted ? "fill-[#85A0B5]" : ""}`} />
           </button>
         </div>
-
-        {/* Bottom action bar — Add to cart or Waitlist */}
-        <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-2">
-          {product.stock === 0 ? (
-            <div className="w-full flex items-center justify-center gap-2 bg-[#1C2D3E] text-[#85A0B5] h-10 font-sans text-[10px] tracking-[0.2em] uppercase font-medium">
-              <Bell className="h-3.5 w-3.5" />
-              Join Waiting List
-            </div>
-          ) : (
-            <button
-              onClick={handleAddToCart}
-              className="w-full flex items-center justify-center gap-2 bg-[#85A0B5] text-black h-10 font-sans text-[10px] tracking-[0.2em] uppercase font-medium hover:bg-[#9DB5C8] transition-colors"
-            >
-              <ShoppingBag className="h-3.5 w-3.5" />
-              Add to Selection
-            </button>
-          )}
-        </div>
       </div>
 
-      {/* Info */}
-      <div className="pt-4 pb-2 px-1">
-        <p className="font-sans text-[9px] tracking-[0.25em] text-[#85A0B5] uppercase mb-1">
-          {product.category?.name || product.material}
+      {/* ── Info ── */}
+      <div className="bg-[#141414] px-4 pt-4 pb-4">
+        {/* Category + badge */}
+        <p className="font-sans text-[8px] tracking-[0.3em] text-[#85A0B5]/70 uppercase mb-2 truncate">
+          {categoryName}
+          {product.badge && (
+            <span className="text-[#5A5A5A]"> · {product.badge}</span>
+          )}
         </p>
-        <h3 className="font-serif text-base text-white group-hover:text-[#85A0B5] transition-colors duration-300 leading-snug">
+
+        {/* Product name */}
+        <h3 className="font-serif text-xl text-white leading-snug mb-2 group-hover:text-[#C4CDD6] transition-colors duration-300">
           {product.name}
         </h3>
+
+        {/* Short description */}
         {product.shortDesc && (
-          <p className="font-sans text-xs text-[#5A5A5A] mt-1 line-clamp-2 leading-relaxed">
+          <p className="font-sans text-xs text-[#5A5A5A] leading-relaxed line-clamp-2 mb-4">
             {product.shortDesc}
           </p>
         )}
-        <div className="flex items-center gap-3 mt-2.5">
-          <span className="font-sans text-sm text-[#85A0B5]">
-            From {format(product.price)}
-          </span>
-          {product.comparePrice && product.comparePrice > product.price && (
-            <span className="font-sans text-xs text-[#5A5A5A] line-through">
-              {format(product.comparePrice)}
+
+        {/* Price + action */}
+        <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#1A1A1A]">
+          <div>
+            <span className="font-sans text-sm text-[#85A0B5]">
+              From {format(product.price)}
             </span>
+            {product.comparePrice && product.comparePrice > product.price && (
+              <span className="block font-sans text-[10px] text-[#3A3A3A] line-through">
+                {format(product.comparePrice)}
+              </span>
+            )}
+          </div>
+
+          {product.stock === 0 ? (
+            <button
+              onClick={(e) => e.preventDefault()}
+              className="flex items-center gap-1.5 border border-[#3A3A3A] text-[#5A5A5A] px-3 py-2 font-sans text-[8px] tracking-[0.2em] uppercase hover:border-[#85A0B5] hover:text-[#85A0B5] transition-colors duration-200"
+            >
+              <Bell className="h-3 w-3" />
+              Notify Me
+            </button>
+          ) : (
+            <button
+              onClick={handleAddToCart}
+              className="bg-[#85A0B5] text-black px-4 py-2.5 font-sans text-[9px] tracking-[0.2em] uppercase font-medium hover:bg-[#9DB5C8] transition-colors duration-200"
+            >
+              Add to Cart
+            </button>
           )}
         </div>
       </div>
