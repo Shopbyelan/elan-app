@@ -66,11 +66,11 @@ export function Footer() {
             </h4>
             <ul className="space-y-3">
               {[
-                { href: "/materials", label: "Our Materials" },
-                { href: "/care-guide", label: "Jewellery Care" },
-                { href: "/sizing", label: "Ring Sizing Guide" },
-                { href: "/shipping", label: "Shipping & Delivery" },
-                { href: "/returns", label: "Returns Policy" },
+                { href: "/guide", label: "Client Guide" },
+                { href: "/guide#authentication", label: "Authentication" },
+                { href: "/guide#sizing", label: "Ring Sizing" },
+                { href: "/guide#care", label: "Jewellery Care" },
+                { href: "/guide#returns", label: "Returns Policy" },
                 { href: "/faq", label: "FAQ" },
               ].map((l) => (
                 <li key={l.href}>
