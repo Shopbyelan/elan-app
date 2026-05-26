@@ -1,4 +1,5 @@
 ﻿import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -8,10 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <span className="font-serif text-2xl tracking-[0.3em] text-white">ÉLAN</span>
-            <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mt-1 mb-6">
-              Fine Jewellery
-            </p>
+            <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={140} height={56} className="h-10 w-auto mb-6" />
             <p className="font-sans text-xs text-[#5A5A5A] leading-relaxed max-w-48">
               Where rarity becomes ritual. Crafted for those who understand the language of fine jewellery.
             </p>
@@ -71,7 +69,7 @@ export function Footer() {
                 { href: "/guide#sizing", label: "Ring Sizing" },
                 { href: "/guide#care", label: "Jewellery Care" },
                 { href: "/guide#returns", label: "Returns Policy" },
-                { href: "/faq", label: "FAQ" },
+                { href: "/home#faq", label: "FAQ" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="font-sans text-xs text-[#5A5A5A] hover:text-[#9A9A9A] transition-colors tracking-wider">

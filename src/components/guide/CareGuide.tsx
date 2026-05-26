@@ -5,10 +5,89 @@ import { useState } from "react";
 const TABS = ["All Pieces", "18k Gold", "Sterling Silver", "Platinum", "Stones"] as const;
 type Tab = (typeof TABS)[number];
 
-type Step = { icon: string; num: string; title: string; body: string[]; callout?: { label: string; text: string } };
+// ── Shared primitives ────────────────────────────────────────────────────────
 
-const content: Record<Tab, Step[]> = {
-  "All Pieces": [
+function SpecBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-[#0F0F0F] p-6 md:p-8">
+      <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[8px] tracking-[0.35em] text-[#C4CDD6] uppercase">
+        {children}
+      </span>
+    </div>
+  );
+}
+
+function SafeSection({ metalName, items }: { metalName: string; items: string[] }) {
+  return (
+    <div className="bg-[#0F0F0F] p-6 md:p-8">
+      <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-5">
+        ✓ Safe for {metalName}
+      </p>
+      <ul className="space-y-3">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-3">
+            <span className="mt-2 w-1 h-1 rounded-full bg-[#85A0B5]/50 shrink-0" />
+            <span className="font-sans text-sm text-[#9A9A9A] leading-relaxed">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function AvoidSection({ metalName, items }: { metalName: string; items: string[] }) {
+  return (
+    <div className="bg-[#150505] p-6 md:p-8">
+      <p className="font-sans text-[9px] tracking-[0.35em] text-[#8B3232] uppercase mb-5">
+        ✗ Avoid with {metalName}
+      </p>
+      <ul className="space-y-3">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-3">
+            <span className="mt-2 w-1 h-1 rounded-full bg-[#8B3232]/50 shrink-0" />
+            <span className="font-sans text-sm text-[#9A9A9A] leading-relaxed">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function NotesSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="bg-[#0F0F0F] p-6 md:p-8">
+      <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-5">{title}</p>
+      {children}
+    </div>
+  );
+}
+
+function Callout({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="border-l-2 border-[#85A0B5]/40 bg-[#111111] pl-4 py-3 pr-4">
+      <p className="font-sans text-[8px] tracking-[0.3em] text-[#85A0B5] uppercase mb-1.5">{label}</p>
+      <p className="font-serif text-sm text-[#5A5A5A] italic leading-relaxed">{children}</p>
+    </div>
+  );
+}
+
+function StoneCard({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="bg-[#0F0F0F] p-6 md:p-8">
+      <div className="mb-5">
+        <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[8px] tracking-[0.35em] text-[#C4CDD6] uppercase">
+          {title}
+        </span>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+// ── Tab content ───────────────────────────────────────────────────────────────
+
+function AllPiecesContent() {
+  const steps = [
     {
       icon: "🫧",
       num: "01",
@@ -33,7 +112,7 @@ const content: Record<Tab, Step[]> = {
       title: "Chemical Avoidance",
       body: [
         "Remove all jewellery before applying perfume, body lotion, sunscreen, hairspray, or cleaning products. Put jewellery on last — after all beauty products have dried.",
-        "Chlorine in pools and hot tubs permanently weakens gold and silver alloys at a molecular level. Sweat and gym equipment cause gradual surface wear. Remove Élan pieces before swimming, bathing, and exercise.",
+        "Chlorine in pools and hot tubs permanently weakens gold and silver alloys at a molecular level. Remove Élan pieces before swimming, bathing, and exercise.",
       ],
     },
     {
@@ -42,7 +121,7 @@ const content: Record<Tab, Step[]> = {
       title: "Annual Prong Check",
       body: [
         "Every stone-set piece should be professionally inspected every 12–18 months. Prong wear is invisible to the naked eye until a stone becomes loose.",
-        "Registered Élan clients receive one complimentary annual inspection — bring or post your piece to us and we will check every prong, setting, and clasp, tighten where needed, and return it fully polished.",
+        "Registered Élan clients receive one complimentary annual inspection — we check every prong, setting, and clasp, tighten where needed, and return it fully polished.",
       ],
     },
     {
@@ -54,168 +133,177 @@ const content: Record<Tab, Step[]> = {
         "For pieces with intentional matte or brushed finishes, inform us before polishing — these require a different technique to preserve the texture.",
       ],
     },
-    {
-      icon: "🔬",
-      num: "06",
-      title: "Ultrasonic Cleaning",
-      body: [
-        "Professional ultrasonic cleaning is safe for most diamond and moissanite pieces in secure settings. Avoid for: emeralds, opals, turquoise, pearls, and any treated or fracture-filled stones — vibration can crack inclusions or loosen fillings.",
-        "Avoid for pieces with pavé settings where many small stones are closely set. Always consult Élan before any ultrasonic service.",
-      ],
-    },
-  ],
-  "18k Gold": [
-    {
-      icon: "🌊",
-      num: "01",
-      title: "Avoid Water & Chemicals",
-      body: [
-        "Remove 18k gold before swimming, bathing, or using cleaning products. Chlorine and saltwater cause progressive surface damage to gold alloys. Even brief repeated exposure weakens the metal over time.",
-      ],
-    },
-    {
-      icon: "🧴",
-      num: "02",
-      title: "Apply Products First",
-      body: [
-        "Always put jewellery on last — after all perfumes, lotions, and sprays have fully dried. Gold is a soft metal by nature; chemical residue accelerates wear on the surface and prong settings.",
-      ],
-    },
-    {
-      icon: "✨",
-      num: "03",
-      title: "Polishing & Replating",
-      body: [
-        "Yellow 18k gold can be professionally polished to restore its warm lustre. White gold is rhodium-plated — this plating wears over time with daily wear and will need refreshing every 1–3 years depending on use.",
-        "Rose gold is a natural alloy and does not require replating — its colour is permanent.",
-      ],
-    },
-    {
-      icon: "📦",
-      num: "04",
-      title: "Separate Storage",
-      body: [
-        "Store individually in the provided Élan silk pouch. Diamonds and moissanite stones can scratch gold surfaces when stored together. Use separate compartments for each piece.",
-      ],
-    },
-  ],
-  "Sterling Silver": [
-    {
-      icon: "🪞",
-      num: "01",
-      title: "Regular Polishing",
-      body: [
-        "Use a specialist silver polishing cloth to refresh the rhodium-plated surface. Do not use liquid silver dip products — they strip the rhodium plating and can permanently dull the finish.",
-        "Our silver pieces are rhodium-plated to prevent tarnishing. With proper care, the plating remains bright for years.",
-      ],
-    },
-    {
-      icon: "💧",
-      num: "02",
-      title: "Moisture & Tarnish Prevention",
-      body: [
-        "Exposure to air and moisture triggers tarnish on unplated silver. Store in the provided anti-tarnish silk pouch and avoid leaving pieces exposed on surfaces. Never store in a bathroom.",
-        "If your piece begins to dull, this is a surface oxidation and can be corrected — not a defect in the metal.",
-      ],
-    },
-    {
-      icon: "🔄",
-      num: "03",
-      title: "Rhodium Re-plating",
-      body: [
-        "Rhodium plating will eventually wear in areas of highest friction — ring shanks, bracelet undersides. When you notice the base silver appearing, contact us for re-plating.",
-        "Re-plating takes approximately 5–7 business days and restores your piece to its original mirror finish.",
-      ],
-    },
-    {
-      icon: "🧴",
-      num: "04",
-      title: "Chemical Avoidance",
-      body: [
-        "Silver is more reactive than gold. Remove before applying any topical products. Chlorine exposure can permanently stain and pit sterling silver surfaces beyond restoration.",
-      ],
-    },
-  ],
-  Platinum: [
-    {
-      icon: "🌸",
-      num: "01",
-      title: "Embrace the Patina",
-      body: [
-        "Platinum develops a natural surface texture over time called patina bloom — a soft, satin-like appearance that many connoisseurs prize. Unlike other metals, platinum is not lost when scratched; the metal simply displaces.",
-        "If you prefer the original high-polish mirror finish, professional polishing will restore it completely at any time.",
-      ],
-    },
-    {
-      icon: "✨",
-      num: "02",
-      title: "Professional Polishing",
-      body: [
-        "Platinum can be polished as frequently as desired without the metal thinning. Its extraordinary density means polishing removes only microscopic amounts of surface material.",
-        "We recommend polishing every 3–5 years for everyday-worn pieces, or whenever you wish to refresh the finish.",
-      ],
-    },
-    {
-      icon: "🔬",
-      num: "03",
-      title: "Ultrasonic Cleaning",
-      body: [
-        "Platinum is highly compatible with professional ultrasonic cleaning for diamond and moissanite-set pieces. The metal's density and stability make it the safest fine jewellery metal for professional cleaning methods.",
-        "Always confirm stone type before ultrasonic cleaning — the limitation is the stone, not the platinum.",
-      ],
-    },
-    {
-      icon: "💍",
-      num: "04",
-      title: "Prong Inspection",
-      body: [
-        "Platinum prongs hold stones exceptionally well due to the metal's grip strength. Annual inspection is still recommended — not because platinum is weak, but because all stone settings benefit from professional review.",
-      ],
-    },
-  ],
-  Stones: [
-    {
-      icon: "💎",
-      num: "01",
-      title: "Diamond & Moissanite Cleaning",
-      body: [
-        "Warm water, a drop of dish soap, and a soft toothbrush is sufficient for weekly home cleaning. Both diamond and moissanite attract oils and can appear dull between cleans — this is normal and easily corrected.",
-        "Both stones are safe for professional ultrasonic cleaning in secure settings. The brilliance will immediately return after a thorough clean.",
-      ],
-    },
-    {
-      icon: "🔍",
-      num: "02",
-      title: "Prong Inspection for Set Stones",
-      body: [
-        "Stone-set pieces should be professionally inspected every 12–18 months. Prong wear is invisible to the naked eye until a stone is already loose. Do not wait until you feel movement — inspect proactively.",
-        "Registered Élan clients receive one complimentary annual prong inspection. Book through Client Services.",
-      ],
-    },
-    {
-      icon: "📦",
-      num: "03",
-      title: "Stone Storage",
-      body: [
-        "Diamond and moissanite (hardness 10 and 9.25 respectively) will scratch every other gemstone and most metals when stored together. Always store separately in individual Élan pouches.",
-        "Never store loose stones or stone-set pieces with softer gemstones — pearls, opals, turquoise, and amber are particularly vulnerable.",
-      ],
-    },
-    {
-      icon: "⚠️",
-      num: "04",
-      title: "Avoid Thermal Shock",
-      body: [
-        "Avoid exposing stone-set pieces to sudden extreme temperature changes — moving from cold to very hot environments rapidly. While diamonds and moissanite are extremely durable, thermal shock can affect the settings and prongs around them.",
-        "Remove fine jewellery before saunas, steam rooms, and exposure to direct high heat sources.",
-      ],
-    },
-  ],
-};
+  ];
+
+  return (
+    <div className="space-y-px bg-[#1A1A1A]">
+      {steps.map((step) => (
+        <div key={step.num} className="relative bg-[#0F0F0F] p-6 md:p-8 overflow-hidden">
+          <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#1A1A1A] leading-none select-none pointer-events-none">
+            {step.num}
+          </span>
+          <div className="relative">
+            <span className="text-2xl mb-4 block">{step.icon}</span>
+            <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+              {step.title}
+            </p>
+            <div className="space-y-3 max-w-2xl">
+              {step.body.map((para, i) => (
+                <p key={i} className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
+                  {para}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function GoldContent() {
+  return (
+    <div className="space-y-px bg-[#1A1A1A]">
+      <SpecBadge>18K Gold · 750 Hallmarked</SpecBadge>
+      <SafeSection
+        metalName="18k Gold"
+        items={[
+          "Warm soapy water with soft brush",
+          "Lint-free polishing cloths",
+          "Professional ultrasonic (for set pieces — confirm with us first)",
+          "Professional steam clean (at jeweller)",
+          "Jewellery-specific polishing creams",
+        ]}
+      />
+      <AvoidSection
+        metalName="18k Gold"
+        items={[
+          "Chlorine — permanently damages alloy structure",
+          "Bleach and household cleaning chemicals",
+          "Abrasive materials (toothpaste, baking soda)",
+          "Acetone (nail polish remover)",
+          "Extended saltwater exposure",
+          "Direct heat sources (hairdryers, steam rooms)",
+        ]}
+      />
+      <NotesSection title="Gold-Specific Notes">
+        <ul className="space-y-4 max-w-2xl">
+          <li className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
+            <strong className="text-white font-normal">Yellow &amp; Rose Gold:</strong>{" "}
+            Does not tarnish. Light surface scratches develop into a desirable &ldquo;patina&rdquo; over time. Polish to restore original finish.
+          </li>
+          <li className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
+            <strong className="text-white font-normal">White Gold:</strong>{" "}
+            Naturally light yellow — rhodium-plated to appear white. Re-plating recommended every 1–2 years for regularly worn pieces, or when yellowing becomes visible.
+          </li>
+        </ul>
+      </NotesSection>
+    </div>
+  );
+}
+
+function SilverContent() {
+  return (
+    <div className="space-y-px bg-[#1A1A1A]">
+      <SpecBadge>925 Sterling Silver · Rhodium Plated</SpecBadge>
+      <SafeSection
+        metalName="Sterling Silver"
+        items={[
+          "Warm water and gentle dish soap",
+          "Specialist silver polishing cloth (dry polish only)",
+          "Soft, lint-free cloth for drying",
+          "Anti-tarnish storage pouches",
+          "Élan re-plating service (every 2–3 years)",
+        ]}
+      />
+      <AvoidSection
+        metalName="Sterling Silver"
+        items={[
+          "Liquid silver dip solutions — strip rhodium plating",
+          "Ultrasonic cleaners (can damage rhodium layer)",
+          "Rubber bands and elastic — accelerate tarnishing",
+          "Sulfur-rich environments (hot springs, eggs, certain foods)",
+          "Perfume, hairspray, and lotions directly on the piece",
+          "Chlorine and swimming pools",
+        ]}
+      />
+      <NotesSection title="About Tarnishing">
+        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-5 max-w-2xl">
+          Our rhodium plating significantly delays tarnishing. If dulling occurs, a gentle polish with a specialist cloth will restore brilliance. For deeper tarnishing, contact us for a professional re-plate service — this fully restores the mirror finish and typically takes 5–7 business days.
+        </p>
+        <div className="max-w-2xl">
+          <Callout label="Storage Tip">
+            Store silver in an anti-tarnish cloth pouch with a small silica gel packet. This absorbs moisture and dramatically slows tarnishing.
+          </Callout>
+        </div>
+      </NotesSection>
+    </div>
+  );
+}
+
+function PlatinumContent() {
+  return (
+    <div className="space-y-px bg-[#1A1A1A]">
+      <SpecBadge>950 Platinum · Naturally White</SpecBadge>
+      <SafeSection
+        metalName="Platinum"
+        items={[
+          "Warm soapy water with soft brush",
+          "Lint-free polishing cloth",
+          "Professional ultrasonic cleaning",
+          "Professional steam cleaning",
+          "Professional high-polish service to remove patina",
+        ]}
+      />
+      <AvoidSection
+        metalName="Platinum"
+        items={[
+          "Chlorine — weakens the metal over time",
+          "Abrasive polishing compounds",
+          "Storing with softer metals (platinum will scratch them)",
+          "Impact and hard knocks — can bend fine settings",
+        ]}
+      />
+      <NotesSection title="Understanding Platinum Patina">
+        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl">
+          Platinum develops a natural surface bloom — a soft, satiny lustre that many connoisseurs love. Unlike other metals, platinum is not lost when scratched; the metal simply displaces. This patina can always be professionally polished back to a mirror finish by our team on request — free of charge in your first year of ownership.
+        </p>
+      </NotesSection>
+    </div>
+  );
+}
+
+function StonesContent() {
+  return (
+    <div className="space-y-px bg-[#1A1A1A]">
+      <StoneCard title="Cultivated Diamond">
+        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl">
+          Diamond is the hardest substance on earth (10 Mohs). It is highly resistant to scratching but can chip under sharp impact — particularly on pointed or thin girdle cuts. Clean with warm soapy water and a soft brush. Safe for ultrasonic and steam cleaning in secure settings. Store separately — diamonds will scratch every other stone and most metals.
+        </p>
+      </StoneCard>
+      <StoneCard title="Crystal Moissanite">
+        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl">
+          Crystal moissanite rates 9.25 Mohs — extraordinarily durable. Clean with warm soapy water and a soft brush. Safe for ultrasonic cleaning in secure settings. Moissanite is highly resistant to heat and chemical exposure compared to most gems. Store individually to prevent it from scratching softer stones. Its brilliance does not diminish with age.
+        </p>
+      </StoneCard>
+      <StoneCard title="General Stone Care">
+        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl mb-5">
+          Regardless of stone, always remove jewellery before impact activities, heavy exercise, and swimming. Even the hardest stones can chip on a sharp edge. Inspect settings regularly — a loose stone is far easier to fix than a lost one. All Élan stone-set pieces qualify for our complimentary annual setting inspection.
+        </p>
+        <div className="max-w-2xl">
+          <Callout label="Remember">
+            Never use toothpaste on any stone or metal. Despite common advice, it is mildly abrasive and will dull polished surfaces over time.
+          </Callout>
+        </div>
+      </StoneCard>
+    </div>
+  );
+}
+
+// ── Main export ───────────────────────────────────────────────────────────────
 
 export function CareGuide() {
   const [activeTab, setActiveTab] = useState<Tab>("All Pieces");
-  const steps = content[activeTab];
 
   return (
     <div>
@@ -236,41 +324,12 @@ export function CareGuide() {
         ))}
       </div>
 
-      {/* Steps */}
-      <div className="space-y-px bg-[#1A1A1A]">
-        {steps.map((step) => (
-          <div key={step.num} className="relative bg-[#0F0F0F] p-6 md:p-8 overflow-hidden">
-            {/* Faint step number */}
-            <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#1A1A1A] leading-none select-none pointer-events-none">
-              {step.num}
-            </span>
-
-            <div className="relative">
-              <span className="text-2xl mb-4 block">{step.icon}</span>
-              <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
-                {step.title}
-              </p>
-              <div className="space-y-3 max-w-2xl">
-                {step.body.map((para, i) => (
-                  <p key={i} className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
-                    {para}
-                  </p>
-                ))}
-              </div>
-              {step.callout && (
-                <div className="mt-5 border-l-2 border-[#85A0B5]/40 bg-[#111111] pl-4 py-3 pr-4 max-w-2xl">
-                  <p className="font-sans text-[8px] tracking-[0.3em] text-[#85A0B5] uppercase mb-1.5">
-                    {step.callout.label}
-                  </p>
-                  <p className="font-serif text-sm text-[#5A5A5A] italic leading-relaxed">
-                    {step.callout.text}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* Tab content */}
+      {activeTab === "All Pieces" && <AllPiecesContent />}
+      {activeTab === "18k Gold" && <GoldContent />}
+      {activeTab === "Sterling Silver" && <SilverContent />}
+      {activeTab === "Platinum" && <PlatinumContent />}
+      {activeTab === "Stones" && <StonesContent />}
     </div>
   );
 }

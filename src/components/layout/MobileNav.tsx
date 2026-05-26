@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { X } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import { useCurrencyStore } from "@/store/currency.store";
@@ -49,7 +50,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#1A1A1A] shrink-0">
-          <span className="font-serif text-xl tracking-[0.3em] text-white">ÉLAN</span>
+          <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={100} height={36} className="h-7 w-auto" />
           <button onClick={onClose} className="text-[#9A9A9A] hover:text-white transition-colors">
             <X className="h-5 w-5" />
           </button>

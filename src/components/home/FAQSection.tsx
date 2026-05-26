@@ -250,7 +250,7 @@ export function FAQSection() {
   };
 
   return (
-    <section className="py-20 md:py-32 bg-[#0A0A0A] border-t border-[#1A1A1A]">
+    <section id="faq" className="py-20 md:py-32 bg-[#0A0A0A] border-t border-[#1A1A1A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Header */}

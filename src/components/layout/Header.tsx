@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { ShoppingBag, Heart, User, Search, Menu, X, ChevronDown } from "lucide-react";
 import { useCartStore } from "@/store/cart.store";
@@ -121,14 +122,7 @@ export function Header() {
 
             {/* Center — Logo */}
             <Link href="/" className="absolute left-1/2 -translate-x-1/2">
-              <div className="flex flex-col items-center">
-                <span className="font-serif text-xl md:text-2xl text-white tracking-[0.3em]">
-                  ÉLAN
-                </span>
-                <span className="font-sans text-[7px] tracking-[0.4em] text-[#85A0B5] uppercase mt-0.5 hidden md:block">
-                  Fine Jewellery
-                </span>
-              </div>
+              <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={120} height={48} className="h-8 md:h-10 w-auto" />
             </Link>
 
             {/* Right — Actions */}

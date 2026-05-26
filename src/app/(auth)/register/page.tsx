@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { Eye, EyeOff, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -54,8 +55,7 @@ export default function RegisterPage() {
             style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(184,212,232,0.1) 30px, rgba(184,212,232,0.1) 31px)` }}
           />
           <div className="relative z-10">
-            <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
-            <p className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase mt-2 mb-6">Fine Jewellery</p>
+            <Image src="/Elanlogoblue.png" alt="Élan Fine Jewellery" width={200} height={80} className="h-16 w-auto mb-6" />
           </div>
         </div>
         <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#0A0A0A]">
@@ -86,8 +86,7 @@ export default function RegisterPage() {
           style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(184,212,232,0.1) 30px, rgba(184,212,232,0.1) 31px)` }}
         />
         <div className="relative z-10">
-          <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
-          <p className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase mt-2 mb-6">Fine Jewellery</p>
+          <Image src="/Elanlogoblue.png" alt="Élan Fine Jewellery" width={200} height={80} className="h-16 w-auto mb-6" />
           <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
             Join the Élan circle. Access exclusive pieces, track your orders, and receive priority service.
           </p>
@@ -98,7 +97,7 @@ export default function RegisterPage() {
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#0A0A0A]">
         <div className="w-full max-w-sm">
           <Link href="/" className="block mb-10 lg:hidden">
-            <span className="font-serif text-2xl tracking-[0.3em] text-white">ÉLAN</span>
+            <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={120} height={40} className="h-8 w-auto" />
           </Link>
 
           <h1 className="font-serif text-3xl text-white mb-2">Create an account</h1>

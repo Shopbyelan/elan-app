@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { Eye, EyeOff } from "lucide-react";
@@ -73,7 +74,7 @@ function LoginForm() {
   return (
     <div className="w-full max-w-sm">
       <Link href="/" className="block mb-10 lg:hidden">
-        <span className="font-serif text-2xl tracking-[0.3em] text-white">ÉLAN</span>
+        <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={120} height={40} className="h-8 w-auto" />
       </Link>
 
       <h1 className="font-serif text-3xl text-white mb-2">Welcome back</h1>
@@ -166,8 +167,7 @@ export default function LoginPage() {
           style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(133, 160, 181,0.1) 30px, rgba(133, 160, 181,0.1) 31px)` }}
         />
         <div className="relative z-10">
-          <span className="font-serif text-5xl tracking-[0.3em] text-white">ÉLAN</span>
-          <p className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase mt-2 mb-6">Fine Jewellery</p>
+          <Image src="/Elanlogoblue.png" alt="Élan Fine Jewellery" width={200} height={80} className="h-16 w-auto mb-6" />
           <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
             Where rarity becomes ritual. Sign in to access your personal Élan experience.
           </p>

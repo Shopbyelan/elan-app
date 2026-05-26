@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
@@ -24,7 +25,7 @@ export function AdminSidebar() {
       {/* Brand */}
       <div className="px-6 py-6 border-b border-[#1A1A1A]">
         <Link href="/">
-          <span className="font-serif text-xl tracking-[0.3em] text-white">ÉLAN</span>
+          <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={100} height={36} className="h-7 w-auto" />
         </Link>
         <p className="font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase mt-0.5">
           Admin Panel

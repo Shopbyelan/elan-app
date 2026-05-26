@@ -104,13 +104,8 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.2 }}
           className="mb-10"
         >
-          <div className="inline-flex flex-col items-center bg-[#85A0B5] px-12 py-8 shadow-2xl">
-            <span className="font-serif text-5xl md:text-6xl tracking-[0.22em] text-[#0A0A0A]">
-              ÉLAN
-            </span>
-            <span className="font-sans text-[7px] tracking-[0.5em] text-[#0A0A0A]/60 uppercase mt-1.5">
-              Fine Jewellery
-            </span>
+          <div className="inline-flex items-center bg-[#85A0B5] px-12 py-8 shadow-2xl">
+            <Image src="/ElanLogoblack.png" alt="Élan Fine Jewellery" width={220} height={88} className="h-16 md:h-20 w-auto" />
           </div>
         </motion.div>
 
