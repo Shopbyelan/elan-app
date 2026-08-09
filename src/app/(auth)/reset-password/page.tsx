@@ -22,8 +22,8 @@ function ResetPasswordForm() {
   if (!token || !email) {
     return (
       <div className="w-full max-w-sm text-center">
-        <p className="font-sans text-sm text-[#9A9A9A] mb-6">This reset link is invalid or has expired.</p>
-        <Link href="/forgot-password" className="font-sans text-sm text-[#85A0B5] hover:underline">
+        <p className="font-sans text-sm text-[#6B6B6B] mb-6">This reset link is invalid or has expired.</p>
+        <Link href="/forgot-password" className="font-sans text-sm text-[#3A5A78] hover:underline">
           Request a new link
         </Link>
       </div>
@@ -65,8 +65,8 @@ function ResetPasswordForm() {
         <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={120} height={40} className="h-8 w-auto" />
       </Link>
 
-      <h1 className="font-serif text-3xl text-white mb-2">Set new password</h1>
-      <p className="font-sans text-sm text-[#9A9A9A] mb-8">
+      <h1 className="font-serif text-3xl text-[#0A0A0A] mb-2">Set new password</h1>
+      <p className="font-sans text-sm text-[#6B6B6B] mb-8">
         Enter your new password below.
       </p>
 
@@ -79,7 +79,7 @@ function ResetPasswordForm() {
           onChange={(e) => setPassword(e.target.value)}
           required
           suffix={
-            <button type="button" onClick={() => setShowPw(!showPw)} className="hover:text-white transition-colors">
+            <button type="button" onClick={() => setShowPw(!showPw)} className="hover:text-[#3A5A78] transition-colors">
               {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           }
@@ -109,12 +109,12 @@ export default function ResetPasswordPage() {
         />
         <div className="relative z-10">
           <Image src="/Elanlogoblue.png" alt="Élan Fine Jewellery" width={200} height={80} className="h-16 w-auto mb-6" />
-          <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
+          <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-xs">
             Choose a strong password to protect your Élan account.
           </p>
         </div>
       </div>
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#0A0A0A]">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#FFFFFF]">
         <Suspense fallback={<div className="w-full max-w-sm animate-pulse" />}>
           <ResetPasswordForm />
         </Suspense>

@@ -56,12 +56,12 @@ export function CollectionsSection() {
     <section className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
       {/* Header */}
       <div className="text-center mb-16">
-        <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-4">
+        <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-4">
           Curated Collections
         </p>
-        <h2 className="font-serif text-3xl md:text-5xl text-white">
+        <h2 className="font-serif text-3xl md:text-5xl text-[#0A0A0A]">
           The{" "}
-          <em className="text-[#85A0B5] not-italic">Élan</em>
+          <em className="text-[#3A5A78] not-italic">Élan</em>
           {" "}Edit
         </h2>
       </div>
@@ -98,8 +98,8 @@ export function CollectionsSection() {
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-between p-5">
                 {/* Badge */}
-                <span className={`self-start font-sans text-[9px] tracking-[0.25em] uppercase bg-black/30 px-2.5 py-1 ${
-                  col.slug === "sterling-silver" ? "text-[#85A0B5]" : "text-[#9A9A9A]"
+                <span className={`self-start font-sans text-[11px] tracking-[0.25em] uppercase bg-black/30 px-2.5 py-1 ${
+                  col.slug === "sterling-silver" ? "text-[#3A5A78]" : "text-[#6B6B6B]"
                 }`}>
                   {col.label}
                 </span>
@@ -109,12 +109,12 @@ export function CollectionsSection() {
                   <h3 className="font-serif text-lg text-white leading-tight mb-1">
                     {col.name.split(" ")[0]}{" "}
                     <br />
-                    <em className="text-[#85A0B5] not-italic">{col.italicName}</em>
+                    <em className="text-[#3A5A78] not-italic">{col.italicName}</em>
                   </h3>
-                  <p className="font-sans text-[10px] text-[#9A9A9A] leading-relaxed hidden group-hover:block transition-all">
+                  <p className="font-sans text-[12px] text-[#6B6B6B] leading-relaxed hidden group-hover:block transition-all">
                     {col.description}
                   </p>
-                  <button className="mt-4 font-sans text-[10px] tracking-[0.2em] text-[#85A0B5] uppercase flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button className="mt-4 font-sans text-[12px] tracking-[0.2em] text-[#3A5A78] uppercase flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Explore →
                   </button>
                 </div>

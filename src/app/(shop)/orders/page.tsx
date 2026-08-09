@@ -37,19 +37,19 @@ export default async function OrdersPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-16">
       <div className="mb-10">
-        <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-2">
+        <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-2">
           My Orders
         </p>
-        <h1 className="font-serif text-3xl md:text-4xl text-white">
+        <h1 className="font-serif text-3xl md:text-4xl text-[#0A0A0A]">
           Order History
         </h1>
       </div>
 
       {orders.length === 0 ? (
         <div className="py-24 text-center">
-          <Package className="h-16 w-16 text-[#2A2A2A] mx-auto mb-8" />
-          <h2 className="font-serif text-2xl text-[#5A5A5A] mb-4">No orders yet</h2>
-          <p className="font-sans text-sm text-[#3A3A3A] mb-10">
+          <Package className="h-16 w-16 text-[#E4E1DA] mx-auto mb-8" />
+          <h2 className="font-serif text-2xl text-[#9A9A9A] mb-4">No orders yet</h2>
+          <p className="font-sans text-sm text-[#9A9A9A] mb-10">
             Your order history will appear here.
           </p>
           <Button variant="gold" asChild>
@@ -59,32 +59,32 @@ export default async function OrdersPage() {
       ) : (
         <div className="space-y-4">
           {orders.map((order) => (
-            <div key={order.id} className="bg-[#111] border border-[#1A1A1A] p-6">
+            <div key={order.id} className="bg-[#FFFFFF] border border-[#E4E1DA] p-6">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                 <div>
-                  <p className="font-sans text-[10px] tracking-[0.2em] text-[#85A0B5] uppercase mb-1">
+                  <p className="font-sans text-[12px] tracking-[0.2em] text-[#3A5A78] uppercase mb-1">
                     {order.orderNumber}
                   </p>
-                  <p className="font-sans text-xs text-[#5A5A5A]">
+                  <p className="font-sans text-xs text-[#9A9A9A]">
                     {formatDate(order.createdAt)}
                   </p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className={`font-sans text-xs font-medium ${STATUS_COLORS[order.status] || "text-[#9A9A9A]"}`}>
+                  <span className={`font-sans text-xs font-medium ${STATUS_COLORS[order.status] || "text-[#6B6B6B]"}`}>
                     {order.status}
                   </span>
-                  <span className="font-serif text-lg text-[#85A0B5]">
+                  <span className="font-serif text-lg text-[#3A5A78]">
                     {formatPrice(order.total)}
                   </span>
                 </div>
               </div>
-              <div className="border-t border-[#141414] pt-4">
-                <p className="font-sans text-xs text-[#5A5A5A] mb-2">
+              <div className="border-t border-[#E4E1DA] pt-4">
+                <p className="font-sans text-xs text-[#9A9A9A] mb-2">
                   {order.items.length} piece{order.items.length !== 1 ? "s" : ""}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {order.items.map((item) => (
-                    <span key={item.id} className="font-sans text-xs text-[#9A9A9A]">
+                    <span key={item.id} className="font-sans text-xs text-[#6B6B6B]">
                       {item.productName} × {item.quantity}
                     </span>
                   ))}

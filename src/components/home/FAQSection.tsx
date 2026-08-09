@@ -207,17 +207,17 @@ function AccordionItem({
   onToggle: () => void;
 }) {
   return (
-    <div className="border-b border-[#1A1A1A]">
+    <div className="border-b border-[#E4E1DA]">
       <button
         onClick={onToggle}
         className="w-full flex items-start justify-between gap-6 py-5 text-left group"
         aria-expanded={isOpen}
       >
-        <span className="font-sans text-sm text-[#C4CDD6] tracking-wide leading-relaxed group-hover:text-white transition-colors duration-200">
+        <span className="font-sans text-sm text-[#3A3A3A] tracking-wide leading-relaxed group-hover:text-[#0A0A0A] transition-colors duration-200">
           {question}
         </span>
         <span
-          className={`flex-shrink-0 mt-0.5 w-5 h-5 flex items-center justify-center border border-[#2A2A2A] text-[#85A0B5] transition-all duration-300 ${
+          className={`flex-shrink-0 mt-0.5 w-5 h-5 flex items-center justify-center border border-[#E4E1DA] text-[#3A5A78] transition-all duration-300 ${
             isOpen ? "rotate-45 border-[#85A0B5]" : "group-hover:border-[#85A0B5]"
           }`}
           aria-hidden
@@ -233,7 +233,7 @@ function AccordionItem({
           isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <p className="font-sans text-sm text-[#5A5A5A] leading-relaxed pb-5 pr-8">
+        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed pb-5 pr-8">
           {answer}
         </p>
       </div>
@@ -250,23 +250,23 @@ export function FAQSection() {
   };
 
   return (
-    <section id="faq" className="py-20 md:py-32 bg-[#0A0A0A] border-t border-[#1A1A1A]">
+    <section id="faq" className="py-20 md:py-32 bg-[#FFFFFF] border-t border-[#E4E1DA]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
         <div className="mb-10 md:mb-16">
-          <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-4">
+          <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-4">
             Client Services
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-white">
-            Frequently Asked <em className="text-[#85A0B5] not-italic">Questions</em>
+          <h2 className="font-serif text-3xl md:text-4xl text-[#0A0A0A]">
+            Frequently Asked <em className="text-[#3A5A78] not-italic">Questions</em>
           </h2>
         </div>
 
         {/* ── Mobile layout ── */}
         <div className="md:hidden">
           {/* Category list card */}
-          <div className="border border-[#1A1A1A] mb-8">
+          <div className="border border-[#E4E1DA] mb-8">
             {faqData.map((section, i) => (
               <button
                 key={i}
@@ -274,16 +274,16 @@ export function FAQSection() {
                   setActiveCategory(i);
                   setOpenItems({});
                 }}
-                className={`w-full flex items-center gap-3.5 px-4 py-4 border-b border-[#1A1A1A] last:border-b-0 text-left transition-all duration-200 ${
+                className={`w-full flex items-center gap-3.5 px-4 py-4 border-b border-[#E4E1DA] last:border-b-0 text-left transition-all duration-200 ${
                   activeCategory === i
-                    ? "text-[#85A0B5] bg-[#0F0F0F] border-l-2 border-l-[#85A0B5]"
-                    : "text-[#5A5A5A]"
+                    ? "text-[#3A5A78] bg-[#F7F5F2] border-l-2 border-l-[#85A0B5]"
+                    : "text-[#9A9A9A]"
                 }`}
               >
-                <span className={`transition-colors duration-200 ${activeCategory === i ? "text-[#85A0B5]" : "text-[#3A3A3A]"}`}>
+                <span className={`transition-colors duration-200 ${activeCategory === i ? "text-[#3A5A78]" : "text-[#9A9A9A]"}`}>
                   {section.icon}
                 </span>
-                <span className="font-sans text-[10px] tracking-[0.25em] uppercase">
+                <span className="font-sans text-[12px] tracking-[0.25em] uppercase">
                   {section.category}
                 </span>
               </button>
@@ -291,8 +291,8 @@ export function FAQSection() {
           </div>
 
           {/* Active category label */}
-          <div className="mb-4 pb-3 border-b border-[#2A2A2A]">
-            <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase">
+          <div className="mb-4 pb-3 border-b border-[#E4E1DA]">
+            <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase">
               {faqData[activeCategory].category}
             </p>
           </div>
@@ -318,7 +318,7 @@ export function FAQSection() {
         <div className="hidden md:flex gap-16">
           {/* Sidebar */}
           <div className="w-56 lg:w-64 flex-shrink-0">
-            <nav className="sticky top-8 border border-[#1A1A1A]">
+            <nav className="sticky top-8 border border-[#E4E1DA]">
               {faqData.map((section, i) => (
                 <button
                   key={i}
@@ -326,16 +326,16 @@ export function FAQSection() {
                     setActiveCategory(i);
                     setOpenItems({});
                   }}
-                  className={`w-full flex items-center gap-3.5 px-4 py-3.5 border-b border-[#1A1A1A] last:border-b-0 text-left transition-all duration-200 ${
+                  className={`w-full flex items-center gap-3.5 px-4 py-3.5 border-b border-[#E4E1DA] last:border-b-0 text-left transition-all duration-200 ${
                     activeCategory === i
-                      ? "text-[#85A0B5] bg-[#0F0F0F] border-l-2 border-l-[#85A0B5]"
-                      : "text-[#5A5A5A] hover:text-[#9A9A9A]"
+                      ? "text-[#3A5A78] bg-[#F7F5F2] border-l-2 border-l-[#85A0B5]"
+                      : "text-[#9A9A9A] hover:text-[#6B6B6B]"
                   }`}
                 >
-                  <span className={`transition-colors duration-200 ${activeCategory === i ? "text-[#85A0B5]" : "text-[#3A3A3A]"}`}>
+                  <span className={`transition-colors duration-200 ${activeCategory === i ? "text-[#3A5A78]" : "text-[#9A9A9A]"}`}>
                     {section.icon}
                   </span>
-                  <span className="font-sans text-[10px] tracking-[0.2em] uppercase">
+                  <span className="font-sans text-[12px] tracking-[0.2em] uppercase">
                     {section.category}
                   </span>
                 </button>
@@ -345,8 +345,8 @@ export function FAQSection() {
 
           {/* FAQ items */}
           <div className="flex-1 min-w-0">
-            <div className="mb-6 pb-4 border-b border-[#2A2A2A]">
-              <h3 className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase">
+            <div className="mb-6 pb-4 border-b border-[#E4E1DA]">
+              <h3 className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase">
                 {faqData[activeCategory].category}
               </h3>
             </div>

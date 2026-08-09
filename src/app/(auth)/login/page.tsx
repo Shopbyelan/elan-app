@@ -77,8 +77,8 @@ function LoginForm() {
         <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={120} height={40} className="h-8 w-auto" />
       </Link>
 
-      <h1 className="font-serif text-3xl text-white mb-2">Welcome back</h1>
-      <p className="font-sans text-sm text-[#9A9A9A] mb-8">Sign in to your Élan account</p>
+      <h1 className="font-serif text-3xl text-[#0A0A0A] mb-2">Welcome back</h1>
+      <p className="font-sans text-sm text-[#6B6B6B] mb-8">Sign in to your Élan account</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
@@ -97,13 +97,13 @@ function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           required
           suffix={
-            <button type="button" onClick={() => setShowPw(!showPw)} className="hover:text-white transition-colors">
+            <button type="button" onClick={() => setShowPw(!showPw)} className="hover:text-[#3A5A78] transition-colors">
               {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           }
         />
         <div className="flex justify-end">
-          <Link href="/forgot-password" className="font-sans text-[11px] text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">
+          <Link href="/forgot-password" className="font-sans text-[11px] text-[#3A5A78] hover:text-[#9DB5C8] transition-colors">
             Forgot password?
           </Link>
         </div>
@@ -113,13 +113,13 @@ function LoginForm() {
       </form>
 
       {loginFailed && (
-        <div className="mt-4 p-3 bg-[#111] border border-[#1A1A1A]">
-          <p className="font-sans text-xs text-[#9A9A9A] leading-relaxed">
+        <div className="mt-4 p-3 bg-[#FFFFFF] border border-[#E4E1DA]">
+          <p className="font-sans text-xs text-[#6B6B6B] leading-relaxed">
             Just registered? Your email may not be verified yet.{" "}
             <button
               onClick={handleResend}
               disabled={resendLoading}
-              className="text-[#85A0B5] hover:underline disabled:opacity-50"
+              className="text-[#3A5A78] hover:underline disabled:opacity-50"
             >
               {resendLoading ? "Sending..." : "Resend verification email"}
             </button>
@@ -129,10 +129,10 @@ function LoginForm() {
 
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-[#1A1A1A]" />
+          <div className="w-full border-t border-[#E4E1DA]" />
         </div>
         <div className="relative flex justify-center">
-          <span className="bg-[#0A0A0A] px-4 font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase">
+          <span className="bg-[#FFFFFF] px-4 font-sans text-[12px] tracking-[0.2em] text-[#9A9A9A] uppercase">
             or continue with
           </span>
         </div>
@@ -149,9 +149,9 @@ function LoginForm() {
         Continue with Google
       </Button>
 
-      <p className="mt-8 text-center font-sans text-sm text-[#5A5A5A]">
+      <p className="mt-8 text-center font-sans text-sm text-[#9A9A9A]">
         New to Élan?{" "}
-        <Link href="/register" className="text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">
+        <Link href="/register" className="text-[#3A5A78] hover:text-[#9DB5C8] transition-colors">
           Create an account
         </Link>
       </p>
@@ -168,12 +168,12 @@ export default function LoginPage() {
         />
         <div className="relative z-10">
           <Image src="/Elanlogoblue.png" alt="Élan Fine Jewellery" width={200} height={80} className="h-16 w-auto mb-6" />
-          <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
+          <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-xs">
             Where rarity becomes ritual. Sign in to access your personal Élan experience.
           </p>
         </div>
       </div>
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#0A0A0A]">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#FFFFFF]">
         <Suspense fallback={<div className="w-full max-w-sm animate-pulse" />}>
           <LoginForm />
         </Suspense>

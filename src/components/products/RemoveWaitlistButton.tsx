@@ -29,7 +29,7 @@ export function RemoveWaitlistButton({ productId }: Props) {
     <button
       onClick={handleRemove}
       disabled={busy}
-      className="flex items-center gap-1 font-sans text-[10px] tracking-[0.15em] text-[#5A5A5A] uppercase hover:text-red-400 transition-colors disabled:opacity-40"
+      className="flex items-center gap-1 font-sans text-[12px] tracking-[0.15em] text-[#9A9A9A] uppercase hover:text-red-400 transition-colors disabled:opacity-40"
       aria-label="Remove from waiting list"
     >
       {busy ? <Loader2 className="h-3 w-3 animate-spin" /> : <X className="h-3 w-3" />}

@@ -20,10 +20,10 @@ const sizeClasses = {
 
 const variantClasses = {
   gold: "bg-[#85A0B5] text-black hover:bg-[#9DB5C8] font-medium tracking-[0.2em] uppercase",
-  outline: "border border-[#85A0B5] text-[#85A0B5] hover:bg-[#85A0B5] hover:text-black tracking-[0.2em] uppercase",
-  ghost: "text-[#9A9A9A] hover:text-white hover:bg-white/5 tracking-[0.15em] uppercase",
-  dark: "bg-[#1A1A1A] text-white border border-[#2A2A2A] hover:border-[#85A0B5] tracking-[0.15em] uppercase",
-  link: "text-[#85A0B5] hover:text-[#9DB5C8] underline-offset-4 hover:underline p-0 h-auto",
+  outline: "border border-[#3A5A78] text-[#3A5A78] hover:bg-[#3A5A78] hover:text-white tracking-[0.2em] uppercase",
+  ghost: "text-[#6B6B6B] hover:text-[#0A0A0A] hover:bg-black/5 tracking-[0.15em] uppercase",
+  dark: "bg-[#0A0A0A] text-white hover:bg-[#3A5A78] tracking-[0.15em] uppercase",
+  link: "text-[#3A5A78] hover:text-[#2E4560] underline-offset-4 hover:underline p-0 h-auto",
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

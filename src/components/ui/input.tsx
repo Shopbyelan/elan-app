@@ -13,22 +13,22 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full">
         {label && (
-          <label className="block text-[10px] font-sans tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">
+          <label className="block text-[12px] font-sans tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">
             {label}
           </label>
         )}
         <div className="relative flex items-center">
           {prefix && (
-            <div className="absolute left-3 text-[#5A5A5A]">{prefix}</div>
+            <div className="absolute left-3 text-[#9A9A9A]">{prefix}</div>
           )}
           <input
             type={type}
             ref={ref}
             className={cn(
-              "w-full h-11 px-4 py-3 font-sans text-sm text-[#E8E8E8]",
-              "bg-[#141414] border border-[#2A2A2A]",
-              "placeholder:text-[#5A5A5A]",
-              "focus:outline-none focus:border-[#85A0B5] transition-colors duration-200",
+              "w-full h-11 px-4 py-3 font-sans text-sm text-[#3A3A3A]",
+              "bg-[#F7F5F2] border border-[#E4E1DA]",
+              "placeholder:text-[#9A9A9A]",
+              "focus:outline-none focus:border-[#3A5A78] transition-colors duration-200",
               "disabled:opacity-50 disabled:cursor-not-allowed",
               error && "border-red-500",
               prefix && "pl-10",
@@ -38,7 +38,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {suffix && (
-            <div className="absolute right-3 text-[#5A5A5A]">{suffix}</div>
+            <div className="absolute right-3 text-[#9A9A9A]">{suffix}</div>
           )}
         </div>
         {error && (
@@ -60,17 +60,17 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="w-full">
         {label && (
-          <label className="block text-[10px] font-sans tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">
+          <label className="block text-[12px] font-sans tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">
             {label}
           </label>
         )}
         <textarea
           ref={ref}
           className={cn(
-            "w-full px-4 py-3 font-sans text-sm text-[#E8E8E8]",
-            "bg-[#141414] border border-[#2A2A2A]",
-            "placeholder:text-[#5A5A5A] resize-none",
-            "focus:outline-none focus:border-[#85A0B5] transition-colors duration-200",
+            "w-full px-4 py-3 font-sans text-sm text-[#3A3A3A]",
+            "bg-[#F7F5F2] border border-[#E4E1DA]",
+            "placeholder:text-[#9A9A9A] resize-none",
+            "focus:outline-none focus:border-[#3A5A78] transition-colors duration-200",
             error && "border-red-500",
             className
           )}

@@ -37,16 +37,16 @@ export function NewsletterSection() {
         {/* Decorative line */}
         <div className="flex items-center justify-center gap-4 mb-10">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#85A0B5]/30" />
-          <span className="font-sans text-[10px] tracking-[0.4em] text-[#85A0B5] uppercase">
+          <span className="font-sans text-[12px] tracking-[0.4em] text-[#3A5A78] uppercase">
             Élan Inner Circle
           </span>
           <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#85A0B5]/30" />
         </div>
 
-        <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
+        <h2 className="font-serif text-3xl md:text-4xl text-[#0A0A0A] mb-4">
           First Access. Always.
         </h2>
-        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-10">
+        <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-10">
           Join the Élan circle and receive early access to new arrivals, exclusive pieces,
           and invitations to private events — before the world sees them.
         </p>
@@ -71,7 +71,7 @@ export function NewsletterSection() {
           </Button>
         </form>
 
-        <p className="font-sans text-[10px] text-[#3A3A3A] mt-4">
+        <p className="font-sans text-[12px] text-[#9A9A9A] mt-4">
           No spam. Only excellence. Unsubscribe at any time.
         </p>
       </div>

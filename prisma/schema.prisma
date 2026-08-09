@@ -117,6 +117,9 @@ model Product {
   dimensions   String?
   careInstr    String?  @db.Text
   badge        String?
+  productType  String?
+  isBridal        Boolean  @default(false)
+  isLimitedEdition Boolean @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 

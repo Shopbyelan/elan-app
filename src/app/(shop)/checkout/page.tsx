@@ -162,7 +162,7 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-        <h1 className="font-serif text-3xl text-white mb-4">Your cart is empty</h1>
+        <h1 className="font-serif text-3xl text-[#0A0A0A] mb-4">Your cart is empty</h1>
         <Button variant="gold" asChild>
           <Link href="/shop">Continue Shopping</Link>
         </Button>
@@ -173,19 +173,19 @@ export default function CheckoutPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
       <div className="mb-10">
-        <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-2">
+        <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-2">
           Secure Checkout
         </p>
-        <h1 className="font-serif text-3xl md:text-4xl text-white">Complete Your Order</h1>
+        <h1 className="font-serif text-3xl md:text-4xl text-[#0A0A0A]">Complete Your Order</h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
         {/* ── Form ── */}
         <div className="lg:col-span-3 space-y-6">
           {!session && (
-            <div className="bg-[#111] border border-[#85A0B5]/20 p-4">
-              <p className="font-sans text-xs text-[#9A9A9A]">
-                <Link href="/login?callbackUrl=/checkout" className="text-[#85A0B5] hover:underline">
+            <div className="bg-[#FFFFFF] border border-[#85A0B5]/20 p-4">
+              <p className="font-sans text-xs text-[#6B6B6B]">
+                <Link href="/login?callbackUrl=/checkout" className="text-[#3A5A78] hover:underline">
                   Sign in
                 </Link>{" "}
                 to auto-fill your details and track your order.
@@ -194,8 +194,8 @@ export default function CheckoutPage() {
           )}
 
           {/* Contact */}
-          <div className="bg-[#111] border border-[#1A1A1A] p-6 space-y-4">
-            <h2 className="font-serif text-lg text-white mb-2">Contact Information</h2>
+          <div className="bg-[#FFFFFF] border border-[#E4E1DA] p-6 space-y-4">
+            <h2 className="font-serif text-lg text-[#0A0A0A] mb-2">Contact Information</h2>
             <div className="grid grid-cols-2 gap-4">
               <Input
                 label="First Name *"
@@ -227,8 +227,8 @@ export default function CheckoutPage() {
           </div>
 
           {/* Shipping address */}
-          <div className="bg-[#111] border border-[#1A1A1A] p-6 space-y-4">
-            <h2 className="font-serif text-lg text-white mb-2">Shipping Address</h2>
+          <div className="bg-[#FFFFFF] border border-[#E4E1DA] p-6 space-y-4">
+            <h2 className="font-serif text-lg text-[#0A0A0A] mb-2">Shipping Address</h2>
 
             {/* Country first */}
             <Select
@@ -281,8 +281,8 @@ export default function CheckoutPage() {
           </div>
 
           {/* Coupon */}
-          <div className="bg-[#111] border border-[#1A1A1A] p-6">
-            <h2 className="font-serif text-lg text-white mb-4">Coupon Code</h2>
+          <div className="bg-[#FFFFFF] border border-[#E4E1DA] p-6">
+            <h2 className="font-serif text-lg text-[#0A0A0A] mb-4">Coupon Code</h2>
             <div className="flex gap-3">
               <Input
                 placeholder="Enter coupon code"
@@ -299,47 +299,47 @@ export default function CheckoutPage() {
 
         {/* ── Order summary ── */}
         <div className="lg:col-span-2">
-          <div className="bg-[#111] border border-[#1A1A1A] p-6 sticky top-24">
-            <h2 className="font-serif text-lg text-white mb-6">Order Summary</h2>
+          <div className="bg-[#FFFFFF] border border-[#E4E1DA] p-6 sticky top-24">
+            <h2 className="font-serif text-lg text-[#0A0A0A] mb-6">Order Summary</h2>
 
             <div className="space-y-3 mb-6 max-h-48 overflow-y-auto pr-1">
               {items.map(({ product, quantity }) => (
                 <div key={product.id} className="flex justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="font-sans text-xs text-[#9A9A9A] truncate">{product.name}</p>
-                    <p className="font-sans text-[10px] text-[#5A5A5A]">Qty: {quantity}</p>
+                    <p className="font-sans text-xs text-[#6B6B6B] truncate">{product.name}</p>
+                    <p className="font-sans text-[12px] text-[#9A9A9A]">Qty: {quantity}</p>
                   </div>
-                  <p className="font-sans text-xs text-white flex-shrink-0">
+                  <p className="font-sans text-xs text-[#3A3A3A] flex-shrink-0">
                     {format(product.price * quantity)}
                   </p>
                 </div>
               ))}
             </div>
 
-            <div className="border-t border-[#1A1A1A] pt-4 space-y-3 mb-6">
+            <div className="border-t border-[#E4E1DA] pt-4 space-y-3 mb-6">
               <div className="flex justify-between font-sans text-sm">
-                <span className="text-[#9A9A9A]">Subtotal</span>
-                <span className="text-white">{format(subtotal)}</span>
+                <span className="text-[#6B6B6B]">Subtotal</span>
+                <span className="text-[#3A3A3A]">{format(subtotal)}</span>
               </div>
               <div className="flex justify-between font-sans text-sm">
-                <span className="text-[#9A9A9A] capitalize">{deliveryLabel}</span>
-                <span className="text-white">
+                <span className="text-[#6B6B6B] capitalize">{deliveryLabel}</span>
+                <span className="text-[#3A3A3A]">
                   {form.country ? format(delivery) : "Select country"}
                 </span>
               </div>
               {form.country !== "NG" && (
-                <p className="font-sans text-[10px] text-[#5A5A5A] leading-relaxed">
+                <p className="font-sans text-[12px] text-[#9A9A9A] leading-relaxed">
                   International orders are shipped via DHL / FedEx. Delivery within 5–10 business days.
                 </p>
               )}
-              <div className="border-t border-[#1A1A1A] pt-3 flex justify-between">
-                <span className="font-sans text-xs tracking-[0.15em] text-[#9A9A9A] uppercase">Total</span>
-                <span className="font-serif text-xl text-[#85A0B5]">{format(total)}</span>
+              <div className="border-t border-[#E4E1DA] pt-3 flex justify-between">
+                <span className="font-sans text-xs tracking-[0.15em] text-[#6B6B6B] uppercase">Total</span>
+                <span className="font-serif text-xl text-[#3A5A78]">{format(total)}</span>
               </div>
             </div>
 
             {currency === "USD" && (
-              <p className="font-sans text-[10px] text-[#5A5A5A] text-center mb-3">
+              <p className="font-sans text-[12px] text-[#9A9A9A] text-center mb-3">
                 Approx. {format(total)} · Rate: $1 = ₦{NGN_PER_USD.toLocaleString()}
               </p>
             )}
@@ -354,8 +354,8 @@ export default function CheckoutPage() {
                 "256-bit SSL encryption",
                 "Certificate of Authenticity included",
               ].map((t) => (
-                <p key={t} className="font-sans text-[10px] text-[#3A3A3A] flex items-center gap-2">
-                  <span className="text-[#85A0B5]">✓</span> {t}
+                <p key={t} className="font-sans text-[12px] text-[#9A9A9A] flex items-center gap-2">
+                  <span className="text-[#3A5A78]">✓</span> {t}
                 </p>
               ))}
             </div>

@@ -39,17 +39,17 @@ export function NotifyWaitlistButton({ productId, count }: Props) {
     <button
       onClick={handleNotify}
       disabled={busy || done}
-      className="inline-flex items-center gap-1.5 font-sans text-[9px] tracking-[0.15em] uppercase transition-colors disabled:opacity-50"
+      className="inline-flex items-center gap-1.5 font-sans text-[11px] tracking-[0.15em] uppercase transition-colors disabled:opacity-50"
       title={`Notify ${count} waiting customer${count !== 1 ? "s" : ""}`}
     >
       {busy ? (
-        <Loader2 className="h-3 w-3 animate-spin text-[#85A0B5]" />
+        <Loader2 className="h-3 w-3 animate-spin text-[#3A5A78]" />
       ) : done ? (
         <CheckCircle className="h-3 w-3 text-emerald-400" />
       ) : (
-        <Bell className="h-3 w-3 text-[#85A0B5]" />
+        <Bell className="h-3 w-3 text-[#3A5A78]" />
       )}
-      <span className={done ? "text-emerald-400" : "text-[#85A0B5] hover:text-[#9DB5C8]"}>
+      <span className={done ? "text-emerald-400" : "text-[#3A5A78] hover:text-[#9DB5C8]"}>
         {done ? "Sent" : `${count} waiting`}
       </span>
     </button>

@@ -78,23 +78,23 @@ export default function MaterialsPage() {
   return (
     <>
       {/* Header */}
-      <div className="bg-[#0D0D0D] border-b border-[#141414] py-16 md:py-24 px-4 text-center">
-        <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-4">
+      <div className="bg-[#F7F5F2] border-b border-[#E4E1DA] py-16 md:py-24 px-4 text-center">
+        <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-4">
           Knowledge is Luxury
         </p>
-        <h1 className="font-serif text-4xl md:text-6xl text-white mb-4">
-          Understanding Your <em className="text-[#85A0B5] not-italic">Élan</em>
+        <h1 className="font-serif text-4xl md:text-6xl text-[#0A0A0A] mb-4">
+          Understanding Your <em className="text-[#3A5A78] not-italic">Élan</em>
         </h1>
-        <p className="font-sans text-sm text-[#9A9A9A] max-w-xl mx-auto leading-relaxed">
+        <p className="font-sans text-sm text-[#6B6B6B] max-w-xl mx-auto leading-relaxed">
           True luxury is not just owning something rare — it is understanding what you carry and why it matters.
         </p>
       </div>
 
       {/* Material nav */}
-      <div className="sticky top-16 md:top-20 z-30 bg-[#0A0A0A]/95 backdrop-blur border-b border-[#141414]">
+      <div className="sticky top-16 md:top-20 z-30 bg-[#FFFFFF]/95 backdrop-blur border-b border-[#E4E1DA]">
         <div className="max-w-4xl mx-auto px-4 flex gap-6 overflow-x-auto py-4">
           {materials.map((m) => (
-            <a key={m.id} href={`#${m.id}`} className="flex-shrink-0 font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase hover:text-[#85A0B5] transition-colors">
+            <a key={m.id} href={`#${m.id}`} className="flex-shrink-0 font-sans text-[12px] tracking-[0.2em] text-[#9A9A9A] uppercase hover:text-[#3A5A78] transition-colors">
               {m.name}
             </a>
           ))}
@@ -108,7 +108,7 @@ export default function MaterialsPage() {
             {/* Tabs nav */}
             <div className="hidden">
               {["18K GOLD", "STERLING SILVER", "CULTIVATED DIAMOND", "PLATINUM", "CRYSTAL MOISSANITE"].map((t) => (
-                <button key={t} className="font-sans text-[10px] tracking-[0.2em] uppercase">{t}</button>
+                <button key={t} className="font-sans text-[12px] tracking-[0.2em] uppercase">{t}</button>
               ))}
             </div>
 
@@ -117,8 +117,8 @@ export default function MaterialsPage() {
               <div className={`${idx % 2 === 1 ? "md:order-2" : ""}`}>
                 <div className={`aspect-square relative overflow-hidden ${mat.gradient}`}>
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-                    <span className="font-serif text-7xl md:text-8xl text-[#85A0B5]">{mat.code}</span>
-                    <p className="font-sans text-[9px] tracking-[0.3em] text-[#9A9A9A] uppercase mt-4">
+                    <span className="font-serif text-7xl md:text-8xl text-[#3A5A78]">{mat.code}</span>
+                    <p className="font-sans text-[11px] tracking-[0.3em] text-[#6B6B6B] uppercase mt-4">
                       {mat.name}
                     </p>
                   </div>
@@ -127,26 +127,26 @@ export default function MaterialsPage() {
 
               {/* Content */}
               <div className={`${idx % 2 === 1 ? "md:order-1" : ""}`}>
-                <p className="font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase mb-3">
+                <p className="font-sans text-[11px] tracking-[0.3em] text-[#3A5A78] uppercase mb-3">
                   {["18K GOLD", "STERLING SILVER", "CULTIVATED DIAMOND", "PLATINUM", "CRYSTAL MOISSANITE"][idx]}
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl text-white mb-2">{mat.name}</h2>
-                <p className="font-sans text-xs text-[#5A5A5A] tracking-wider mb-8">{mat.subtitle}</p>
+                <h2 className="font-serif text-3xl md:text-4xl text-[#0A0A0A] mb-2">{mat.name}</h2>
+                <p className="font-sans text-xs text-[#9A9A9A] tracking-wider mb-8">{mat.subtitle}</p>
 
                 <div className="space-y-4 mb-10">
                   {mat.body.map((para, i) => (
-                    <p key={i} className="font-sans text-sm text-[#9A9A9A] leading-relaxed">{para}</p>
+                    <p key={i} className="font-sans text-sm text-[#6B6B6B] leading-relaxed">{para}</p>
                   ))}
                 </div>
 
                 {mat.variants && (
                   <div className="mb-8">
-                    <p className="font-sans text-[9px] tracking-[0.25em] text-[#5A5A5A] uppercase mb-3">
+                    <p className="font-sans text-[11px] tracking-[0.25em] text-[#9A9A9A] uppercase mb-3">
                       Available In
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {mat.variants.map((v) => (
-                        <span key={v} className="px-3 py-1.5 border border-[#2A2A2A] font-sans text-[10px] tracking-[0.15em] text-[#9A9A9A]">
+                        <span key={v} className="px-3 py-1.5 border border-[#E4E1DA] font-sans text-[12px] tracking-[0.15em] text-[#6B6B6B]">
                           {v}
                         </span>
                       ))}
@@ -164,7 +164,7 @@ export default function MaterialsPage() {
             </div>
 
             {idx < materials.length - 1 && (
-              <div className="mt-24 h-px bg-gradient-to-r from-transparent via-[#2A2A2A] to-transparent" />
+              <div className="mt-24 h-px bg-gradient-to-r from-transparent via-[#E4E1DA] to-transparent" />
             )}
           </section>
         ))}

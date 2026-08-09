@@ -9,8 +9,8 @@ type Tab = (typeof TABS)[number];
 
 function SpecBadge({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-[#0F0F0F] p-6 md:p-8">
-      <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[8px] tracking-[0.35em] text-[#C4CDD6] uppercase">
+    <div className="bg-[#F7F5F2] p-6 md:p-8">
+      <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[10px] tracking-[0.35em] text-[#3A5A78] uppercase">
         {children}
       </span>
     </div>
@@ -19,15 +19,15 @@ function SpecBadge({ children }: { children: React.ReactNode }) {
 
 function SafeSection({ metalName, items }: { metalName: string; items: string[] }) {
   return (
-    <div className="bg-[#0F0F0F] p-6 md:p-8">
-      <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-5">
+    <div className="bg-[#F7F5F2] p-6 md:p-8">
+      <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-5">
         ✓ Safe for {metalName}
       </p>
       <ul className="space-y-3">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-3">
             <span className="mt-2 w-1 h-1 rounded-full bg-[#85A0B5]/50 shrink-0" />
-            <span className="font-sans text-sm text-[#9A9A9A] leading-relaxed">{item}</span>
+            <span className="font-sans text-sm text-[#6B6B6B] leading-relaxed">{item}</span>
           </li>
         ))}
       </ul>
@@ -38,14 +38,14 @@ function SafeSection({ metalName, items }: { metalName: string; items: string[] 
 function AvoidSection({ metalName, items }: { metalName: string; items: string[] }) {
   return (
     <div className="bg-[#150505] p-6 md:p-8">
-      <p className="font-sans text-[9px] tracking-[0.35em] text-[#8B3232] uppercase mb-5">
+      <p className="font-sans text-[11px] tracking-[0.35em] text-[#8B3232] uppercase mb-5">
         ✗ Avoid with {metalName}
       </p>
       <ul className="space-y-3">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-3">
             <span className="mt-2 w-1 h-1 rounded-full bg-[#8B3232]/50 shrink-0" />
-            <span className="font-sans text-sm text-[#9A9A9A] leading-relaxed">{item}</span>
+            <span className="font-sans text-sm text-[#6B6B6B] leading-relaxed">{item}</span>
           </li>
         ))}
       </ul>
@@ -55,8 +55,8 @@ function AvoidSection({ metalName, items }: { metalName: string; items: string[]
 
 function NotesSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-[#0F0F0F] p-6 md:p-8">
-      <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-5">{title}</p>
+    <div className="bg-[#F7F5F2] p-6 md:p-8">
+      <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-5">{title}</p>
       {children}
     </div>
   );
@@ -64,18 +64,18 @@ function NotesSection({ title, children }: { title: string; children: React.Reac
 
 function Callout({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="border-l-2 border-[#85A0B5]/40 bg-[#111111] pl-4 py-3 pr-4">
-      <p className="font-sans text-[8px] tracking-[0.3em] text-[#85A0B5] uppercase mb-1.5">{label}</p>
-      <p className="font-serif text-sm text-[#5A5A5A] italic leading-relaxed">{children}</p>
+    <div className="border-l-2 border-[#85A0B5]/40 bg-[#FFFFFF] pl-4 py-3 pr-4">
+      <p className="font-sans text-[10px] tracking-[0.3em] text-[#3A5A78] uppercase mb-1.5">{label}</p>
+      <p className="font-serif text-sm text-[#9A9A9A] italic leading-relaxed">{children}</p>
     </div>
   );
 }
 
 function StoneCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-[#0F0F0F] p-6 md:p-8">
+    <div className="bg-[#F7F5F2] p-6 md:p-8">
       <div className="mb-5">
-        <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[8px] tracking-[0.35em] text-[#C4CDD6] uppercase">
+        <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[10px] tracking-[0.35em] text-[#3A5A78] uppercase">
           {title}
         </span>
       </div>
@@ -136,20 +136,20 @@ function AllPiecesContent() {
   ];
 
   return (
-    <div className="space-y-px bg-[#1A1A1A]">
+    <div className="space-y-px bg-[#E4E1DA]">
       {steps.map((step) => (
-        <div key={step.num} className="relative bg-[#0F0F0F] p-6 md:p-8 overflow-hidden">
-          <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#1A1A1A] leading-none select-none pointer-events-none">
+        <div key={step.num} className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
+          <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
             {step.num}
           </span>
           <div className="relative">
             <span className="text-2xl mb-4 block">{step.icon}</span>
-            <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+            <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
               {step.title}
             </p>
             <div className="space-y-3 max-w-2xl">
               {step.body.map((para, i) => (
-                <p key={i} className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
+                <p key={i} className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
                   {para}
                 </p>
               ))}
@@ -163,7 +163,7 @@ function AllPiecesContent() {
 
 function GoldContent() {
   return (
-    <div className="space-y-px bg-[#1A1A1A]">
+    <div className="space-y-px bg-[#E4E1DA]">
       <SpecBadge>18K Gold · 750 Hallmarked</SpecBadge>
       <SafeSection
         metalName="18k Gold"
@@ -188,12 +188,12 @@ function GoldContent() {
       />
       <NotesSection title="Gold-Specific Notes">
         <ul className="space-y-4 max-w-2xl">
-          <li className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
-            <strong className="text-white font-normal">Yellow &amp; Rose Gold:</strong>{" "}
+          <li className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
+            <strong className="text-[#3A3A3A] font-normal">Yellow &amp; Rose Gold:</strong>{" "}
             Does not tarnish. Light surface scratches develop into a desirable &ldquo;patina&rdquo; over time. Polish to restore original finish.
           </li>
-          <li className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
-            <strong className="text-white font-normal">White Gold:</strong>{" "}
+          <li className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
+            <strong className="text-[#3A3A3A] font-normal">White Gold:</strong>{" "}
             Naturally light yellow — rhodium-plated to appear white. Re-plating recommended every 1–2 years for regularly worn pieces, or when yellowing becomes visible.
           </li>
         </ul>
@@ -204,7 +204,7 @@ function GoldContent() {
 
 function SilverContent() {
   return (
-    <div className="space-y-px bg-[#1A1A1A]">
+    <div className="space-y-px bg-[#E4E1DA]">
       <SpecBadge>925 Sterling Silver · Rhodium Plated</SpecBadge>
       <SafeSection
         metalName="Sterling Silver"
@@ -228,7 +228,7 @@ function SilverContent() {
         ]}
       />
       <NotesSection title="About Tarnishing">
-        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-5 max-w-2xl">
+        <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-5 max-w-2xl">
           Our rhodium plating significantly delays tarnishing. If dulling occurs, a gentle polish with a specialist cloth will restore brilliance. For deeper tarnishing, contact us for a professional re-plate service — this fully restores the mirror finish and typically takes 5–7 business days.
         </p>
         <div className="max-w-2xl">
@@ -243,7 +243,7 @@ function SilverContent() {
 
 function PlatinumContent() {
   return (
-    <div className="space-y-px bg-[#1A1A1A]">
+    <div className="space-y-px bg-[#E4E1DA]">
       <SpecBadge>950 Platinum · Naturally White</SpecBadge>
       <SafeSection
         metalName="Platinum"
@@ -265,7 +265,7 @@ function PlatinumContent() {
         ]}
       />
       <NotesSection title="Understanding Platinum Patina">
-        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl">
+        <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-2xl">
           Platinum develops a natural surface bloom — a soft, satiny lustre that many connoisseurs love. Unlike other metals, platinum is not lost when scratched; the metal simply displaces. This patina can always be professionally polished back to a mirror finish by our team on request — free of charge in your first year of ownership.
         </p>
       </NotesSection>
@@ -275,19 +275,19 @@ function PlatinumContent() {
 
 function StonesContent() {
   return (
-    <div className="space-y-px bg-[#1A1A1A]">
+    <div className="space-y-px bg-[#E4E1DA]">
       <StoneCard title="Cultivated Diamond">
-        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl">
+        <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-2xl">
           Diamond is the hardest substance on earth (10 Mohs). It is highly resistant to scratching but can chip under sharp impact — particularly on pointed or thin girdle cuts. Clean with warm soapy water and a soft brush. Safe for ultrasonic and steam cleaning in secure settings. Store separately — diamonds will scratch every other stone and most metals.
         </p>
       </StoneCard>
       <StoneCard title="Crystal Moissanite">
-        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl">
+        <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-2xl">
           Crystal moissanite rates 9.25 Mohs — extraordinarily durable. Clean with warm soapy water and a soft brush. Safe for ultrasonic cleaning in secure settings. Moissanite is highly resistant to heat and chemical exposure compared to most gems. Store individually to prevent it from scratching softer stones. Its brilliance does not diminish with age.
         </p>
       </StoneCard>
       <StoneCard title="General Stone Care">
-        <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl mb-5">
+        <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-2xl mb-5">
           Regardless of stone, always remove jewellery before impact activities, heavy exercise, and swimming. Even the hardest stones can chip on a sharp edge. Inspect settings regularly — a loose stone is far easier to fix than a lost one. All Élan stone-set pieces qualify for our complimentary annual setting inspection.
         </p>
         <div className="max-w-2xl">
@@ -313,10 +313,10 @@ export function CareGuide() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2.5 font-sans text-[10px] tracking-[0.2em] uppercase border transition-all duration-200 ${
+            className={`px-4 py-2.5 font-sans text-[12px] tracking-[0.2em] uppercase border transition-all duration-200 ${
               activeTab === tab
                 ? "bg-[#85A0B5] text-black border-[#85A0B5]"
-                : "border-[#2A2A2A] text-[#5A5A5A] hover:border-[#85A0B5] hover:text-[#85A0B5]"
+                : "border-[#E4E1DA] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-[#3A5A78]"
             }`}
           >
             {tab}

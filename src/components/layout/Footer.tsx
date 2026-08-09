@@ -37,7 +37,7 @@ export function Footer() {
 
           {/* Collections */}
           <div>
-            <h4 className="font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
+            <h4 className="font-sans text-[11px] tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
               Collections
             </h4>
             <ul className="space-y-3">
@@ -59,7 +59,7 @@ export function Footer() {
 
           {/* Help */}
           <div>
-            <h4 className="font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
+            <h4 className="font-sans text-[11px] tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
               Help
             </h4>
             <ul className="space-y-3">
@@ -82,7 +82,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
+            <h4 className="font-sans text-[11px] tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
               Contact
             </h4>
             <ul className="space-y-3">
@@ -97,10 +97,10 @@ export function Footer() {
               </li>
             </ul>
             <div className="mt-6">
-              <p className="font-sans text-[9px] tracking-[0.2em] text-[#5A5A5A] uppercase mb-2">
+              <p className="font-sans text-[11px] tracking-[0.2em] text-[#5A5A5A] uppercase mb-2">
                 Certificate of Authenticity
               </p>
-              <p className="font-sans text-[9px] text-[#3A3A3A] leading-relaxed">
+              <p className="font-sans text-[11px] text-[#3A3A3A] leading-relaxed">
                 Every Élan piece ships with a certificate verifying metal purity and stone specifications.
               </p>
             </div>
@@ -111,7 +111,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-[#141414] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-sans text-[10px] text-[#3A3A3A] tracking-wider">
+          <p className="font-sans text-[12px] text-[#3A3A3A] tracking-wider">
             © {new Date().getFullYear()} Élan Jewellery. All rights reserved.
           </p>
           <div className="flex gap-6">
@@ -120,7 +120,7 @@ export function Footer() {
               { href: "/terms", label: "Terms" },
               { href: "/cookies", label: "Cookies" },
             ].map((l) => (
-              <Link key={l.href} href={l.href} className="font-sans text-[10px] text-[#3A3A3A] hover:text-[#5A5A5A] tracking-wider transition-colors">
+              <Link key={l.href} href={l.href} className="font-sans text-[12px] text-[#3A3A3A] hover:text-[#5A5A5A] tracking-wider transition-colors">
                 {l.label}
               </Link>
             ))}

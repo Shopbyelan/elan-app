@@ -14,11 +14,20 @@ interface MobileNavProps {
 
 const navLinks = [
   { href: "/shop", label: "All Collections" },
+  { href: "/shop?collection=new-arrivals", label: "New Arrivals" },
+  { href: "/shop?collection=best-sellers", label: "Best Sellers" },
+  { href: "/shop?type=necklace", label: "Necklaces" },
+  { href: "/shop?type=earrings", label: "Earrings" },
+  { href: "/shop?type=ring", label: "Rings" },
+  { href: "/shop?type=bracelet", label: "Bracelets" },
+  { href: "/shop?category=crystal-moissanite", label: "Moissanite" },
+  { href: "/shop?collection=gifts-under-200k", label: "Gifts Under ₦200,000" },
+  { href: "/shop?collection=bridal", label: "Bridal" },
+  { href: "/shop?collection=limited-edition", label: "Limited Edition" },
   { href: "/shop?category=18k-gold", label: "18k Gold" },
   { href: "/shop?category=sterling-silver", label: "Sterling Silver" },
   { href: "/shop?category=cultivated-diamond", label: "Cultivated Diamond" },
   { href: "/shop?category=platinum", label: "Platinum" },
-  { href: "/shop?category=crystal-moissanite", label: "Crystal Moissanite" },
   { href: "/materials", label: "Our Materials" },
 ];
 
@@ -59,7 +68,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto">
           <nav className="py-6">
-            <p className="px-6 mb-4 font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase">
+            <p className="px-6 mb-4 font-sans text-[11px] tracking-[0.3em] text-[#85A0B5] uppercase">
               Collections
             </p>
             {navLinks.map((link) => (
@@ -75,7 +84,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
           </nav>
 
           <div className="border-t border-[#1A1A1A] py-6">
-            <p className="px-6 mb-4 font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase">
+            <p className="px-6 mb-4 font-sans text-[11px] tracking-[0.3em] text-[#85A0B5] uppercase">
               Account
             </p>
             {session ? (
@@ -111,13 +120,13 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
         {/* Sticky footer — currency + shop now */}
         <div className="shrink-0 border-t border-[#1A1A1A] px-6 py-5 space-y-3">
-          <p className="font-sans text-[9px] tracking-[0.3em] text-[#85A0B5] uppercase mb-3">
+          <p className="font-sans text-[11px] tracking-[0.3em] text-[#85A0B5] uppercase mb-3">
             Currency
           </p>
           <div className="flex items-center border border-[#2A2A2A] overflow-hidden">
             <button
               onClick={() => setCurrency("NGN")}
-              className={`flex-1 py-2.5 font-sans text-[10px] tracking-[0.2em] uppercase transition-colors ${
+              className={`flex-1 py-2.5 font-sans text-[12px] tracking-[0.2em] uppercase transition-colors ${
                 currency === "NGN"
                   ? "bg-[#1A2A3A] text-[#85A0B5]"
                   : "text-[#3A3A3A] hover:text-[#5A5A5A]"
@@ -128,7 +137,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
             <div className="w-px h-5 bg-[#2A2A2A]" />
             <button
               onClick={() => setCurrency("USD")}
-              className={`flex-1 py-2.5 font-sans text-[10px] tracking-[0.2em] uppercase transition-colors ${
+              className={`flex-1 py-2.5 font-sans text-[12px] tracking-[0.2em] uppercase transition-colors ${
                 currency === "USD"
                   ? "bg-[#1A2A3A] text-[#85A0B5]"
                   : "text-[#3A3A3A] hover:text-[#5A5A5A]"

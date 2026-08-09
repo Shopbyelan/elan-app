@@ -36,6 +36,9 @@ export async function createProduct(formData: FormData) {
   const material = formData.get("material") as string;
   const isFeatured = formData.get("isFeatured") === "on";
   const badge = formData.get("badge") as string;
+  const productType = formData.get("productType") as string;
+  const isBridal = formData.get("isBridal") === "on";
+  const isLimitedEdition = formData.get("isLimitedEdition") === "on";
 
   let slug = slugify(name);
   const existing = await prisma.product.findUnique({ where: { slug } });
@@ -50,6 +53,7 @@ export async function createProduct(formData: FormData) {
       name, slug, categoryId, price, comparePrice, description,
       shortDesc, stock, sku: sku || null, material: material || null,
       isFeatured, badge: badge || null,
+      productType: productType || null, isBridal, isLimitedEdition,
       images: {
         create: imageUrls.map((url, i) => ({
           url,
@@ -79,6 +83,9 @@ export async function updateProduct(formData: FormData) {
   const material = formData.get("material") as string;
   const isFeatured = formData.get("isFeatured") === "on";
   const badge = formData.get("badge") as string;
+  const productType = formData.get("productType") as string;
+  const isBridal = formData.get("isBridal") === "on";
+  const isLimitedEdition = formData.get("isLimitedEdition") === "on";
 
   const imageUrls = formData.getAll("imageUrls") as string[];
   const imagePublicIds = formData.getAll("imagePublicIds") as string[];
@@ -90,6 +97,7 @@ export async function updateProduct(formData: FormData) {
       name, categoryId, price, comparePrice, description,
       shortDesc, stock, material: material || null,
       isFeatured, badge: badge || null,
+      productType: productType || null, isBridal, isLimitedEdition,
       ...(imageUrls.length > 0 && {
         images: {
           create: imageUrls.map((url, i) => ({

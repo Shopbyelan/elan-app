@@ -67,7 +67,7 @@ export function WaitlistButton({ productId, productName }: WaitlistButtonProps) 
   // Initial skeleton while we resolve auth + waitlist status
   if (state === "loading") {
     return (
-      <div className="flex-1 h-13 bg-[#111] border border-[#1A1A1A] animate-pulse" />
+      <div className="flex-1 h-13 bg-[#FFFFFF] border border-[#E4E1DA] animate-pulse" />
     );
   }
 
@@ -76,12 +76,12 @@ export function WaitlistButton({ productId, productName }: WaitlistButtonProps) 
     return (
       <div className="flex-1 space-y-2">
         <div className="flex items-center gap-3 h-13 px-5 border border-[#85A0B5]/40 bg-[#85A0B5]/5">
-          <Check className="h-4 w-4 text-[#85A0B5] flex-shrink-0" />
+          <Check className="h-4 w-4 text-[#3A5A78] flex-shrink-0" />
           <div>
-            <p className="font-sans text-xs tracking-[0.12em] text-[#85A0B5]">
+            <p className="font-sans text-xs tracking-[0.12em] text-[#3A5A78]">
               On the waiting list
             </p>
-            <p className="font-sans text-[10px] text-[#5A5A5A]">
+            <p className="font-sans text-[12px] text-[#9A9A9A]">
               We&apos;ll email you when it&apos;s back in stock
             </p>
           </div>
@@ -89,7 +89,7 @@ export function WaitlistButton({ productId, productName }: WaitlistButtonProps) 
         <button
           onClick={leave}
           disabled={busy}
-          className="flex items-center gap-1.5 font-sans text-[10px] tracking-[0.15em] text-[#5A5A5A] uppercase hover:text-[#9A9A9A] transition-colors disabled:opacity-40"
+          className="flex items-center gap-1.5 font-sans text-[12px] tracking-[0.15em] text-[#9A9A9A] uppercase hover:text-[#6B6B6B] transition-colors disabled:opacity-40"
         >
           {busy ? <Loader2 className="h-3 w-3 animate-spin" /> : <BellOff className="h-3 w-3" />}
           Leave waiting list
@@ -102,7 +102,7 @@ export function WaitlistButton({ productId, productName }: WaitlistButtonProps) 
   if (!session && showEmailForm) {
     return (
       <div className="flex-1 space-y-3">
-        <p className="font-sans text-xs text-[#9A9A9A] leading-relaxed">
+        <p className="font-sans text-xs text-[#6B6B6B] leading-relaxed">
           Enter your email and we&apos;ll notify you the moment this piece is back in stock.
         </p>
         <div className="flex gap-2">
@@ -128,7 +128,7 @@ export function WaitlistButton({ productId, productName }: WaitlistButtonProps) 
         </div>
         <button
           onClick={() => setShowEmailForm(false)}
-          className="font-sans text-[10px] tracking-[0.15em] text-[#5A5A5A] uppercase hover:text-[#9A9A9A] transition-colors"
+          className="font-sans text-[12px] tracking-[0.15em] text-[#9A9A9A] uppercase hover:text-[#6B6B6B] transition-colors"
         >
           Cancel
         </button>

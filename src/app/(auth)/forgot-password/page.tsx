@@ -42,14 +42,14 @@ export default function ForgotPasswordPage() {
         />
         <div className="relative z-10">
           <Image src="/Elanlogoblue.png" alt="Élan Fine Jewellery" width={200} height={80} className="h-16 w-auto mb-6" />
-          <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
+          <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-xs">
             We&apos;ll send you a secure link to reset your password.
           </p>
         </div>
       </div>
 
       {/* Right panel */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#0A0A0A]">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#FFFFFF]">
         <div className="w-full max-w-sm">
           <Link href="/" className="block mb-10 lg:hidden">
             <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={120} height={40} className="h-8 w-auto" />
@@ -57,22 +57,22 @@ export default function ForgotPasswordPage() {
 
           {sent ? (
             <div className="text-center">
-              <CheckCircle className="h-12 w-12 text-[#85A0B5] mx-auto mb-6" />
-              <h1 className="font-serif text-3xl text-white mb-3">Check your inbox</h1>
-              <p className="font-sans text-sm text-[#9A9A9A] mb-8 leading-relaxed">
-                If an account exists for <span className="text-white">{email}</span>, you&apos;ll receive a reset link shortly.
+              <CheckCircle className="h-12 w-12 text-[#3A5A78] mx-auto mb-6" />
+              <h1 className="font-serif text-3xl text-[#0A0A0A] mb-3">Check your inbox</h1>
+              <p className="font-sans text-sm text-[#6B6B6B] mb-8 leading-relaxed">
+                If an account exists for <span className="text-[#3A3A3A]">{email}</span>, you&apos;ll receive a reset link shortly.
               </p>
               <Link
                 href="/login"
-                className="font-sans text-sm text-[#85A0B5] hover:text-[#9DB5C8] transition-colors"
+                className="font-sans text-sm text-[#3A5A78] hover:text-[#9DB5C8] transition-colors"
               >
                 ← Back to Sign In
               </Link>
             </div>
           ) : (
             <>
-              <h1 className="font-serif text-3xl text-white mb-2">Reset password</h1>
-              <p className="font-sans text-sm text-[#9A9A9A] mb-8 leading-relaxed">
+              <h1 className="font-serif text-3xl text-[#0A0A0A] mb-2">Reset password</h1>
+              <p className="font-sans text-sm text-[#6B6B6B] mb-8 leading-relaxed">
                 Enter your email address and we&apos;ll send you a link to reset your password.
               </p>
 
@@ -90,9 +90,9 @@ export default function ForgotPasswordPage() {
                 </Button>
               </form>
 
-              <p className="mt-6 text-center font-sans text-sm text-[#5A5A5A]">
+              <p className="mt-6 text-center font-sans text-sm text-[#9A9A9A]">
                 Remember your password?{" "}
-                <Link href="/login" className="text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">
+                <Link href="/login" className="text-[#3A5A78] hover:text-[#9DB5C8] transition-colors">
                   Sign in
                 </Link>
               </p>

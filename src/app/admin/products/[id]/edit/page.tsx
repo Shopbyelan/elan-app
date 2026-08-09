@@ -28,14 +28,14 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
 
   if (!product) notFound();
 
-  const remainingSlots = 3 - product.images.length;
+  const remainingSlots = 4 - product.images.length;
 
   return (
     <div className="max-w-2xl">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-serif text-3xl text-white">Edit Product</h1>
-          <p className="font-sans text-sm text-[#5A5A5A] mt-1">{product.name}</p>
+          <h1 className="font-serif text-3xl text-[#0A0A0A]">Edit Product</h1>
+          <p className="font-sans text-sm text-[#6B6B6B] mt-1">{product.name}</p>
         </div>
         <Button variant="ghost" asChild>
           <Link href="/admin/products">← Back</Link>
@@ -43,8 +43,8 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
       </div>
 
       {/* Photos */}
-      <div className="bg-[#111] border border-[#1A1A1A] p-6 space-y-4 mb-6">
-        <h2 className="font-serif text-lg text-white">Photos</h2>
+      <div className="bg-white border border-[#E4E1DA] p-6 space-y-4 mb-6">
+        <h2 className="font-serif text-lg text-[#0A0A0A]">Photos</h2>
 
         {/* Existing images */}
         {product.images.length > 0 && (
@@ -54,7 +54,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
                 <Image src={img.url} alt={img.alt || product.name} fill className="object-cover" />
 
                 {img.isPrimary && (
-                  <span className="absolute bottom-0 left-0 right-0 bg-[#85A0B5]/90 text-black font-sans text-[8px] tracking-wider uppercase text-center py-0.5">
+                  <span className="absolute bottom-0 left-0 right-0 bg-[#85A0B5]/90 text-black font-sans text-[10px] tracking-wider uppercase text-center py-0.5">
                     Primary
                   </span>
                 )}
@@ -79,15 +79,15 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
         {remainingSlots > 0 && (
           <form action={updateProduct}>
             <input type="hidden" name="id" value={product.id} />
-            <ImageUploader maxImages={3} existingCount={product.images.length} />
-            <button type="submit" className="mt-3 font-sans text-[10px] tracking-[0.2em] text-[#85A0B5] uppercase hover:underline">
+            <ImageUploader maxImages={4} existingCount={product.images.length} />
+            <button type="submit" className="mt-3 font-sans text-[12px] tracking-[0.2em] text-[#3A5A78] uppercase hover:underline">
               Save new photos →
             </button>
           </form>
         )}
 
         {remainingSlots === 0 && (
-          <p className="font-sans text-[10px] text-[#3A3A3A]">3 / 3 photos · Delete one to add another</p>
+          <p className="font-sans text-[12px] text-[#9A9A9A]">4 / 4 photos · Delete one to add another</p>
         )}
       </div>
 
@@ -95,68 +95,90 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
       <form action={updateProduct} className="space-y-6">
         <input type="hidden" name="id" value={product.id} />
 
-        <div className="bg-[#111] border border-[#1A1A1A] p-6 space-y-5">
-          <h2 className="font-serif text-lg text-white">Product Details</h2>
+        <div className="bg-white border border-[#E4E1DA] p-6 space-y-5">
+          <h2 className="font-serif text-lg text-[#0A0A0A]">Product Details</h2>
 
           <div>
-            <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Product Name *</label>
-            <input name="name" required defaultValue={product.name} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
+            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Product Name *</label>
+            <input name="name" required defaultValue={product.name} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Category *</label>
-              <select name="categoryId" required defaultValue={product.categoryId} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors appearance-none">
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Category *</label>
+              <select name="categoryId" required defaultValue={product.categoryId} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors appearance-none">
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">SKU</label>
-              <input name="sku" defaultValue={product.sku || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">SKU</label>
+              <input name="sku" defaultValue={product.sku || ""} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
             </div>
           </div>
 
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Price (₦) *</label>
-              <input name="price" type="number" step="0.01" required defaultValue={product.price} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Price (₦) *</label>
+              <input name="price" type="number" step="0.01" required defaultValue={product.price} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
             </div>
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Compare Price</label>
-              <input name="comparePrice" type="number" step="0.01" defaultValue={product.comparePrice || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Compare Price</label>
+              <input name="comparePrice" type="number" step="0.01" defaultValue={product.comparePrice || ""} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
             </div>
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Stock *</label>
-              <input name="stock" type="number" required defaultValue={product.stock} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Stock *</label>
+              <input name="stock" type="number" required defaultValue={product.stock} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
             </div>
           </div>
 
           <div>
-            <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Short Description</label>
-            <input name="shortDesc" defaultValue={product.shortDesc || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
+            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Short Description</label>
+            <input name="shortDesc" defaultValue={product.shortDesc || ""} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
           </div>
 
           <div>
-            <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Description *</label>
-            <textarea name="description" required rows={5} defaultValue={product.description} className="w-full px-4 py-3 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors resize-none" />
+            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Description *</label>
+            <textarea name="description" required rows={5} defaultValue={product.description} className="w-full px-4 py-3 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors resize-none" />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Material</label>
-              <input name="material" defaultValue={product.material || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Material</label>
+              <input name="material" defaultValue={product.material || ""} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
             </div>
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">Badge</label>
-              <input name="badge" defaultValue={product.badge || ""} className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors" />
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Badge</label>
+              <input name="badge" defaultValue={product.badge || ""} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <input type="checkbox" id="isFeatured" name="isFeatured" defaultChecked={product.isFeatured} className="h-4 w-4 accent-[#85A0B5]" />
-            <label htmlFor="isFeatured" className="font-sans text-xs text-[#9A9A9A]">Feature on homepage</label>
+          <div>
+            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Piece Type</label>
+            <select name="productType" defaultValue={product.productType || ""} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors appearance-none">
+              <option value="">— None —</option>
+              <option value="necklace">Necklace</option>
+              <option value="earrings">Earrings</option>
+              <option value="ring">Ring</option>
+              <option value="bracelet">Bracelet</option>
+            </select>
+            <p className="font-sans text-[12px] text-[#9A9A9A] mt-1.5">Used for the Necklaces / Earrings / Rings / Bracelets collections</p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-6">
+            <div className="flex items-center gap-3">
+              <input type="checkbox" id="isFeatured" name="isFeatured" defaultChecked={product.isFeatured} className="h-4 w-4 accent-[#3A5A78]" />
+              <label htmlFor="isFeatured" className="font-sans text-xs text-[#6B6B6B]">Feature on homepage</label>
+            </div>
+            <div className="flex items-center gap-3">
+              <input type="checkbox" id="isBridal" name="isBridal" defaultChecked={product.isBridal} className="h-4 w-4 accent-[#3A5A78]" />
+              <label htmlFor="isBridal" className="font-sans text-xs text-[#6B6B6B]">Bridal collection</label>
+            </div>
+            <div className="flex items-center gap-3">
+              <input type="checkbox" id="isLimitedEdition" name="isLimitedEdition" defaultChecked={product.isLimitedEdition} className="h-4 w-4 accent-[#3A5A78]" />
+              <label htmlFor="isLimitedEdition" className="font-sans text-xs text-[#6B6B6B]">Limited edition</label>
+            </div>
           </div>
         </div>
 

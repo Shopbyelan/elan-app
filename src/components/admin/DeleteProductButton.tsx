@@ -24,7 +24,7 @@ export function DeleteProductButton({ id, name, hasOrders }: { id: string; name:
         type="button"
         onClick={handleClick}
         title={hasOrders ? "Hide product (has orders)" : "Delete product"}
-        className="text-[#5A5A5A] hover:text-red-400 transition-colors"
+        className="text-[#9A9A9A] hover:text-red-400 transition-colors"
       >
         <Trash2 className="h-4 w-4" />
       </button>

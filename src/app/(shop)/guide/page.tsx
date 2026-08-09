@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-sans text-[9px] tracking-[0.45em] text-[#85A0B5] uppercase mb-4">
+    <p className="font-sans text-[11px] tracking-[0.45em] text-[#3A5A78] uppercase mb-4">
       {children}
     </p>
   );
@@ -21,7 +21,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-serif text-3xl md:text-5xl text-white leading-tight">
+    <h2 className="font-serif text-3xl md:text-5xl text-[#0A0A0A] leading-tight">
       {children}
     </h2>
   );
@@ -35,11 +35,11 @@ function Callout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-l-2 border-[#85A0B5]/40 bg-[#111111] pl-4 py-3 pr-4">
-      <p className="font-sans text-[8px] tracking-[0.3em] text-[#85A0B5] uppercase mb-1.5">
+    <div className="border-l-2 border-[#85A0B5]/40 bg-[#FFFFFF] pl-4 py-3 pr-4">
+      <p className="font-sans text-[10px] tracking-[0.3em] text-[#3A5A78] uppercase mb-1.5">
         {label}
       </p>
-      <p className="font-serif text-sm text-[#5A5A5A] italic leading-relaxed">
+      <p className="font-serif text-sm text-[#9A9A9A] italic leading-relaxed">
         {children}
       </p>
     </div>
@@ -48,13 +48,13 @@ function Callout({
 
 function DocumentsBox({ items }: { items: string[] }) {
   return (
-    <div className="border-l-2 border-[#85A0B5]/40 bg-[#111111] pl-4 py-3 pr-4">
-      <p className="font-sans text-[8px] tracking-[0.3em] text-[#85A0B5] uppercase mb-3">
+    <div className="border-l-2 border-[#85A0B5]/40 bg-[#FFFFFF] pl-4 py-3 pr-4">
+      <p className="font-sans text-[10px] tracking-[0.3em] text-[#3A5A78] uppercase mb-3">
         Documents Enclosed
       </p>
       <ul className="space-y-1.5">
         {items.map((item) => (
-          <li key={item} className="flex items-start gap-2 font-sans text-xs text-[#9A9A9A]">
+          <li key={item} className="flex items-start gap-2 font-sans text-xs text-[#6B6B6B]">
             <span className="mt-1.5 w-1 h-1 rounded-full bg-[#85A0B5]/50 flex-shrink-0" />
             {item}
           </li>
@@ -65,14 +65,14 @@ function DocumentsBox({ items }: { items: string[] }) {
 }
 
 function Divider() {
-  return <div className="h-px bg-[#141414] my-0" />;
+  return <div className="h-px bg-[#F7F5F2] my-0" />;
 }
 
 /* ─── PAGE ─── */
 
 export default function GuidePage() {
   return (
-    <div className="bg-[#0A0A0A]">
+    <div className="bg-[#FFFFFF]">
 
       {/* ══ 1. AUTHENTICATION & CERTIFICATION ══════════════════════════ */}
       <section id="authentication" className="py-20 md:py-32 px-4 sm:px-6">
@@ -81,33 +81,33 @@ export default function GuidePage() {
             <SectionLabel>What Comes With Your Purchase</SectionLabel>
             <SectionTitle>
               Authentication &amp;{" "}
-              <em className="not-italic text-[#85A0B5]">Certification</em>
+              <em className="not-italic text-[#3A5A78]">Certification</em>
             </SectionTitle>
-            <p className="font-serif text-base md:text-lg text-[#5A5A5A] italic leading-relaxed max-w-2xl mx-auto mt-6">
+            <p className="font-serif text-base md:text-lg text-[#9A9A9A] italic leading-relaxed max-w-2xl mx-auto mt-6">
               Every Élan piece is authenticated. What that authentication looks like depends
               on the material — because different materials warrant different documentation.
             </p>
           </div>
 
-          <div className="space-y-px bg-[#1A1A1A]">
+          <div className="space-y-px bg-[#E4E1DA]">
 
             {/* Card: GIA / IGI Certificate */}
-            <div className="bg-[#0F0F0F] overflow-hidden">
+            <div className="bg-[#F7F5F2] overflow-hidden">
               <div className="gradient-platinum flex flex-col items-center justify-center py-12 gap-3">
                 <span className="text-5xl">📜</span>
-                <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[8px] tracking-[0.35em] text-[#C4CDD6] uppercase">
+                <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[10px] tracking-[0.35em] text-[#C4CDD6] uppercase">
                   GIA / IGI Certificate
                 </span>
               </div>
               <div className="p-6 md:p-8">
-                <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+                <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
                   Cultivated Diamond
                 </p>
-                <h3 className="font-serif text-xl md:text-2xl text-white mb-5 leading-snug">
+                <h3 className="font-serif text-xl md:text-2xl text-[#0A0A0A] mb-5 leading-snug">
                   Included for stones{" "}
-                  <em className="not-italic text-[#85A0B5]">1 carat and above</em>
+                  <em className="not-italic text-[#3A5A78]">1 carat and above</em>
                 </h3>
-                <div className="space-y-4 text-sm font-sans text-[#9A9A9A] leading-relaxed mb-6 max-w-2xl">
+                <div className="space-y-4 text-sm font-sans text-[#6B6B6B] leading-relaxed mb-6 max-w-2xl">
                   <p>
                     Every cultivated diamond of 1 carat or above is accompanied by its original GIA
                     (Gemological Institute of America) or IGI (International Gemological Institute)
@@ -134,22 +134,22 @@ export default function GuidePage() {
             </div>
 
             {/* Card: Élan Stone Specification Card */}
-            <div className="bg-[#0F0F0F] overflow-hidden">
+            <div className="bg-[#F7F5F2] overflow-hidden">
               <div className="gradient-moiss flex flex-col items-center justify-center py-12 gap-3">
                 <span className="text-5xl">📋</span>
-                <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[8px] tracking-[0.35em] text-[#C4CDD6] uppercase">
+                <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[10px] tracking-[0.35em] text-[#C4CDD6] uppercase">
                   Élan Stone Specification Card
                 </span>
               </div>
               <div className="p-6 md:p-8">
-                <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+                <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
                   Crystal Moissanite
                 </p>
-                <h3 className="font-serif text-xl md:text-2xl text-white mb-5 leading-snug">
+                <h3 className="font-serif text-xl md:text-2xl text-[#0A0A0A] mb-5 leading-snug">
                   Included with{" "}
-                  <em className="not-italic text-[#85A0B5]">all moissanite purchases</em>
+                  <em className="not-italic text-[#3A5A78]">all moissanite purchases</em>
                 </h3>
-                <div className="space-y-4 text-sm font-sans text-[#9A9A9A] leading-relaxed mb-6 max-w-2xl">
+                <div className="space-y-4 text-sm font-sans text-[#6B6B6B] leading-relaxed mb-6 max-w-2xl">
                   <p>
                     Every crystal moissanite piece includes our Élan Stone Specification Card —
                     a detailed document stating the stone dimensions, millimetre size,
@@ -174,27 +174,27 @@ export default function GuidePage() {
             </div>
 
             {/* Card: Hallmark Engraving */}
-            <div className="bg-[#0F0F0F] overflow-hidden">
+            <div className="bg-[#F7F5F2] overflow-hidden">
               <div className="gradient-gold flex flex-col items-center justify-center py-12 gap-3">
                 <span className="text-5xl">🔑</span>
-                <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[8px] tracking-[0.35em] text-[#C4CDD6] uppercase">
+                <span className="border border-[#85A0B5]/40 px-4 py-1.5 font-sans text-[10px] tracking-[0.35em] text-[#C4CDD6] uppercase">
                   Hallmark Engraving
                 </span>
               </div>
               <div className="p-6 md:p-8">
-                <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+                <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
                   18k Gold &amp; Sterling Silver 925
                 </p>
-                <h3 className="font-serif text-xl md:text-2xl text-white mb-5 leading-snug">
+                <h3 className="font-serif text-xl md:text-2xl text-[#0A0A0A] mb-5 leading-snug">
                   Authentication is{" "}
-                  <em className="not-italic text-[#85A0B5]">engraved directly onto the piece</em>
+                  <em className="not-italic text-[#3A5A78]">engraved directly onto the piece</em>
                 </h3>
-                <div className="space-y-4 text-sm font-sans text-[#9A9A9A] leading-relaxed mb-6 max-w-2xl">
+                <div className="space-y-4 text-sm font-sans text-[#6B6B6B] leading-relaxed mb-6 max-w-2xl">
                   <p>
                     For all 18k gold and 925 sterling silver pieces, authentication is permanent and
                     built into the jewellery itself. Every piece is hallmarked with the internationally
-                    recognised purity stamp — <strong className="text-white font-normal">750</strong> for
-                    18k gold and <strong className="text-white font-normal">925</strong> for sterling
+                    recognised purity stamp — <strong className="text-[#3A3A3A] font-normal">750</strong> for
+                    18k gold and <strong className="text-[#3A3A3A] font-normal">925</strong> for sterling
                     silver — engraved directly onto the metal by an independent assay process.
                   </p>
                   <p>
@@ -227,22 +227,22 @@ export default function GuidePage() {
       <Divider />
 
       {/* ══ 2. RING SIZING GUIDE ════════════════════════════════════════ */}
-      <section id="sizing" className="py-20 md:py-32 px-4 sm:px-6 bg-[#0D0D0D]">
+      <section id="sizing" className="py-20 md:py-32 px-4 sm:px-6 bg-[#F7F5F2]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <SectionLabel>Get the Perfect Fit</SectionLabel>
             <SectionTitle>
               Ring Sizing{" "}
-              <em className="not-italic text-[#85A0B5]">Guide</em>
+              <em className="not-italic text-[#3A5A78]">Guide</em>
             </SectionTitle>
-            <p className="font-serif text-base md:text-lg text-[#5A5A5A] italic leading-relaxed max-w-xl mx-auto mt-6">
+            <p className="font-serif text-base md:text-lg text-[#9A9A9A] italic leading-relaxed max-w-xl mx-auto mt-6">
               A ring that fits perfectly is a ring you will never take off. Use our guide
               to find your size before ordering — or contact us and we will advise.
             </p>
           </div>
 
           {/* Steps */}
-          <div className="space-y-px bg-[#1A1A1A] mb-14">
+          <div className="space-y-px bg-[#E4E1DA] mb-14">
             {[
               {
                 icon: "📐",
@@ -280,18 +280,18 @@ export default function GuidePage() {
                 },
               },
             ].map((step) => (
-              <div key={step.num} className="relative bg-[#0F0F0F] p-6 md:p-8 overflow-hidden">
-                <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#1A1A1A] leading-none select-none pointer-events-none">
+              <div key={step.num} className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
+                <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
                   {step.num}
                 </span>
                 <div className="relative">
                   <span className="text-2xl mb-4 block">{step.icon}</span>
-                  <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+                  <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
                     {step.title}
                   </p>
                   <div className="space-y-3 max-w-2xl">
                     {step.body.map((para, i) => (
-                      <p key={i} className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
+                      <p key={i} className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
                         {para}
                       </p>
                     ))}
@@ -308,7 +308,7 @@ export default function GuidePage() {
 
           {/* Size chart */}
           <div>
-            <p className="font-sans text-[9px] tracking-[0.45em] text-[#85A0B5] uppercase text-center mb-6">
+            <p className="font-sans text-[11px] tracking-[0.45em] text-[#3A5A78] uppercase text-center mb-6">
               International Size Chart
             </p>
             <div className="overflow-x-auto">
@@ -318,7 +318,7 @@ export default function GuidePage() {
                     {["Diameter (mm)", "UK Size", "US Size"].map((h) => (
                       <th
                         key={h}
-                        className="px-4 py-3 font-sans text-[9px] tracking-[0.2em] text-black uppercase text-left"
+                        className="px-4 py-3 font-sans text-[11px] tracking-[0.2em] text-black uppercase text-left"
                       >
                         {h}
                       </th>
@@ -345,17 +345,17 @@ export default function GuidePage() {
                   ].map(([mm, uk, us], i) => (
                     <tr
                       key={mm}
-                      className={`border-b border-[#1A1A1A] ${i % 2 === 0 ? "bg-[#0A0A0A]" : "bg-[#0D0D0D]"}`}
+                      className={`border-b border-[#E4E1DA] ${i % 2 === 0 ? "bg-[#FFFFFF]" : "bg-[#F7F5F2]"}`}
                     >
-                      <td className="px-4 py-3 font-sans text-sm text-[#9A9A9A]">{mm}</td>
-                      <td className="px-4 py-3 font-serif text-sm text-white">{uk}</td>
-                      <td className="px-4 py-3 font-sans text-sm text-[#9A9A9A]">{us}</td>
+                      <td className="px-4 py-3 font-sans text-sm text-[#6B6B6B]">{mm}</td>
+                      <td className="px-4 py-3 font-serif text-sm text-[#3A3A3A]">{uk}</td>
+                      <td className="px-4 py-3 font-sans text-sm text-[#6B6B6B]">{us}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="font-serif text-xs text-[#3A3A3A] italic text-center mt-4 leading-relaxed">
+            <p className="font-serif text-xs text-[#9A9A9A] italic text-center mt-4 leading-relaxed">
               Sizes K½ – N½ represent the most common ring sizes for women. Sizes R – V represent
               the most common sizes for men. If your measurement falls between sizes, always size up.
               Complimentary resizing available within 30 days.
@@ -373,9 +373,9 @@ export default function GuidePage() {
             <SectionLabel>Your Piece Deserves It</SectionLabel>
             <SectionTitle>
               Complete Jewellery{" "}
-              <em className="not-italic text-[#85A0B5]">Care Guide</em>
+              <em className="not-italic text-[#3A5A78]">Care Guide</em>
             </SectionTitle>
-            <p className="font-serif text-base md:text-lg text-[#5A5A5A] italic leading-relaxed max-w-2xl mx-auto mt-6">
+            <p className="font-serif text-base md:text-lg text-[#9A9A9A] italic leading-relaxed max-w-2xl mx-auto mt-6">
               Fine jewellery cared for properly does not age — it deepens. Every Élan piece
               is built to last generations. These practices ensure it does.
             </p>
@@ -387,35 +387,35 @@ export default function GuidePage() {
       <Divider />
 
       {/* ══ 4. RETURN & EXCHANGE POLICY ════════════════════════════════ */}
-      <section id="returns" className="py-20 md:py-32 px-4 sm:px-6 bg-[#0D0D0D]">
+      <section id="returns" className="py-20 md:py-32 px-4 sm:px-6 bg-[#F7F5F2]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <SectionLabel>Shop With Confidence</SectionLabel>
             <SectionTitle>
               Return &amp; Exchange{" "}
-              <em className="not-italic text-[#85A0B5]">Policy</em>
+              <em className="not-italic text-[#3A5A78]">Policy</em>
             </SectionTitle>
-            <p className="font-serif text-base md:text-lg text-[#5A5A5A] italic leading-relaxed max-w-2xl mx-auto mt-6">
+            <p className="font-serif text-base md:text-lg text-[#9A9A9A] italic leading-relaxed max-w-2xl mx-auto mt-6">
               We want you to love your Élan piece unconditionally. If for any reason you do
               not, we make the process simple, transparent, and respectful of your time.
             </p>
           </div>
 
-          <div className="space-y-px bg-[#1A1A1A]">
+          <div className="space-y-px bg-[#E4E1DA]">
 
             {/* 14-day returns */}
-            <div className="relative bg-[#0F0F0F] p-6 md:p-8 overflow-hidden">
-              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#1A1A1A] leading-none select-none pointer-events-none">
+            <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
+              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
                 01
               </span>
               <div className="relative">
                 <span className="text-2xl mb-4 block">↩</span>
-                <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+                <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
                   14-Day Returns
                 </p>
-                <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-4 max-w-2xl">
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
                   Unworn, unaltered pieces may be returned within{" "}
-                  <strong className="text-white font-normal">14 days</strong> of confirmed delivery.
+                  <strong className="text-[#3A3A3A] font-normal">14 days</strong> of confirmed delivery.
                   The piece must be in its original condition, in its original packaging, with all
                   documentation enclosed.
                 </p>
@@ -426,13 +426,13 @@ export default function GuidePage() {
                     "Stone specification cards and grading reports enclosed",
                     "Piece must show no signs of wear or alteration",
                   ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#9A9A9A]">
+                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#6B6B6B]">
                       <span className="mt-2 w-1 h-1 rounded-full bg-[#85A0B5]/50 flex-shrink-0" />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl">
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-2xl">
                   All returns are subject to a professional condition inspection before processing.
                   Any piece found to have been worn, resized by a third party, or altered in any way
                   will not be accepted.
@@ -441,18 +441,18 @@ export default function GuidePage() {
             </div>
 
             {/* 30-day exchanges */}
-            <div className="relative bg-[#0F0F0F] p-6 md:p-8 overflow-hidden">
-              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#1A1A1A] leading-none select-none pointer-events-none">
+            <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
+              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
                 02
               </span>
               <div className="relative">
                 <span className="text-2xl mb-4 block">🔄</span>
-                <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+                <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
                   30-Day Exchanges
                 </p>
-                <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-4 max-w-2xl">
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
                   Exchanges are accepted within{" "}
-                  <strong className="text-white font-normal">30 days</strong> of confirmed delivery at
+                  <strong className="text-[#3A3A3A] font-normal">30 days</strong> of confirmed delivery at
                   the original purchase price, applied as full credit toward any equal or higher-value
                   Élan piece.
                 </p>
@@ -463,7 +463,7 @@ export default function GuidePage() {
                     "Credit applied within 2–3 business days of inspection",
                     "New piece despatched within 1–2 business days of credit confirmation",
                   ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#9A9A9A]">
+                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#6B6B6B]">
                       <span className="mt-2 w-1 h-1 rounded-full bg-[#85A0B5]/50 flex-shrink-0" />
                       {item}
                     </li>
@@ -477,18 +477,18 @@ export default function GuidePage() {
             </div>
 
             {/* Final sale items */}
-            <div className="relative bg-[#0F0F0F] p-6 md:p-8 overflow-hidden">
-              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#1A1A1A] leading-none select-none pointer-events-none">
+            <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
+              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
                 03
               </span>
               <div className="relative">
                 <span className="text-2xl mb-4 block">⚠️</span>
-                <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+                <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
                   Final Sale Items
                 </p>
-                <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-4 max-w-2xl">
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
                   The following are{" "}
-                  <strong className="text-white font-normal">
+                  <strong className="text-[#3A3A3A] font-normal">
                     final sale and cannot be returned or exchanged
                   </strong>{" "}
                   under any circumstances:
@@ -501,13 +501,13 @@ export default function GuidePage() {
                     "Pieces altered by any third-party jeweller",
                     "Earrings (for hygiene reasons)",
                   ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#9A9A9A]">
+                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#6B6B6B]">
                       <span className="mt-2 w-1 h-1 rounded-full bg-[#85A0B5]/50 flex-shrink-0" />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl">
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-2xl">
                   If you are unsure whether your piece qualifies for return, contact us before
                   initiating — we will advise clearly and honestly.
                 </p>
@@ -515,18 +515,18 @@ export default function GuidePage() {
             </div>
 
             {/* Refund processing */}
-            <div className="relative bg-[#0F0F0F] p-6 md:p-8 overflow-hidden">
-              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#1A1A1A] leading-none select-none pointer-events-none">
+            <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
+              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
                 04
               </span>
               <div className="relative">
                 <span className="text-2xl mb-4 block">💳</span>
-                <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+                <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
                   Refund Processing
                 </p>
-                <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-4 max-w-2xl">
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
                   Once your return is received and passes our condition inspection — typically within{" "}
-                  <strong className="text-white font-normal">2–3 business days</strong> of arrival —
+                  <strong className="text-[#3A3A3A] font-normal">2–3 business days</strong> of arrival —
                   your refund is processed to the original payment method.
                 </p>
                 <ul className="space-y-2 mb-4 max-w-2xl">
@@ -535,13 +535,13 @@ export default function GuidePage() {
                     "PayPal / digital wallet: 3–5 business days",
                     "Bank transfer: 5–10 business days",
                   ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#9A9A9A]">
+                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#6B6B6B]">
                       <span className="mt-2 w-1 h-1 rounded-full bg-[#85A0B5]/50 flex-shrink-0" />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-5 max-w-2xl">
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-5 max-w-2xl">
                   You will receive an email confirmation at each stage. Original shipping fees are
                   non-refundable unless the return is due to a fault on our part.
                 </p>
@@ -555,16 +555,16 @@ export default function GuidePage() {
             </div>
 
             {/* Complimentary ring resizing */}
-            <div className="relative bg-[#0F0F0F] p-6 md:p-8 overflow-hidden">
-              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#1A1A1A] leading-none select-none pointer-events-none">
+            <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
+              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
                 05
               </span>
               <div className="relative">
                 <span className="text-2xl mb-4 block">💍</span>
-                <p className="font-sans text-[9px] tracking-[0.35em] text-[#85A0B5] uppercase mb-3">
+                <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
                   Complimentary Ring Resizing
                 </p>
-                <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-2xl">
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-2xl">
                   All non-bespoke, non-engraved ring purchases qualify for one complimentary resize
                   within 30 days of delivery. Simply contact client services, return your ring in
                   its original packaging, and we will resize and return it to you within 5–7 business
@@ -585,7 +585,7 @@ export default function GuidePage() {
           {/* Ornamental divider */}
           <div className="flex items-center justify-center gap-4 mb-12">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#85A0B5]/40" />
-            <svg width="8" height="8" viewBox="0 0 8 8" className="text-[#85A0B5]" fill="currentColor">
+            <svg width="8" height="8" viewBox="0 0 8 8" className="text-[#3A5A78]" fill="currentColor">
               <rect x="0" y="4" width="5.66" height="5.66" transform="rotate(-45 0 4)" />
             </svg>
             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#85A0B5]/40" />
@@ -593,10 +593,10 @@ export default function GuidePage() {
 
           <SectionLabel>The Élan Promise</SectionLabel>
 
-          <blockquote className="font-serif text-2xl md:text-4xl text-white leading-snug mb-12">
+          <blockquote className="font-serif text-2xl md:text-4xl text-[#0A0A0A] leading-snug mb-12">
             &ldquo;We will never sell you a stone you don&apos;t understand, a metal you
             can&apos;t verify, or a story that isn&apos;t{" "}
-            <em className="not-italic text-[#85A0B5]">entirely true.</em>&rdquo;
+            <em className="not-italic text-[#3A5A78]">entirely true.</em>&rdquo;
           </blockquote>
         </div>
       </section>
@@ -604,7 +604,7 @@ export default function GuidePage() {
       <NewsletterSection />
 
       {/* ══ Quick nav ════════════════════════════════════════════════════ */}
-      <div className="border-t border-[#141414] py-8 px-4 sm:px-6 bg-[#0A0A0A]">
+      <div className="border-t border-[#E4E1DA] py-8 px-4 sm:px-6 bg-[#FFFFFF]">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-6 justify-center">
           {[
             { href: "#authentication", label: "Authentication" },
@@ -616,7 +616,7 @@ export default function GuidePage() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-sans text-[10px] tracking-[0.2em] text-[#3A3A3A] uppercase hover:text-[#85A0B5] transition-colors"
+              className="font-sans text-[12px] tracking-[0.2em] text-[#9A9A9A] uppercase hover:text-[#3A5A78] transition-colors"
             >
               {link.label}
             </Link>

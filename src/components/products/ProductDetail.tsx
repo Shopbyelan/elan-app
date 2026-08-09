@@ -46,21 +46,21 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-16">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 font-sans text-[10px] tracking-[0.15em] text-[#5A5A5A] uppercase mb-8">
-        <Link href="/shop" className="hover:text-[#85A0B5] transition-colors">Collections</Link>
+      <nav className="flex items-center gap-2 font-sans text-[12px] tracking-[0.15em] text-[#9A9A9A] uppercase mb-8">
+        <Link href="/shop" className="hover:text-[#3A5A78] transition-colors">Collections</Link>
         <span>/</span>
-        <Link href={`/shop?category=${product.category?.slug}`} className="hover:text-[#85A0B5] transition-colors">
+        <Link href={`/shop?category=${product.category?.slug}`} className="hover:text-[#3A5A78] transition-colors">
           {product.category?.name}
         </Link>
         <span>/</span>
-        <span className="text-[#9A9A9A]">{product.name}</span>
+        <span className="text-[#6B6B6B]">{product.name}</span>
       </nav>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
         {/* Gallery */}
         <div className="space-y-3">
           {/* Main image */}
-          <div className="relative aspect-4/5 bg-[#111] overflow-hidden">
+          <div className="relative aspect-4/5 bg-[#FFFFFF] overflow-hidden">
             <Image
               src={images[activeImg]?.url || "/placeholder.jpg"}
               alt={images[activeImg]?.alt || product.name}
@@ -105,7 +105,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
           <div className="flex items-center justify-between mb-4">
             <Link
               href={`/shop?category=${product.category?.slug}`}
-              className="font-sans text-[10px] tracking-[0.3em] text-[#85A0B5] uppercase hover:text-[#9DB5C8] transition-colors"
+              className="font-sans text-[12px] tracking-[0.3em] text-[#3A5A78] uppercase hover:text-[#9DB5C8] transition-colors"
             >
               {product.category?.name}
             </Link>
@@ -113,10 +113,10 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
               <div className="flex items-center gap-1.5">
                 <div className="flex">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className={`h-3 w-3 ${i < Math.round(avgRating) ? "fill-[#85A0B5] text-[#85A0B5]" : "text-[#2A2A2A]"}`} />
+                    <Star key={i} className={`h-3 w-3 ${i < Math.round(avgRating) ? "fill-[#85A0B5] text-[#3A5A78]" : "text-[#E4E1DA]"}`} />
                   ))}
                 </div>
-                <span className="font-sans text-[10px] text-[#5A5A5A]">
+                <span className="font-sans text-[12px] text-[#9A9A9A]">
                   ({product.reviews.length})
                 </span>
               </div>
@@ -124,48 +124,48 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
           </div>
 
           {/* Name */}
-          <h1 className="font-serif text-3xl md:text-4xl text-white mb-3 leading-tight">
+          <h1 className="font-serif text-3xl md:text-4xl text-[#0A0A0A] mb-3 leading-tight">
             {product.name}
           </h1>
 
           {/* Short desc */}
           {product.shortDesc && (
-            <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-6">
+            <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-6">
               {product.shortDesc}
             </p>
           )}
 
           {/* Price */}
           <div className="flex items-baseline gap-4 mb-8">
-            <span className="font-sans text-2xl text-[#85A0B5]">
+            <span className="font-sans text-2xl text-[#3A5A78]">
               {format(product.price)}
             </span>
             {product.comparePrice && product.comparePrice > product.price && (
-              <span className="font-sans text-base text-[#5A5A5A] line-through">
+              <span className="font-sans text-base text-[#9A9A9A] line-through">
                 {format(product.comparePrice)}
               </span>
             )}
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-[#1A1A1A] mb-8" />
+          <div className="h-px bg-[#F7F5F2] mb-8" />
 
           {/* Quantity */}
           <div className="mb-6">
-            <p className="font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-3">
+            <p className="font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-3">
               Quantity
             </p>
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setQty(Math.max(1, qty - 1))}
-                className="h-10 w-10 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-white transition-all text-lg"
+                className="h-10 w-10 flex items-center justify-center border border-[#E4E1DA] text-[#6B6B6B] hover:border-[#85A0B5] hover:text-[#3A5A78] transition-all text-lg"
               >
                 −
               </button>
-              <span className="font-sans text-base text-white w-8 text-center">{qty}</span>
+              <span className="font-sans text-base text-[#3A3A3A] w-8 text-center">{qty}</span>
               <button
                 onClick={() => setQty(qty + 1)}
-                className="h-10 w-10 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-white transition-all text-lg"
+                className="h-10 w-10 flex items-center justify-center border border-[#E4E1DA] text-[#6B6B6B] hover:border-[#85A0B5] hover:text-[#3A5A78] transition-all text-lg"
               >
                 +
               </button>
@@ -194,8 +194,8 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
                   }}
                   className={`h-13 w-13 min-w-13 flex items-center justify-center border transition-all ${
                     wishlisted
-                      ? "border-[#85A0B5] text-[#85A0B5]"
-                      : "border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-[#85A0B5]"
+                      ? "border-[#85A0B5] text-[#3A5A78]"
+                      : "border-[#E4E1DA] text-[#6B6B6B] hover:border-[#85A0B5] hover:text-[#3A5A78]"
                   }`}
                 >
                   <Heart className={`h-4 w-4 ${wishlisted ? "fill-[#85A0B5]" : ""}`} />
@@ -205,15 +205,15 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
           </div>
 
           {/* Trust badges */}
-          <div className="grid grid-cols-3 gap-4 py-6 border-t border-b border-[#1A1A1A] mb-8">
+          <div className="grid grid-cols-3 gap-4 py-6 border-t border-b border-[#E4E1DA] mb-8">
             {[
               { icon: Shield, label: "Certificate of Authenticity" },
               { icon: Truck, label: "Secure Nationwide Delivery" },
               { icon: RotateCcw, label: "14-Day Returns" },
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="text-center">
-                <Icon className="h-4 w-4 text-[#85A0B5] mx-auto mb-2" />
-                <p className="font-sans text-[9px] tracking-widest text-[#5A5A5A] leading-relaxed">
+                <Icon className="h-4 w-4 text-[#3A5A78] mx-auto mb-2" />
+                <p className="font-sans text-[11px] tracking-widest text-[#9A9A9A] leading-relaxed">
                   {label}
                 </p>
               </div>
@@ -222,15 +222,15 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
 
           {/* Tabs */}
           <div>
-            <div className="flex border-b border-[#1A1A1A] mb-6">
+            <div className="flex border-b border-[#E4E1DA] mb-6">
               {(["description", "materials", "care"] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`mr-6 pb-3 font-sans text-[10px] tracking-[0.2em] uppercase border-b-2 transition-colors ${
+                  className={`mr-6 pb-3 font-sans text-[12px] tracking-[0.2em] uppercase border-b-2 transition-colors ${
                     activeTab === tab
-                      ? "border-[#85A0B5] text-[#85A0B5]"
-                      : "border-transparent text-[#5A5A5A] hover:text-[#9A9A9A]"
+                      ? "border-[#85A0B5] text-[#3A5A78]"
+                      : "border-transparent text-[#9A9A9A] hover:text-[#6B6B6B]"
                   }`}
                 >
                   {tab}
@@ -239,34 +239,34 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
             </div>
 
             {activeTab === "description" && (
-              <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
+              <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
                 {product.description}
               </p>
             )}
             {activeTab === "materials" && (
               <div className="space-y-3">
                 {product.material && (
-                  <div className="flex justify-between border-b border-[#141414] pb-3">
-                    <span className="font-sans text-xs text-[#5A5A5A] uppercase tracking-wider">Material</span>
-                    <span className="font-sans text-xs text-[#9A9A9A]">{product.material}</span>
+                  <div className="flex justify-between border-b border-[#E4E1DA] pb-3">
+                    <span className="font-sans text-xs text-[#9A9A9A] uppercase tracking-wider">Material</span>
+                    <span className="font-sans text-xs text-[#6B6B6B]">{product.material}</span>
                   </div>
                 )}
                 {product.weight && (
-                  <div className="flex justify-between border-b border-[#141414] pb-3">
-                    <span className="font-sans text-xs text-[#5A5A5A] uppercase tracking-wider">Weight</span>
-                    <span className="font-sans text-xs text-[#9A9A9A]">{product.weight}</span>
+                  <div className="flex justify-between border-b border-[#E4E1DA] pb-3">
+                    <span className="font-sans text-xs text-[#9A9A9A] uppercase tracking-wider">Weight</span>
+                    <span className="font-sans text-xs text-[#6B6B6B]">{product.weight}</span>
                   </div>
                 )}
                 {product.dimensions && (
-                  <div className="flex justify-between border-b border-[#141414] pb-3">
-                    <span className="font-sans text-xs text-[#5A5A5A] uppercase tracking-wider">Dimensions</span>
-                    <span className="font-sans text-xs text-[#9A9A9A]">{product.dimensions}</span>
+                  <div className="flex justify-between border-b border-[#E4E1DA] pb-3">
+                    <span className="font-sans text-xs text-[#9A9A9A] uppercase tracking-wider">Dimensions</span>
+                    <span className="font-sans text-xs text-[#6B6B6B]">{product.dimensions}</span>
                   </div>
                 )}
               </div>
             )}
             {activeTab === "care" && (
-              <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed">
+              <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed">
                 {product.careInstr ||
                   "Store in the provided Élan pouch when not worn. Avoid contact with perfumes, lotions, and chemicals. Polish gently with a soft cloth. Professional cleaning available at any Élan boutique."}
               </p>
@@ -277,13 +277,13 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
 
       {/* Reviews */}
       {product.reviews.length > 0 && (
-        <section className="mt-20 pt-16 border-t border-[#141414]">
+        <section className="mt-20 pt-16 border-t border-[#E4E1DA]">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-2">Client Experiences</p>
-              <h2 className="font-serif text-2xl text-white">
+              <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-2">Client Experiences</p>
+              <h2 className="font-serif text-2xl text-[#0A0A0A]">
                 {avgRating.toFixed(1)} / 5.0
-                <span className="font-sans text-sm text-[#5A5A5A] ml-3">
+                <span className="font-sans text-sm text-[#9A9A9A] ml-3">
                   ({product.reviews.length} reviews)
                 </span>
               </h2>
@@ -291,25 +291,25 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {product.reviews.map((review) => (
-              <div key={review.id} className="p-6 bg-[#111] border border-[#1A1A1A]">
+              <div key={review.id} className="p-6 bg-[#FFFFFF] border border-[#E4E1DA]">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="h-8 w-8 rounded-full bg-[#1A1A1A] flex items-center justify-center text-[#85A0B5] font-serif text-sm">
+                  <div className="h-8 w-8 rounded-full bg-[#F7F5F2] flex items-center justify-center text-[#3A5A78] font-serif text-sm">
                     {review.user?.name?.[0] || "C"}
                   </div>
                   <div>
-                    <p className="font-sans text-xs text-white">{review.user?.name || "Client"}</p>
-                    <p className="font-sans text-[10px] text-[#5A5A5A]">
+                    <p className="font-sans text-xs text-[#3A3A3A]">{review.user?.name || "Client"}</p>
+                    <p className="font-sans text-[12px] text-[#9A9A9A]">
                       {formatDate(review.createdAt)}
                     </p>
                   </div>
                   <div className="ml-auto flex">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className={`h-3 w-3 ${i < review.rating ? "fill-[#85A0B5] text-[#85A0B5]" : "text-[#2A2A2A]"}`} />
+                      <Star key={i} className={`h-3 w-3 ${i < review.rating ? "fill-[#85A0B5] text-[#3A5A78]" : "text-[#E4E1DA]"}`} />
                     ))}
                   </div>
                 </div>
                 {review.comment && (
-                  <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed">{review.comment}</p>
+                  <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed">{review.comment}</p>
                 )}
               </div>
             ))}
@@ -319,14 +319,14 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
 
       {/* Related */}
       {related.length > 0 && (
-        <section className="mt-20 pt-16 border-t border-[#141414]">
+        <section className="mt-20 pt-16 border-t border-[#E4E1DA]">
           <div className="mb-10">
-            <p className="font-sans text-[9px] tracking-[0.4em] text-[#85A0B5] uppercase mb-2">You May Also Love</p>
-            <h2 className="font-serif text-2xl text-white">From the Same Collection</h2>
+            <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-2">You May Also Love</p>
+            <h2 className="font-serif text-2xl text-[#0A0A0A]">From the Same Collection</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#141414]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#F7F5F2]">
             {related.map((p, i) => (
-              <div key={p.id} className="bg-[#0A0A0A]">
+              <div key={p.id} className="bg-[#FFFFFF]">
                 <ProductCard product={p} index={i} />
               </div>
             ))}

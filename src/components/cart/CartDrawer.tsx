@@ -38,7 +38,7 @@ export function CartDrawer() {
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#1A1A1A]">
           <div>
             <h2 className="font-serif text-lg text-white">Your Selection</h2>
-            <p className="font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase mt-0.5">
+            <p className="font-sans text-[12px] tracking-[0.2em] text-[#5A5A5A] uppercase mt-0.5">
               {items.length} {items.length === 1 ? "piece" : "pieces"}
             </p>
           </div>
@@ -61,7 +61,13 @@ export function CartDrawer() {
                   Discover our curated collections and find pieces that speak to you.
                 </p>
               </div>
-              <Button variant="outline" size="md" onClick={closeCart} asChild>
+              <Button
+                variant="outline"
+                size="md"
+                className="border-[#85A0B5] text-[#85A0B5] hover:bg-[#85A0B5] hover:text-black"
+                onClick={closeCart}
+                asChild
+              >
                 <Link href="/shop">Explore Collections</Link>
               </Button>
             </div>
@@ -88,7 +94,7 @@ export function CartDrawer() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <p className="font-sans text-[9px] tracking-[0.2em] text-[#85A0B5] uppercase">
+                          <p className="font-sans text-[11px] tracking-[0.2em] text-[#85A0B5] uppercase">
                             {product.category?.name}
                           </p>
                           <h3 className="font-serif text-sm text-white mt-0.5 truncate">
@@ -147,7 +153,7 @@ export function CartDrawer() {
                 {format(totalPrice())}
               </span>
             </div>
-            <p className="font-sans text-[10px] text-[#5A5A5A]">
+            <p className="font-sans text-[12px] text-[#5A5A5A]">
               Shipping calculated at checkout · Certificate of Authenticity included
             </p>
             <Button
@@ -162,7 +168,7 @@ export function CartDrawer() {
             <Button
               variant="ghost"
               size="md"
-              className="w-full"
+              className="w-full text-[#9A9A9A] hover:text-white hover:bg-white/5"
               onClick={closeCart}
               asChild
             >

@@ -68,8 +68,8 @@ export default async function AdminDashboard() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl text-white">Dashboard</h1>
-        <p className="font-sans text-sm text-[#5A5A5A] mt-1">
+        <h1 className="font-serif text-3xl text-[#0A0A0A]">Dashboard</h1>
+        <p className="font-sans text-sm text-[#9A9A9A] mt-1">
           Welcome to the Élan admin panel
         </p>
       </div>
@@ -77,14 +77,14 @@ export default async function AdminDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Total Revenue", value: formatPrice(stats.revenue), icon: TrendingUp, color: "text-[#85A0B5]" },
+          { label: "Total Revenue", value: formatPrice(stats.revenue), icon: TrendingUp, color: "text-[#3A5A78]" },
           { label: "Total Orders", value: stats.totalOrders.toString(), icon: ShoppingCart, color: "text-blue-400" },
           { label: "Active Products", value: stats.totalProducts.toString(), icon: Package, color: "text-purple-400" },
           { label: "Customers", value: stats.totalCustomers.toString(), icon: Users, color: "text-emerald-400" },
         ].map(({ label, value, icon: Icon, color }) => (
-          <div key={label} className="bg-[#111] border border-[#1A1A1A] p-5">
+          <div key={label} className="bg-[#FFFFFF] border border-[#E4E1DA] p-5">
             <div className="flex items-center justify-between mb-4">
-              <p className="font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase">{label}</p>
+              <p className="font-sans text-[12px] tracking-[0.2em] text-[#9A9A9A] uppercase">{label}</p>
               <Icon className={`h-4 w-4 ${color}`} />
             </div>
             <p className={`font-serif text-2xl ${color}`}>{value}</p>
@@ -94,40 +94,40 @@ export default async function AdminDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Orders */}
-        <div className="lg:col-span-2 bg-[#111] border border-[#1A1A1A]">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-[#1A1A1A]">
-            <h2 className="font-serif text-lg text-white">Recent Orders</h2>
-            <Link href="/admin/orders" className="font-sans text-[10px] tracking-[0.15em] text-[#85A0B5] uppercase hover:text-[#9DB5C8]">
+        <div className="lg:col-span-2 bg-[#FFFFFF] border border-[#E4E1DA]">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-[#E4E1DA]">
+            <h2 className="font-serif text-lg text-[#0A0A0A]">Recent Orders</h2>
+            <Link href="/admin/orders" className="font-sans text-[12px] tracking-[0.15em] text-[#3A5A78] uppercase hover:text-[#9DB5C8]">
               View all →
             </Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-[#1A1A1A]">
+                <tr className="border-b border-[#E4E1DA]">
                   {["Order", "Customer", "Amount", "Status"].map((h) => (
-                    <th key={h} className="px-6 py-3 text-left font-sans text-[9px] tracking-[0.2em] text-[#5A5A5A] uppercase">
+                    <th key={h} className="px-6 py-3 text-left font-sans text-[11px] tracking-[0.2em] text-[#9A9A9A] uppercase">
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#141414]">
+              <tbody className="divide-y divide-[#E4E1DA]">
                 {recentOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-[#141414] transition-colors">
+                  <tr key={order.id} className="hover:bg-[#F7F5F2] transition-colors">
                     <td className="px-6 py-4">
-                      <Link href={`/admin/orders/${order.id}`} className="font-sans text-xs text-[#85A0B5] hover:underline">
+                      <Link href={`/admin/orders/${order.id}`} className="font-sans text-xs text-[#3A5A78] hover:underline">
                         {order.orderNumber}
                       </Link>
                     </td>
-                    <td className="px-6 py-4 font-sans text-xs text-[#9A9A9A]">
+                    <td className="px-6 py-4 font-sans text-xs text-[#6B6B6B]">
                       {order.user?.name || order.user?.email || "—"}
                     </td>
-                    <td className="px-6 py-4 font-sans text-xs text-white">
+                    <td className="px-6 py-4 font-sans text-xs text-[#3A3A3A]">
                       {formatPrice(order.total)}
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex px-2 py-0.5 font-sans text-[9px] tracking-wider rounded-sm ${STATUS_COLORS[order.status] || "text-[#9A9A9A] bg-[#1A1A1A]"}`}>
+                      <span className={`inline-flex px-2 py-0.5 font-sans text-[11px] tracking-wider rounded-sm ${STATUS_COLORS[order.status] || "text-[#6B6B6B] bg-[#F7F5F2]"}`}>
                         {order.status}
                       </span>
                     </td>
@@ -135,7 +135,7 @@ export default async function AdminDashboard() {
                 ))}
                 {recentOrders.length === 0 && (
                   <tr>
-                    <td colSpan={4} className="px-6 py-8 text-center font-sans text-sm text-[#5A5A5A]">
+                    <td colSpan={4} className="px-6 py-8 text-center font-sans text-sm text-[#9A9A9A]">
                       No orders yet
                     </td>
                   </tr>
@@ -149,13 +149,13 @@ export default async function AdminDashboard() {
         <div className="space-y-4">
           {/* Pending orders alert */}
           {stats.pendingOrders > 0 && (
-            <div className="bg-[#111] border border-amber-800/40 p-5">
+            <div className="bg-[#FFFFFF] border border-amber-800/40 p-5">
               <div className="flex items-center gap-3 mb-3">
                 <AlertCircle className="h-4 w-4 text-amber-400" />
                 <h3 className="font-sans text-xs tracking-[0.15em] text-amber-400 uppercase">Pending Orders</h3>
               </div>
-              <p className="font-serif text-2xl text-white mb-3">{stats.pendingOrders}</p>
-              <Link href="/admin/orders?status=PENDING" className="font-sans text-[10px] tracking-[0.15em] text-[#85A0B5] uppercase hover:text-[#9DB5C8]">
+              <p className="font-serif text-2xl text-[#3A3A3A] mb-3">{stats.pendingOrders}</p>
+              <Link href="/admin/orders?status=PENDING" className="font-sans text-[12px] tracking-[0.15em] text-[#3A5A78] uppercase hover:text-[#9DB5C8]">
                 Review orders →
               </Link>
             </div>
@@ -163,29 +163,29 @@ export default async function AdminDashboard() {
 
           {/* Low stock */}
           {stats.lowStock.length > 0 && (
-            <div className="bg-[#111] border border-[#1A1A1A] p-5">
-              <h3 className="font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase mb-4">
+            <div className="bg-[#FFFFFF] border border-[#E4E1DA] p-5">
+              <h3 className="font-sans text-[12px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-4">
                 Low Stock Alert
               </h3>
               <div className="space-y-3">
                 {stats.lowStock.map((p) => (
                   <div key={p.id} className="flex items-center justify-between">
-                    <span className="font-sans text-xs text-[#9A9A9A] truncate max-w-32">{p.name}</span>
+                    <span className="font-sans text-xs text-[#6B6B6B] truncate max-w-32">{p.name}</span>
                     <span className={`font-sans text-xs font-medium ${p.stock === 0 ? "text-red-400" : "text-amber-400"}`}>
                       {p.stock === 0 ? "Out" : `${p.stock} left`}
                     </span>
                   </div>
                 ))}
               </div>
-              <Link href="/admin/products" className="mt-4 block font-sans text-[10px] tracking-[0.15em] text-[#85A0B5] uppercase hover:text-[#9DB5C8]">
+              <Link href="/admin/products" className="mt-4 block font-sans text-[12px] tracking-[0.15em] text-[#3A5A78] uppercase hover:text-[#9DB5C8]">
                 Manage inventory →
               </Link>
             </div>
           )}
 
           {/* Quick actions */}
-          <div className="bg-[#111] border border-[#1A1A1A] p-5">
-            <h3 className="font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase mb-4">Quick Actions</h3>
+          <div className="bg-[#FFFFFF] border border-[#E4E1DA] p-5">
+            <h3 className="font-sans text-[12px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-4">Quick Actions</h3>
             <div className="space-y-2">
               {[
                 { href: "/admin/products/new", label: "Add New Product" },
@@ -195,7 +195,7 @@ export default async function AdminDashboard() {
                 <Link
                   key={href}
                   href={href}
-                  className="block px-3 py-2.5 font-sans text-xs text-[#9A9A9A] hover:text-[#85A0B5] hover:bg-[#141414] transition-all"
+                  className="block px-3 py-2.5 font-sans text-xs text-[#6B6B6B] hover:text-[#3A5A78] hover:bg-[#F7F5F2] transition-all"
                 >
                   + {label}
                 </Link>

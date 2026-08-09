@@ -1,28 +1,38 @@
 ﻿@import "tailwindcss";
 
 :root {
-  /* Élan Brand Colors */
+  /* Dark chrome — Header, Footer, MobileNav drawer, CartDrawer, Hero overlay */
   --elan-black: #0A0A0A;
   --elan-dark: #111111;
   --elan-card: #141414;
   --elan-surface: #1A1A1A;
-  --elan-border: #2A2A2A;
+  --elan-border-dark: #2A2A2A;
+
+  /* Light body — everything else */
+  --elan-bg: #FFFFFF;
+  --elan-bg-alt: #F7F5F2;
+  --elan-surface-light: #F0EEE8;
+  --elan-border: #E4E1DA;
+  --elan-text: #3A3A3A;
+  --elan-muted: #6B6B6B;
+  --elan-dim: #9A9A9A;
+  --elan-ink: #0A0A0A;
+
+  /* Accent blue system */
   --elan-gold: #85A0B5;
   --elan-gold-light: #9DB5C8;
   --elan-gold-dim: #4A6B8A;
   --elan-blue: #85A0B5;
-  --elan-blue-deep: #4A6B8A;
+  --elan-blue-light: #9DB5C8;
+  --elan-blue-deep: #2E4560;
   --elan-blue-rich: #3A5A78;
   --elan-silver: #C4CDD6;
   --elan-silver-light: #E2E8EE;
   --elan-silver-dim: #8A9BAB;
   --elan-white: #FFFFFF;
-  --elan-text: #E8E8E8;
-  --elan-muted: #9A9A9A;
-  --elan-dim: #5A5A5A;
 
   /* Background & Foreground */
-  --background: var(--elan-black);
+  --background: var(--elan-bg);
   --foreground: var(--elan-text);
 }
 
@@ -34,11 +44,18 @@
   --color-elan-dark: var(--elan-dark);
   --color-elan-card: var(--elan-card);
   --color-elan-surface: var(--elan-surface);
+  --color-elan-bg: var(--elan-bg);
+  --color-elan-bg-alt: var(--elan-bg-alt);
+  --color-elan-surface-light: var(--elan-surface-light);
   --color-elan-border: var(--elan-border);
+  --color-elan-border-dark: var(--elan-border-dark);
   --color-elan-muted: var(--elan-muted);
   --color-elan-dim: var(--elan-dim);
+  --color-elan-ink: var(--elan-ink);
   --color-elan-blue: var(--elan-blue);
+  --color-elan-blue-light: var(--elan-blue-light);
   --color-elan-blue-deep: var(--elan-blue-deep);
+  --color-elan-blue-rich: var(--elan-blue-rich);
   --color-elan-silver: var(--elan-silver);
   --color-elan-silver-light: var(--elan-silver-light);
   --color-elan-silver-dim: var(--elan-silver-dim);
@@ -54,7 +71,7 @@ html {
 }
 
 body {
-  background: var(--elan-black);
+  background: var(--elan-bg);
   color: var(--elan-text);
   font-family: 'Georgia', 'Times New Roman', serif;
   min-height: 100vh;
@@ -62,11 +79,15 @@ body {
 
 /* ── Scrollbar ────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--elan-dark); }
-::-webkit-scrollbar-thumb { background: var(--elan-blue-deep); border-radius: 2px; }
+::-webkit-scrollbar-track { background: var(--elan-bg-alt); }
+::-webkit-scrollbar-thumb { background: var(--elan-blue-rich); border-radius: 2px; }
 
 /* ── Selection ────────────────────── */
-::selection { background: var(--elan-blue); color: #fff; }
+::selection { background: var(--elan-blue-rich); color: #fff; }
+
+/* ── Hidden scrollbar (swipeable carousels) ── */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 /* ── Typography Utilities ─────────── */
 .font-serif { font-family: 'Georgia', 'Times New Roman', serif; }
@@ -123,8 +144,8 @@ body {
 
 .btn-outline-gold {
   background: transparent;
-  color: #85A0B5;
-  border: 1px solid #85A0B5;
+  color: #3A5A78;
+  border: 1px solid #3A5A78;
   font-size: 12px;
   letter-spacing: 0.2em;
   font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -132,7 +153,7 @@ body {
   transition: all 0.3s ease;
   text-transform: uppercase;
 }
-.btn-outline-gold:hover { background: #85A0B5; color: #000; }
+.btn-outline-gold:hover { background: #3A5A78; color: #fff; }
 
 /* ── Marquee / Ticker ─────────────── */
 @keyframes marquee {
@@ -159,7 +180,7 @@ body {
   100% { background-position: 200% 0; }
 }
 .skeleton {
-  background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+  background: linear-gradient(90deg, #F0EEE8 25%, #E4E1DA 50%, #F0EEE8 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -172,16 +193,16 @@ body {
 
 /* ── Input ────────────────────────── */
 input, textarea, select {
-  background: #141414;
-  border: 1px solid #2A2A2A;
-  color: #E8E8E8;
+  background: #F7F5F2;
+  border: 1px solid #E4E1DA;
+  color: #3A3A3A;
   outline: none;
   transition: border-color 0.2s;
 }
 input:focus, textarea:focus, select:focus {
-  border-color: #85A0B5;
+  border-color: #3A5A78;
 }
 
 /* ── Prose overrides ──────────────── */
-.prose-elan p { color: #9a9a9a; line-height: 1.9; }
-.prose-elan h2 { color: #fff; font-size: 1.5rem; margin-bottom: 1rem; }
+.prose-elan p { color: #6B6B6B; line-height: 1.9; }
+.prose-elan h2 { color: #0A0A0A; font-size: 1.5rem; margin-bottom: 1rem; }

@@ -58,18 +58,18 @@ export default function RegisterPage() {
             <Image src="/Elanlogoblue.png" alt="Élan Fine Jewellery" width={200} height={80} className="h-16 w-auto mb-6" />
           </div>
         </div>
-        <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#0A0A0A]">
+        <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#FFFFFF]">
           <div className="w-full max-w-sm text-center">
-            <CheckCircle className="h-14 w-14 text-[#85A0B5] mx-auto mb-6" strokeWidth={1} />
-            <h1 className="font-serif text-3xl text-white mb-3">Check your inbox</h1>
-            <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed mb-2">
+            <CheckCircle className="h-14 w-14 text-[#3A5A78] mx-auto mb-6" strokeWidth={1} />
+            <h1 className="font-serif text-3xl text-[#0A0A0A] mb-3">Check your inbox</h1>
+            <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-2">
               We sent a verification link to
             </p>
-            <p className="font-sans text-sm text-white mb-8">{registeredEmail}</p>
-            <p className="font-sans text-xs text-[#5A5A5A] leading-relaxed mb-8">
+            <p className="font-sans text-sm text-[#3A3A3A] mb-8">{registeredEmail}</p>
+            <p className="font-sans text-xs text-[#9A9A9A] leading-relaxed mb-8">
               Click the link in the email to activate your account. The link expires in 24 hours.
             </p>
-            <Link href="/login" className="font-sans text-sm text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">
+            <Link href="/login" className="font-sans text-sm text-[#3A5A78] hover:text-[#9DB5C8] transition-colors">
               ← Back to Sign In
             </Link>
           </div>
@@ -87,21 +87,21 @@ export default function RegisterPage() {
         />
         <div className="relative z-10">
           <Image src="/Elanlogoblue.png" alt="Élan Fine Jewellery" width={200} height={80} className="h-16 w-auto mb-6" />
-          <p className="font-sans text-sm text-[#9A9A9A] leading-relaxed max-w-xs">
+          <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed max-w-xs">
             Join the Élan circle. Access exclusive pieces, track your orders, and receive priority service.
           </p>
         </div>
       </div>
 
       {/* Right panel */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#0A0A0A]">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 bg-[#FFFFFF]">
         <div className="w-full max-w-sm">
           <Link href="/" className="block mb-10 lg:hidden">
             <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={120} height={40} className="h-8 w-auto" />
           </Link>
 
-          <h1 className="font-serif text-3xl text-white mb-2">Create an account</h1>
-          <p className="font-sans text-sm text-[#9A9A9A] mb-8">
+          <h1 className="font-serif text-3xl text-[#0A0A0A] mb-2">Create an account</h1>
+          <p className="font-sans text-sm text-[#6B6B6B] mb-8">
             Join the Élan inner circle
           </p>
 
@@ -116,7 +116,7 @@ export default function RegisterPage() {
               onChange={(e) => update("password", e.target.value)}
               required
               suffix={
-                <button type="button" onClick={() => setShowPw(!showPw)} className="hover:text-white transition-colors">
+                <button type="button" onClick={() => setShowPw(!showPw)} className="hover:text-[#3A5A78] transition-colors">
                   {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               }
@@ -130,11 +130,11 @@ export default function RegisterPage() {
               required
             />
 
-            <p className="font-sans text-[11px] text-[#5A5A5A] leading-relaxed">
+            <p className="font-sans text-[11px] text-[#9A9A9A] leading-relaxed">
               By creating an account, you agree to our{" "}
-              <Link href="/terms" className="text-[#85A0B5] hover:underline">Terms of Service</Link>
+              <Link href="/terms" className="text-[#3A5A78] hover:underline">Terms of Service</Link>
               {" "}and{" "}
-              <Link href="/privacy" className="text-[#85A0B5] hover:underline">Privacy Policy</Link>.
+              <Link href="/privacy" className="text-[#3A5A78] hover:underline">Privacy Policy</Link>.
             </p>
 
             <Button type="submit" variant="gold" size="lg" className="w-full" loading={loading}>
@@ -144,10 +144,10 @@ export default function RegisterPage() {
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[#1A1A1A]" />
+              <div className="w-full border-t border-[#E4E1DA]" />
             </div>
             <div className="relative flex justify-center">
-              <span className="bg-[#0A0A0A] px-4 font-sans text-[10px] tracking-[0.2em] text-[#5A5A5A] uppercase">or</span>
+              <span className="bg-[#FFFFFF] px-4 font-sans text-[12px] tracking-[0.2em] text-[#9A9A9A] uppercase">or</span>
             </div>
           </div>
 
@@ -161,9 +161,9 @@ export default function RegisterPage() {
             Continue with Google
           </Button>
 
-          <p className="mt-8 text-center font-sans text-sm text-[#5A5A5A]">
+          <p className="mt-8 text-center font-sans text-sm text-[#9A9A9A]">
             Already have an account?{" "}
-            <Link href="/login" className="text-[#85A0B5] hover:text-[#9DB5C8] transition-colors">Sign in</Link>
+            <Link href="/login" className="text-[#3A5A78] hover:text-[#9DB5C8] transition-colors">Sign in</Link>
           </p>
         </div>
       </div>

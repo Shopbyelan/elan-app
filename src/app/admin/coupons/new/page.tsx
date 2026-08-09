@@ -7,8 +7,8 @@ export default function NewCouponPage() {
     <div className="max-w-xl">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-serif text-3xl text-white">New Coupon</h1>
-          <p className="font-sans text-sm text-[#5A5A5A] mt-1">Create a discount code</p>
+          <h1 className="font-serif text-3xl text-[#0A0A0A]">New Coupon</h1>
+          <p className="font-sans text-sm text-[#9A9A9A] mt-1">Create a discount code</p>
         </div>
         <Button variant="ghost" asChild>
           <Link href="/admin/coupons">← Back</Link>
@@ -16,49 +16,49 @@ export default function NewCouponPage() {
       </div>
 
       <form action={createCoupon} className="space-y-6">
-        <div className="bg-[#111] border border-[#1A1A1A] p-6 space-y-5">
-          <h2 className="font-serif text-lg text-white">Coupon Details</h2>
+        <div className="bg-[#FFFFFF] border border-[#E4E1DA] p-6 space-y-5">
+          <h2 className="font-serif text-lg text-[#0A0A0A]">Coupon Details</h2>
 
           <div>
-            <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">
+            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">
               Coupon Code *
             </label>
             <input
               name="code"
               required
-              className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors uppercase placeholder:normal-case"
+              className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors uppercase placeholder:normal-case"
               placeholder="WELCOME10"
             />
-            <p className="mt-1.5 font-sans text-[10px] text-[#5A5A5A]">Will be auto-uppercased. Share this with customers.</p>
+            <p className="mt-1.5 font-sans text-[12px] text-[#9A9A9A]">Will be auto-uppercased. Share this with customers.</p>
           </div>
 
           <div>
-            <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">
+            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">
               Description
             </label>
             <input
               name="description"
-              className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
+              className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors"
               placeholder="New customer welcome discount"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">
                 Discount Type *
               </label>
               <select
                 name="discountType"
                 required
-                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors appearance-none"
+                className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors appearance-none"
               >
                 <option value="PERCENTAGE">Percentage (%)</option>
                 <option value="FIXED">Fixed Amount (₦)</option>
               </select>
             </div>
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">
                 Discount Value *
               </label>
               <input
@@ -67,7 +67,7 @@ export default function NewCouponPage() {
                 step="0.01"
                 min="0"
                 required
-                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
+                className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors"
                 placeholder="10"
               />
             </div>
@@ -75,7 +75,7 @@ export default function NewCouponPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">
                 Min. Order Amount (₦)
               </label>
               <input
@@ -83,32 +83,32 @@ export default function NewCouponPage() {
                 type="number"
                 step="0.01"
                 min="0"
-                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
+                className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors"
                 placeholder="50000"
               />
             </div>
             <div>
-              <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">
+              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">
                 Max Uses
               </label>
               <input
                 name="maxUses"
                 type="number"
                 min="1"
-                className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
+                className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors"
                 placeholder="100"
               />
             </div>
           </div>
 
           <div>
-            <label className="block font-sans text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase mb-2">
+            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">
               Expiry Date
             </label>
             <input
               name="expiresAt"
               type="date"
-              className="w-full h-11 px-4 bg-[#141414] border border-[#2A2A2A] text-[#E8E8E8] font-sans text-sm focus:outline-none focus:border-[#85A0B5] transition-colors"
+              className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors"
             />
           </div>
         </div>

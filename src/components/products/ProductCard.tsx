@@ -140,7 +140,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
         {/* Category badge — top left */}
         <div className="absolute top-3 left-3 z-[2]">
-          <span className="inline-block border border-[#85A0B5]/50 bg-black/50 backdrop-blur-sm px-3 py-1.5 font-sans text-[8px] tracking-[0.3em] text-[#C4CDD6] uppercase leading-none">
+          <span className="inline-block border border-[#85A0B5]/50 bg-black/50 backdrop-blur-sm px-3 py-1.5 font-sans text-[10px] tracking-[0.3em] text-[#C4CDD6] uppercase leading-none">
             {categoryName}
           </span>
         </div>
@@ -148,7 +148,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         {/* Sale badge — top right */}
         {product.comparePrice && product.comparePrice > product.price && (
           <div className="absolute top-3 right-3 z-[2]">
-            <span className="inline-block border border-[#85A0B5]/30 bg-black/50 backdrop-blur-sm px-2 py-1 font-sans text-[7px] tracking-[0.2em] text-[#85A0B5] uppercase leading-none">
+            <span className="inline-block border border-[#85A0B5]/30 bg-black/50 backdrop-blur-sm px-2 py-1 font-sans text-[9px] tracking-[0.2em] text-[#85A0B5] uppercase leading-none">
               Sale
             </span>
           </div>
@@ -171,35 +171,35 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       </div>
 
       {/* ── Info ── */}
-      <div className="bg-[#141414] px-4 pt-4 pb-4">
+      <div className="bg-white px-4 pt-4 pb-4">
         {/* Category + badge */}
-        <p className="font-sans text-[8px] tracking-[0.3em] text-[#85A0B5]/70 uppercase mb-2 truncate">
+        <p className="font-sans text-[10px] tracking-[0.3em] text-[#3A5A78]/80 uppercase mb-2 truncate">
           {categoryName}
           {product.badge && (
-            <span className="text-[#5A5A5A]"> · {product.badge}</span>
+            <span className="text-[#9A9A9A]"> · {product.badge}</span>
           )}
         </p>
 
         {/* Product name */}
-        <h3 className="font-serif text-xl text-white leading-snug mb-2 group-hover:text-[#C4CDD6] transition-colors duration-300">
+        <h3 className="font-serif text-xl text-[#0A0A0A] leading-snug mb-2 group-hover:text-[#3A5A78] transition-colors duration-300">
           {product.name}
         </h3>
 
         {/* Short description */}
         {product.shortDesc && (
-          <p className="font-sans text-xs text-[#5A5A5A] leading-relaxed line-clamp-2 mb-4">
+          <p className="font-sans text-xs text-[#6B6B6B] leading-relaxed line-clamp-2 mb-4">
             {product.shortDesc}
           </p>
         )}
 
         {/* Price + action */}
-        <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#1A1A1A]">
+        <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#E4E1DA]">
           <div>
-            <span className="font-sans text-sm text-[#85A0B5]">
+            <span className="font-sans text-sm text-[#3A5A78]">
               From {format(product.price)}
             </span>
             {product.comparePrice && product.comparePrice > product.price && (
-              <span className="block font-sans text-[10px] text-[#3A3A3A] line-through">
+              <span className="block font-sans text-[12px] text-[#9A9A9A] line-through">
                 {format(product.comparePrice)}
               </span>
             )}
@@ -208,7 +208,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           {product.stock === 0 ? (
             <button
               onClick={(e) => e.preventDefault()}
-              className="flex items-center gap-1.5 border border-[#3A3A3A] text-[#5A5A5A] px-3 py-2 font-sans text-[8px] tracking-[0.2em] uppercase hover:border-[#85A0B5] hover:text-[#85A0B5] transition-colors duration-200"
+              className="flex items-center gap-1.5 border border-[#E4E1DA] text-[#9A9A9A] px-3 py-2 font-sans text-[10px] tracking-[0.2em] uppercase hover:border-[#3A5A78] hover:text-[#3A5A78] transition-colors duration-200"
             >
               <Bell className="h-3 w-3" />
               Notify Me
@@ -216,7 +216,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           ) : (
             <button
               onClick={handleAddToCart}
-              className="bg-[#85A0B5] text-black px-4 py-2.5 font-sans text-[9px] tracking-[0.2em] uppercase font-medium hover:bg-[#9DB5C8] transition-colors duration-200"
+              className="bg-[#85A0B5] text-black px-4 py-2.5 font-sans text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[#9DB5C8] transition-colors duration-200"
             >
               Add to Cart
             </button>
