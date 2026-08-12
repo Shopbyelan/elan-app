@@ -87,7 +87,7 @@ export function Footer() {
             </h4>
             <ul className="space-y-3">
               <li className="font-sans text-xs text-[#5A5A5A] leading-relaxed">
-                hello@elan-jewelry.com
+                hello@shopbyelan.com
               </li>
               <li className="font-sans text-xs text-[#5A5A5A] leading-relaxed">
                 +234 800 000 0000
