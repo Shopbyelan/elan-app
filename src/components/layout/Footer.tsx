@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import Image from "next/image";
+import { FooterNewsletterForm } from "./FooterNewsletterForm";
 
 export function Footer() {
   return (
@@ -33,6 +34,7 @@ export function Footer() {
                 </svg>
               </a>
             </div>
+            <FooterNewsletterForm />
           </div>
 
           {/* Collections */}
