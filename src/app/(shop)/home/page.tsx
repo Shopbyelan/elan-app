@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { HeroSection } from "@/components/home/HeroSection";
 import { CollectionSection } from "@/components/products/CollectionSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
-import { FAQSection } from "@/components/home/FAQSection";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
 import { getHomepageCollections } from "@/lib/products";
 
@@ -21,14 +20,38 @@ export default async function HomePage() {
       <div className="bg-[#0D1E2E] border-t border-b border-[#3A5A78]/30 overflow-hidden py-3">
         <div className="animate-marquee">
           {[...Array(3)].map((_, i) => (
-            <span key={i} className="flex gap-10 font-sans text-[12px] tracking-[0.25em] text-[#8A9BAB] uppercase whitespace-nowrap pr-10">
-              <span>Complimentary Gift Wrapping</span>
+            <span key={i} className="flex gap-10 font-sans text-sm tracking-[0.2em] text-[#8A9BAB] uppercase whitespace-nowrap pr-10">
+              <span>Worn by Royalty</span>
               <span className="text-[#4A6B8A]">✦</span>
-              <span>Lifetime Polishing</span>
+              <span>Hallmarked</span>
               <span className="text-[#4A6B8A]">✦</span>
-              <span>Certificate of Authenticity</span>
+              <span>Certified</span>
               <span className="text-[#4A6B8A]">✦</span>
-              <span>Secure Nationwide Delivery</span>
+              <span>All Orders Fully Insured in Transit</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>Free Abuja Collection Available</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>18k Gold</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>925 Sterling Silver</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>Cultivated Diamond</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>Platinum</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>Crystal Moissanite</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>GIA/IGI Certified</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>Hallmarked & Verified</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>Complimentary Gift Wrapping on All Orders</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>Free Abuja Pick-Up</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>Insured Delivery Nationwide</span>
+              <span className="text-[#4A6B8A]">✦</span>
+              <span>First-Year Maintenance Included</span>
               <span className="text-[#4A6B8A]">✦</span>
             </span>
           ))}
@@ -48,7 +71,6 @@ export default async function HomePage() {
       <CollectionSection label="While They Last" heading="Limited Edition" products={c.limitedEdition} viewAllHref="/shop?collection=limited-edition" background="bg" />
 
       <TestimonialsSection />
-      <FAQSection />
       <NewsletterSection />
     </>
   );

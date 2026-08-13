@@ -403,7 +403,7 @@ export default function GuidePage() {
 
           <div className="space-y-px bg-[#E4E1DA]">
 
-            {/* 14-day returns */}
+            {/* 2-day returns */}
             <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
               <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
                 01
@@ -411,11 +411,11 @@ export default function GuidePage() {
               <div className="relative">
                 <span className="text-2xl mb-4 block">↩</span>
                 <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
-                  14-Day Returns
+                  2-Day Returns
                 </p>
                 <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
                   Unworn, unaltered pieces may be returned within{" "}
-                  <strong className="text-[#3A3A3A] font-normal">14 days</strong> of confirmed delivery.
+                  <strong className="text-[#3A3A3A] font-normal">2 days</strong> of confirmed delivery.
                   The piece must be in its original condition, in its original packaging, with all
                   documentation enclosed.
                 </p>

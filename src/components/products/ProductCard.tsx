@@ -8,6 +8,7 @@ import { useWishlistStore } from "@/store/wishlist.store";
 import { useCurrencyStore } from "@/store/currency.store";
 import type { Product } from "@/types";
 import { toast } from "sonner";
+import { formatCategoryTag } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
@@ -91,6 +92,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const wishlisted = isWishlisted(product.id);
   const categorySlug = product.category?.slug;
   const categoryName = product.category?.name || product.material || "";
+  const categoryTag = formatCategoryTag(categoryName);
   const gradientClass = getCategoryGradient(categorySlug, categoryName);
 
   function handleAddToCart(e: React.MouseEvent) {
@@ -141,7 +143,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         {/* Category badge — top left */}
         <div className="absolute top-3 left-3 z-[2]">
           <span className="inline-block border border-[#85A0B5]/50 bg-black/50 backdrop-blur-sm px-3 py-1.5 font-sans text-[10px] tracking-[0.3em] text-[#C4CDD6] uppercase leading-none">
-            {categoryName}
+            {categoryTag}
           </span>
         </div>
 
@@ -173,21 +175,21 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       {/* ── Info ── */}
       <div className="bg-white px-4 pt-4 pb-4">
         {/* Category + badge */}
-        <p className="font-sans text-[10px] tracking-[0.3em] text-[#3A5A78]/80 uppercase mb-2 truncate">
-          {categoryName}
+        <p className="font-sans text-xs tracking-[0.25em] text-[#3A5A78]/80 uppercase mb-2 truncate">
+          {categoryTag}
           {product.badge && (
             <span className="text-[#9A9A9A]"> · {product.badge}</span>
           )}
         </p>
 
         {/* Product name */}
-        <h3 className="font-serif text-xl text-[#0A0A0A] leading-snug mb-2 group-hover:text-[#3A5A78] transition-colors duration-300">
+        <h3 className="font-serif text-2xl text-[#0A0A0A] leading-snug mb-2 group-hover:text-[#3A5A78] transition-colors duration-300">
           {product.name}
         </h3>
 
         {/* Short description */}
         {product.shortDesc && (
-          <p className="font-sans text-xs text-[#6B6B6B] leading-relaxed line-clamp-2 mb-4">
+          <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed line-clamp-2 mb-4">
             {product.shortDesc}
           </p>
         )}
@@ -195,11 +197,11 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         {/* Price + action */}
         <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#E4E1DA]">
           <div>
-            <span className="font-sans text-sm text-[#3A5A78]">
+            <span className="font-sans text-base text-[#3A5A78]">
               From {format(product.price)}
             </span>
             {product.comparePrice && product.comparePrice > product.price && (
-              <span className="block font-sans text-[12px] text-[#9A9A9A] line-through">
+              <span className="block font-sans text-sm text-[#9A9A9A] line-through">
                 {format(product.comparePrice)}
               </span>
             )}
@@ -208,7 +210,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           {product.stock === 0 ? (
             <button
               onClick={(e) => e.preventDefault()}
-              className="flex items-center gap-1.5 border border-[#E4E1DA] text-[#9A9A9A] px-3 py-2 font-sans text-[10px] tracking-[0.2em] uppercase hover:border-[#3A5A78] hover:text-[#3A5A78] transition-colors duration-200"
+              className="flex items-center gap-1.5 border border-[#E4E1DA] text-[#9A9A9A] px-3 py-2 font-sans text-xs tracking-[0.2em] uppercase hover:border-[#3A5A78] hover:text-[#3A5A78] transition-colors duration-200"
             >
               <Bell className="h-3 w-3" />
               Notify Me
@@ -216,7 +218,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           ) : (
             <button
               onClick={handleAddToCart}
-              className="bg-[#85A0B5] text-black px-4 py-2.5 font-sans text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[#9DB5C8] transition-colors duration-200"
+              className="bg-[#85A0B5] text-black px-4 py-2.5 font-sans text-xs tracking-[0.2em] uppercase font-medium hover:bg-[#9DB5C8] transition-colors duration-200"
             >
               Add to Cart
             </button>

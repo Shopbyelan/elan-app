@@ -1,6 +1,11 @@
 ﻿import Link from "next/link";
 import Image from "next/image";
+import { MessageCircle } from "lucide-react";
 import { FooterNewsletterForm } from "./FooterNewsletterForm";
+
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "2347079579907";
+const WHATSAPP_MESSAGE =
+  "Hello! I'm interested in an Élan jewellery piece and would love some guidance.";
 
 export function Footer() {
   return (
@@ -11,7 +16,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={140} height={56} className="h-10 w-auto mb-6" />
-            <p className="font-sans text-xs text-[#5A5A5A] leading-relaxed max-w-48">
+            <p className="font-sans text-sm text-[#5A5A5A] leading-relaxed max-w-48">
               Where rarity becomes ritual. Crafted for those who understand the language of fine jewellery.
             </p>
             <div className="flex gap-4 mt-6">
@@ -39,7 +44,7 @@ export function Footer() {
 
           {/* Collections */}
           <div>
-            <h4 className="font-sans text-[11px] tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
+            <h4 className="font-sans text-xs tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
               Collections
             </h4>
             <ul className="space-y-3">
@@ -51,7 +56,7 @@ export function Footer() {
                 { href: "/shop?category=crystal-moissanite", label: "Crystal Moissanite" },
               ].map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="font-sans text-xs text-[#5A5A5A] hover:text-[#9A9A9A] transition-colors tracking-wider">
+                  <Link href={l.href} className="font-sans text-sm text-[#5A5A5A] hover:text-[#9A9A9A] transition-colors tracking-wider">
                     {l.label}
                   </Link>
                 </li>
@@ -61,7 +66,7 @@ export function Footer() {
 
           {/* Help */}
           <div>
-            <h4 className="font-sans text-[11px] tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
+            <h4 className="font-sans text-xs tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
               Help
             </h4>
             <ul className="space-y-3">
@@ -71,10 +76,10 @@ export function Footer() {
                 { href: "/guide#sizing", label: "Ring Sizing" },
                 { href: "/guide#care", label: "Jewellery Care" },
                 { href: "/guide#returns", label: "Returns Policy" },
-                { href: "/home#faq", label: "FAQ" },
+                { href: "/faq", label: "FAQ" },
               ].map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="font-sans text-xs text-[#5A5A5A] hover:text-[#9A9A9A] transition-colors tracking-wider">
+                  <Link href={l.href} className="font-sans text-sm text-[#5A5A5A] hover:text-[#9A9A9A] transition-colors tracking-wider">
                     {l.label}
                   </Link>
                 </li>
@@ -84,25 +89,34 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-sans text-[11px] tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
+            <h4 className="font-sans text-xs tracking-[0.3em] text-[#85A0B5] uppercase mb-6">
               Contact
             </h4>
             <ul className="space-y-3">
-              <li className="font-sans text-xs text-[#5A5A5A] leading-relaxed">
+              <li className="font-sans text-sm text-[#5A5A5A] leading-relaxed">
                 hello@shopbyelan.com
               </li>
-              <li className="font-sans text-xs text-[#5A5A5A] leading-relaxed">
-                +234 800 000 0000
+              <li className="font-sans text-sm text-[#5A5A5A] leading-relaxed">
+                0707 957 9907
               </li>
-              <li className="font-sans text-xs text-[#5A5A5A] leading-relaxed">
+              <li className="font-sans text-sm text-[#5A5A5A] leading-relaxed">
                 Lagos · Abuja · Port Harcourt
               </li>
             </ul>
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-2 border border-[#25D366]/40 text-[#25D366] px-4 py-2.5 font-sans text-xs tracking-[0.15em] uppercase hover:bg-[#25D366] hover:text-[#0A0A0A] transition-colors duration-200"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Chat on WhatsApp
+            </a>
             <div className="mt-6">
-              <p className="font-sans text-[11px] tracking-[0.2em] text-[#5A5A5A] uppercase mb-2">
+              <p className="font-sans text-xs tracking-[0.2em] text-[#5A5A5A] uppercase mb-2">
                 Certificate of Authenticity
               </p>
-              <p className="font-sans text-[11px] text-[#3A3A3A] leading-relaxed">
+              <p className="font-sans text-xs text-[#3A3A3A] leading-relaxed">
                 Every Élan piece ships with a certificate verifying metal purity and stone specifications.
               </p>
             </div>
@@ -113,7 +127,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-[#141414] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-sans text-[12px] text-[#3A3A3A] tracking-wider">
+          <p className="font-sans text-sm text-[#3A3A3A] tracking-wider">
             © {new Date().getFullYear()} Élan Jewellery. All rights reserved.
           </p>
           <div className="flex gap-6">
@@ -122,7 +136,7 @@ export function Footer() {
               { href: "/terms", label: "Terms" },
               { href: "/cookies", label: "Cookies" },
             ].map((l) => (
-              <Link key={l.href} href={l.href} className="font-sans text-[12px] text-[#3A3A3A] hover:text-[#5A5A5A] tracking-wider transition-colors">
+              <Link key={l.href} href={l.href} className="font-sans text-sm text-[#3A3A3A] hover:text-[#5A5A5A] tracking-wider transition-colors">
                 {l.label}
               </Link>
             ))}

@@ -105,7 +105,7 @@ const faqData = [
     items: [
       {
         q: "Can I return my order?",
-        a: "Élan accepts returns of unworn, unaltered pieces in original packaging within 14 days of confirmed delivery. The piece must be in its original condition with all documentation enclosed. Your Certificate of Authenticity must be included — it is required for all return processing.",
+        a: "Élan accepts returns of unworn, unaltered pieces in original packaging within 2 days of confirmed delivery. The piece must be in its original condition with all documentation enclosed. Your Certificate of Authenticity must be included — it is required for all return processing.",
       },
       {
         q: "What items are non-returnable?",
@@ -258,9 +258,9 @@ export function FAQSection() {
           <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-4">
             Client Services
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-[#0A0A0A]">
+          <h1 className="font-serif text-3xl md:text-4xl text-[#0A0A0A]">
             Frequently Asked <em className="text-[#3A5A78] not-italic">Questions</em>
-          </h2>
+          </h1>
         </div>
 
         {/* ── Mobile layout ── */}

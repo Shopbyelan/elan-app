@@ -162,8 +162,9 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
               <option value="earrings">Earrings</option>
               <option value="ring">Ring</option>
               <option value="bracelet">Bracelet</option>
+              <option value="jewelry-set">Jewelry Set</option>
             </select>
-            <p className="font-sans text-[12px] text-[#9A9A9A] mt-1.5">Used for the Necklaces / Earrings / Rings / Bracelets collections</p>
+            <p className="font-sans text-[12px] text-[#9A9A9A] mt-1.5">Used for the Necklaces / Earrings / Rings / Bracelets / Jewelry Set collections</p>
           </div>
 
           <div className="flex flex-wrap items-center gap-6">

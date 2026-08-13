@@ -77,7 +77,7 @@ export function Header() {
       <div className="bg-[#3A5A78] text-center py-2.5 overflow-hidden">
         <div className="animate-marquee">
           {[...Array(3)].map((_, i) => (
-            <span key={i} className="flex gap-12 font-sans text-[12px] tracking-[0.25em] uppercase font-medium whitespace-nowrap pr-12 text-[#C4CDD6]">
+            <span key={i} className="flex gap-12 font-sans text-sm tracking-[0.2em] uppercase font-medium whitespace-nowrap pr-12 text-[#C4CDD6]">
               <span>Free delivery on orders above ₦100,000</span>
               <span className="text-[#85A0B5]">✦</span>
               <span>Certificate of Authenticity with every piece</span>

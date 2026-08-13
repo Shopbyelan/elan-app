@@ -39,6 +39,10 @@ export function truncate(str: string, length: number): string {
   return str.slice(0, length) + "…";
 }
 
+export function formatCategoryTag(name: string): string {
+  return name === "Sterling Silver" ? "925 Sterling Silver" : name;
+}
+
 export function getInitials(name: string): string {
   return name
     .split(" ")

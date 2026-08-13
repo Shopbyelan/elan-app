@@ -94,10 +94,10 @@ export function CartDrawer() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <p className="font-sans text-[11px] tracking-[0.2em] text-[#85A0B5] uppercase">
+                          <p className="font-sans text-xs tracking-[0.2em] text-[#85A0B5] uppercase">
                             {product.category?.name}
                           </p>
-                          <h3 className="font-serif text-sm text-white mt-0.5 truncate">
+                          <h3 className="font-serif text-base text-white mt-0.5 truncate">
                             {product.name}
                           </h3>
                         </div>
