@@ -4,9 +4,9 @@ const testimonials = [
   {
     quote:
       "I came knowing nothing about moissanite. They explained everything — the fire, the difference, why it suited my lifestyle. I left feeling like the most educated woman in the room.",
-    name: "Dominique A.",
+    name: "Temitope A.",
     product: "Crystal Moissanite Solitaire",
-    location: "Paris",
+    location: "Lagos",
   },
   {
     quote:
@@ -18,9 +18,9 @@ const testimonials = [
   {
     quote:
       "I chose a cultivated diamond because I could not justify the cost or ethics of mining. Élan didn't just sell me a stone. They gave me a story I am genuinely proud to tell.",
-    name: "Taraji N.",
+    name: "Halima Y.",
     product: "Cultivated Diamond Ring",
-    location: "New York",
+    location: "Abuja",
   },
 ];
 

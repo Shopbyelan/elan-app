@@ -113,11 +113,11 @@ const faqData = [
       },
       {
         q: "How do I make an exchange?",
-        a: "Exchanges are accepted within 30 days at the original purchase price toward any equal or higher-value Élan piece. Contact our client services team to initiate — we will guide you through the process.",
+        a: "Exchanges are accepted within 14 days of confirmed delivery, subject to inspection and approval. The piece must be unworn and in its original condition, with the original box, silk pouch, and documentation included. Contact Client Services to initiate — we'll provide a prepaid, insured return label and issue full credit toward an equal- or higher-value Élan piece once approved.",
       },
       {
-        q: "How long does a refund take?",
-        a: "Once a return is received and passes our condition inspection (typically 2–3 business days), refunds are processed within 5–7 business days to the original payment method.",
+        q: "What is Élan's refund policy?",
+        a: "Élan does not offer refunds for change of mind, preference, sizing, or other reasons unrelated to a fault on our part. If an item arrives damaged, defective, incorrect, or materially different from what was ordered due to an error on our part, contact Client Services within 48 hours of delivery with photographs — we will arrange an immediate replacement or a full refund to the original payment method.",
       },
     ],
   },

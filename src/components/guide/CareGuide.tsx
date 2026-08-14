@@ -102,7 +102,7 @@ function AllPiecesContent() {
       num: "02",
       title: "Storage",
       body: [
-        "Store every piece individually in its Élan silk pouch or original box. Storing jewellery together allows harder stones — diamond and moissanite — to scratch softer metals and other gems.",
+        "Store every piece individually in its Élan original box. Silk pouches should be disposed of, but can be kept if needed. Storing jewellery together allows harder stones — diamond and moissanite — to scratch softer metals and other gems.",
         "Keep away from direct sunlight, humidity, and extreme temperature changes. A cool, dry drawer is ideal. Never store in a bathroom.",
       ],
     },

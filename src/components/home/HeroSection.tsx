@@ -28,7 +28,7 @@ export function HeroSection() {
     if (paused) return;
     const id = setInterval(next, SLIDE_DURATION_MS);
     return () => clearInterval(id);
-  }, [paused, next]);
+  }, [paused, next, current]);
 
   return (
     <section
@@ -37,7 +37,7 @@ export function HeroSection() {
       onMouseLeave={() => setPaused(false)}
     >
       {/* Photo carousel */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         <motion.div
           key={current}
           initial={{ opacity: 0 }}

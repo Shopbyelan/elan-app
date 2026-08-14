@@ -440,7 +440,7 @@ export default function GuidePage() {
               </div>
             </div>
 
-            {/* 30-day exchanges */}
+            {/* 14-day exchanges */}
             <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
               <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
                 02
@@ -448,20 +448,23 @@ export default function GuidePage() {
               <div className="relative">
                 <span className="text-2xl mb-4 block">🔄</span>
                 <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
-                  30-Day Exchanges
+                  14-Day Exchanges
                 </p>
                 <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
                   Exchanges are accepted within{" "}
-                  <strong className="text-[#3A3A3A] font-normal">30 days</strong> of confirmed delivery at
-                  the original purchase price, applied as full credit toward any equal or higher-value
-                  Élan piece.
+                  <strong className="text-[#3A3A3A] font-normal">14 days</strong> of confirmed delivery,
+                  subject to inspection and approval.
                 </p>
-                <ul className="space-y-2 mb-5 max-w-2xl">
+                <ul className="space-y-2 mb-4 max-w-2xl">
                   {[
-                    "Contact client services to initiate your exchange",
-                    "We issue a prepaid insured return label",
-                    "Credit applied within 2–3 business days of inspection",
-                    "New piece despatched within 1–2 business days of credit confirmation",
+                    "Contact Client Services within 14 days to initiate your exchange",
+                    "The piece must be unworn and in its original condition, with no signs of wear, alteration, resizing, or damage",
+                    "The original Élan gift box, silk pouch, Certificate of Authenticity, stone specification cards, and grading reports (where applicable) must be included",
+                    "We will provide a prepaid, insured return label",
+                    "Once received, the piece will undergo a professional condition inspection",
+                    "Upon approval, full credit toward an equal- or higher-value Élan piece will be issued",
+                    "Any difference in value for a higher-priced piece must be paid before dispatch",
+                    "Your new piece will be dispatched within 1–2 business days of exchange credit confirmation",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#6B6B6B]">
                       <span className="mt-2 w-1 h-1 rounded-full bg-[#85A0B5]/50 flex-shrink-0" />
@@ -469,9 +472,13 @@ export default function GuidePage() {
                     </li>
                   ))}
                 </ul>
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-5 max-w-2xl">
+                  Pieces that have been worn, resized, altered, repaired by a third party, or otherwise
+                  modified will not be accepted.
+                </p>
                 <Callout label="Good to Know">
-                  If you are unsure between two pieces, we recommend contacting us before ordering.
-                  Our team can help you choose with confidence — and avoid the need to exchange at all.
+                  If you are unsure between two pieces, we recommend contacting Client Services before
+                  ordering. Our team will be pleased to assist you in selecting the right piece.
                 </Callout>
               </div>
             </div>
@@ -514,26 +521,33 @@ export default function GuidePage() {
               </div>
             </div>
 
-            {/* Refund processing */}
+            {/* Refunds */}
             <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
               <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
                 04
               </span>
               <div className="relative">
-                <span className="text-2xl mb-4 block">💳</span>
+                <span className="text-2xl mb-4 block">🔴</span>
                 <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
-                  Refund Processing
+                  Refunds
                 </p>
                 <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
-                  Once your return is received and passes our condition inspection — typically within{" "}
-                  <strong className="text-[#3A3A3A] font-normal">2–3 business days</strong> of arrival —
-                  your refund is processed to the original payment method.
+                  Élan does not offer refunds for change of mind, preference, sizing, or other reasons
+                  unrelated to a fault on our part.
+                </p>
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
+                  If an item arrives damaged, defective, incorrect, or materially different from what was
+                  ordered due to an error on our part, please contact Client Services within{" "}
+                  <strong className="text-[#3A3A3A] font-normal">48 hours</strong> of confirmed delivery
+                  with clear photographs of the piece and its packaging.
+                </p>
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-2 max-w-2xl">
+                  Following assessment and approval, Élan will arrange either:
                 </p>
                 <ul className="space-y-2 mb-4 max-w-2xl">
                   {[
-                    "Credit/debit card: 5–7 business days",
-                    "PayPal / digital wallet: 3–5 business days",
-                    "Bank transfer: 5–10 business days",
+                    "An immediate replacement at no additional cost; or",
+                    "A full refund to the original payment method, including original shipping costs where the issue is due to an error on our part",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#6B6B6B]">
                       <span className="mt-2 w-1 h-1 rounded-full bg-[#85A0B5]/50 flex-shrink-0" />
@@ -541,14 +555,16 @@ export default function GuidePage() {
                     </li>
                   ))}
                 </ul>
-                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-5 max-w-2xl">
-                  You will receive an email confirmation at each stage. Original shipping fees are
-                  non-refundable unless the return is due to a fault on our part.
+                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
+                  For approved refunds, processing begins once the item is received and passes our
+                  condition inspection. You will receive email confirmation at each stage of the
+                  process. Refund processing times depend on the original payment method and your
+                  financial institution.
                 </p>
                 <div className="max-w-2xl">
-                  <Callout label="Damaged on Arrival?">
-                    Contact us within 48 hours with photographs. We will arrange an immediate
-                    replacement or full refund — including original shipping.
+                  <Callout label="Please Note">
+                    Refunds are not available for items that have been worn, altered, resized, damaged
+                    after delivery, or repaired by a third party.
                   </Callout>
                 </div>
               </div>
