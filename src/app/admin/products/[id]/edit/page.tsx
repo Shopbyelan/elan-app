@@ -1,5 +1,5 @@
 ﻿import { prisma } from "@/lib/prisma";
-import { updateProduct, deleteProductImage } from "@/actions/product.actions";
+import { updateProduct, deleteProductImage, addProductImages } from "@/actions/product.actions";
 import { Button } from "@/components/ui/button";
 import { ImageUploader } from "@/components/admin/ImageUploader";
 import { notFound } from "next/navigation";
@@ -77,7 +77,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
 
         {/* Upload new images */}
         {remainingSlots > 0 && (
-          <form action={updateProduct}>
+          <form action={addProductImages}>
             <input type="hidden" name="id" value={product.id} />
             <ImageUploader maxImages={4} existingCount={product.images.length} />
             <button type="submit" className="mt-3 font-sans text-[12px] tracking-[0.2em] text-[#3A5A78] uppercase hover:underline">

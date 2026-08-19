@@ -21,8 +21,12 @@ export function formatDate(date: Date | string): string {
   }).format(new Date(date));
 }
 
+const COMBINING_DIACRITICS = new RegExp("[\\u0300-\\u036f]", "g");
+
 export function slugify(text: string): string {
   return text
+    .normalize("NFKD")
+    .replace(COMBINING_DIACRITICS, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");

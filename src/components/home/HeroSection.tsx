@@ -7,12 +7,26 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const SLIDES = [
-  "https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&w=2400&q=90",
-  "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=2400&q=90",
-  "https://images.unsplash.com/photo-1573408301185-9519eb7ed3ab?auto=format&fit=crop&w=2400&q=90",
-  "https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?auto=format&fit=crop&w=2400&q=90",
-  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=2400&q=90",
+interface Slide {
+  src: string;
+  /**
+   * These are portrait/square campaign photos being object-cover cropped into
+   * a full-bleed frame, so the crop axis flips between breakpoints: on a
+   * narrow mobile viewport the image is height-constrained (full height
+   * shown, sides cropped), on a wide desktop viewport it's width-constrained
+   * (full width shown, top/bottom cropped). Each needs its own focal point
+   * per axis, hence separate Tailwind object-position classes per breakpoint
+   * rather than a single object-center.
+   */
+  positionClassName: string;
+}
+
+const SLIDES: Slide[] = [
+  { src: "/hero-flower-shell.png", positionClassName: "object-[50%_center] md:object-[center_98%]" },
+  { src: "/hero-profile-earring.jpg", positionClassName: "object-[62%_center] md:object-[center_57%]" },
+  { src: "/hero-hand-ring.png", positionClassName: "object-[50%_center] md:object-[center_40%]" },
+  { src: "/hero-heart-studs-stone.png", positionClassName: "object-[42%_center] md:object-[center_45%]" },
+  { src: "/hero-rings-stone.png", positionClassName: "object-[58%_center] md:object-[center_55%]" },
 ];
 
 const SLIDE_DURATION_MS = 6000;
@@ -47,10 +61,10 @@ export function HeroSection() {
           className="absolute inset-0 z-0"
         >
           <Image
-            src={SLIDES[current]}
+            src={SLIDES[current].src}
             alt="Élan fine jewellery"
             fill
-            className="object-cover object-center"
+            className={`object-cover ${SLIDES[current].positionClassName}`}
             priority={current === 0}
             sizes="100vw"
           />

@@ -87,10 +87,6 @@ export async function updateProduct(formData: FormData) {
   const isBridal = formData.get("isBridal") === "on";
   const isLimitedEdition = formData.get("isLimitedEdition") === "on";
 
-  const imageUrls = formData.getAll("imageUrls") as string[];
-  const imagePublicIds = formData.getAll("imagePublicIds") as string[];
-  const imagePrimary = formData.getAll("imagePrimary") as string[];
-
   await prisma.product.update({
     where: { id },
     data: {
@@ -98,16 +94,6 @@ export async function updateProduct(formData: FormData) {
       shortDesc, stock, material: material || null,
       isFeatured, badge: badge || null,
       productType: productType || null, isBridal, isLimitedEdition,
-      ...(imageUrls.length > 0 && {
-        images: {
-          create: imageUrls.map((url, i) => ({
-            url,
-            publicId: imagePublicIds[i] || null,
-            isPrimary: imagePrimary[i] === "true",
-            sortOrder: i,
-          })),
-        },
-      }),
     },
   });
 
@@ -115,6 +101,39 @@ export async function updateProduct(formData: FormData) {
   revalidatePath("/admin/products");
   if (updated) revalidatePath(`/product/${updated.slug}`);
   redirect("/admin/products");
+}
+
+export async function addProductImages(formData: FormData) {
+  await requireAdmin();
+  const productId = formData.get("id") as string;
+
+  const imageUrls = formData.getAll("imageUrls") as string[];
+  const imagePublicIds = formData.getAll("imagePublicIds") as string[];
+  const imagePrimary = formData.getAll("imagePrimary") as string[];
+
+  if (imageUrls.length === 0) return;
+
+  const existingCount = await prisma.productImage.count({ where: { productId } });
+
+  await prisma.product.update({
+    where: { id: productId },
+    data: {
+      images: {
+        create: imageUrls.map((url, i) => ({
+          url,
+          publicId: imagePublicIds[i] || null,
+          isPrimary: imagePrimary[i] === "true",
+          sortOrder: existingCount + i,
+        })),
+      },
+    },
+  });
+
+  const product = await prisma.product.findUnique({ where: { id: productId }, select: { slug: true } });
+  revalidatePath("/admin/products");
+  revalidatePath(`/admin/products/${productId}/edit`);
+  if (product) revalidatePath(`/product/${product.slug}`);
+  redirect(`/admin/products/${productId}/edit`);
 }
 
 export async function deleteProductImage(formData: FormData) {

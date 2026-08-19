@@ -18,9 +18,13 @@ export default async function HomePage() {
 
       {/* Ticker bar */}
       <div className="bg-[#0D1E2E] border-t border-b border-[#3A5A78]/30 overflow-hidden py-3">
-        <div className="animate-marquee">
-          {[...Array(3)].map((_, i) => (
-            <span key={i} className="flex gap-10 font-sans text-sm tracking-[0.2em] text-[#8A9BAB] uppercase whitespace-nowrap pr-10">
+        <div
+          className="animate-marquee"
+          role="group"
+          aria-label="Worn by Royalty. Hallmarked. Certified. All orders fully insured in transit. Free Abuja collection available. 18k Gold, 925 Sterling Silver, Cultivated Diamond, Platinum, Crystal Moissanite. GIA/IGI Certified. Hallmarked and verified. Complimentary gift wrapping on all orders. Free Abuja pick-up. Insured delivery nationwide. First-year maintenance included."
+        >
+          {[...Array(2)].map((_, i) => (
+            <span key={i} aria-hidden="true" className="flex gap-10 font-sans text-sm tracking-[0.2em] text-[#8A9BAB] uppercase whitespace-nowrap pr-10">
               <span>Worn by Royalty</span>
               <span className="text-[#4A6B8A]">✦</span>
               <span>Hallmarked</span>
