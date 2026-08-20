@@ -10,7 +10,7 @@ import { X } from "lucide-react";
 async function getProduct(id: string) {
   return prisma.product.findUnique({
     where: { id },
-    include: { images: { orderBy: { sortOrder: "asc" } }, category: true },
+    include: { images: { orderBy: { sortOrder: "asc" } }, categories: true },
   });
 }
 
@@ -103,19 +103,31 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
             <input name="name" required defaultValue={product.name} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Category *</label>
-              <select name="categoryId" required defaultValue={product.categoryId} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors appearance-none">
-                {categories.map((c) => (
-                  <option key={c.id} value={c.id}>{c.name}</option>
-                ))}
-              </select>
+          <div>
+            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Categories *</label>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 px-4 py-3 bg-[#F7F5F2] border border-[#E4E1DA]">
+              {categories.map((c) => (
+                <label key={c.id} className="flex items-center gap-2 font-sans text-sm text-[#3A3A3A] cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="categoryIds"
+                    value={c.id}
+                    defaultChecked={product.categories.some((pc) => pc.id === c.id)}
+                    className="h-4 w-4 accent-[#3A5A78]"
+                  />
+                  {c.name}
+                </label>
+              ))}
+              {categories.length === 0 && (
+                <p className="font-sans text-sm text-[#9A9A9A]">No categories yet — create one first.</p>
+              )}
             </div>
-            <div>
-              <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">SKU</label>
-              <input name="sku" defaultValue={product.sku || ""} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
-            </div>
+            <p className="font-sans text-[12px] text-[#9A9A9A] mt-1.5">A product can belong to more than one category (e.g. 18k Gold and Platinum).</p>
+          </div>
+
+          <div>
+            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">SKU</label>
+            <input name="sku" defaultValue={product.sku || ""} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors" />
           </div>
 
           <div className="grid grid-cols-3 gap-4">

@@ -90,8 +90,9 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
     null;
 
   const wishlisted = isWishlisted(product.id);
-  const categorySlug = product.category?.slug;
-  const categoryName = product.category?.name || product.material || "";
+  const primaryCategory = product.categories?.[0];
+  const categorySlug = primaryCategory?.slug;
+  const categoryName = primaryCategory?.name || product.material || "";
   const categoryTag = formatCategoryTag(categoryName);
   const gradientClass = getCategoryGradient(categorySlug, categoryName);
 

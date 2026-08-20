@@ -37,6 +37,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
   const { format } = useCurrencyStore();
   const wishlisted = isWishlisted(product.id);
   const images = product.images.length > 0 ? product.images : [{ url: "/placeholder.jpg", alt: product.name }];
+  const primaryCategory = product.categories?.[0];
   const avgRating = product.reviews.length > 0
     ? product.reviews.reduce((a, r) => a + r.rating, 0) / product.reviews.length
     : 0;
@@ -81,8 +82,8 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
       <nav className="flex items-center gap-2 font-sans text-sm tracking-[0.15em] text-[#9A9A9A] uppercase mb-8">
         <Link href="/shop" className="hover:text-[#3A5A78] transition-colors">Collections</Link>
         <span>/</span>
-        <Link href={`/shop?category=${product.category?.slug}`} className="hover:text-[#3A5A78] transition-colors">
-          {product.category?.name}
+        <Link href={`/shop?category=${primaryCategory?.slug}`} className="hover:text-[#3A5A78] transition-colors">
+          {primaryCategory?.name}
         </Link>
         <span>/</span>
         <span className="text-[#6B6B6B]">{product.name}</span>
@@ -197,10 +198,10 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
           {/* Category & rating */}
           <div className="flex items-center justify-between mb-4">
             <Link
-              href={`/shop?category=${product.category?.slug}`}
+              href={`/shop?category=${primaryCategory?.slug}`}
               className="font-sans text-sm tracking-[0.3em] text-[#3A5A78] uppercase hover:text-[#9DB5C8] transition-colors"
             >
-              {product.category?.name && formatCategoryTag(product.category.name)}
+              {primaryCategory?.name && formatCategoryTag(primaryCategory.name)}
             </Link>
             {avgRating > 0 && (
               <div className="flex items-center gap-1.5">

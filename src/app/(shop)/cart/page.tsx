@@ -57,7 +57,7 @@ export default function CartPage() {
                 </Link>
                 <div className="flex-1 min-w-0">
                   <p className="font-sans text-xs tracking-[0.25em] text-[#3A5A78] uppercase mb-1">
-                    {product.category?.name}
+                    {product.categories?.[0]?.name}
                   </p>
                   <Link href={`/product/${product.slug}`}>
                     <h3 className="font-serif text-lg text-[#0A0A0A] hover:text-[#3A5A78] transition-colors">

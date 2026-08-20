@@ -14,7 +14,7 @@ async function getProducts() {
     return await prisma.product.findMany({
       include: {
         images: true,
-        category: true,
+        categories: true,
         _count: { select: { orderItems: true, waitlistEntries: true } },
       },
       orderBy: { createdAt: "desc" },
@@ -70,7 +70,9 @@ export default async function AdminProductsPage() {
                     </div>
                   </td>
                   <td className="px-5 py-4 font-sans text-xs text-[#6B6B6B]">
-                    {product.category?.name || "—"}
+                    {product.categories.length > 0
+                      ? product.categories.map((c) => c.name).join(", ")
+                      : "—"}
                   </td>
                   <td className="px-5 py-4 font-sans text-xs text-[#3A5A78]">
                     {formatPrice(product.price)}

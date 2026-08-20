@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
     where: { userId: session.user.id },
     include: {
       product: {
-        include: { images: true, category: true },
+        include: { images: true, categories: true },
       },
     },
     orderBy: { createdAt: "desc" },

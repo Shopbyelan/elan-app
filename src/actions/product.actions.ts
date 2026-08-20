@@ -26,7 +26,7 @@ export async function createProduct(formData: FormData) {
   await requireAdmin();
 
   const name = formData.get("name") as string;
-  const categoryId = formData.get("categoryId") as string;
+  const categoryIds = formData.getAll("categoryIds") as string[];
   const price = parseFloat(formData.get("price") as string);
   const comparePrice = formData.get("comparePrice") ? parseFloat(formData.get("comparePrice") as string) : null;
   const description = formData.get("description") as string;
@@ -50,10 +50,11 @@ export async function createProduct(formData: FormData) {
 
   const product = await prisma.product.create({
     data: {
-      name, slug, categoryId, price, comparePrice, description,
+      name, slug, price, comparePrice, description,
       shortDesc, stock, sku: sku || null, material: material || null,
       isFeatured, badge: badge || null,
       productType: productType || null, isBridal, isLimitedEdition,
+      categories: { connect: categoryIds.map((id) => ({ id })) },
       images: {
         create: imageUrls.map((url, i) => ({
           url,
@@ -74,7 +75,7 @@ export async function updateProduct(formData: FormData) {
   const id = formData.get("id") as string;
 
   const name = formData.get("name") as string;
-  const categoryId = formData.get("categoryId") as string;
+  const categoryIds = formData.getAll("categoryIds") as string[];
   const price = parseFloat(formData.get("price") as string);
   const comparePrice = formData.get("comparePrice") ? parseFloat(formData.get("comparePrice") as string) : null;
   const description = formData.get("description") as string;
@@ -90,10 +91,11 @@ export async function updateProduct(formData: FormData) {
   await prisma.product.update({
     where: { id },
     data: {
-      name, categoryId, price, comparePrice, description,
+      name, price, comparePrice, description,
       shortDesc, stock, material: material || null,
       isFeatured, badge: badge || null,
       productType: productType || null, isBridal, isLimitedEdition,
+      categories: { set: categoryIds.map((id) => ({ id })) },
     },
   });
 

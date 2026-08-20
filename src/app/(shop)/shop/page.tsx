@@ -66,11 +66,11 @@ async function getProducts(params: { category?: string; type?: string; collectio
     return await prisma.product.findMany({
       where: {
         isActive: true,
-        ...(params.category ? { category: { slug: params.category } } : {}),
+        ...(params.category ? { categories: { some: { slug: params.category } } } : {}),
         ...(params.type ? { productType: params.type } : {}),
         ...searchFilter,
       },
-      include: { images: true, category: true },
+      include: { images: true, categories: true },
       orderBy,
     });
   } catch {

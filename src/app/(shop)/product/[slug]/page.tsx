@@ -12,7 +12,7 @@ async function getProduct(slug: string) {
     where: { slug, isActive: true },
     include: {
       images: { orderBy: { sortOrder: "asc" } },
-      category: true,
+      categories: true,
       reviews: {
         where: { isVisible: true },
         include: { user: { select: { name: true, image: true } } },
@@ -24,10 +24,11 @@ async function getProduct(slug: string) {
   });
 }
 
-async function getRelatedProducts(categoryId: string, excludeId: string) {
+async function getRelatedProducts(categoryIds: string[], excludeId: string) {
+  if (categoryIds.length === 0) return [];
   return prisma.product.findMany({
-    where: { categoryId, isActive: true, id: { not: excludeId } },
-    include: { images: true, category: true },
+    where: { categories: { some: { id: { in: categoryIds } } }, isActive: true, id: { not: excludeId } },
+    include: { images: true, categories: true },
     take: 4,
   });
 }
@@ -67,7 +68,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let related: any[] = [];
   try {
-    related = await getRelatedProducts(product.categoryId, product.id);
+    related = await getRelatedProducts(product.categories.map((c: { id: string }) => c.id), product.id);
   } catch {
     // ignore
   }

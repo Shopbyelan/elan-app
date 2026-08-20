@@ -15,7 +15,7 @@ async function getWaitlistItems(userId: string) {
     where: { userId },
     include: {
       product: {
-        include: { images: true, category: true },
+        include: { images: true, categories: true },
       },
     },
     orderBy: { createdAt: "desc" },
@@ -95,7 +95,7 @@ export default async function WaitlistPage() {
                 {/* Info */}
                 <div className="flex-1 min-w-0">
                   <p className="font-sans text-[11px] tracking-[0.25em] text-[#3A5A78] uppercase mb-0.5">
-                    {product.category?.name}
+                    {product.categories?.[0]?.name}
                   </p>
                   <Link href={`/product/${product.slug}`}>
                     <h3 className="font-serif text-base text-[#0A0A0A] hover:text-[#3A5A78] transition-colors truncate">

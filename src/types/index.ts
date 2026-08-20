@@ -35,8 +35,7 @@ export interface Product {
   dimensions: string | null;
   careInstr: string | null;
   badge: string | null;
-  categoryId: string;
-  category: Category;
+  categories: Category[];
   images: ProductImage[];
   _count?: { reviews: number };
   averageRating?: number;

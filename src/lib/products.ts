@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 
-const PRODUCT_INCLUDE = { images: true, category: true } satisfies Prisma.ProductInclude;
+const PRODUCT_INCLUDE = { images: true, categories: true } satisfies Prisma.ProductInclude;
 
 export type ProductWithRelations = Prisma.ProductGetPayload<{ include: typeof PRODUCT_INCLUDE }>;
 
@@ -47,7 +47,7 @@ export const getLimitedEditionProducts = (opts?: CollectionOpts) =>
 export const getGiftsUnder200k = (opts?: CollectionOpts) =>
   getProductsByFilter({ price: { lte: 200000 } }, opts);
 export const getMoissaniteProducts = (opts?: CollectionOpts) =>
-  getProductsByFilter({ category: { slug: "crystal-moissanite" } }, opts);
+  getProductsByFilter({ categories: { some: { slug: "crystal-moissanite" } } }, opts);
 export const getProductsByType = (
   type: "necklace" | "earrings" | "ring" | "bracelet",
   opts?: CollectionOpts
@@ -123,7 +123,7 @@ export async function getHomepageCollections() {
     earrings: take(allActive.filter((p) => p.productType === "earrings")),
     rings: take(allActive.filter((p) => p.productType === "ring")),
     bracelets: take(allActive.filter((p) => p.productType === "bracelet")),
-    moissanite: take(allActive.filter((p) => p.category?.slug === "crystal-moissanite")),
+    moissanite: take(allActive.filter((p) => p.categories.some((c) => c.slug === "crystal-moissanite"))),
     gifts: take(allActive.filter((p) => p.price <= 200000)),
     bridal: take(allActive.filter((p) => p.isBridal)),
     limitedEdition: take(allActive.filter((p) => p.isLimitedEdition)),

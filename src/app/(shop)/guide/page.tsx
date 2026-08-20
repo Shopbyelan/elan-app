@@ -164,7 +164,6 @@ export default function GuidePage() {
                 </div>
                 <DocumentsBox
                   items={[
-                    "Élan Stone Specification Card",
                     "Élan Certificate of Authenticity",
                     "Metal hallmark documentation",
                     "Care guide",

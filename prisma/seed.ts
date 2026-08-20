@@ -135,7 +135,7 @@ async function main() {
       where: { slug: data.slug },
       create: {
         ...data,
-        categoryId: createdCategories[categorySlug],
+        categories: { connect: { id: createdCategories[categorySlug] } },
         images: {
           create: [
             {
