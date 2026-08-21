@@ -95,8 +95,10 @@ export function HeroSection() {
         <ChevronRight className="h-4 w-4" />
       </button>
 
-      {/* Headline + CTA */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-end text-center px-6 pb-32 md:pb-40">
+      {/* Headline + CTA — pointer-events-none so this full-height wrapper doesn't
+          steal clicks meant for the arrows/dots sitting at the same z-index;
+          only the actual CTA button opts back in. */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-end text-center px-6 pb-32 md:pb-40 pointer-events-none">
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -112,6 +114,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
+          className="pointer-events-auto"
         >
           <Button variant="gold" size="lg" asChild>
             <Link href="/shop">Shop Collection</Link>

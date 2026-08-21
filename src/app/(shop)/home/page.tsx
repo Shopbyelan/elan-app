@@ -21,12 +21,10 @@ export default async function HomePage() {
         <div
           className="animate-marquee"
           role="group"
-          aria-label="Worn by Royalty. Hallmarked. Certified. All orders fully insured in transit. Free Abuja collection available. 18k Gold, 925 Sterling Silver, Cultivated Diamond, Platinum, Crystal Moissanite. GIA/IGI Certified. Hallmarked and verified. Complimentary gift wrapping on all orders. Free Abuja pick-up. Insured delivery nationwide. First-year maintenance included."
+          aria-label="Hallmarked. Certified. All orders fully insured in transit. Free Abuja collection available. 18k Gold, 925 Sterling Silver, Cultivated Diamond, Platinum, Crystal Moissanite. Hallmarked and verified. Complimentary gift wrapping on all orders. Free Abuja pick-up. Insured delivery nationwide. First-year maintenance included."
         >
           {[...Array(2)].map((_, i) => (
             <span key={i} aria-hidden="true" className="flex gap-10 font-sans text-sm tracking-[0.2em] text-[#8A9BAB] uppercase whitespace-nowrap pr-10">
-              <span>Worn by Royalty</span>
-              <span className="text-[#4A6B8A]">✦</span>
               <span>Hallmarked</span>
               <span className="text-[#4A6B8A]">✦</span>
               <span>Certified</span>
@@ -45,8 +43,6 @@ export default async function HomePage() {
               <span className="text-[#4A6B8A]">✦</span>
               <span>Crystal Moissanite</span>
               <span className="text-[#4A6B8A]">✦</span>
-              <span>GIA/IGI Certified</span>
-              <span className="text-[#4A6B8A]">✦</span>
               <span>Hallmarked & Verified</span>
               <span className="text-[#4A6B8A]">✦</span>
               <span>Complimentary Gift Wrapping on All Orders</span>
@@ -64,15 +60,15 @@ export default async function HomePage() {
 
       <CollectionSection label="Curated for You" heading="Featured Pieces" products={c.featured} viewAllHref="/shop?collection=featured" background="bg" />
       <CollectionSection label="Just In" heading="New Arrivals" products={c.newArrivals} viewAllHref="/shop?collection=new-arrivals" background="bg-alt" />
-      <CollectionSection label="Most Loved" heading="Best Sellers" products={c.bestSellers} viewAllHref="/shop?collection=best-sellers" background="bg" />
-      <CollectionSection label="Piece Type" heading="Necklaces" products={c.necklaces} viewAllHref="/shop?type=necklace" background="bg-alt" />
-      <CollectionSection label="Piece Type" heading="Earrings" products={c.earrings} viewAllHref="/shop?type=earrings" background="bg" />
-      <CollectionSection label="Piece Type" heading="Rings" products={c.rings} viewAllHref="/shop?type=ring" background="bg-alt" />
-      <CollectionSection label="Piece Type" heading="Bracelets" products={c.bracelets} viewAllHref="/shop?type=bracelet" background="bg" />
-      <CollectionSection label="Crystal Moissanite" heading="Moissanite" products={c.moissanite} viewAllHref="/shop?category=crystal-moissanite" background="bg-alt" />
-      <CollectionSection label="Thoughtful & Timeless" heading="Gifts Under ₦200,000" products={c.gifts} viewAllHref="/shop?collection=gifts-under-200k" background="bg" />
-      <CollectionSection label="For the Aisle" heading="Bridal" products={c.bridal} viewAllHref="/shop?collection=bridal" background="bg-alt" />
-      <CollectionSection label="While They Last" heading="Limited Edition" products={c.limitedEdition} viewAllHref="/shop?collection=limited-edition" background="bg" />
+      {/* Best Sellers temporarily removed — ranking isn't meaningful yet with current order volume */}
+      <CollectionSection label="Piece Type" heading="Necklaces" products={c.necklaces} viewAllHref="/shop?type=necklace" background="bg" />
+      <CollectionSection label="Piece Type" heading="Earrings" products={c.earrings} viewAllHref="/shop?type=earrings" background="bg-alt" />
+      <CollectionSection label="Piece Type" heading="Rings" products={c.rings} viewAllHref="/shop?type=ring" background="bg" />
+      <CollectionSection label="Piece Type" heading="Bracelets" products={c.bracelets} viewAllHref="/shop?type=bracelet" background="bg-alt" />
+      <CollectionSection label="Crystal Moissanite" heading="Moissanite" products={c.moissanite} viewAllHref="/shop?category=crystal-moissanite" background="bg" />
+      <CollectionSection label="Thoughtful & Timeless" heading="Gifts Under ₦200,000" products={c.gifts} viewAllHref="/shop?collection=gifts-under-200k" background="bg-alt" />
+      <CollectionSection label="For the Aisle" heading="Bridal" products={c.bridal} viewAllHref="/shop?collection=bridal" background="bg" />
+      <CollectionSection label="While They Last" heading="Limited Edition" products={c.limitedEdition} viewAllHref="/shop?collection=limited-edition" background="bg-alt" />
 
       <TestimonialsSection />
       <NewsletterSection />

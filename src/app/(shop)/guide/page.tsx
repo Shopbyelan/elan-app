@@ -385,13 +385,13 @@ export default function GuidePage() {
 
       <Divider />
 
-      {/* ══ 4. RETURN & EXCHANGE POLICY ════════════════════════════════ */}
+      {/* ══ 4. RETURN POLICY ════════════════════════════════════════════ */}
       <section id="returns" className="py-20 md:py-32 px-4 sm:px-6 bg-[#F7F5F2]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <SectionLabel>Shop With Confidence</SectionLabel>
             <SectionTitle>
-              Return &amp; Exchange{" "}
+              Return{" "}
               <em className="not-italic text-[#3A5A78]">Policy</em>
             </SectionTitle>
             <p className="font-serif text-base md:text-lg text-[#9A9A9A] italic leading-relaxed max-w-2xl mx-auto mt-6">
@@ -439,53 +439,10 @@ export default function GuidePage() {
               </div>
             </div>
 
-            {/* 14-day exchanges */}
-            <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
-              <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
-                02
-              </span>
-              <div className="relative">
-                <span className="text-2xl mb-4 block">🔄</span>
-                <p className="font-sans text-[11px] tracking-[0.35em] text-[#3A5A78] uppercase mb-3">
-                  14-Day Exchanges
-                </p>
-                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
-                  Exchanges are accepted within{" "}
-                  <strong className="text-[#3A3A3A] font-normal">14 days</strong> of confirmed delivery,
-                  subject to inspection and approval.
-                </p>
-                <ul className="space-y-2 mb-4 max-w-2xl">
-                  {[
-                    "Contact Client Services within 14 days to initiate your exchange",
-                    "The piece must be unworn and in its original condition, with no signs of wear, alteration, resizing, or damage",
-                    "The original Élan gift box, silk pouch, Certificate of Authenticity, stone specification cards, and grading reports (where applicable) must be included",
-                    "We will provide a prepaid, insured return label",
-                    "Once received, the piece will undergo a professional condition inspection",
-                    "Upon approval, full credit toward an equal- or higher-value Élan piece will be issued",
-                    "Any difference in value for a higher-priced piece must be paid before dispatch",
-                    "Your new piece will be dispatched within 1–2 business days of exchange credit confirmation",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-[#6B6B6B]">
-                      <span className="mt-2 w-1 h-1 rounded-full bg-[#85A0B5]/50 flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-5 max-w-2xl">
-                  Pieces that have been worn, resized, altered, repaired by a third party, or otherwise
-                  modified will not be accepted.
-                </p>
-                <Callout label="Good to Know">
-                  If you are unsure between two pieces, we recommend contacting Client Services before
-                  ordering. Our team will be pleased to assist you in selecting the right piece.
-                </Callout>
-              </div>
-            </div>
-
             {/* Final sale items */}
             <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
               <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
-                03
+                02
               </span>
               <div className="relative">
                 <span className="text-2xl mb-4 block">⚠️</span>
@@ -495,7 +452,7 @@ export default function GuidePage() {
                 <p className="font-sans text-sm text-[#6B6B6B] leading-relaxed mb-4 max-w-2xl">
                   The following are{" "}
                   <strong className="text-[#3A3A3A] font-normal">
-                    final sale and cannot be returned or exchanged
+                    final sale and cannot be returned
                   </strong>{" "}
                   under any circumstances:
                 </p>
@@ -523,7 +480,7 @@ export default function GuidePage() {
             {/* Refunds */}
             <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
               <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
-                04
+                03
               </span>
               <div className="relative">
                 <span className="text-2xl mb-4 block">🔴</span>
@@ -572,7 +529,7 @@ export default function GuidePage() {
             {/* Complimentary ring resizing */}
             <div className="relative bg-[#F7F5F2] p-6 md:p-8 overflow-hidden">
               <span className="absolute top-4 right-5 font-serif text-7xl md:text-8xl text-[#E4E1DA] leading-none select-none pointer-events-none">
-                05
+                04
               </span>
               <div className="relative">
                 <span className="text-2xl mb-4 block">💍</span>
@@ -625,7 +582,7 @@ export default function GuidePage() {
             { href: "#authentication", label: "Authentication" },
             { href: "#sizing", label: "Ring Sizing" },
             { href: "#care", label: "Care Guide" },
-            { href: "#returns", label: "Returns & Exchanges" },
+            { href: "#returns", label: "Return Policy" },
             { href: "#promise", label: "The Élan Promise" },
           ].map((link) => (
             <Link

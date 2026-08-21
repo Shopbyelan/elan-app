@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { NewsletterPopup } from "@/components/common/NewsletterPopup";
-import { TawkChat } from "@/components/common/TawkChat";
+import { ChatWidget } from "@/components/common/ChatWidget";
 
 export default function ShopLayout({
   children,
@@ -14,7 +14,7 @@ export default function ShopLayout({
       <main className="flex-1">{children}</main>
       <Footer />
       <NewsletterPopup />
-      <TawkChat />
+      <ChatWidget />
     </>
   );
 }

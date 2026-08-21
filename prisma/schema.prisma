@@ -296,6 +296,15 @@ model Newsletter {
   createdAt DateTime @default(now())
 }
 
+/// Abuse-prevention counters for the AI chat widget. Bucketed keys (e.g.
+/// "ip:1.2.3.4:2026-08-21T14" or "global:2026-08-21") let a single upsert
+/// increment-or-create the bucket. Stores counts only — never message content.
+model ChatRateLimit {
+  id        String   @id
+  count     Int      @default(1)
+  updatedAt DateTime @updatedAt
+}
+
 model WaitlistEntry {
   id        String   @id @default(cuid())
   email     String

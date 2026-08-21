@@ -22,13 +22,6 @@ const cookieGroups = [
       "Remember your preferences, such as recently viewed items, to make your visit smoother on return.",
     examples: "Preference and display-state cookies",
   },
-  {
-    name: "Third-Party Services",
-    required: false,
-    purpose:
-      "Set by services we embed directly into the Site to provide specific features — such as live chat support. These providers may set their own cookies once loaded.",
-    examples: "Tawk.to (live chat widget)",
-  },
 ];
 
 export default function CookiePolicyPage() {
@@ -80,6 +73,11 @@ export default function CookiePolicyPage() {
               </div>
             ))}
           </div>
+          <LP>
+            Our AI chat concierge keeps your conversation in your browser&apos;s session storage
+            (not a cookie) so it&apos;s there if you navigate between pages, and clears automatically
+            when you close the tab. It is never sent to Élan&apos;s own database.
+          </LP>
         </LSection>
 
         <LSection num="03" title="Payment Processing">

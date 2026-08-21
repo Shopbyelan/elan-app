@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 
-const PRODUCT_INCLUDE = { images: true, categories: true } satisfies Prisma.ProductInclude;
+export const PRODUCT_INCLUDE = { images: true, categories: true } satisfies Prisma.ProductInclude;
 
 export type ProductWithRelations = Prisma.ProductGetPayload<{ include: typeof PRODUCT_INCLUDE }>;
 

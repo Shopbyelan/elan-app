@@ -74,7 +74,7 @@ export default function PrivacyPolicyPage() {
               <><strong className="text-[#3A3A3A] font-normal">Paystack</strong> — to process payments securely.</>,
               <><strong className="text-[#3A3A3A] font-normal">Cloudinary</strong> — to host and deliver product imagery.</>,
               <><strong className="text-[#3A3A3A] font-normal">Resend</strong> — to deliver transactional emails such as order confirmations and account notifications.</>,
-              <><strong className="text-[#3A3A3A] font-normal">Tawk.to</strong> — to provide live chat support on our site.</>,
+              <><strong className="text-[#3A3A3A] font-normal">Anthropic</strong> — our AI chat assistant sends your chat messages to Anthropic&apos;s Claude API to generate a reply. Messages are processed transiently to produce that reply and are not stored in Élan&apos;s database.</>,
               "Delivery and courier partners — to fulfil and track your shipment.",
               "Regulators or law enforcement, where required by law.",
             ]}

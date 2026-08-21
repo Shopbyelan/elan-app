@@ -13,13 +13,26 @@ async function requireAdmin() {
   }
 }
 
+/**
+ * /home and /product/[slug] are statically rendered (no `revalidate`, no
+ * dynamic API usage) so they only refresh via an explicit revalidation —
+ * every mutation that changes what a product looks like on the storefront
+ * must call this, or the change can sit stale indefinitely.
+ */
+function revalidateStorefront(slug?: string) {
+  revalidatePath("/home");
+  revalidatePath("/shop");
+  if (slug) revalidatePath(`/product/${slug}`);
+}
+
 export async function toggleProductActive(formData: FormData) {
   await requireAdmin();
   const id = formData.get("id") as string;
   const isActive = formData.get("isActive") === "true";
 
-  await prisma.product.update({ where: { id }, data: { isActive } });
+  const updated = await prisma.product.update({ where: { id }, data: { isActive } });
   revalidatePath("/admin/products");
+  revalidateStorefront(updated.slug);
 }
 
 export async function createProduct(formData: FormData) {
@@ -67,6 +80,7 @@ export async function createProduct(formData: FormData) {
   });
 
   revalidatePath("/admin/products");
+  revalidateStorefront(product.slug);
   redirect("/admin/products");
 }
 
@@ -101,7 +115,7 @@ export async function updateProduct(formData: FormData) {
 
   const updated = await prisma.product.findUnique({ where: { id }, select: { slug: true } });
   revalidatePath("/admin/products");
-  if (updated) revalidatePath(`/product/${updated.slug}`);
+  revalidateStorefront(updated?.slug);
   redirect("/admin/products");
 }
 
@@ -134,7 +148,7 @@ export async function addProductImages(formData: FormData) {
   const product = await prisma.product.findUnique({ where: { id: productId }, select: { slug: true } });
   revalidatePath("/admin/products");
   revalidatePath(`/admin/products/${productId}/edit`);
-  if (product) revalidatePath(`/product/${product.slug}`);
+  revalidateStorefront(product?.slug);
   redirect(`/admin/products/${productId}/edit`);
 }
 
@@ -159,8 +173,10 @@ export async function deleteProductImage(formData: FormData) {
     await prisma.productImage.update({ where: { id: remaining.id }, data: { isPrimary: true } });
   }
 
+  const product = await prisma.product.findUnique({ where: { id: productId }, select: { slug: true } });
   revalidatePath("/admin/products");
   revalidatePath(`/admin/products/${productId}/edit`);
+  revalidateStorefront(product?.slug);
 }
 
 export async function hardDeleteProduct(formData: FormData) {
@@ -170,8 +186,9 @@ export async function hardDeleteProduct(formData: FormData) {
   // Products with orders can only be hidden, not deleted
   const orderCount = await prisma.orderItem.count({ where: { productId: id } });
   if (orderCount > 0) {
-    await prisma.product.update({ where: { id }, data: { isActive: false } });
+    const hidden = await prisma.product.update({ where: { id }, data: { isActive: false } });
     revalidatePath("/admin/products");
+    revalidateStorefront(hidden.slug);
     return;
   }
 
@@ -184,5 +201,6 @@ export async function hardDeleteProduct(formData: FormData) {
 
   await prisma.product.delete({ where: { id } });
   revalidatePath("/admin/products");
+  revalidateStorefront();
   redirect("/admin/products");
 }
