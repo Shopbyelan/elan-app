@@ -378,13 +378,13 @@ const MIDDLE_EAST = new Set(["AE","SA","QA","KW","BH","OM","JO","LB","IL","IQ","
 const EUROPE = new Set(["GB","DE","FR","IT","ES","PT","NL","BE","CH","AT","PL","SE","NO","DK","FI","IE","GR","CZ","HU","RO","BG","HR","RS","SK","SI","LT","LV","EE","UA","RU","BY","MD","AL","MK","BA","ME","XK","IS","LU","MT","CY","MC","LI","SM","TR"]);
 const NORTH_AMERICA = new Set(["US","CA","MX"]);
 
-const NIGERIAN_DELIVERY: Record<string, number> = {
-  Lagos: 3000, FCT: 3500, Ogun: 4000, Oyo: 4500, Edo: 5000, Delta: 5000, Rivers: 5500, default: 6000,
-};
+const ABUJA_STATE_NAME = "FCT";
+const NIGERIA_ABUJA_DELIVERY_FEE = 10000;
+const NIGERIA_OTHER_STATES_DELIVERY_FEE = 30000;
 
 export function getInternationalDeliveryFee(countryCode: string, state?: string): number {
   if (countryCode === "NG") {
-    return NIGERIAN_DELIVERY[state ?? ""] ?? NIGERIAN_DELIVERY.default;
+    return state === ABUJA_STATE_NAME ? NIGERIA_ABUJA_DELIVERY_FEE : NIGERIA_OTHER_STATES_DELIVERY_FEE;
   }
   if (WEST_AFRICA.has(countryCode)) return 15000;
   if (AFRICA.has(countryCode))      return 25000;
@@ -392,6 +392,11 @@ export function getInternationalDeliveryFee(countryCode: string, state?: string)
   if (EUROPE.has(countryCode))      return 55000;
   if (NORTH_AMERICA.has(countryCode)) return 60000;
   return 50000; // Rest of World
+}
+
+/** Free in-person pickup is only offered for our Abuja (FCT) studio. */
+export function isPickupAvailable(countryCode: string, state?: string): boolean {
+  return countryCode === "NG" && state === ABUJA_STATE_NAME;
 }
 
 export function getDeliveryLabel(countryCode: string): string {

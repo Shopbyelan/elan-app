@@ -9,7 +9,7 @@ import { useCurrencyStore, NGN_PER_USD } from "@/store/currency.store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { COUNTRIES, getInternationalDeliveryFee, getDeliveryLabel } from "@/data/countries";
+import { COUNTRIES, getInternationalDeliveryFee, getDeliveryLabel, isPickupAvailable } from "@/data/countries";
 import { toast } from "sonner";
 
 interface CheckoutForm {
@@ -46,6 +46,7 @@ export default function CheckoutPage() {
     couponCode: "",
   });
   const [loading, setLoading] = useState(false);
+  const [deliveryMethod, setDeliveryMethod] = useState<"delivery" | "pickup">("delivery");
 
   const selectedCountry = useMemo(
     () => COUNTRIES.find((c) => c.code === form.country),
@@ -56,10 +57,12 @@ export default function CheckoutPage() {
     [selectedCountry],
   );
   const hasStates = stateOptions.length > 0;
+  const pickupAvailable = isPickupAvailable(form.country, form.state);
+  const isPickup = pickupAvailable && deliveryMethod === "pickup";
 
   const subtotal = totalPrice();
-  const delivery = getInternationalDeliveryFee(form.country, form.state);
-  const deliveryLabel = getDeliveryLabel(form.country);
+  const delivery = isPickup ? 0 : getInternationalDeliveryFee(form.country, form.state);
+  const deliveryLabel = isPickup ? "Pickup (Abuja studio)" : getDeliveryLabel(form.country);
   const total = subtotal + delivery;
 
   function update<K extends keyof CheckoutForm>(field: K, value: string) {
@@ -69,6 +72,13 @@ export default function CheckoutPage() {
       if (field === "country") next.state = "";
       return next;
     });
+    // Pickup is only offered for Abuja/FCT — fall back to delivery if the
+    // customer changes country/state away from it.
+    if (field === "country" || field === "state") {
+      const nextState = field === "state" ? value : "";
+      const nextCountry = field === "country" ? value : form.country;
+      if (!isPickupAvailable(nextCountry, nextState)) setDeliveryMethod("delivery");
+    }
   }
 
   async function handlePaystack() {
@@ -102,6 +112,7 @@ export default function CheckoutPage() {
           subtotal,
           deliveryFee: delivery,
           total,
+          notes: isPickup ? "Store Pickup — Abuja Studio (no delivery required)" : undefined,
           address: {
             ...form,
             country: selectedCountry?.name ?? form.country,
@@ -277,6 +288,30 @@ export default function CheckoutPage() {
                 onChange={(e) => update("state", e.target.value)}
                 placeholder="State or region"
               />
+            )}
+
+            {pickupAvailable && (
+              <div className="flex gap-3 pt-2">
+                {(["delivery", "pickup"] as const).map((method) => (
+                  <button
+                    key={method}
+                    type="button"
+                    onClick={() => setDeliveryMethod(method)}
+                    className={`flex-1 h-11 font-sans text-xs tracking-[0.15em] uppercase border transition-colors ${
+                      deliveryMethod === method
+                        ? "border-[#3A5A78] bg-[#3A5A78] text-white"
+                        : "border-[#E4E1DA] text-[#6B6B6B] hover:border-[#85A0B5]"
+                    }`}
+                  >
+                    {method === "delivery" ? "Home Delivery" : "Pickup — Free"}
+                  </button>
+                ))}
+              </div>
+            )}
+            {isPickup && (
+              <p className="font-sans text-[12px] text-[#9A9A9A] leading-relaxed">
+                We&apos;ll contact you to arrange collection from our Abuja studio once your order is confirmed.
+              </p>
             )}
           </div>
 

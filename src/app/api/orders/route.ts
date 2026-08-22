@@ -17,6 +17,7 @@ const orderSchema = z.object({
   subtotal: z.number().positive(),
   deliveryFee: z.number().min(0),
   total: z.number().positive(),
+  notes: z.string().optional(),
   couponCode: z.string().optional(),
   address: z.object({
     firstName: z.string(),
@@ -126,6 +127,7 @@ async function createOrder(
       deliveryFee: data.deliveryFee,
       discount,
       total: data.total - discount,
+      notes: data.notes,
       status: "PENDING",
       items: {
         create: data.items.map((item) => ({
