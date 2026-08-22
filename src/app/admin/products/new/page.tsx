@@ -2,6 +2,8 @@
 import { createProduct } from "@/actions/product.actions";
 import { Button } from "@/components/ui/button";
 import { ImageUploader } from "@/components/admin/ImageUploader";
+import { UploadGateProvider } from "@/components/admin/UploadGate";
+import { PhotoAwareSubmit } from "@/components/admin/PhotoAwareSubmit";
 import Link from "next/link";
 
 async function getCategories() {
@@ -27,6 +29,7 @@ export default async function NewProductPage() {
         </Button>
       </div>
 
+      <UploadGateProvider>
       <form action={createProduct} className="space-y-6">
         {/* Photos */}
         <div className="bg-white border border-[#E4E1DA] p-6 space-y-4">
@@ -135,14 +138,15 @@ export default async function NewProductPage() {
         </div>
 
         <div className="flex gap-4">
-          <Button type="submit" variant="gold" size="lg">
+          <PhotoAwareSubmit variant="gold" size="lg">
             Create Product
-          </Button>
+          </PhotoAwareSubmit>
           <Button type="button" variant="ghost" size="lg" asChild>
             <Link href="/admin/products">Cancel</Link>
           </Button>
         </div>
       </form>
+      </UploadGateProvider>
     </div>
   );
 }

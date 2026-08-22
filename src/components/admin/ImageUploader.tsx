@@ -1,8 +1,9 @@
 ﻿"use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { X, Upload, Loader2 } from "lucide-react";
 import Image from "next/image";
+import { useUploadGate } from "@/components/admin/UploadGate";
 
 interface UploadedImage {
   url: string;
@@ -14,13 +15,37 @@ interface UploadedImage {
 interface Props {
   maxImages?: number;
   existingCount?: number;
+  /**
+   * Submit the enclosing <form> automatically once a batch of uploads
+   * finishes, instead of requiring a separate manual "save" click. Use this
+   * when ImageUploader is the only thing in its form (e.g. "add photos to
+   * an existing product") — never on a form that also has other required
+   * fields still being filled in (e.g. the "new product" form), since that
+   * would submit those fields prematurely.
+   */
+  autoSubmit?: boolean;
 }
 
-export function ImageUploader({ maxImages = 4, existingCount = 0 }: Props) {
+export function ImageUploader({ maxImages = 4, existingCount = 0, autoSubmit = false }: Props) {
   const [images, setImages] = useState<UploadedImage[]>([]);
-  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const wasUploading = useRef(false);
+  const { uploading, setUploading, setImageCount } = useUploadGate();
+
+  useEffect(() => {
+    setImageCount(images.length);
+  }, [images.length, setImageCount]);
+
+  // Fires once per finished batch (uploading: true -> false), after React
+  // has committed the hidden imageUrls/imagePublicIds inputs for every
+  // image in that batch — so requestSubmit always sees the full set.
+  useEffect(() => {
+    if (autoSubmit && wasUploading.current && !uploading && images.length > 0) {
+      inputRef.current?.form?.requestSubmit();
+    }
+    wasUploading.current = uploading;
+  }, [uploading, autoSubmit, images.length]);
 
   const slots = maxImages - existingCount;
   const canAdd = images.length < slots && !uploading;

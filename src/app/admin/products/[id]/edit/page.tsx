@@ -2,6 +2,8 @@
 import { updateProduct, deleteProductImage, addProductImages } from "@/actions/product.actions";
 import { Button } from "@/components/ui/button";
 import { ImageUploader } from "@/components/admin/ImageUploader";
+import { UploadGateProvider } from "@/components/admin/UploadGate";
+import { PhotoAwareSubmit } from "@/components/admin/PhotoAwareSubmit";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -75,15 +77,26 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
           </div>
         )}
 
-        {/* Upload new images */}
+        {/* Upload new images — saves automatically as soon as uploads finish,
+            so there's no separate step to forget (unlike the Product Details
+            form below, this one is its own independent save). */}
         {remainingSlots > 0 && (
-          <form action={addProductImages}>
-            <input type="hidden" name="id" value={product.id} />
-            <ImageUploader maxImages={4} existingCount={product.images.length} />
-            <button type="submit" className="mt-3 font-sans text-[12px] tracking-[0.2em] text-[#3A5A78] uppercase hover:underline">
-              Save new photos →
-            </button>
-          </form>
+          <UploadGateProvider>
+            <form action={addProductImages}>
+              <input type="hidden" name="id" value={product.id} />
+              <ImageUploader maxImages={4} existingCount={product.images.length} autoSubmit />
+              <PhotoAwareSubmit
+                requireImages
+                variant="link"
+                className="mt-3 tracking-[0.2em] text-[12px] uppercase"
+              >
+                Save new photos →
+              </PhotoAwareSubmit>
+              <p className="font-sans text-[11px] text-[#9A9A9A] mt-1">
+                New photos save automatically once uploaded — this is separate from &ldquo;Save Changes&rdquo; below.
+              </p>
+            </form>
+          </UploadGateProvider>
         )}
 
         {remainingSlots === 0 && (

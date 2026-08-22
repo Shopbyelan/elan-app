@@ -95,6 +95,7 @@ export async function updateProduct(formData: FormData) {
   const description = formData.get("description") as string;
   const shortDesc = formData.get("shortDesc") as string;
   const stock = parseInt(formData.get("stock") as string) || 0;
+  const sku = formData.get("sku") as string;
   const material = formData.get("material") as string;
   const isFeatured = formData.get("isFeatured") === "on";
   const badge = formData.get("badge") as string;
@@ -106,7 +107,7 @@ export async function updateProduct(formData: FormData) {
     where: { id },
     data: {
       name, price, comparePrice, description,
-      shortDesc, stock, material: material || null,
+      shortDesc, stock, sku: sku || null, material: material || null,
       isFeatured, badge: badge || null,
       productType: productType || null, isBridal, isLimitedEdition,
       categories: { set: categoryIds.map((id) => ({ id })) },
