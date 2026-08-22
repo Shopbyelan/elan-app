@@ -21,17 +21,13 @@ export default async function HomePage() {
         <div
           className="animate-marquee"
           role="group"
-          aria-label="Hallmarked. Certified. All orders fully insured in transit. Free Abuja collection available. 18k Gold, 925 Sterling Silver, Cultivated Diamond, Platinum, Crystal Moissanite. Hallmarked and verified. Complimentary gift wrapping on all orders. Free Abuja pick-up. Insured delivery nationwide. First-year maintenance included."
+          aria-label="Hallmarked. Certified. 18k Gold, 925 Sterling Silver, Cultivated Diamond, Platinum, Crystal Moissanite."
         >
           {[...Array(2)].map((_, i) => (
             <span key={i} aria-hidden="true" className="flex gap-10 font-sans text-sm tracking-[0.2em] text-[#8A9BAB] uppercase whitespace-nowrap pr-10">
               <span>Hallmarked</span>
               <span className="text-[#4A6B8A]">✦</span>
               <span>Certified</span>
-              <span className="text-[#4A6B8A]">✦</span>
-              <span>All Orders Fully Insured in Transit</span>
-              <span className="text-[#4A6B8A]">✦</span>
-              <span>Free Abuja Collection Available</span>
               <span className="text-[#4A6B8A]">✦</span>
               <span>18k Gold</span>
               <span className="text-[#4A6B8A]">✦</span>
@@ -42,16 +38,6 @@ export default async function HomePage() {
               <span>Platinum</span>
               <span className="text-[#4A6B8A]">✦</span>
               <span>Crystal Moissanite</span>
-              <span className="text-[#4A6B8A]">✦</span>
-              <span>Hallmarked & Verified</span>
-              <span className="text-[#4A6B8A]">✦</span>
-              <span>Complimentary Gift Wrapping on All Orders</span>
-              <span className="text-[#4A6B8A]">✦</span>
-              <span>Free Abuja Pick-Up</span>
-              <span className="text-[#4A6B8A]">✦</span>
-              <span>Insured Delivery Nationwide</span>
-              <span className="text-[#4A6B8A]">✦</span>
-              <span>First-Year Maintenance Included</span>
               <span className="text-[#4A6B8A]">✦</span>
             </span>
           ))}

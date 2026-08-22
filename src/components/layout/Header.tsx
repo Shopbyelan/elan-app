@@ -75,12 +75,16 @@ export function Header() {
     <>
       {/* Announcement bar */}
       <div className="bg-[#3A5A78] text-center py-2.5 overflow-hidden">
-        <div className="animate-marquee" role="group" aria-label="Certificate of Authenticity with every piece. Complimentary gift wrapping.">
+        <div className="animate-marquee" role="group" aria-label="Complimentary Gift Wrapping on All Orders. Insured Delivery Nationwide. First-Year Maintenance Included. Free Abuja Pick-Up.">
           {[...Array(2)].map((_, i) => (
             <span key={i} aria-hidden="true" className="flex gap-12 font-sans text-sm tracking-[0.2em] uppercase font-medium whitespace-nowrap pr-12 text-[#C4CDD6]">
-              <span>Certificate of Authenticity with every piece</span>
+              <span>Complimentary Gift Wrapping on All Orders</span>
               <span className="text-[#85A0B5]">✦</span>
-              <span>Complimentary gift wrapping</span>
+              <span>Insured Delivery Nationwide</span>
+              <span className="text-[#85A0B5]">✦</span>
+              <span>First-Year Maintenance Included</span>
+              <span className="text-[#85A0B5]">✦</span>
+              <span>Free Abuja Pick-Up</span>
               <span className="text-[#85A0B5]">✦</span>
             </span>
           ))}

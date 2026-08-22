@@ -13,9 +13,12 @@ export async function POST(req: NextRequest) {
     const existing = await prisma.newsletter.findUnique({ where: { email } });
     if (!existing) {
       await prisma.newsletter.create({ data: { email } });
-      sendNewsletterConfirmEmail(email).catch(console.error);
+      // Awaited (not fire-and-forget) — on serverless hosting the function's
+      // execution can be frozen the instant the response is sent, silently
+      // cutting off any in-flight un-awaited request before it completes.
+      await sendNewsletterConfirmEmail(email).catch(console.error);
     }
-    addContactToBrevo(email).catch(console.error);
+    await addContactToBrevo(email).catch(console.error);
 
     return NextResponse.json({ message: "Subscribed successfully" });
   } catch (err) {
