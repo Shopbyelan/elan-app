@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
+import { confirmPaystackPayment } from "@/lib/order-confirmation";
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -20,27 +21,12 @@ export async function POST(req: NextRequest) {
 
   try {
     if (event.event === "charge.success") {
-      const { reference } = event.data;
-      const transaction = await prisma.transaction.findUnique({
-        where: { reference },
+      await confirmPaystackPayment({
+        reference: event.data.reference,
+        gatewayResponse: event.data.gateway_response,
+        paidAt: event.data.paid_at,
+        customerEmail: event.data.customer.email,
       });
-
-      if (transaction && transaction.status !== "SUCCESS") {
-        await prisma.$transaction([
-          prisma.transaction.update({
-            where: { reference },
-            data: {
-              status: "SUCCESS",
-              gatewayResponse: event.data.gateway_response,
-              paidAt: new Date(event.data.paid_at),
-            },
-          }),
-          prisma.order.update({
-            where: { id: transaction.orderId },
-            data: { status: "CONFIRMED" },
-          }),
-        ]);
-      }
     }
 
     if (event.event === "refund.processed") {

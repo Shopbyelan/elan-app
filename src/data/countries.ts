@@ -394,11 +394,6 @@ export function getInternationalDeliveryFee(countryCode: string, state?: string)
   return 50000; // Rest of World
 }
 
-/** Free in-person pickup is only offered for our Abuja (FCT) studio. */
-export function isPickupAvailable(countryCode: string, state?: string): boolean {
-  return countryCode === "NG" && state === ABUJA_STATE_NAME;
-}
-
 export function getDeliveryLabel(countryCode: string): string {
   if (countryCode === "NG") return "Delivery fee";
   if (WEST_AFRICA.has(countryCode)) return "West Africa shipping";

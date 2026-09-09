@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { generateOrderNumber } from "@/lib/utils";
+import { findValidCoupon, calculateDiscount } from "@/lib/coupon";
 import { z } from "zod";
 
 const itemSchema = z.object({
@@ -53,14 +54,10 @@ export async function POST(req: NextRequest) {
     let couponId: string | undefined;
     let discount = 0;
     if (data.couponCode) {
-      const coupon = await prisma.coupon.findUnique({
-        where: { code: data.couponCode, isActive: true },
-      });
+      const coupon = await findValidCoupon(data.couponCode);
       if (coupon) {
         couponId = coupon.id;
-        discount = coupon.discountType === "PERCENTAGE"
-          ? (data.subtotal * coupon.discountValue) / 100
-          : coupon.discountValue;
+        discount = calculateDiscount(coupon, data.subtotal);
       }
     }
 
@@ -97,7 +94,9 @@ export async function POST(req: NextRequest) {
     });
 
     const order = await createOrder(userId, data, orderNumber, discount, couponId, addr.id);
-    const transaction = await createTransaction(order.id, reference, data.total);
+    // Charge exactly what was persisted as order.total (post-discount) — never the
+    // client-submitted `data.total`, which never accounts for a coupon.
+    const transaction = await createTransaction(order.id, reference, order.total);
     return NextResponse.json({ order, reference: transaction.reference }, { status: 201 });
 
   } catch (err) {

@@ -9,7 +9,7 @@ import { useCurrencyStore, NGN_PER_USD } from "@/store/currency.store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { COUNTRIES, getInternationalDeliveryFee, getDeliveryLabel, isPickupAvailable } from "@/data/countries";
+import { COUNTRIES, getInternationalDeliveryFee, getDeliveryLabel } from "@/data/countries";
 import { toast } from "sonner";
 
 interface CheckoutForm {
@@ -47,6 +47,9 @@ export default function CheckoutPage() {
   });
   const [loading, setLoading] = useState(false);
   const [deliveryMethod, setDeliveryMethod] = useState<"delivery" | "pickup">("delivery");
+  const [discount, setDiscount] = useState(0);
+  const [couponApplied, setCouponApplied] = useState(false);
+  const [applyingCoupon, setApplyingCoupon] = useState(false);
 
   const selectedCountry = useMemo(
     () => COUNTRIES.find((c) => c.code === form.country),
@@ -57,13 +60,12 @@ export default function CheckoutPage() {
     [selectedCountry],
   );
   const hasStates = stateOptions.length > 0;
-  const pickupAvailable = isPickupAvailable(form.country, form.state);
-  const isPickup = pickupAvailable && deliveryMethod === "pickup";
+  const isPickup = deliveryMethod === "pickup";
 
   const subtotal = totalPrice();
   const delivery = isPickup ? 0 : getInternationalDeliveryFee(form.country, form.state);
   const deliveryLabel = isPickup ? "Pickup (Abuja studio)" : getDeliveryLabel(form.country);
-  const total = subtotal + delivery;
+  const total = subtotal + delivery - discount;
 
   function update<K extends keyof CheckoutForm>(field: K, value: string) {
     setForm((f) => {
@@ -72,22 +74,49 @@ export default function CheckoutPage() {
       if (field === "country") next.state = "";
       return next;
     });
-    // Pickup is only offered for Abuja/FCT — fall back to delivery if the
-    // customer changes country/state away from it.
-    if (field === "country" || field === "state") {
-      const nextState = field === "state" ? value : "";
-      const nextCountry = field === "country" ? value : form.country;
-      if (!isPickupAvailable(nextCountry, nextState)) setDeliveryMethod("delivery");
+    // Editing the code after applying invalidates the previously applied discount
+    if (field === "couponCode" && couponApplied) {
+      setCouponApplied(false);
+      setDiscount(0);
+    }
+  }
+
+  async function handleApplyCoupon() {
+    if (!form.couponCode) return;
+    setApplyingCoupon(true);
+    try {
+      const res = await fetch("/api/coupons/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: form.couponCode, subtotal }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.valid) {
+        setDiscount(0);
+        setCouponApplied(false);
+        toast.error(data.message ?? "Invalid coupon code");
+        return;
+      }
+      setDiscount(data.discount);
+      setCouponApplied(true);
+      toast.success("Coupon applied");
+    } catch (err) {
+      console.error(err);
+      toast.error("Could not apply coupon. Please try again.");
+    } finally {
+      setApplyingCoupon(false);
     }
   }
 
   async function handlePaystack() {
-    const required: (keyof CheckoutForm)[] = ["firstName", "email", "phone", "address", "city", "country"];
+    const required: (keyof CheckoutForm)[] = isPickup
+      ? ["firstName", "email", "phone"]
+      : ["firstName", "email", "phone", "address", "city", "country"];
     if (required.some((k) => !form[k])) {
       toast.error("Please fill in all required fields");
       return;
     }
-    if (hasStates && !form.state) {
+    if (!isPickup && hasStates && !form.state) {
       toast.error("Please select a state / province");
       return;
     }
@@ -113,10 +142,21 @@ export default function CheckoutPage() {
           deliveryFee: delivery,
           total,
           notes: isPickup ? "Store Pickup — Abuja Studio (no delivery required)" : undefined,
-          address: {
-            ...form,
-            country: selectedCountry?.name ?? form.country,
-          },
+          address: isPickup
+            ? {
+                firstName: form.firstName,
+                lastName: form.lastName,
+                email: form.email,
+                phone: form.phone,
+                address: "In-store pickup — Abuja studio",
+                city: "Abuja",
+                state: "FCT",
+                country: "Nigeria",
+              }
+            : {
+                ...form,
+                country: selectedCountry?.name ?? form.country,
+              },
           couponCode: form.couponCode || undefined,
         }),
       });
@@ -124,10 +164,13 @@ export default function CheckoutPage() {
       if (!orderRes.ok) throw new Error("Failed to create order");
       const { order, reference } = await orderRes.json();
 
+      // Charge exactly what the server persisted as order.total (post-discount),
+      // not the locally computed `total` — keeps the amount charged in sync with
+      // what's recorded even if the coupon state on this page is stale.
       const paystackAmount =
         currency === "USD"
-          ? Math.round((total / NGN_PER_USD) * 100)
-          : Math.round(total * 100);
+          ? Math.round((order.total / NGN_PER_USD) * 100)
+          : Math.round(order.total * 100);
 
       const PaystackPop = (await import("@paystack/inline-js")).default;
       const handler = PaystackPop.setup({
@@ -237,81 +280,83 @@ export default function CheckoutPage() {
             />
           </div>
 
-          {/* Shipping address */}
+          {/* Delivery method */}
           <div className="bg-[#FFFFFF] border border-[#E4E1DA] p-6 space-y-4">
-            <h2 className="font-serif text-lg text-[#0A0A0A] mb-2">Shipping Address</h2>
+            <h2 className="font-serif text-lg text-[#0A0A0A] mb-2">Delivery Method</h2>
 
-            {/* Country first */}
-            <Select
-              label="Country *"
-              options={COUNTRY_OPTIONS}
-              placeholder="Select country"
-              value={form.country}
-              onChange={(e) => update("country", e.target.value)}
-            />
-
-            <Input
-              label="Street Address *"
-              value={form.address}
-              onChange={(e) => update("address", e.target.value)}
-              placeholder="123 Main Street, Apt 4B"
-            />
-
-            <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="City *"
-                value={form.city}
-                onChange={(e) => update("city", e.target.value)}
-                placeholder="City"
-              />
-              <Input
-                label="Postal / ZIP Code"
-                value={form.postalCode}
-                onChange={(e) => update("postalCode", e.target.value)}
-                placeholder="00000"
-              />
+            <div className="flex gap-3">
+              {(["delivery", "pickup"] as const).map((method) => (
+                <button
+                  key={method}
+                  type="button"
+                  onClick={() => setDeliveryMethod(method)}
+                  className={`flex-1 h-11 font-sans text-xs tracking-[0.15em] uppercase border transition-colors ${
+                    deliveryMethod === method
+                      ? "border-[#3A5A78] bg-[#3A5A78] text-white"
+                      : "border-[#E4E1DA] text-[#6B6B6B] hover:border-[#85A0B5]"
+                  }`}
+                >
+                  {method === "delivery" ? "Home Delivery" : "Pickup — Abuja Studio (Free)"}
+                </button>
+              ))}
             </div>
 
-            {/* State: dropdown if country has states, text input otherwise */}
-            {hasStates ? (
-              <Select
-                label="State / Province *"
-                options={stateOptions}
-                placeholder="Select state"
-                value={form.state}
-                onChange={(e) => update("state", e.target.value)}
-              />
-            ) : (
-              <Input
-                label="State / Region / Province"
-                value={form.state}
-                onChange={(e) => update("state", e.target.value)}
-                placeholder="State or region"
-              />
-            )}
-
-            {pickupAvailable && (
-              <div className="flex gap-3 pt-2">
-                {(["delivery", "pickup"] as const).map((method) => (
-                  <button
-                    key={method}
-                    type="button"
-                    onClick={() => setDeliveryMethod(method)}
-                    className={`flex-1 h-11 font-sans text-xs tracking-[0.15em] uppercase border transition-colors ${
-                      deliveryMethod === method
-                        ? "border-[#3A5A78] bg-[#3A5A78] text-white"
-                        : "border-[#E4E1DA] text-[#6B6B6B] hover:border-[#85A0B5]"
-                    }`}
-                  >
-                    {method === "delivery" ? "Home Delivery" : "Pickup — Free"}
-                  </button>
-                ))}
-              </div>
-            )}
-            {isPickup && (
+            {isPickup ? (
               <p className="font-sans text-[12px] text-[#9A9A9A] leading-relaxed">
-                We&apos;ll contact you to arrange collection from our Abuja studio once your order is confirmed.
+                No shipping details needed — we&apos;ll contact you to arrange collection from our Abuja studio
+                once your order is confirmed.
               </p>
+            ) : (
+              <>
+                {/* Country first */}
+                <Select
+                  label="Country *"
+                  options={COUNTRY_OPTIONS}
+                  placeholder="Select country"
+                  value={form.country}
+                  onChange={(e) => update("country", e.target.value)}
+                />
+
+                <Input
+                  label="Street Address *"
+                  value={form.address}
+                  onChange={(e) => update("address", e.target.value)}
+                  placeholder="123 Main Street, Apt 4B"
+                />
+
+                <div className="grid grid-cols-2 gap-4">
+                  <Input
+                    label="City *"
+                    value={form.city}
+                    onChange={(e) => update("city", e.target.value)}
+                    placeholder="City"
+                  />
+                  <Input
+                    label="Postal / ZIP Code"
+                    value={form.postalCode}
+                    onChange={(e) => update("postalCode", e.target.value)}
+                    placeholder="00000"
+                  />
+                </div>
+
+                {/* State: dropdown if country has states, text input otherwise */}
+                {hasStates ? (
+                  <Select
+                    label="State / Province *"
+                    options={stateOptions}
+                    placeholder="Select state"
+                    value={form.state}
+                    onChange={(e) => update("state", e.target.value)}
+                  />
+                ) : (
+                  <Input
+                    label="State / Region / Province"
+                    value={form.state}
+                    onChange={(e) => update("state", e.target.value)}
+                    placeholder="State or region"
+                  />
+                )}
+              </>
             )}
           </div>
 
@@ -325,8 +370,16 @@ export default function CheckoutPage() {
                 onChange={(e) => update("couponCode", e.target.value)}
                 className="flex-1"
               />
-              <Button variant="outline" size="md" className="flex-shrink-0">
-                Apply
+              <Button
+                type="button"
+                variant="outline"
+                size="md"
+                className="flex-shrink-0"
+                loading={applyingCoupon}
+                disabled={!form.couponCode || couponApplied}
+                onClick={handleApplyCoupon}
+              >
+                {couponApplied ? "Applied" : "Apply"}
               </Button>
             </div>
           </div>
@@ -362,6 +415,12 @@ export default function CheckoutPage() {
                   {form.country ? format(delivery) : "Select country"}
                 </span>
               </div>
+              {discount > 0 && (
+                <div className="flex justify-between font-sans text-sm">
+                  <span className="text-[#6B6B6B]">Discount</span>
+                  <span className="text-[#3A5A78]">−{format(discount)}</span>
+                </div>
+              )}
               {form.country !== "NG" && (
                 <p className="font-sans text-[12px] text-[#9A9A9A] leading-relaxed">
                   International orders are shipped via DHL / FedEx. Delivery within 5–10 business days.
