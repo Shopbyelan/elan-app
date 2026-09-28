@@ -98,23 +98,23 @@ export function Header() {
             : "bg-[#0A0A0A]"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 h-16 md:h-20">
             {/* Left — mobile menu + nav */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center min-w-0">
               <button
                 onClick={() => setMobileOpen(true)}
-                className="md:hidden text-[#9A9A9A] hover:text-white transition-colors"
+                className="xl:hidden text-[#9A9A9A] hover:text-white transition-colors"
               >
                 <Menu className="h-5 w-5" />
               </button>
 
               {/* Desktop nav */}
-              <nav className="hidden md:flex items-center gap-8">
+              <nav className="hidden xl:flex items-center gap-5 2xl:gap-7 whitespace-nowrap">
                 <div className="relative group">
                   <Link
                     href="/shop"
-                    className="flex items-center gap-1 font-sans text-[11px] tracking-[0.2em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
+                    className="flex items-center gap-1 font-sans text-[11px] tracking-[0.1em] 2xl:tracking-[0.18em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
                   >
                     Collections
                     <ChevronDown className="h-3 w-3" />
@@ -155,26 +155,32 @@ export function Header() {
                 </div>
                 <Link
                   href="/our-story"
-                  className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
+                  className="font-sans text-[11px] tracking-[0.1em] 2xl:tracking-[0.18em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
                 >
                   Our Story
                 </Link>
                 <Link
                   href="/materials"
-                  className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
+                  className="font-sans text-[11px] tracking-[0.1em] 2xl:tracking-[0.18em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
                 >
                   Our Materials
+                </Link>
+                <Link
+                  href="/corporate-gifting"
+                  className="font-sans text-[11px] tracking-[0.1em] 2xl:tracking-[0.18em] uppercase text-[#9A9A9A] hover:text-[#85A0B5] transition-colors"
+                >
+                  Corporate &amp; Gifting
                 </Link>
               </nav>
             </div>
 
             {/* Center — Logo */}
-            <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+            <Link href="/" className="justify-self-center">
               <Image src="/ElanLogowhite.png" alt="Élan Fine Jewellery" width={120} height={48} className="h-8 md:h-10 w-auto" />
             </Link>
 
             {/* Right — Actions */}
-            <div className="flex items-center gap-1 md:gap-2">
+            <div className="flex items-center justify-end gap-1 md:gap-2">
               <CurrencyToggle />
 
               <button
@@ -247,7 +253,7 @@ export function Header() {
               {/* Shop Now — desktop only */}
               <Link
                 href="/shop"
-                className="hidden md:inline-flex ml-2 btn-gold h-9 px-5 text-[12px] items-center justify-center tracking-[0.2em]"
+                className="hidden lg:inline-flex ml-2 btn-gold h-9 px-5 text-[12px] items-center justify-center tracking-[0.2em]"
               >
                 Shop Now
               </Link>

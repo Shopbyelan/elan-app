@@ -83,6 +83,7 @@ export function Footer() {
                 { href: "/guide#care", label: "Jewellery Care" },
                 { href: "/guide#returns", label: "Returns Policy" },
                 { href: "/faq", label: "FAQ" },
+                { href: "/corporate-gifting", label: "Corporate & Gifting" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="font-sans text-sm text-[#5A5A5A] hover:text-[#9A9A9A] transition-colors tracking-wider">

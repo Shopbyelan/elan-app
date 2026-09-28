@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
-  LayoutDashboard, Package, Tag, ShoppingCart, Users, Ticket, LogOut, ChevronRight,
+  LayoutDashboard, Package, Tag, ShoppingCart, Users, Ticket, Gift, LogOut, ChevronRight,
 } from "lucide-react";
 
 const navItems = [
@@ -15,6 +15,7 @@ const navItems = [
   { href: "/admin/orders", icon: ShoppingCart, label: "Orders" },
   { href: "/admin/customers", icon: Users, label: "Customers" },
   { href: "/admin/coupons", icon: Ticket, label: "Coupons" },
+  { href: "/admin/corporate", icon: Gift, label: "Corporate" },
 ];
 
 export function AdminSidebar() {

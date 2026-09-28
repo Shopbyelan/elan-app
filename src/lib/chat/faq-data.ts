@@ -72,6 +72,10 @@ export const faqData: FaqCategory[] = [
         a: "All orders are gift-ready by default at no extra charge. We also offer handwritten gift notes — add your message at checkout.",
       },
       {
+        q: "Do you offer corporate or bulk gifting?",
+        a: "Yes. Through our Corporate & Gifting page (linked in the site menu and footer), organisations can request 10 or more pieces for employee recognition, client appreciation, events or bridal parties. We offer preferential volume pricing, personalised engraving, co-branded packaging and a dedicated gifting concierge. Submit a no-obligation request on that page and an advisor will respond within one business day with a proposal and quote.",
+      },
+      {
         q: "How long does delivery take?",
         a: "Standard delivery is 3–5 business days. Express 1–2 business day delivery is available at checkout. All orders are fully insured in transit and require a signature on delivery. International delivery times vary by destination — typically 5–10 business days.",
       },

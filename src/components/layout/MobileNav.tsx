@@ -29,6 +29,7 @@ const navLinks = [
   { href: "/shop?category=cultivated-diamond", label: "Cultivated Diamond" },
   { href: "/shop?category=platinum", label: "Platinum" },
   { href: "/materials", label: "Our Materials" },
+  { href: "/corporate-gifting", label: "Corporate & Gifting" },
 ];
 
 export function MobileNav({ isOpen, onClose }: MobileNavProps) {
