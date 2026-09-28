@@ -44,14 +44,20 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <CollectionSection label="Curated for You" heading="Featured Pieces" products={c.featured} viewAllHref="/shop?collection=featured" background="bg" />
+      <CollectionSection label="Piece Type" heading="Earrings" products={c.earrings} viewAllHref="/shop?type=earrings" background="bg"
+        feature={{ src: "/elangirl1.jpeg", alt: "Model wearing Élan pavé studs, rings, necklace and bracelet", eyebrow: "The Élan Edit", caption: "Quiet brilliance, worn every day.", focus: "40% 30%" }}
+      />
+      <CollectionSection label="Piece Type" heading="Bracelets" products={c.bracelets} viewAllHref="/shop?type=bracelet" background="bg-alt"
+        feature={{ src: "/elangirl2.jpeg", alt: "Stacked Élan diamond bracelets on the wrist", eyebrow: "Stack, Don’t Choose", caption: "Layered light for every wrist.", focus: "30% 55%" }}
+      />
+      <CollectionSection label="Crystal Moissanite" heading="Moissanite" products={c.moissanite} viewAllHref="/shop?category=crystal-moissanite" background="bg" />
+      <CollectionSection label="Piece Type" heading="Rings" products={c.rings} viewAllHref="/shop?type=ring" background="bg-alt" />
+      <CollectionSection label="18k Gold" heading="Gold" products={c.gold} viewAllHref="/shop?category=18k-gold" background="bg" />
+      <CollectionSection label="Curated for You" heading="Most Loved" products={c.featured} viewAllHref="/shop?collection=featured" background="bg-alt" />
+      <CollectionSection label="For Him" heading="Men" products={c.mens} viewAllHref="/shop?collection=men" background="bg" />
       <CollectionSection label="Just In" heading="New Arrivals" products={c.newArrivals} viewAllHref="/shop?collection=new-arrivals" background="bg-alt" />
       {/* Best Sellers temporarily removed — ranking isn't meaningful yet with current order volume */}
       <CollectionSection label="Piece Type" heading="Necklaces" products={c.necklaces} viewAllHref="/shop?type=necklace" background="bg" />
-      <CollectionSection label="Piece Type" heading="Earrings" products={c.earrings} viewAllHref="/shop?type=earrings" background="bg-alt" />
-      <CollectionSection label="Piece Type" heading="Rings" products={c.rings} viewAllHref="/shop?type=ring" background="bg" />
-      <CollectionSection label="Piece Type" heading="Bracelets" products={c.bracelets} viewAllHref="/shop?type=bracelet" background="bg-alt" />
-      <CollectionSection label="Crystal Moissanite" heading="Moissanite" products={c.moissanite} viewAllHref="/shop?category=crystal-moissanite" background="bg" />
       <CollectionSection label="Thoughtful & Timeless" heading="Gifts Under ₦200,000" products={c.gifts} viewAllHref="/shop?collection=gifts-under-200k" background="bg-alt" />
       <CollectionSection label="For the Aisle" heading="Bridal" products={c.bridal} viewAllHref="/shop?collection=bridal" background="bg" />
       <CollectionSection label="While They Last" heading="Limited Edition" products={c.limitedEdition} viewAllHref="/shop?collection=limited-edition" background="bg-alt" />

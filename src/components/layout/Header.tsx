@@ -55,6 +55,10 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  // Cart and wishlist are persisted in localStorage, so their counts only exist
+  // on the client — render badges after mount to avoid a hydration mismatch.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const submitSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -128,6 +132,7 @@ export function Header() {
                           <Link href="/shop?collection=best-sellers" className="font-sans text-xs text-[#3A3A3A] hover:text-[#0A0A0A] transition-colors">Best Sellers</Link>
                           <Link href="/shop?collection=bridal" className="font-sans text-xs text-[#3A3A3A] hover:text-[#0A0A0A] transition-colors">Bridal</Link>
                           <Link href="/shop?collection=limited-edition" className="font-sans text-xs text-[#3A3A3A] hover:text-[#0A0A0A] transition-colors">Limited Edition</Link>
+                          <Link href="/shop?collection=men" className="font-sans text-xs text-[#3A3A3A] hover:text-[#0A0A0A] transition-colors">Men</Link>
                           <Link href="/shop?collection=gifts-under-200k" className="font-sans text-xs text-[#3A3A3A] hover:text-[#0A0A0A] transition-colors">Gifts Under ₦200,000</Link>
                         </div>
                       </div>
@@ -195,7 +200,7 @@ export function Header() {
                 className="relative p-2.5 text-[#9A9A9A] hover:text-white transition-colors"
               >
                 <Heart className="h-4 w-4" />
-                {wishlistItems.length > 0 && (
+                {mounted && wishlistItems.length > 0 && (
                   <span className="absolute top-1 right-1 h-3.5 w-3.5 flex items-center justify-center bg-[#85A0B5] text-black text-[10px] font-bold rounded-full">
                     {wishlistItems.length}
                   </span>
@@ -243,7 +248,7 @@ export function Header() {
                 className="relative p-2.5 text-[#9A9A9A] hover:text-white transition-colors"
               >
                 <ShoppingBag className="h-4 w-4" />
-                {totalItems() > 0 && (
+                {mounted && totalItems() > 0 && (
                   <span className="absolute top-1 right-1 h-3.5 w-3.5 flex items-center justify-center bg-[#85A0B5] text-black text-[10px] font-bold rounded-full">
                     {totalItems()}
                   </span>

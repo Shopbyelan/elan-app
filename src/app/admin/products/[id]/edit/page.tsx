@@ -205,6 +205,10 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
               <input type="checkbox" id="isLimitedEdition" name="isLimitedEdition" defaultChecked={product.isLimitedEdition} className="h-4 w-4 accent-[#3A5A78]" />
               <label htmlFor="isLimitedEdition" className="font-sans text-xs text-[#6B6B6B]">Limited edition</label>
             </div>
+            <div className="flex items-center gap-3">
+              <input type="checkbox" id="isMens" name="isMens" defaultChecked={product.isMens} className="h-4 w-4 accent-[#3A5A78]" />
+              <label htmlFor="isMens" className="font-sans text-xs text-[#6B6B6B]">Men's collection</label>
+            </div>
           </div>
         </div>
 

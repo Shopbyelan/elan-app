@@ -86,6 +86,7 @@ export function CartDrawer() {
                         src={primaryImg}
                         alt={product.name}
                         fill
+                        sizes="80px"
                         className="object-cover"
                       />
                     </div>

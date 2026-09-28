@@ -24,6 +24,7 @@ const navLinks = [
   { href: "/shop?collection=gifts-under-200k", label: "Gifts Under ₦200,000" },
   { href: "/shop?collection=bridal", label: "Bridal" },
   { href: "/shop?collection=limited-edition", label: "Limited Edition" },
+  { href: "/shop?collection=men", label: "Men" },
   { href: "/shop?category=18k-gold", label: "18k Gold" },
   { href: "/shop?category=sterling-silver", label: "Sterling Silver" },
   { href: "/shop?category=cultivated-diamond", label: "Cultivated Diamond" },

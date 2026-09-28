@@ -185,6 +185,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
                     src={img.url}
                     alt={img.alt || `View ${i + 1}`}
                     fill
+                    sizes="64px"
                     className="object-cover"
                   />
                 </button>

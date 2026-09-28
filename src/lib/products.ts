@@ -44,6 +44,8 @@ export const getBridalProducts = (opts?: CollectionOpts) =>
   getProductsByFilter({ isBridal: true }, opts);
 export const getLimitedEditionProducts = (opts?: CollectionOpts) =>
   getProductsByFilter({ isLimitedEdition: true }, opts);
+export const getMensProducts = (opts?: CollectionOpts) =>
+  getProductsByFilter({ isMens: true }, opts);
 export const getGiftsUnder200k = (opts?: CollectionOpts) =>
   getProductsByFilter({ price: { lte: 200000 } }, opts);
 export const getMoissaniteProducts = (opts?: CollectionOpts) =>
@@ -127,5 +129,7 @@ export async function getHomepageCollections() {
     gifts: take(allActive.filter((p) => p.price <= 200000)),
     bridal: take(allActive.filter((p) => p.isBridal)),
     limitedEdition: take(allActive.filter((p) => p.isLimitedEdition)),
+    gold: take(allActive.filter((p) => p.categories.some((c) => c.slug === "18k-gold"))),
+    mens: take(allActive.filter((p) => p.isMens)),
   };
 }

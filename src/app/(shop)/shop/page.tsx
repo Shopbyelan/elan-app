@@ -5,6 +5,7 @@ import { ProductCardSkeleton } from "@/components/ui/skeleton";
 import {
   getBestSellers,
   getBridalProducts,
+  getMensProducts,
   getFeaturedProducts,
   getGiftsUnder200k,
   getLimitedEditionProducts,
@@ -41,6 +42,8 @@ async function getProducts(params: { category?: string; type?: string; collectio
         return await getBestSellers({ search: params.search, take: 24 });
       case "bridal":
         return await getBridalProducts({ search: params.search });
+      case "men":
+        return await getMensProducts({ search: params.search });
       case "limited-edition":
         return await getLimitedEditionProducts({ search: params.search });
       case "gifts-under-200k":
@@ -100,6 +103,7 @@ const COLLECTION_TABS = [
   { label: "Best Sellers", value: "best-sellers" },
   { label: "Bridal", value: "bridal" },
   { label: "Limited Edition", value: "limited-edition" },
+  { label: "Men", value: "men" },
   { label: "Gifts Under ₦200,000", value: "gifts-under-200k" },
 ];
 
@@ -109,6 +113,7 @@ const COLLECTION_HEADINGS: Record<string, { label: string; title: string; sub: s
   "best-sellers": { label: "Most Loved", title: "Best Sellers", sub: "The pieces our clients return for, again and again." },
   bridal: { label: "For the Aisle", title: "Bridal", sub: "Engagement, wedding bands, and pieces made for a lifetime." },
   "limited-edition": { label: "While They Last", title: "Limited Edition", sub: "Rare pieces, produced in restricted numbers." },
+  men: { label: "For Him", title: "Men", sub: "Considered pieces for the modern gentleman." },
   "gifts-under-200k": { label: "Thoughtful & Timeless", title: "Gifts Under ₦200,000", sub: "Exceptional pieces at an accessible price." },
 };
 
