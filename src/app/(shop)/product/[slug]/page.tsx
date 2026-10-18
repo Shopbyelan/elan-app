@@ -33,6 +33,15 @@ async function getRelatedProducts(categoryIds: string[], excludeId: string) {
   });
 }
 
+async function getSavedThisWeek(productId: string) {
+  const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  try {
+    return await prisma.productSave.count({ where: { productId, createdAt: { gte: since } } });
+  } catch {
+    return 0;
+  }
+}
+
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
@@ -73,5 +82,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     // ignore
   }
 
-  return <ProductDetail product={product} related={related} />;
+  const savedThisWeek = await getSavedThisWeek(product.id);
+
+  return <ProductDetail product={product} related={related} savedThisWeek={savedThisWeek} />;
 }

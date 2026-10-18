@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
-import { Heart, ShoppingBag, Star, Shield, RotateCcw, Truck } from "lucide-react";
+import { Heart, ShoppingBag, Star, Shield, RotateCcw, Truck, Tag } from "lucide-react";
 import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
 import { useCurrencyStore } from "@/store/currency.store";
@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { WaitlistButton } from "@/components/products/WaitlistButton";
 import { ProductCard } from "@/components/products/ProductCard";
 import { formatDate, formatCategoryTag } from "@/lib/utils";
+import { getStockAlert, stockAlertText, SAVED_THIS_WEEK_MIN } from "@/lib/product-alerts";
 import { toast } from "sonner";
 import type { Product, Review } from "@/types";
 
@@ -22,9 +23,11 @@ interface ProductDetailProps {
     variants: { id: string; name: string; value: string; price: number | null }[];
   };
   related: Product[];
+  /** Genuine wishlist saves in the last 7 days. */
+  savedThisWeek?: number;
 }
 
-export function ProductDetail({ product, related }: ProductDetailProps) {
+export function ProductDetail({ product, related, savedThisWeek = 0 }: ProductDetailProps) {
   const [activeImg, setActiveImg] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState(0);
   const [isZooming, setIsZooming] = useState(false);
@@ -41,6 +44,8 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
   const avgRating = product.reviews.length > 0
     ? product.reviews.reduce((a, r) => a + r.rating, 0) / product.reviews.length
     : 0;
+  const stockAlert = getStockAlert(product);
+  const showSaved = product.stock > 0 && savedThisWeek >= SAVED_THIS_WEEK_MIN;
 
   function goToImage(index: number) {
     if (index < 0 || index >= images.length || index === activeImg) return;
@@ -231,7 +236,7 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
           )}
 
           {/* Price */}
-          <div className="flex items-baseline gap-4 mb-8">
+          <div className={`flex items-baseline gap-4 ${stockAlert || showSaved ? "mb-5" : "mb-8"}`}>
             <span className="font-sans text-2xl text-[#3A5A78]">
               {format(product.price)}
             </span>
@@ -241,6 +246,42 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
               </span>
             )}
           </div>
+
+          {/* Alerts — each only renders when the underlying data makes it true */}
+          {(stockAlert || showSaved) && (
+            <div className="mb-8 space-y-2.5" aria-live="polite">
+              {stockAlert && (
+                <motion.p
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="flex items-center gap-3 font-sans text-sm text-[#8A3B1F]"
+                >
+                  {stockAlert.kind === "last-at-price" ? (
+                    <Tag className="h-3.5 w-3.5" />
+                  ) : (
+                    <span className="relative flex h-2 w-2 mx-[3px]">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-[#C2552D] opacity-60 animate-ping motion-reduce:animate-none" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-[#C2552D]" />
+                    </span>
+                  )}
+                  {stockAlertText(stockAlert)}
+                </motion.p>
+              )}
+              {showSaved && (
+                // Delayed so it lands as a second beat once the visitor has taken in the price
+                <motion.p
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 1.4 }}
+                  className="flex items-center gap-3 font-sans text-sm text-[#6B6B6B]"
+                >
+                  <Heart className="h-3.5 w-3.5 fill-[#85A0B5] text-[#3A5A78]" />
+                  This piece has been saved {savedThisWeek} times this week
+                </motion.p>
+              )}
+            </div>
+          )}
 
           {/* Divider */}
           <div className="h-px bg-[#F7F5F2] mb-8" />
@@ -259,8 +300,9 @@ export function ProductDetail({ product, related }: ProductDetailProps) {
               </button>
               <span className="font-sans text-base text-[#3A3A3A] w-8 text-center">{qty}</span>
               <button
-                onClick={() => setQty(qty + 1)}
-                className="h-10 w-10 flex items-center justify-center border border-[#E4E1DA] text-[#6B6B6B] hover:border-[#85A0B5] hover:text-[#3A5A78] transition-all text-lg"
+                onClick={() => setQty(Math.min(Math.max(product.stock, 1), qty + 1))}
+                disabled={qty >= product.stock}
+                className="h-10 w-10 flex items-center justify-center border border-[#E4E1DA] text-[#6B6B6B] hover:border-[#85A0B5] hover:text-[#3A5A78] transition-all text-lg disabled:opacity-40 disabled:pointer-events-none"
               >
                 +
               </button>
