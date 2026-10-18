@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { FooterNewsletterForm } from "./FooterNewsletterForm";
+import { PreferredSourceBar } from "@/components/common/PreferredSourceBar";
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "2347079579907";
 const WHATSAPP_MESSAGE =
@@ -10,6 +11,8 @@ const WHATSAPP_MESSAGE =
 export function Footer() {
   return (
     <footer className="bg-[#0A0A0A] border-t border-[#1A1A1A] mt-24">
+      <PreferredSourceBar />
+
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
