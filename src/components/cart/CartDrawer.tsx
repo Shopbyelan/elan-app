@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
-import { useCartStore } from "@/store/cart.store";
+import { useCartStore, cartLineKey } from "@/store/cart.store";
 import { useCurrencyStore } from "@/store/currency.store";
 import { Button } from "@/components/ui/button";
 
@@ -73,13 +73,14 @@ export function CartDrawer() {
             </div>
           ) : (
             <ul className="divide-y divide-[#1A1A1A]">
-              {items.map(({ product, quantity }) => {
+              {items.map((item) => {
+                const { product, quantity, size } = item;
                 const primaryImg =
                   product.images.find((i) => i.isPrimary)?.url ||
                   product.images[0]?.url ||
                   "/placeholder.jpg";
                 return (
-                  <li key={product.id} className="px-6 py-5 flex gap-4">
+                  <li key={cartLineKey(item)} className="px-6 py-5 flex gap-4">
                     {/* Image */}
                     <div className="relative w-20 h-24 flex-shrink-0 bg-[#141414] overflow-hidden">
                       <Image
@@ -101,9 +102,12 @@ export function CartDrawer() {
                           <h3 className="font-serif text-base text-white mt-0.5 truncate">
                             {product.name}
                           </h3>
+                          {size && (
+                            <p className="font-sans text-xs text-[#9A9A9A] mt-1">Size: {size}</p>
+                          )}
                         </div>
                         <button
-                          onClick={() => removeItem(product.id)}
+                          onClick={() => removeItem(product.id, size)}
                           className="text-[#3A3A3A] hover:text-red-400 transition-colors flex-shrink-0"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
@@ -117,7 +121,7 @@ export function CartDrawer() {
                       {/* Quantity */}
                       <div className="flex items-center gap-3 mt-3">
                         <button
-                          onClick={() => updateQuantity(product.id, quantity - 1)}
+                          onClick={() => updateQuantity(product.id, quantity - 1, size)}
                           className="h-7 w-7 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-white transition-colors"
                         >
                           <Minus className="h-3 w-3" />
@@ -126,7 +130,7 @@ export function CartDrawer() {
                           {quantity}
                         </span>
                         <button
-                          onClick={() => updateQuantity(product.id, quantity + 1)}
+                          onClick={() => updateQuantity(product.id, quantity + 1, size)}
                           className="h-7 w-7 flex items-center justify-center border border-[#2A2A2A] text-[#9A9A9A] hover:border-[#85A0B5] hover:text-white transition-colors"
                         >
                           <Plus className="h-3 w-3" />

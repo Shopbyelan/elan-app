@@ -137,6 +137,7 @@ export default function CheckoutPage() {
             price: i.product.price,
             productName: i.product.name,
             productImg: i.product.images[0]?.url,
+            size: i.size,
           })),
           subtotal,
           deliveryFee: delivery,
@@ -391,10 +392,11 @@ export default function CheckoutPage() {
             <h2 className="font-serif text-lg text-[#0A0A0A] mb-6">Order Summary</h2>
 
             <div className="space-y-3 mb-6 max-h-48 overflow-y-auto pr-1">
-              {items.map(({ product, quantity }) => (
-                <div key={product.id} className="flex justify-between gap-3">
+              {items.map(({ product, quantity, size }) => (
+                <div key={`${product.id}:${size ?? ""}`} className="flex justify-between gap-3">
                   <div className="min-w-0">
                     <p className="font-sans text-xs text-[#6B6B6B] truncate">{product.name}</p>
+                    {size && <p className="font-sans text-[11px] text-[#9A9A9A]">Size: {size}</p>}
                     <p className="font-sans text-[12px] text-[#9A9A9A]">Qty: {quantity}</p>
                   </div>
                   <p className="font-sans text-xs text-[#3A3A3A] flex-shrink-0">

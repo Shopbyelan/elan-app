@@ -11,6 +11,7 @@ const itemSchema = z.object({
   price: z.number().positive(),
   productName: z.string(),
   productImg: z.string().nullable().optional(),
+  size: z.string().max(40).optional(),
 });
 
 const orderSchema = z.object({
@@ -38,7 +39,8 @@ export async function POST(req: NextRequest) {
     const data = orderSchema.parse(body);
 
     // Verify products exist and prices match
-    const productIds = data.items.map((i) => i.productId);
+    // De-duplicated: the same ring in two sizes arrives as two lines with one productId
+    const productIds = [...new Set(data.items.map((i) => i.productId))];
     const products = await prisma.product.findMany({
       where: { id: { in: productIds }, isActive: true },
     });
@@ -135,6 +137,7 @@ async function createOrder(
           price: item.price,
           productName: item.productName,
           productImg: item.productImg,
+          size: item.size,
         })),
       },
     },
