@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Our Story — Élan Fine Jewellery",
   description:
     "How two friends set out to build fine jewellery for a generation of women building something real — real metals, honest prices, no apology.",
 };
+
+/**
+ * Founders as they appear in the photo, left to right. Names render only once
+ * both are filled in, so the page never shows a placeholder.
+ */
+const FOUNDERS: { name: string; title: string }[] = [
+  { name: "", title: "Co-Founder" }, // left — white suit
+  { name: "", title: "Co-Founder" }, // right — black blazer
+];
+const foundersNamed = FOUNDERS.every((f) => f.name.trim());
 
 type StoryBlock =
   | { kind: "p"; text: string }
@@ -87,16 +98,94 @@ function Divider() {
 export default function OurStoryPage() {
   return (
     <>
-      {/* Header */}
-      <div className="bg-[#F7F5F2] border-b border-[#E4E1DA] py-16 md:py-24 px-4 text-center">
-        <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-4">
-          Our Story
-        </p>
-        <h1 className="font-serif text-4xl md:text-6xl text-[#0A0A0A] mb-4 max-w-3xl mx-auto leading-tight">
-          Some of the best things start with a conversation{" "}
-          <em className="text-[#3A5A78] not-italic">between friends.</em>
-        </h1>
-      </div>
+      {/* Header — founders portrait */}
+      <section className="relative overflow-hidden bg-[#F7F5F2] border-b border-[#E4E1DA]">
+        {/* Soft warm wash echoing the portrait's backdrop */}
+        <div className="pointer-events-none absolute -right-40 top-0 h-[560px] w-[560px] rounded-full bg-[#D9C3A5]/25 blur-[120px]" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
+          <div className="lg:col-span-6 text-center lg:text-left">
+            <p className="font-sans text-[11px] tracking-[0.4em] text-[#3A5A78] uppercase mb-5 flex items-center justify-center lg:justify-start gap-4">
+              <span className="hidden lg:block h-px w-10 bg-[#85A0B5]" />
+              Our Story
+            </p>
+            <h1 className="font-serif text-4xl md:text-6xl text-[#0A0A0A] mb-6 leading-[1.08]">
+              Some of the best things start with a conversation{" "}
+              <em className="text-[#3A5A78] not-italic">between friends.</em>
+            </h1>
+            <p className="font-sans text-[15px] text-[#6B6B6B] leading-relaxed max-w-md mx-auto lg:mx-0">
+              Two young women, one frustration, and an obsessive commitment to doing fine
+              jewellery properly — for a generation building something real.
+            </p>
+
+            {foundersNamed && (
+              <div className="mt-10 inline-grid grid-cols-2 gap-px bg-[#E4E1DA] border border-[#E4E1DA] text-left">
+                {FOUNDERS.map((f) => (
+                  <div key={f.name} className="bg-white px-6 py-4">
+                    <p className="font-serif text-lg text-[#0A0A0A] leading-tight">{f.name}</p>
+                    <p className="font-sans text-[10px] tracking-[0.25em] text-[#3A5A78] uppercase mt-1.5">{f.title}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <figure className="lg:col-span-6 relative mx-auto w-full max-w-md lg:max-w-none">
+            {/* Offset hairline frame */}
+            <div className="pointer-events-none absolute -bottom-5 -left-5 hidden md:block h-full w-full border border-[#85A0B5]/50" />
+            <div className="relative aspect-[862/1080] overflow-hidden bg-[#E9E1D6]">
+              <Image
+                src="/elan-founders.jpg"
+                alt={
+                  foundersNamed
+                    ? `${FOUNDERS[0].name} and ${FOUNDERS[1].name}, founders of Élan, wearing Élan jewellery`
+                    : "The two founders of Élan standing back to back, wearing Élan jewellery"
+                }
+                fill
+                priority
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            {/* Vertical label along the frame edge */}
+            <p
+              aria-hidden="true"
+              className="hidden xl:block absolute top-1/2 -right-12 -translate-y-1/2 rotate-90 origin-center font-sans text-[10px] tracking-[0.5em] text-[#9A9A9A] uppercase whitespace-nowrap"
+            >
+              The Founders of Élan
+            </p>
+            <figcaption className="mt-8 md:mt-10 flex items-center justify-between font-sans text-[10px] tracking-[0.3em] text-[#9A9A9A] uppercase">
+              {foundersNamed ? (
+                <>
+                  <span>{FOUNDERS[0].name}</span>
+                  <span className="h-px flex-1 mx-4 bg-[#E4E1DA]" />
+                  <span>{FOUNDERS[1].name}</span>
+                </>
+              ) : (
+                <>
+                  <span>The Founders</span>
+                  <span className="h-px flex-1 mx-4 bg-[#E4E1DA]" />
+                  <span>Élan Fine Jewels</span>
+                </>
+              )}
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* Founders' pull quote */}
+      <section className="bg-[#0A0A0A] px-4 sm:px-6 py-16 md:py-24">
+        <blockquote className="max-w-3xl mx-auto text-center">
+          <span aria-hidden="true" className="block font-serif text-6xl leading-none text-[#85A0B5]/60 mb-4">“</span>
+          <p className="font-serif text-2xl md:text-4xl text-white leading-snug">
+            We didn’t want to sell jewellery. We wanted to change what jewellery meant{" "}
+            <em className="not-italic text-[#9DB5C8]">for our generation.</em>
+          </p>
+          <footer className="mt-8 font-sans text-[11px] tracking-[0.35em] text-[#8A9BAB] uppercase">
+            {foundersNamed ? `${FOUNDERS[0].name} & ${FOUNDERS[1].name}` : "The Founders"}
+          </footer>
+        </blockquote>
+      </section>
 
       {/* Story */}
       <article className="max-w-2xl mx-auto px-4 sm:px-6 py-20 md:py-28">
@@ -137,6 +226,11 @@ export default function OurStoryPage() {
           <p className="font-sans text-[11px] tracking-[0.3em] text-[#6B6B6B] uppercase">
             Welcome to Élan Fine Jewels
           </p>
+          {foundersNamed && (
+            <p className="mt-8 font-serif italic text-xl text-[#3A5A78]">
+              — {FOUNDERS[0].name} &amp; {FOUNDERS[1].name}
+            </p>
+          )}
         </div>
       </article>
 
