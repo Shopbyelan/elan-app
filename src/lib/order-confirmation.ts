@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { sendOrderConfirmationEmail } from "@/lib/resend";
+import { sendOrderConfirmationEmail, sendNewOrderAdminEmail } from "@/lib/resend";
 
 interface ConfirmPaymentInput {
   reference: string;
@@ -14,7 +14,7 @@ type ConfirmPaymentResult =
   | { ok: true; alreadyProcessed: false };
 
 /**
- * Marks a transaction/order as paid and sends the confirmation email.
+ * Marks a transaction/order as paid, emails the customer, and alerts the team.
  * Called from both the client-triggered verify route and the Paystack webhook,
  * whichever fires first — the conditional updateMany atomically claims the
  * SUCCESS transition so the other caller finds count === 0 and short-circuits,
@@ -45,7 +45,7 @@ export async function confirmPaystackPayment({
   const order = await prisma.order.update({
     where: { id: transaction.orderId },
     data: { status: "CONFIRMED" },
-    include: { user: true, address: true },
+    include: { user: true, address: true, items: true },
   });
 
   const recipientName = order.address
@@ -56,6 +56,23 @@ export async function confirmPaystackPayment({
   sendOrderConfirmationEmail(customerEmail, recipientName, order.orderNumber, order.total, isGuest).catch(
     console.error
   );
+
+  sendNewOrderAdminEmail({
+    orderId: order.id,
+    orderNumber: order.orderNumber,
+    subtotal: order.subtotal,
+    deliveryFee: order.deliveryFee,
+    discount: order.discount,
+    total: order.total,
+    notes: order.notes,
+    customer: {
+      name: recipientName,
+      email: customerEmail,
+      phone: order.address?.phone ?? order.user?.phone,
+    },
+    address: order.address,
+    items: order.items,
+  }).catch(console.error);
 
   return { ok: true, alreadyProcessed: false };
 }

@@ -264,3 +264,103 @@ export async function sendCorporateInquiryAdminEmail(data: CorporateInquiryEmail
     `,
   });
 }
+
+interface NewOrderEmailData {
+  orderId: string;
+  orderNumber: string;
+  subtotal: number;
+  deliveryFee: number;
+  discount: number;
+  total: number;
+  notes?: string | null;
+  customer: { name: string; email: string; phone?: string | null };
+  address?: { address: string; city: string; state: string } | null;
+  items: { productName: string; quantity: number; price: number; size?: string | null; productImg?: string | null }[];
+}
+
+/**
+ * Recipients for new-order alerts, from ORDER_NOTIFICATION_EMAILS
+ * (comma-separated, e.g. "a@shopbyelan.com,b@shopbyelan.com").
+ */
+function orderNotificationRecipients(): string[] {
+  const list = (process.env.ORDER_NOTIFICATION_EMAILS || "")
+    .split(",")
+    .map((e) => e.trim())
+    .filter(Boolean);
+  return list.length ? list : ["hello@shopbyelan.com"];
+}
+
+export async function sendNewOrderAdminEmail(data: NewOrderEmailData) {
+  const naira = (n: number) => `₦${n.toLocaleString()}`;
+  const adminUrl = `${process.env.NEXT_PUBLIC_APP_URL}/admin/orders/${data.orderId}`;
+  const pieceCount = data.items.reduce((sum, i) => sum + i.quantity, 0);
+
+  const row = (label: string, value: string) =>
+    `<tr><td style="color:#9a9a9a; padding:6px 16px 6px 0; font-size:12px; letter-spacing:1px; vertical-align:top; white-space:nowrap;">${label}</td><td style="color:#eee; padding:6px 0; font-size:14px;">${value}</td></tr>`;
+
+  const itemRows = data.items
+    .map(
+      (i) => `
+        <tr>
+          <td style="padding:12px 12px 12px 0; border-bottom:1px solid #1f1f1f; width:56px; vertical-align:top;">
+            ${i.productImg ? `<img src="${escapeHtml(i.productImg)}" width="56" height="56" alt="" style="display:block; object-fit:cover; background:#1a1a1a;" />` : ""}
+          </td>
+          <td style="padding:12px 0; border-bottom:1px solid #1f1f1f; vertical-align:top;">
+            <div style="color:#fff; font-size:15px;">${escapeHtml(i.productName)}</div>
+            <div style="color:#9a9a9a; font-size:12px; margin-top:4px;">
+              Qty ${i.quantity}${i.size ? ` · <span style="color:#85A0B5;">Size ${escapeHtml(i.size)}</span>` : ""}
+            </div>
+          </td>
+          <td style="padding:12px 0; border-bottom:1px solid #1f1f1f; color:#eee; font-size:14px; text-align:right; vertical-align:top; white-space:nowrap;">
+            ${naira(i.price * i.quantity)}
+          </td>
+        </tr>`
+    )
+    .join("");
+
+  const totalsRow = (label: string, value: string, strong = false) =>
+    `<tr><td style="color:${strong ? "#fff" : "#9a9a9a"}; padding:4px 0; font-size:${strong ? "16px" : "13px"};">${label}</td><td style="color:${strong ? "#85A0B5" : "#ccc"}; padding:4px 0; font-size:${strong ? "18px" : "13px"}; text-align:right;">${value}</td></tr>`;
+
+  const address = data.address
+    ? `${escapeHtml(data.address.address)}<br/>${escapeHtml(data.address.city)}, ${escapeHtml(data.address.state)}`
+    : "—";
+
+  return resend.emails.send({
+    from: FROM,
+    to: orderNotificationRecipients(),
+    replyTo: data.customer.email,
+    subject: `New order ${data.orderNumber} — ${naira(data.total)} (${pieceCount} ${pieceCount === 1 ? "piece" : "pieces"})`,
+    html: `
+      <div style="font-family: Georgia, serif; background:#0a0a0a; color:#fff; padding:40px; max-width:600px; margin:0 auto;">
+        <p style="color:#9a9a9a; font-size:11px; letter-spacing:4px; margin:0 0 8px;">ÉLAN · NEW PAID ORDER</p>
+        <h1 style="color:#fff; font-size:26px; margin:0 0 4px;">${naira(data.total)}</h1>
+        <p style="color:#85A0B5; font-size:13px; letter-spacing:2px; margin:0 0 28px;">${escapeHtml(data.orderNumber)}</p>
+
+        <table style="border-collapse:collapse; width:100%;">${itemRows}</table>
+
+        <table style="border-collapse:collapse; width:100%; margin-top:16px;">
+          ${totalsRow("Subtotal", naira(data.subtotal))}
+          ${totalsRow("Delivery", data.deliveryFee ? naira(data.deliveryFee) : "Free")}
+          ${data.discount ? totalsRow("Discount", `−${naira(data.discount)}`) : ""}
+          ${totalsRow("Total paid", naira(data.total), true)}
+        </table>
+
+        <div style="height:1px; background:#1f1f1f; margin:28px 0;"></div>
+
+        <table style="border-collapse:collapse; width:100%;">
+          ${row("CUSTOMER", escapeHtml(data.customer.name))}
+          ${row("EMAIL", escapeHtml(data.customer.email))}
+          ${data.customer.phone ? row("PHONE", escapeHtml(data.customer.phone)) : ""}
+          ${row("DELIVER TO", address)}
+        </table>
+        ${data.notes ? `<div style="background:#111; padding:16px; margin-top:20px; border-left:2px solid #85A0B5; color:#ccc; line-height:1.7;">${escapeHtml(data.notes)}</div>` : ""}
+
+        <a href="${adminUrl}"
+           style="display:inline-block; margin-top:32px; background:#85A0B5; color:#000; padding:14px 32px; text-decoration:none; font-size:13px; letter-spacing:2px;">
+          VIEW ORDER IN ADMIN
+        </a>
+        <p style="color:#5a5a5a; font-size:12px; margin-top:24px;">Reply to this email to contact the customer directly.</p>
+      </div>
+    `,
+  });
+}
