@@ -14,6 +14,7 @@ import { WaitlistButton } from "@/components/products/WaitlistButton";
 import { ProductCard } from "@/components/products/ProductCard";
 import { formatDate, formatCategoryTag } from "@/lib/utils";
 import { getStockAlert, stockAlertText, SAVED_THIS_WEEK_MIN } from "@/lib/product-alerts";
+import { RING_SIZES, ringSizeLabel, needsRingSize } from "@/lib/ring-sizes";
 import { toast } from "sonner";
 import type { Product, Review } from "@/types";
 
@@ -33,6 +34,9 @@ export function ProductDetail({ product, related, savedThisWeek = 0 }: ProductDe
   const [isZooming, setIsZooming] = useState(false);
   const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
   const [qty, setQty] = useState(1);
+  const [sizeIdx, setSizeIdx] = useState<number | null>(null);
+  const [sizeError, setSizeError] = useState(false);
+  const [shakeKey, setShakeKey] = useState(0);
   const [activeTab, setActiveTab] = useState<"description" | "materials" | "care">("description");
   const { addItem, openCart } = useCartStore();
   const { toggleItem, isWishlisted } = useWishlistStore();
@@ -46,6 +50,8 @@ export function ProductDetail({ product, related, savedThisWeek = 0 }: ProductDe
     : 0;
   const stockAlert = getStockAlert(product);
   const showSaved = product.stock > 0 && savedThisWeek >= SAVED_THIS_WEEK_MIN;
+  const isRing = needsRingSize(product);
+  const selectedSize = sizeIdx != null ? RING_SIZES[sizeIdx] : null;
 
   function goToImage(index: number) {
     if (index < 0 || index >= images.length || index === activeImg) return;
@@ -76,9 +82,16 @@ export function ProductDetail({ product, related, savedThisWeek = 0 }: ProductDe
   const lensY = Math.min(Math.max(zoomPos.y, lensHalf), 100 - lensHalf);
 
   function handleAddToCart() {
-    for (let i = 0; i < qty; i++) addItem(product);
+    if (isRing && !selectedSize) {
+      setSizeError(true);
+      setShakeKey((k) => k + 1);
+      document.getElementById("ring-size")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    const size = selectedSize ? ringSizeLabel(selectedSize) : undefined;
+    addItem(product, qty, size);
     openCart();
-    toast.success(`${product.name} added to your selection`);
+    toast.success(`${product.name}${size ? ` (${size})` : ""} added to your selection`);
   }
 
   return (
@@ -286,6 +299,69 @@ export function ProductDetail({ product, related, savedThisWeek = 0 }: ProductDe
           {/* Divider */}
           <div className="h-px bg-[#F7F5F2] mb-8" />
 
+          {/* Ring size */}
+          {isRing && product.stock > 0 && (
+            <div id="ring-size" className="mb-8 scroll-mt-32">
+              <div className="flex items-baseline justify-between mb-3">
+                <p className="font-sans text-sm tracking-[0.2em] text-[#6B6B6B] uppercase">
+                  Ring Size
+                  {selectedSize && (
+                    <span className="ml-3 normal-case tracking-normal text-[#3A5A78]">
+                      {ringSizeLabel(selectedSize)} · {selectedSize.mm}
+                    </span>
+                  )}
+                </p>
+                <Link
+                  href="/guide#sizing"
+                  target="_blank"
+                  className="font-sans text-xs tracking-[0.15em] text-[#3A5A78] uppercase underline underline-offset-4 decoration-[#85A0B5]/50 hover:decoration-[#3A5A78]"
+                >
+                  Size Guide
+                </Link>
+              </div>
+              <div
+                key={shakeKey}
+                role="radiogroup"
+                aria-label="Ring size"
+                className={`grid grid-cols-5 gap-2 ${shakeKey > 0 ? "animate-shake" : ""}`}
+              >
+                {RING_SIZES.map((size, i) => {
+                  const active = sizeIdx === i;
+                  return (
+                    <button
+                      key={size.us}
+                      type="button"
+                      role="radio"
+                      aria-checked={active}
+                      aria-label={`${ringSizeLabel(size)}, ${size.mm} diameter`}
+                      onClick={() => {
+                        setSizeIdx(i);
+                        setSizeError(false);
+                      }}
+                      className={`flex flex-col items-center justify-center py-2 border transition-all duration-200 ${
+                        active
+                          ? "border-[#3A5A78] bg-[#3A5A78] text-white"
+                          : sizeError
+                          ? "border-[#C2552D]/50 text-[#3A3A3A] hover:border-[#3A5A78]"
+                          : "border-[#E4E1DA] text-[#3A3A3A] hover:border-[#85A0B5]"
+                      }`}
+                    >
+                      <span className="font-sans text-sm leading-none">{size.us}</span>
+                      <span className={`font-sans text-[10px] mt-1 leading-none ${active ? "text-white/70" : "text-[#9A9A9A]"}`}>
+                        UK {size.uk}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <p className={`mt-3 font-sans text-xs ${sizeError ? "text-[#8A3B1F]" : "text-[#9A9A9A]"}`}>
+                {sizeError
+                  ? "Please select your ring size to continue."
+                  : "US sizes shown. Between sizes? Size up — every ring includes one complimentary resize within 30 days."}
+              </p>
+            </div>
+          )}
+
           {/* Quantity */}
           <div className="mb-6">
             <p className="font-sans text-sm tracking-[0.2em] text-[#6B6B6B] uppercase mb-3">
@@ -322,7 +398,7 @@ export function ProductDetail({ product, related, savedThisWeek = 0 }: ProductDe
                   onClick={handleAddToCart}
                 >
                   <ShoppingBag className="h-4 w-4" />
-                  Add to Selection
+                  {isRing && !selectedSize ? "Select a Size" : "Add to Selection"}
                 </Button>
                 <button
                   onClick={() => {

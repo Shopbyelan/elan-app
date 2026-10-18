@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, Minus, Plus, Trash2, ArrowRight } from "lucide-react";
-import { useCartStore } from "@/store/cart.store";
+import { useCartStore, cartLineKey } from "@/store/cart.store";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 
@@ -48,10 +48,11 @@ export default function CartPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* Items */}
         <div className="lg:col-span-2 space-y-0 divide-y divide-[#E4E1DA]">
-          {items.map(({ product, quantity }) => {
+          {items.map((item) => {
+            const { product, quantity, size } = item;
             const img = product.images.find((i) => i.isPrimary)?.url || product.images[0]?.url || "/placeholder.jpg";
             return (
-              <div key={product.id} className="flex gap-5 py-6">
+              <div key={cartLineKey(item)} className="flex gap-5 py-6">
                 <Link href={`/product/${product.slug}`} className="relative flex-shrink-0 w-24 h-28 bg-[#FFFFFF] overflow-hidden">
                   <Image src={img} alt={product.name} fill className="object-cover hover:scale-105 transition-transform duration-500" />
                 </Link>
@@ -64,16 +65,19 @@ export default function CartPage() {
                       {product.name}
                     </h3>
                   </Link>
+                  {size && (
+                    <p className="font-sans text-xs text-[#6B6B6B] mt-1">Size: {size}</p>
+                  )}
                   <p className="font-sans text-sm text-[#3A5A78] mt-1.5">
                     {formatPrice(product.price)}
                   </p>
                   <div className="flex items-center justify-between mt-4">
                     <div className="flex items-center gap-3 border border-[#E4E1DA]">
-                      <button onClick={() => updateQuantity(product.id, quantity - 1)} className="px-3 py-2 text-[#6B6B6B] hover:text-[#3A5A78] transition-colors">
+                      <button onClick={() => updateQuantity(product.id, quantity - 1, size)} className="px-3 py-2 text-[#6B6B6B] hover:text-[#3A5A78] transition-colors">
                         <Minus className="h-3 w-3" />
                       </button>
                       <span className="font-sans text-sm text-[#3A3A3A] w-4 text-center">{quantity}</span>
-                      <button onClick={() => updateQuantity(product.id, quantity + 1)} className="px-3 py-2 text-[#6B6B6B] hover:text-[#3A5A78] transition-colors">
+                      <button onClick={() => updateQuantity(product.id, quantity + 1, size)} className="px-3 py-2 text-[#6B6B6B] hover:text-[#3A5A78] transition-colors">
                         <Plus className="h-3 w-3" />
                       </button>
                     </div>
@@ -81,7 +85,7 @@ export default function CartPage() {
                       <span className="font-sans text-sm text-[#6B6B6B]">
                         {formatPrice(product.price * quantity)}
                       </span>
-                      <button onClick={() => removeItem(product.id)} className="text-[#9A9A9A] hover:text-red-400 transition-colors">
+                      <button onClick={() => removeItem(product.id, size)} className="text-[#9A9A9A] hover:text-red-400 transition-colors">
                         <Trash2 className="h-4 w-4" />
                       </button>
                     </div>

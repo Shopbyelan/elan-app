@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CareGuide } from "@/components/guide/CareGuide";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
+import { RING_SIZES } from "@/lib/ring-sizes";
 
 export const metadata: Metadata = {
   title: "Client Guide — Élan Fine Jewellery",
@@ -325,23 +326,7 @@ export default function GuidePage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {[
-                    ["14.9mm", "F", "3"],
-                    ["15.3mm", "G½", "3½"],
-                    ["15.7mm", "H½", "4"],
-                    ["16.1mm", "J", "4½"],
-                    ["16.5mm", "K½", "5"],
-                    ["16.9mm", "L½", "5½"],
-                    ["17.3mm", "M½", "6"],
-                    ["17.7mm", "N½", "6½"],
-                    ["18.2mm", "P", "7"],
-                    ["18.6mm", "Q", "7½"],
-                    ["19.0mm", "R", "8"],
-                    ["19.4mm", "S", "8½"],
-                    ["19.8mm", "T", "9"],
-                    ["20.2mm", "U", "9½"],
-                    ["20.6mm", "V", "10"],
-                  ].map(([mm, uk, us], i) => (
+                  {RING_SIZES.map(({ mm, uk, us }, i) => (
                     <tr
                       key={mm}
                       className={`border-b border-[#E4E1DA] ${i % 2 === 0 ? "bg-[#FFFFFF]" : "bg-[#F7F5F2]"}`}

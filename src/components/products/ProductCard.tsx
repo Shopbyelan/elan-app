@@ -10,6 +10,7 @@ import type { Product } from "@/types";
 import { toast } from "sonner";
 import { formatCategoryTag } from "@/lib/utils";
 import { getStockAlert, stockAlertText } from "@/lib/product-alerts";
+import { needsRingSize } from "@/lib/ring-sizes";
 
 interface ProductCardProps {
   product: Product;
@@ -97,6 +98,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const categoryTag = formatCategoryTag(categoryName);
   const gradientClass = getCategoryGradient(categorySlug, categoryName);
   const stockAlert = getStockAlert(product);
+  const isRing = needsRingSize(product);
 
   function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
@@ -196,7 +198,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         </p>
 
         {/* Product name */}
-        <h3 className="font-serif text-2xl text-[#0A0A0A] leading-snug mb-2 group-hover:text-[#3A5A78] transition-colors duration-300">
+        <h3 className="font-serif text-lg text-[#0A0A0A] leading-snug mb-2 group-hover:text-[#3A5A78] transition-colors duration-300">
           {product.name}
         </h3>
 
@@ -208,10 +210,13 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         )}
 
         {/* Price + action */}
-        <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#E4E1DA]">
-          <div>
-            <span className="font-sans text-base text-[#3A5A78]">
-              From {format(product.price)}
+        <div className="flex items-end justify-between gap-3 mt-3 pt-3 border-t border-[#E4E1DA]">
+          <div className="min-w-0">
+            <span className="block font-sans text-[10px] tracking-[0.25em] text-[#9A9A9A] uppercase leading-none mb-1">
+              From
+            </span>
+            <span className="block font-serif text-2xl text-[#3A5A78] leading-tight tabular-nums">
+              {format(product.price)}
             </span>
             {product.comparePrice && product.comparePrice > product.price && (
               <span className="block font-sans text-sm text-[#9A9A9A] line-through">
@@ -228,10 +233,15 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               <Bell className="h-3 w-3" />
               Notify Me
             </button>
+          ) : isRing ? (
+            // Rings need a size, so this lets the click fall through to the product page
+            <span className="flex-shrink-0 bg-[#85A0B5] text-black px-4 py-2.5 font-sans text-xs tracking-[0.2em] uppercase font-medium group-hover:bg-[#9DB5C8] transition-colors duration-200">
+              Select Size
+            </span>
           ) : (
             <button
               onClick={handleAddToCart}
-              className="bg-[#85A0B5] text-black px-4 py-2.5 font-sans text-xs tracking-[0.2em] uppercase font-medium hover:bg-[#9DB5C8] transition-colors duration-200"
+              className="flex-shrink-0 bg-[#85A0B5] text-black px-4 py-2.5 font-sans text-xs tracking-[0.2em] uppercase font-medium hover:bg-[#9DB5C8] transition-colors duration-200"
             >
               Add to Cart
             </button>

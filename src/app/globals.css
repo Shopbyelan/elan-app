@@ -156,6 +156,15 @@ body {
 .btn-outline-gold:hover { background: #3A5A78; color: #fff; }
 
 /* ── Marquee / Ticker ─────────────── */
+/* Nudges an input group the user skipped (e.g. ring size) */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.animate-shake { animation: shake 0.4s ease-in-out; }
+@media (prefers-reduced-motion: reduce) { .animate-shake { animation: none; } }
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }

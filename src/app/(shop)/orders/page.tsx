@@ -85,7 +85,7 @@ export default async function OrdersPage() {
                 <div className="flex flex-wrap gap-2">
                   {order.items.map((item) => (
                     <span key={item.id} className="font-sans text-xs text-[#6B6B6B]">
-                      {item.productName} × {item.quantity}
+                      {item.productName}{item.size ? ` (${item.size})` : ""} × {item.quantity}
                     </span>
                   ))}
                 </div>

@@ -78,7 +78,10 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-sans text-sm text-[#3A3A3A]">{item.productName}</p>
-                    <p className="font-sans text-[12px] text-[#9A9A9A] mt-0.5">Qty: {item.quantity}</p>
+                    <p className="font-sans text-[12px] text-[#9A9A9A] mt-0.5">
+                      Qty: {item.quantity}
+                      {item.size && <span className="ml-3 text-[#3A5A78]">Size: {item.size}</span>}
+                    </p>
                   </div>
                   <p className="font-sans text-sm text-[#3A5A78] flex-shrink-0">
                     {formatPrice(item.price * item.quantity)}

@@ -247,6 +247,7 @@ model OrderItem {
   price       Float
   productName String
   productImg  String?
+  size        String?
   orderId     String
   productId   String
 
