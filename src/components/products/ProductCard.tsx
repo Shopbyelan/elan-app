@@ -9,6 +9,7 @@ import { useCurrencyStore } from "@/store/currency.store";
 import type { Product } from "@/types";
 import { toast } from "sonner";
 import { formatCategoryTag } from "@/lib/utils";
+import { getStockAlert, stockAlertText } from "@/lib/product-alerts";
 
 interface ProductCardProps {
   product: Product;
@@ -95,6 +96,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const categoryName = primaryCategory?.name || product.material || "";
   const categoryTag = formatCategoryTag(categoryName);
   const gradientClass = getCategoryGradient(categorySlug, categoryName);
+  const stockAlert = getStockAlert(product);
 
   function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
@@ -153,6 +155,16 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           <div className="absolute top-3 right-3 z-[2]">
             <span className="inline-block border border-[#85A0B5]/30 bg-black/50 backdrop-blur-sm px-2 py-1 font-sans text-[9px] tracking-[0.2em] text-[#85A0B5] uppercase leading-none">
               Sale
+            </span>
+          </div>
+        )}
+
+        {/* Scarcity alert — bottom right, only when stock is genuinely low */}
+        {stockAlert && (
+          <div className="absolute bottom-3 right-3 z-[2]">
+            <span className="flex items-center gap-1.5 bg-white/90 backdrop-blur-sm px-2.5 py-1.5 font-sans text-[9px] tracking-[0.18em] text-[#8A3B1F] uppercase leading-none">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C2552D]" />
+              {stockAlertText(stockAlert)}
             </span>
           </div>
         )}

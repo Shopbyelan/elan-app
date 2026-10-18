@@ -141,6 +141,7 @@ model Product {
   reviews      Review[]
   variants     ProductVariant[]
   waitlistEntries WaitlistEntry[]
+  saves        ProductSave[]
   corporateInquiryItems CorporateInquiryItem[]
 }
 
@@ -368,4 +369,20 @@ model CorporateInquiryItem {
 
   inquiry CorporateInquiry @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
   product Product?         @relation(fields: [productId], references: [id], onDelete: SetNull)
+}
+
+/// Anonymous wishlist "save" events, used for the "saved N times this week"
+/// social-proof alert. The wishlist itself lives in localStorage, so this is
+/// the only server-side record that a save happened. One row per visitor per
+/// product; un-saving deletes it so the count never overstates interest.
+model ProductSave {
+  id        String   @id @default(cuid())
+  productId String
+  visitorId String
+  createdAt DateTime @default(now())
+
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, visitorId])
+  @@index([productId, createdAt])
 }

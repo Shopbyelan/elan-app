@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/home/HeroSection";
 import { CollectionSection } from "@/components/products/CollectionSection";
+import { CampaignSection } from "@/components/home/CampaignSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
 import { getHomepageCollections } from "@/lib/products";
@@ -51,6 +52,9 @@ export default async function HomePage() {
         feature={{ src: "/elangirl2.jpeg", alt: "Stacked Élan diamond bracelets on the wrist", eyebrow: "Stack, Don’t Choose", caption: "Layered light for every wrist.", focus: "30% 55%" }}
       />
       <CollectionSection label="Crystal Moissanite" heading="Moissanite" products={c.moissanite} viewAllHref="/shop?category=crystal-moissanite" background="bg" />
+
+      <CampaignSection />
+
       <CollectionSection label="Piece Type" heading="Rings" products={c.rings} viewAllHref="/shop?type=ring" background="bg-alt" />
       <CollectionSection label="18k Gold" heading="Gold" products={c.gold} viewAllHref="/shop?category=18k-gold" background="bg" />
       <CollectionSection label="Curated for You" heading="Most Loved" products={c.featured} viewAllHref="/shop?collection=featured" background="bg-alt" />
