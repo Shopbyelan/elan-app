@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 interface ShopPageProps {
-  searchParams: Promise<{ category?: string; type?: string; collection?: string; sort?: string; search?: string }>;
+  searchParams: Promise<ShopParams>;
 }
 
 async function getCategories() {
@@ -30,55 +30,90 @@ async function getCategories() {
   }
 }
 
-async function getProducts(params: { category?: string; type?: string; collection?: string; sort?: string; search?: string }) {
+type ShopParams = { category?: string; type?: string; collection?: string; sort?: string; search?: string };
+
+const SORT_OPTIONS = [
+  { value: "", label: "Newest" },
+  { value: "price-asc", label: "Price: Low to High" },
+  { value: "price-desc", label: "Price: High to Low" },
+] as const;
+
+/** Collection helpers return their own order; re-sort by price when the visitor asks for it. */
+function sortByPrice<T extends { price: number }>(products: T[], sort?: string): T[] {
+  if (sort === "price-asc") return [...products].sort((a, b) => a.price - b.price);
+  if (sort === "price-desc") return [...products].sort((a, b) => b.price - a.price);
+  return products;
+}
+
+/** Builds a /shop URL that keeps every current filter and only swaps the sort. */
+function sortHref(params: ShopParams, sort: string) {
+  const qs = new URLSearchParams();
+  for (const key of ["collection", "type", "category", "search"] as const) {
+    if (params[key]) qs.set(key, params[key]!);
+  }
+  if (sort) qs.set("sort", sort);
+  const str = qs.toString();
+  return str ? `/shop?${str}` : "/shop";
+}
+
+async function getProducts(params: ShopParams) {
   try {
-    // Collection values with dedicated, reusable filter logic (shared with the homepage sections).
-    switch (params.collection) {
-      case "featured":
-        return await getFeaturedProducts({ search: params.search });
-      case "new-arrivals":
-        return await getNewArrivals({ search: params.search });
-      case "best-sellers":
-        return await getBestSellers({ search: params.search, take: 24 });
-      case "bridal":
-        return await getBridalProducts({ search: params.search });
-      case "men":
-        return await getMensProducts({ search: params.search });
-      case "limited-edition":
-        return await getLimitedEditionProducts({ search: params.search });
-      case "gifts-under-200k":
-        return await getGiftsUnder200k({ search: params.search });
-    }
+    const collection = await getCollectionProducts(params);
+    if (collection) return sortByPrice(collection, params.sort);
 
-    // Category/type/search/sort combinations need the `sort` param, which the
-    // shared collection helpers don't support, so this path stays a direct query.
-    const searchFilter = params.search
-      ? {
-          OR: [
-            { name: { contains: params.search, mode: "insensitive" as const } },
-            { description: { contains: params.search, mode: "insensitive" as const } },
-          ],
-        }
-      : {};
-
-    const orderBy =
-      params.sort === "price-asc" ? { price: "asc" as const } :
-      params.sort === "price-desc" ? { price: "desc" as const } :
-      { createdAt: "desc" as const };
-
-    return await prisma.product.findMany({
-      where: {
-        isActive: true,
-        ...(params.category ? { categories: { some: { slug: params.category } } } : {}),
-        ...(params.type ? { productType: params.type } : {}),
-        ...searchFilter,
-      },
-      include: { images: true, categories: true },
-      orderBy,
-    });
+    return await getFilteredProducts(params);
   } catch {
     return [];
   }
+}
+
+// Collection values with dedicated, reusable filter logic (shared with the homepage sections).
+async function getCollectionProducts(params: ShopParams) {
+  switch (params.collection) {
+    case "featured":
+      return await getFeaturedProducts({ search: params.search });
+    case "new-arrivals":
+      return await getNewArrivals({ search: params.search });
+    case "best-sellers":
+      return await getBestSellers({ search: params.search, take: 24 });
+    case "bridal":
+      return await getBridalProducts({ search: params.search });
+    case "men":
+      return await getMensProducts({ search: params.search });
+    case "limited-edition":
+      return await getLimitedEditionProducts({ search: params.search });
+    case "gifts-under-200k":
+      return await getGiftsUnder200k({ search: params.search });
+  }
+  return null;
+}
+
+// Category/type/search combinations sort in the database query itself.
+async function getFilteredProducts(params: ShopParams) {
+  const searchFilter = params.search
+    ? {
+        OR: [
+          { name: { contains: params.search, mode: "insensitive" as const } },
+          { description: { contains: params.search, mode: "insensitive" as const } },
+        ],
+      }
+    : {};
+
+  const orderBy =
+    params.sort === "price-asc" ? { price: "asc" as const } :
+    params.sort === "price-desc" ? { price: "desc" as const } :
+    { createdAt: "desc" as const };
+
+  return await prisma.product.findMany({
+    where: {
+      isActive: true,
+      ...(params.category ? { categories: { some: { slug: params.category } } } : {}),
+      ...(params.type ? { productType: params.type } : {}),
+      ...searchFilter,
+    },
+    include: { images: true, categories: true },
+    orderBy,
+  });
 }
 
 const FILTER_TABS = [
@@ -134,6 +169,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const activeCategory = params.category || "";
   const activeType = params.type || "";
   const activeCollection = params.collection || "";
+  const activeSort = SORT_OPTIONS.some((o) => o.value === params.sort) ? params.sort! : "";
 
   const collectionHeading = activeCollection ? COLLECTION_HEADINGS[activeCollection] : null;
   const typeHeading = activeType ? TYPE_HEADINGS[activeType] : null;
@@ -211,31 +247,46 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               </a>
             ))}
 
-            <div className="ml-auto flex-shrink-0 flex gap-2">
-              <a href={`/shop${activeCategory ? `?category=${activeCategory}&` : "?"}sort=price-asc`}
-                className={`px-3 py-2 font-sans text-[12px] tracking-wider uppercase border border-[#E4E1DA] text-[#6B6B6B] hover:border-[#3A5A78] hover:text-[#3A5A78] transition-all ${params.sort === "price-asc" ? "border-[#3A5A78] text-[#3A5A78]" : ""}`}>
-                Price ↑
-              </a>
-              <a href={`/shop${activeCategory ? `?category=${activeCategory}&` : "?"}sort=price-desc`}
-                className={`px-3 py-2 font-sans text-[12px] tracking-wider uppercase border border-[#E4E1DA] text-[#6B6B6B] hover:border-[#3A5A78] hover:text-[#3A5A78] transition-all ${params.sort === "price-desc" ? "border-[#3A5A78] text-[#3A5A78]" : ""}`}>
-                Price ↓
-              </a>
-            </div>
           </div>
         </div>
       </div>
 
       {/* Products */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-        <div className="flex items-center justify-between mb-8">
-          <p className="font-sans text-xs text-[#9A9A9A]">
-            {products.length} {products.length === 1 ? "piece" : "pieces"}
-          </p>
-          {activeCategory && (
-            <a href="/shop" className="font-sans text-[12px] tracking-[0.15em] text-[#3A5A78] uppercase hover:text-[#2E4560] transition-colors">
-              Clear filter ×
-            </a>
-          )}
+        <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+          <div className="flex items-center gap-6">
+            <p className="font-sans text-xs text-[#9A9A9A]">
+              {products.length} {products.length === 1 ? "piece" : "pieces"}
+            </p>
+            {activeCategory && (
+              <a href="/shop" className="font-sans text-[12px] tracking-[0.15em] text-[#3A5A78] uppercase hover:text-[#2E4560] transition-colors">
+                Clear filter ×
+              </a>
+            )}
+          </div>
+
+          {/* Sort — links rather than a select so it works without client JS */}
+          <nav aria-label="Sort products" className="flex items-center gap-3">
+            <span className="hidden sm:inline font-sans text-[11px] tracking-[0.25em] text-[#9A9A9A] uppercase">Sort</span>
+            <div className="flex flex-1 sm:flex-none border border-[#E4E1DA] divide-x divide-[#E4E1DA]">
+              {SORT_OPTIONS.map((opt) => {
+                const active = activeSort === opt.value;
+                return (
+                  <a
+                    key={opt.value}
+                    href={sortHref(params, opt.value)}
+                    aria-current={active ? "true" : undefined}
+                    className={`flex-1 sm:flex-none px-3 sm:px-4 py-2.5 text-center font-sans text-[11px] tracking-[0.15em] uppercase whitespace-nowrap transition-colors ${
+                      active ? "bg-[#3A5A78] text-white" : "text-[#6B6B6B] hover:text-[#3A5A78] hover:bg-[#F7F5F2]"
+                    }`}
+                  >
+                    {/* Collections have their own curated order (e.g. Best Sellers by sales) */}
+                    {opt.value === "" && activeCollection ? "Recommended" : opt.label}
+                  </a>
+                );
+              })}
+            </div>
+          </nav>
         </div>
 
         {products.length === 0 ? (
