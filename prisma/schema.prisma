@@ -127,6 +127,7 @@ model Product {
   careInstr    String?  @db.Text
   badge        String?
   productType  String?
+  ringSizes    String[] @default([]) // US sizes offered; empty = all
   isBridal        Boolean  @default(false)
   isLimitedEdition Boolean @default(false)
   isMens       Boolean  @default(false)

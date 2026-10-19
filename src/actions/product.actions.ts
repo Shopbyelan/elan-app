@@ -53,6 +53,7 @@ export async function createProduct(formData: FormData) {
   const isBridal = formData.get("isBridal") === "on";
   const isLimitedEdition = formData.get("isLimitedEdition") === "on";
   const isMens = formData.get("isMens") === "on";
+  const ringSizes = productType === "ring" ? (formData.getAll("ringSizes") as string[]) : [];
 
   let slug = slugify(name);
   const existing = await prisma.product.findUnique({ where: { slug } });
@@ -67,7 +68,7 @@ export async function createProduct(formData: FormData) {
       name, slug, price, comparePrice, description,
       shortDesc, stock, sku: sku || null, material: material || null,
       isFeatured, badge: badge || null,
-      productType: productType || null, isBridal, isLimitedEdition, isMens,
+      productType: productType || null, ringSizes, isBridal, isLimitedEdition, isMens,
       categories: { connect: categoryIds.map((id) => ({ id })) },
       images: {
         create: imageUrls.map((url, i) => ({
@@ -104,6 +105,7 @@ export async function updateProduct(formData: FormData) {
   const isBridal = formData.get("isBridal") === "on";
   const isLimitedEdition = formData.get("isLimitedEdition") === "on";
   const isMens = formData.get("isMens") === "on";
+  const ringSizes = productType === "ring" ? (formData.getAll("ringSizes") as string[]) : [];
 
   await prisma.product.update({
     where: { id },
@@ -111,7 +113,7 @@ export async function updateProduct(formData: FormData) {
       name, price, comparePrice, description,
       shortDesc, stock, sku: sku || null, material: material || null,
       isFeatured, badge: badge || null,
-      productType: productType || null, isBridal, isLimitedEdition, isMens,
+      productType: productType || null, ringSizes, isBridal, isLimitedEdition, isMens,
       categories: { set: categoryIds.map((id) => ({ id })) },
     },
   });

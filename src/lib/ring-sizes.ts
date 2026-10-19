@@ -27,3 +27,10 @@ export function ringSizeLabel(size: RingSize): string {
 export function needsRingSize(product: { productType?: string | null }): boolean {
   return product.productType === "ring";
 }
+
+/** Sizes offered for a ring, as ticked in the admin. None ticked means the full chart. */
+export function availableRingSizes(product: { ringSizes?: string[] | null }): readonly RingSize[] {
+  const picked = product.ringSizes ?? [];
+  if (picked.length === 0) return RING_SIZES;
+  return RING_SIZES.filter((s) => picked.includes(s.us));
+}

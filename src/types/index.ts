@@ -36,6 +36,7 @@ export interface Product {
   careInstr: string | null;
   badge: string | null;
   productType?: string | null;
+  ringSizes?: string[];
   categories: Category[];
   images: ProductImage[];
   _count?: { reviews: number };
