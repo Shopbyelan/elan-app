@@ -14,7 +14,7 @@ import { WaitlistButton } from "@/components/products/WaitlistButton";
 import { ProductCard } from "@/components/products/ProductCard";
 import { formatDate, formatCategoryTag } from "@/lib/utils";
 import { getStockAlert, stockAlertText, SAVED_THIS_WEEK_MIN } from "@/lib/product-alerts";
-import { RING_SIZES, ringSizeLabel, needsRingSize } from "@/lib/ring-sizes";
+import { availableRingSizes, ringSizeLabel, needsRingSize } from "@/lib/ring-sizes";
 import { toast } from "sonner";
 import type { Product, Review } from "@/types";
 
@@ -51,7 +51,8 @@ export function ProductDetail({ product, related, savedThisWeek = 0 }: ProductDe
   const stockAlert = getStockAlert(product);
   const showSaved = product.stock > 0 && savedThisWeek >= SAVED_THIS_WEEK_MIN;
   const isRing = needsRingSize(product);
-  const selectedSize = sizeIdx != null ? RING_SIZES[sizeIdx] : null;
+  const ringSizes = availableRingSizes(product);
+  const selectedSize = sizeIdx != null ? ringSizes[sizeIdx] : null;
 
   function goToImage(index: number) {
     if (index < 0 || index >= images.length || index === activeImg) return;
@@ -325,7 +326,7 @@ export function ProductDetail({ product, related, savedThisWeek = 0 }: ProductDe
                 aria-label="Ring size"
                 className={`grid grid-cols-5 gap-2 ${shakeKey > 0 ? "animate-shake" : ""}`}
               >
-                {RING_SIZES.map((size, i) => {
+                {ringSizes.map((size, i) => {
                   const active = sizeIdx === i;
                   return (
                     <button

@@ -5,6 +5,7 @@ import { ImageUploader } from "@/components/admin/ImageUploader";
 import { UploadGateProvider } from "@/components/admin/UploadGate";
 import { PhotoAwareSubmit } from "@/components/admin/PhotoAwareSubmit";
 import { notFound } from "next/navigation";
+import { PieceTypeField } from "@/components/admin/PieceTypeField";
 import Link from "next/link";
 import Image from "next/image";
 import { X } from "lucide-react";
@@ -179,18 +180,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
             </div>
           </div>
 
-          <div>
-            <label className="block font-sans text-[12px] tracking-[0.2em] text-[#6B6B6B] uppercase mb-2">Piece Type</label>
-            <select name="productType" defaultValue={product.productType || ""} className="w-full h-11 px-4 bg-[#F7F5F2] border border-[#E4E1DA] text-[#3A3A3A] font-sans text-sm focus:outline-none focus:border-[#3A5A78] transition-colors appearance-none">
-              <option value="">— None —</option>
-              <option value="necklace">Necklace</option>
-              <option value="earrings">Earrings</option>
-              <option value="ring">Ring</option>
-              <option value="bracelet">Bracelet</option>
-              <option value="jewelry-set">Jewelry Set</option>
-            </select>
-            <p className="font-sans text-[12px] text-[#9A9A9A] mt-1.5">Used for the Necklaces / Earrings / Rings / Bracelets / Jewelry Set collections</p>
-          </div>
+          <PieceTypeField defaultType={product.productType || ""} defaultSizes={product.ringSizes} />
 
           <div className="flex flex-wrap items-center gap-6">
             <div className="flex items-center gap-3">

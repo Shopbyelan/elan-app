@@ -162,7 +162,12 @@ export default function CheckoutPage() {
         }),
       });
 
-      if (!orderRes.ok) throw new Error("Failed to create order");
+      if (!orderRes.ok) {
+        const { message } = await orderRes.json().catch(() => ({}));
+        toast.error(message ?? "Something went wrong. Please try again.");
+        setLoading(false);
+        return;
+      }
       const { order, reference } = await orderRes.json();
 
       // Charge exactly what the server persisted as order.total (post-discount),
