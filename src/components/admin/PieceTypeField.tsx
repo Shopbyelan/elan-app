@@ -65,8 +65,10 @@ export function PieceTypeField({ defaultType = "", defaultSizes = [] }: PieceTyp
               );
             })}
           </div>
-          <p className="font-sans text-[12px] text-[#9A9A9A] mt-1.5">
-            Customers can only choose the sizes ticked here. Leave none ticked to offer every size.
+          <p className={`font-sans text-[12px] mt-1.5 ${sizes.length === 0 ? "text-[#8A3B1F]" : "text-[#9A9A9A]"}`}>
+            {sizes.length === 0
+              ? "No sizes ticked — customers will be offered every size on the chart."
+              : `Customers can choose from the ${sizes.length} size${sizes.length === 1 ? "" : "s"} ticked here.`}
           </p>
         </div>
       )}

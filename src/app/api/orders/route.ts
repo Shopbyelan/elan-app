@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { generateOrderNumber } from "@/lib/utils";
 import { findValidCoupon, calculateDiscount } from "@/lib/coupon";
 import { z } from "zod";
+import { needsRingSize, availableRingSizes, ringSizeLabel } from "@/lib/ring-sizes";
 
 const itemSchema = z.object({
   productId: z.string(),
@@ -47,6 +48,19 @@ export async function POST(req: NextRequest) {
 
     if (products.length !== productIds.length) {
       return NextResponse.json({ message: "One or more products are unavailable" }, { status: 400 });
+    }
+
+    // Rings must carry one of the sizes offered for that ring (carts saved before sizing existed won't)
+    for (const item of data.items) {
+      const product = products.find((p) => p.id === item.productId)!;
+      if (!needsRingSize(product)) continue;
+      const offered = availableRingSizes(product).map(ringSizeLabel);
+      if (!item.size || !offered.includes(item.size)) {
+        return NextResponse.json(
+          { message: `Please select a ring size for ${product.name} — remove it from your cart and add it again with a size.` },
+          { status: 400 }
+        );
+      }
     }
 
     const orderNumber = generateOrderNumber();
