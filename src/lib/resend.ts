@@ -13,7 +13,7 @@ export async function sendWelcomeEmail(to: string, name: string) {
       <div style="font-family: Georgia, serif; background:#0a0a0a; color:#fff; padding:40px; max-width:600px; margin:0 auto;">
         <h1 style="color:#85A0B5; font-size:32px; margin-bottom:8px;">ÉLAN</h1>
         <p style="color:#9a9a9a; font-size:12px; letter-spacing:4px; margin-bottom:32px;">FINE JEWELLERY</p>
-        <h2 style="font-size:24px; margin-bottom:16px;">Welcome, ${name}</h2>
+        <h2 style="font-size:24px; margin-bottom:16px;">Welcome, ${escapeHtml(name)}</h2>
         <p style="color:#ccc; line-height:1.8;">
           You have joined a circle of those who understand that luxury is not merely ownership — it is the considered choice of excellence.
         </p>
@@ -51,7 +51,7 @@ export async function sendOrderConfirmationEmail(
         <h2 style="font-size:24px; margin-bottom:8px;">Order Confirmed</h2>
         <p style="color:#85A0B5; font-size:14px; letter-spacing:2px;">${orderNumber}</p>
         <p style="color:#ccc; line-height:1.8; margin-top:24px;">
-          Dear ${name}, your order has been received and is being prepared with the utmost care.
+          Dear ${escapeHtml(name)}, your order has been received and is being prepared with the utmost care.
         </p>
         <div style="background:#111; padding:24px; margin:24px 0; border-left:2px solid #85A0B5;">
           <p style="color:#9a9a9a; font-size:12px; letter-spacing:2px; margin:0 0 8px;">ORDER TOTAL</p>
@@ -69,7 +69,7 @@ export async function sendOrderConfirmationEmail(
   });
 }
 
-export async function sendEmailVerificationEmail(to: string, name: string, verifyUrl: string) {
+export async function sendEmailVerificationEmail(to: string, _name: string, verifyUrl: string) {
   return resend.emails.send({
     from: FROM,
     to,
@@ -80,7 +80,7 @@ export async function sendEmailVerificationEmail(to: string, name: string, verif
         <p style="color:#9a9a9a; font-size:12px; letter-spacing:4px; margin-bottom:32px;">FINE JEWELLERY</p>
         <h2 style="font-size:22px; margin-bottom:16px;">Verify your email</h2>
         <p style="color:#ccc; line-height:1.8;">
-          Hello ${name}, please verify your email address to activate your account.
+          Please verify your email address to activate your account.
         </p>
         <a href="${verifyUrl}"
            style="display:inline-block; margin-top:32px; background:#85A0B5; color:#000; padding:14px 32px; text-decoration:none; font-size:13px; letter-spacing:2px;">
